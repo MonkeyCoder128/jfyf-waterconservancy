@@ -24,7 +24,7 @@
                 <el-menu-item :index="item2.path" :key="index2">{{item2.title}}</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-menu-item v-else :index="item.path" :key="index">
+            <el-menu-item v-else :index="item.path" :key="item.index">
               <i :class="item.icon"></i>
               <span slot="title">{{item.title}}</span>
             </el-menu-item>
@@ -120,7 +120,7 @@
             children: [
               {
                 title: "设备管理",
-                path: "/system/equipment"
+                path: "/system/deviceManage"
               },
               {
                 title: "用户管理",
@@ -129,9 +129,15 @@
             ]
           },
           {
-            title: "消息提醒",
-            path: "/alert",
-            icon: "el-icon-phone-outline"
+            title: "消息管理",
+            path: "/newsManage",
+            icon: "el-icon-phone-outline",
+            children: [
+              {
+                title: "消息提醒",
+                path: "/newsManage/news"
+              },
+            ]
           },
         ]
       };

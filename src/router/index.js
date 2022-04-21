@@ -132,9 +132,9 @@ const constantRoutes = [
     meta: { title: '系统管理', icon: 'el-icon-user' },
     children: [
       {
-        path: '/system/equipment',
-        name: 'equipment',
-        component: () => import('@/views/system/equipment/index'),
+        path: '/system/deviceManage',
+        name: 'deviceManage',
+        component: () => import('@/views/system/deviceManage/index'),
         meta: { title: '设备管理', icon: 'user' }
       },
       {
@@ -146,16 +146,19 @@ const constantRoutes = [
       }
     ]
   },
-
   {
-    path: '/alert',
+    path: '/newsManage',
     component: Layout,
-    children: [{
-      path: '/alert',
-      name: 'alert',
-      component: () => import('@/views/alert/index'),
-      meta: { title: '消息提醒', icon: 'alert' }
-    }]
+    name: 'newsManage',
+    meta: { title: '消息管理', icon: 'alert' },
+    children: [
+      {
+        path: '/newsManage/news',
+        name: 'news',
+        component: () => import('@/views/newsManage/news/index'),
+        meta: { title: '消息提醒', icon: 'alert' }
+      },
+    ]
   },
 
   { path: '*', redirect: '/404', hidden: true }
@@ -165,7 +168,8 @@ const constantRoutes = [
 //   routes: constantRoutes
 // })
 const router = new VueRouter({
-  routes: constantRoutes
+  routes: constantRoutes,
+  mode: 'history',
 })
 
 
