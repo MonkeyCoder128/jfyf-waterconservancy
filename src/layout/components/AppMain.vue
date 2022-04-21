@@ -19,10 +19,11 @@ export default {
 
 <style scoped>
 .app-main {
-  width: 100%;
-  position: relative;
-  overflow: scroll;
-  height: 86vh;
+  width: 89.7vw;
+    position: relative;
+    height: 92.5vh;
+    padding: 10px;
+    overflow: hidden;
 }
 .fixed-header+.app-main {
   padding-top: 50px;

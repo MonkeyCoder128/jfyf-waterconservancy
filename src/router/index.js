@@ -12,11 +12,6 @@ const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  {
-    path: '/register',
-    component: () => import('@/views/register/index'),
-    hidden: true
-  },
 
   {
     path: '/404',
@@ -25,37 +20,142 @@ const constantRoutes = [
   },
 
   {
-    path: '/dashboard',
+    path: '/screen',
     component: Layout,
-    redirect: '/dashboard/dashboard',
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      path: '/screen',
+      name: 'screen',
+      component: () => import('@/views/screen/index'),
+      meta: { title: '首页', icon: 'home' }
     }]
   },
+
   {
-    path: '/user',
+    path: '/setTime',
     component: Layout,
-    name: 'user',
-    redirect: '/user/index',
-    meta: { title: '用户管理', icon: 'el-icon-user' },
+    name: 'setTime',
+    meta: { title: '实时监测', icon: 'el-icon-user' },
     children: [
       {
-        path: 'index',
-        name: 'userindex',
-        component: () => import('@/views/user/index'),
-        meta: { title: '用户列表', icon: 'user' }
+        path: '/setTime/Dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/setTime/Dashboard/index'),
+        meta: { title: '仪表盘、折线图', icon: 'user' }
       },
       {
-        path: 'edit',
-        name: 'useredit',
-        hidden: true ,
-        component: () => import('@/views/user/edit'),
-        meta: { title: '编辑用户', icon: 'user' }
+        path: '/setTime/report',
+        name: 'report',
+        hidden: true,
+        component: () => import('@/views/setTime/report/index'),
+        meta: { title: '报表', icon: 'user' }
+      },
+    ]
+  },
+
+  {
+    path: '/explain',
+    component: Layout,
+    name: 'explain',
+    meta: { title: '检测分析', icon: 'el-icon-user' },
+    children: [
+      {
+        path: '/explain/warning',
+        name: 'warning',
+        component: () => import('@/views/explain/warning/index'),
+        meta: { title: '预警', icon: 'user' }
+      },
+      {
+        path: '/explain/data',
+        name: 'data',
+        hidden: true,
+        component: () => import('@/views/explain/data/index'),
+        meta: { title: '数据分析', icon: 'user' }
+      },
+    ]
+  },
+
+  {
+    path: '/vide',
+    component: Layout,
+    name: 'vide',
+    meta: { title: '视频监控', icon: 'el-icon-user' },
+    children: [
+      {
+        path: '/vide/realtime',
+        name: 'userindex',
+        component: () => import('@/views/vide/realtime/index'),
+        meta: { title: '实时', icon: 'user' }
+      },
+      {
+        path: '/vide/playback',
+        name: 'playback',
+        hidden: true,
+        component: () => import('@/views/vide/playback/index'),
+        meta: { title: '回放', icon: 'user' }
+      },
+    ]
+  },
+
+  {
+    path: '/search',
+    component: Layout,
+    name: 'search',
+    meta: { title: '巡检管理', icon: 'el-icon-user' },
+    children: [
+      {
+        path: '/search/rule',
+        name: 'rule',
+        component: () => import('@/views/search/rule/index'),
+        meta: { title: '管理条例', icon: 'user' }
+      },
+      {
+        path: '/search/safe',
+        name: 'safe',
+        hidden: true,
+        component: () => import('@/views/search/safe/index'),
+        meta: { title: '安全巡检', icon: 'user' }
+      },
+      {
+        path: '/search/emergency',
+        name: 'emergency',
+        hidden: true,
+        component: () => import('@/views/search/emergency/index'),
+        meta: { title: '事故上报', icon: 'user' }
+      },
+    ]
+  },
+
+  {
+    path: '/system',
+    component: Layout,
+    name: 'system',
+    meta: { title: '系统管理', icon: 'el-icon-user' },
+    children: [
+      {
+        path: '/system/equipment',
+        name: 'equipment',
+        component: () => import('@/views/system/equipment/index'),
+        meta: { title: '设备管理', icon: 'user' }
+      },
+      {
+        path: '/system/user',
+        name: 'user',
+        hidden: true,
+        component: () => import('@/views/system/user/index'),
+        meta: { title: '用户管理', icon: 'user' }
       }
     ]
+  },
+
+  {
+    path: '/alert',
+    component: Layout,
+    children: [{
+      path: '/alert',
+      name: 'alert',
+      component: () => import('@/views/alert/index'),
+      meta: { title: '消息提醒', icon: 'alert' }
+    }]
   },
 
   { path: '*', redirect: '/404', hidden: true }
@@ -65,7 +165,7 @@ const constantRoutes = [
 //   routes: constantRoutes
 // })
 const router = new VueRouter({
-  routes : constantRoutes
+  routes: constantRoutes
 })
 
 
