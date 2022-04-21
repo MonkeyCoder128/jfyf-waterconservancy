@@ -1,7 +1,7 @@
-# 金丰水利
+# vue模板
 
 #### Description
-水利工程
+{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
 
 #### Software Architecture
 Software architecture description
