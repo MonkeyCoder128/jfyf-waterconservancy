@@ -185,6 +185,10 @@ export default {
               path: "/system/deviceManage",
             },
             {
+              title: "角色管理",
+              path: "/system/role",
+            },
+            {
               title: "用户管理",
               path: "/system/user",
             },

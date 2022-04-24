@@ -9,9 +9,13 @@
   "dependencies": {
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "dplayer": "^1.26.0",
     "element-ui": "^2.15.6",
+    "hls.js": "^1.1.5",
     "js-cookie": "^3.0.1",
     "jsencrypt": "^3.2.1",
+    "video.js": "^7.18.1",
+    "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.6.11",
     "vue-loader": "^13.3.0",
     "vue-router": "^3.2.0",
