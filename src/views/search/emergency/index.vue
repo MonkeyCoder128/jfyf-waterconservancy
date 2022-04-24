@@ -4,46 +4,50 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline">
-            <el-form-item label="日期：">
-              <div class="block" :span='6'>
-                <span class="demonstration"></span>
-                <el-date-picker
-                  v-model="formData.dataTime"
-                  type="datetimerange"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  :default-time="['12:00:00']">
-                </el-date-picker>
-              </div>
-            </el-form-item>
-            <el-form-item label="异常情况管理：">
-              <el-select clearable v-model="formData.type" placeholder="请选择">
-                <el-option label="管理1" value="1"></el-option>
-                <el-option label="管理2" value="2"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="异常上报情况：">
-              <el-select clearable v-model="formData.type" placeholder="请选择">
-                <el-option label="异常1" value="1"></el-option>
-                <el-option label="异常2" value="2"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="设备异常：">
-              <el-select clearable v-model="formData.type" placeholder="请选择">
-                <el-option label="异常1" value="1"></el-option>
-                <el-option label="异常2" value="2"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="异常情况：">
-              <el-select clearable v-model="formData.type" placeholder="请选择">
-                <el-option label="异常1" value="1"></el-option>
-                <el-option label="异常2" value="2"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" size="medium" @click="serchData">查询</el-button>
-            </el-form-item>
+          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="110px" :label-position='labelPosition'>
+            <el-row>
+              <el-form-item label="日期：">
+                <div class="block">
+                  <span class="demonstration"></span>
+                  <el-date-picker
+                    v-model="formData.dataTime"
+                    type="datetimerange"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    :default-time="['12:00:00']">
+                  </el-date-picker>
+                </div>
+              </el-form-item>
+              <el-form-item label="异常情况管理：">
+                <el-select clearable v-model="formData.type" placeholder="请选择">
+                  <el-option label="管理1" value="1"></el-option>
+                  <el-option label="管理2" value="2"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-row>
+            <el-row>
+              <el-form-item label="异常上报情况：">
+                <el-select clearable v-model="formData.type" placeholder="请选择">
+                  <el-option label="异常1" value="1"></el-option>
+                  <el-option label="异常2" value="2"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="设备异常：">
+                <el-select clearable v-model="formData.type" placeholder="请选择">
+                  <el-option label="异常1" value="1"></el-option>
+                  <el-option label="异常2" value="2"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="异常情况：">
+                <el-select clearable v-model="formData.type" placeholder="请选择">
+                  <el-option label="异常1" value="1"></el-option>
+                  <el-option label="异常2" value="2"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" size="medium" @click="serchData">查询</el-button>
+              </el-form-item>
+            </el-row>
           </el-form>
 
         </div>
@@ -120,7 +124,7 @@ export default {
           {
             name: 'craig',
             size: '178kb',
-            type: 'excel',
+            type: '点位一',
             reportTime: '2019-07-14',
             situation: '/',
             progress: '等待维修',
@@ -129,7 +133,7 @@ export default {
           {
             name: 'edison',
             size: '178kb',
-            type: 'word',
+            type: '点位二',
             reportTime: '2019-07-14',
             situation: '/',
             progress: '等待维修',
@@ -138,7 +142,7 @@ export default {
           {
             name: 'daniue',
             size: '178kb',
-            type: 'pdf',
+            type: '点位三',
             reportTime: '2019-07-14',
             situation: '/',
             progress: '等待维修',
@@ -151,6 +155,8 @@ export default {
         totalPage: 1
       },
       listLoading: false,
+      // 表单对齐方式
+      labelPosition: 'right',
     };
   },
   methods: {
@@ -174,7 +180,8 @@ export default {
     },
     // 查看异常情况
     check(id){
-      console.log('异常上报' + id);
+      console.log('查看异常' + id);
+      this.$router.push({name:'childrenSafe',query: {id:'2'}})
     },
     // 从后台查询数据
     getdata () {

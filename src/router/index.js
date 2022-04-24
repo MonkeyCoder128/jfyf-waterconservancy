@@ -117,9 +117,9 @@ const constantRoutes = [
       },
       {
         path: '/search/safe',
-        name: 'abnormal',
+        name: 'childrenSafe',
         hidden: true,
-        component: () => import('@/views/search/safe/abnormal'),
+        component: () => import('@/views/search/safe/childrenSafe'),
         meta: { title: '异常上报', icon: 'user' }
       },
       {
@@ -129,6 +129,13 @@ const constantRoutes = [
         component: () => import('@/views/search/emergency/index'),
         meta: { title: '事故上报', icon: 'user' }
       },
+      // {
+      //   path: '/search/emergency',
+      //   name: 'childrenEme',
+      //   hidden: true,
+      //   component: () => import('@/views/search/emergency/childrenEme'),
+      //   meta: { title: '查看记录', icon: 'el-icon-user' }
+      // },
     ]
   },
 

@@ -1,8 +1,8 @@
 <template>
   <el-row :gutter="12">
-    <div class="goback">
+    <div class="goback" @click="goback">
       <i class="el-icon-arrow-left"></i>
-      <span @click="goback">安全巡检</span>
+      <span>{{pageTitle}}</span>
     </div>
     <!--begin 设备异常所展示的部分 -->
     <div v-if="showInfo === true">
@@ -16,14 +16,18 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-form-item label="异常类型：">
-              <el-checkbox-group v-model="formOne.type">
-                <el-checkbox label="设备异常" name="type"></el-checkbox>
-                <el-checkbox label="设备离线" name="type"></el-checkbox>
-                <el-checkbox label="异常状态" name="type"></el-checkbox>
-                <el-checkbox label="功能异常" name="type"></el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
+            <el-row>
+              <el-col :span="8">
+                <el-form-item label="异常类型：">
+                  <el-cascader
+                    placeholder="设备/功能"
+                    :options="formOne.options"
+                    filterable
+                    clearable>
+                  </el-cascader>
+                </el-form-item>
+              </el-col>
+            </el-row>
             <el-form-item label="问题描述：">
               <el-upload
                 action="https://jsonplaceholder.typicode.com/posts/"
@@ -64,7 +68,7 @@
                 </el-input>
               </el-col>
             </el-form-item>
-            <el-form-item>
+            <el-form-item v-if="showUserButton">
               <el-button>取消</el-button>
               <el-button type="primary" @click="onSubmit">提交</el-button>
             </el-form-item>
@@ -160,15 +164,55 @@
 export default {
   data(){
     return{
+      // 页面title
+      pageTitle: '安全巡检',
       // 根据身份key值判断展示的内容
       showInfo: true,
       // 表单1数据
       formOne: {
         name: '',
-        type: [],
         resource: '',
         descDescribe: '',
         descRemarks: '',
+        // 级联选择器数据
+        options: [
+          {
+            value: 'shebeiyichang',
+            label: '设备异常',
+            children: [
+              {
+                value: 'shebeilixian',
+                label: '设备离线',
+              },
+              {
+                value: 'gongnengyichang',
+                label: '功能异常'
+              },
+            ]
+          },
+          {
+            value: 'yichangzhuangtai',
+            label: '异常状态',
+            children: [
+              {
+                value: 'liusuliuliang',
+                label: '流速、流量'
+              }, 
+              {
+                value: 'shentouya',
+                label: '渗透压'
+              }, 
+              {
+                value: 'weiyi',
+                label: '位移'
+              },
+              {
+                value: 'shuizhi',
+                label: '水质'
+              },
+            ]
+          }
+        ]
       },
       // 表单2数据
       formTwo: {
@@ -203,7 +247,20 @@ export default {
       // 上传图片数据
       dialogImageUrl: '',
       // 控制图片是否放大展示
-      dialogVisible: false
+      dialogVisible: false,
+      // 根据不同模控制是否显示提交按钮
+      showUserButton: true
+    }
+  },
+  created(){
+    // 获取父级页面传来的参数
+    const userId = this.$route.query.id;
+    console.log(userId);
+    if(userId == 1){
+      this.pageTitle = '安全巡检';
+    }else{
+      this.pageTitle = '应急管理';
+      this.showUserButton = false;
     }
   },
   methods:{
@@ -235,7 +292,7 @@ export default {
 <style lang="scss" scoped>
   .goback{
     cursor: pointer;
-    margin-bottom: 10px;
+    margin: 10px auto;
     i{
       margin-right: 10px;
       margin-left: 5px;

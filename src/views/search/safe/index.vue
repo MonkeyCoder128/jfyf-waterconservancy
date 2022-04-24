@@ -179,7 +179,7 @@ export default {
     // 异常上报
     check(id){
       console.log('异常上报' + id);
-      this.$router.push({name:'abnormal',query: {id:'1'}})
+      this.$router.push({name:'childrenSafe',query: {id:'1'}})
     },
     // 从后台查询数据
     getdata () {

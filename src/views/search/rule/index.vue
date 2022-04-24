@@ -235,10 +235,10 @@
   .addTerm{
     float: right;
   }
-  .el-upload{
+  /deep/ .el-upload--text{
     width: 100%;
   }
-  .el-upload-dragger{
+  /deep/ .el-upload-dragger{
     width: 100% !important;
   }
 </style>
