@@ -113,7 +113,14 @@ const constantRoutes = [
         name: 'safe',
         hidden: true,
         component: () => import('@/views/search/safe/index'),
-        meta: { title: '安全巡检', icon: 'user' }
+        meta: { title: '安全巡检', icon: 'el-icon-user' },
+      },
+      {
+        path: '/search/safe',
+        name: 'abnormal',
+        hidden: true,
+        component: () => import('@/views/search/safe/abnormal'),
+        meta: { title: '异常上报', icon: 'user' }
       },
       {
         path: '/search/emergency',
@@ -168,6 +175,12 @@ const router = new VueRouter({
   routes: constantRoutes
 })
 
+//获取原型对象上的push函数
+const originalPush = VueRouter.prototype.push
+//修改原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 
 
 export default router
