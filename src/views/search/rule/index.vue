@@ -4,7 +4,7 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline">
+          <el-form :inline="true" :model="formData" class="demo-form-inline" size="small">
             <el-form-item label="法律法规名称：">
               <el-input clearable v-model="formData.name" placeholder="名称"></el-input>
             </el-form-item>
@@ -19,9 +19,9 @@
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" size="medium" @click="serchData">查询</el-button>
+              <el-button type="primary" size="small" @click="serchData">查询</el-button>
             </el-form-item>
-            <el-button class="addTerm" @click="dialogVisible = true">新增条例</el-button>
+            <el-button class="addTerm" size="small" @click="dialogVisible = true">新增条例</el-button>
           </el-form>
 
         </div>

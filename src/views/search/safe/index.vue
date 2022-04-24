@@ -4,7 +4,7 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline">
+          <el-form :inline="true" :model="formData" class="demo-form-inline" size="small">
             <el-form-item label="日期：">
               <div class="block" :span='6'>
                 <span class="demonstration"></span>
@@ -36,7 +36,7 @@
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" size="medium" @click="serchData">查询</el-button>
+              <el-button type="primary" size="small" @click="serchData">查询</el-button>
             </el-form-item>
           </el-form>
 

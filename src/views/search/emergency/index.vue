@@ -4,7 +4,7 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="110px" :label-position='labelPosition'>
+          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="110px" :label-position='labelPosition' size="small">
             <el-row>
               <el-form-item label="日期：">
                 <div class="block">
@@ -24,14 +24,14 @@
                   <el-option label="管理2" value="2"></el-option>
                 </el-select>
               </el-form-item>
-            </el-row>
-            <el-row>
               <el-form-item label="异常上报情况：">
                 <el-select clearable v-model="formData.type" placeholder="请选择">
                   <el-option label="异常1" value="1"></el-option>
                   <el-option label="异常2" value="2"></el-option>
                 </el-select>
               </el-form-item>
+            </el-row>
+            <el-row>
               <el-form-item label="设备异常：">
                 <el-select clearable v-model="formData.type" placeholder="请选择">
                   <el-option label="异常1" value="1"></el-option>
@@ -45,7 +45,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" size="medium" @click="serchData">查询</el-button>
+                <el-button type="primary" size="small" @click="serchData">查询</el-button>
               </el-form-item>
             </el-row>
           </el-form>
