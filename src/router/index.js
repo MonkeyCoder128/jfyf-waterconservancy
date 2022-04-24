@@ -145,6 +145,13 @@ const constantRoutes = [
         meta: { title: '设备管理', icon: 'user' }
       },
       {
+        path: '/system/role',
+        name: 'role',
+        hidden: true,
+        component: () => import('@/views/system/role/index'),
+        meta: { title: '角色管理', icon: 'user' }
+      },
+      {
         path: '/system/user',
         name: 'user',
         hidden: true,
@@ -183,7 +190,7 @@ const router = new VueRouter({
 const originalPush = VueRouter.prototype.push
 //修改原型对象中的push方法
 VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+  return originalPush.call(this, location).catch(err => err)
 }
 
 

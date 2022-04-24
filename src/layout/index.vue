@@ -162,6 +162,10 @@ export default {
               path: "/system/deviceManage",
             },
             {
+              title: "角色管理",
+              path: "/system/role",
+            },
+            {
               title: "用户管理",
               path: "/system/user",
             },
@@ -234,6 +238,7 @@ export default {
   border-bottom: 1px solid #d8dce5;
 }
 .app-main {
+  margin: 10px;
   position: relative;
   height: 95vh;
   overflow: hidden;
@@ -271,5 +276,24 @@ export default {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
+}
+/deep/.dangerBtn {
+  color: rgba(181, 12, 12, 1);
+}
+/deep/.textBtn {
+  color: rgb(55, 78, 176);
+}
+/deep/.el-button--primary {
+  background-color: rgb(55, 78, 176);
+  border-color: rgb(55, 78, 176);
+}
+/deep/.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: rgb(55, 78, 176);
+  border-color: rgb(55, 78, 176);
+}
+/deep/.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: rgb(55, 78, 176);
+  border-color: rgb(55, 78, 176);
 }
 </style>
