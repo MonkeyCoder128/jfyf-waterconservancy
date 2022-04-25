@@ -1,24 +1,18 @@
 <template>
-  <el-row :gutter="12">
-    <el-col :span="24">
-      <el-card shadow="always" class="el-card">
-        <div class="messagePage">
-          <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="title" label="标题" />
-            <el-table-column prop="type" label="类型" />
-            <el-table-column prop="details" label="详情" />
-            <el-table-column label="操作">
-              <template slot-scope="scope">
-                <el-button @click="seeRow(scope.row)" type="text">
-                  查看
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-card>
-    </el-col>
-  </el-row>
+  <div class="messagePage">
+    <el-card shadow="always" class="el-card">
+      <el-table :data="tableData" style="width: 100%">
+        <el-table-column prop="title" label="标题" />
+        <el-table-column prop="type" label="类型" />
+        <el-table-column prop="details" label="详情" />
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button @click="seeRow(scope.row)" type="text"> 查看 </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+  </div>
 </template>
  
 <script>
@@ -64,9 +58,9 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-.el-card {
-  height: 93vh;
-}
 .messagePage {
+  .el-card {
+    height: 93vh;
+  }
 }
 </style>

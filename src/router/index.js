@@ -152,18 +152,25 @@ const constantRoutes = [
         meta: { title: '设备管理', icon: 'user' }
       },
       {
-        path: '/system/role',
-        name: 'role',
+        path: '/system/roleManage',
+        name: 'roleManage',
         hidden: true,
-        component: () => import('@/views/system/role/index'),
+        component: () => import('@/views/system/roleManage/index'),
         meta: { title: '角色管理', icon: 'user' }
       },
       {
-        path: '/system/user',
-        name: 'user',
+        path: '/system/userManage',
+        name: 'userManage',
         hidden: true,
-        component: () => import('@/views/system/user/index'),
+        component: () => import('@/views/system/userManage/index'),
         meta: { title: '用户管理', icon: 'user' }
+      },
+      {
+        path: '/system/userInfo',
+        name: 'userInfo',
+        hidden: true,
+        component: () => import('@/views/system/userInfo/index'),
+        meta: { title: '', icon: 'user' }
       }
     ]
   },
@@ -177,7 +184,7 @@ const constantRoutes = [
         path: '/newsManage/news',
         name: 'news',
         component: () => import('@/views/newsManage/news/index'),
-        meta: { title: '消息提醒', icon: 'alert' }
+        meta: { title: '消息列表', icon: 'alert' }
       },
     ]
   },

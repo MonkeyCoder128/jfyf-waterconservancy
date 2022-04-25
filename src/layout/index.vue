@@ -186,11 +186,11 @@ export default {
             },
             {
               title: "角色管理",
-              path: "/system/role",
+              path: "/system/roleManage",
             },
             {
               title: "用户管理",
-              path: "/system/user",
+              path: "/system/userManage",
             },
           ],
         },
@@ -200,7 +200,7 @@ export default {
           icon: "el-icon-phone-outline",
           children: [
             {
-              title: "消息提醒",
+              title: "消息列表",
               path: "/newsManage/news",
             },
           ],
@@ -300,6 +300,7 @@ export default {
   position: relative;
   height: 95vh;
   overflow: hidden;
+  margin: 8px;
 }
 .sidebar {
   width: 200px;

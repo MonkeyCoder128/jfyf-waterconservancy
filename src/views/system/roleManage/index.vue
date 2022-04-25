@@ -10,8 +10,8 @@
           placeholder="搜索已创建的角色"
           suffix-icon="el-icon-search"
           v-model="searchRole"
-          @keyup.enter.native="searchEnterFun"
-          @click.native="searchEnterFun"
+          @keyup.enter.native="searchEnterRole"
+          @click.native="searchEnterRole"
           size="mini"
           clearable
         >
@@ -23,21 +23,13 @@
         <el-table-column prop="time" label="注册时间" />
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button
-              @click="amendRole(scope.row)"
-              type="text"
-              class="textBtn"
-            >
+            <el-button @click="amendRole(scope.row)" type="text">
               编辑
             </el-button>
-            <el-button @click="lookRole(scope.row)" type="text" class="textBtn">
+            <el-button @click="lookRole(scope.row)" type="text">
               查看
             </el-button>
-            <el-button
-              @click="deleteRole(scope.row)"
-              type="text"
-              class="dangerBtn"
-            >
+            <el-button @click="deleteRole(scope.row)" type="text">
               删除
             </el-button>
           </template>
@@ -51,36 +43,41 @@
       :close-on-click-modal="false"
       :visible.sync="dialogFormVisible"
     >
-      <el-form :model="roleForm" :rules="rules" ref="roleForm">
-        <el-form-item
-          label="角色名称"
-          :label-width="formLabelWidth"
-          prop="name"
-        >
-          <el-input v-model="roleForm.name" autocomplete="off"></el-input>
+      <el-form
+        :model="roleForm"
+        :rules="rules"
+        ref="roleForm"
+        label-width="120px"
+      >
+        <el-form-item label="角色名称" prop="name">
+          <el-input
+            v-model="roleForm.name"
+            autocomplete="off"
+            :disabled="formDisable"
+          ></el-input>
         </el-form-item>
-        <el-form-item
-          label="角色描述"
-          :label-width="formLabelWidth"
-          prop="describe"
-        >
-          <el-input v-model="roleForm.describe" autocomplete="off"></el-input>
+        <el-form-item label="角色描述" prop="describe">
+          <el-input
+            v-model="roleForm.describe"
+            autocomplete="off"
+            :disabled="formDisable"
+          ></el-input>
         </el-form-item>
-        <el-form-item
-          label="功能权限"
-          :label-width="formLabelWidth"
-          prop="permission"
-        >
-          <div class="treeBox">
-            <el-tree
-              :data="treeData"
-              show-checkbox
-              node-key="id"
-              :default-expanded-keys="[2, 3]"
-              :default-checked-keys="[5]"
-              :props="defaultProps"
-            >
-            </el-tree>
+        <el-form-item label="功能权限" prop="permission">
+          <div
+            :class="this.roleTitle !== '查看角色' ? 'treeBox' : 'dis_treeBox'"
+          >
+            <div>
+              <el-tree
+                :data="treeData"
+                show-checkbox
+                node-key="id"
+                :default-expanded-keys="[2, 3]"
+                :default-checked-keys="[5]"
+                :props="defaultProps"
+              >
+              </el-tree>
+            </div>
           </div>
         </el-form-item>
       </el-form>
@@ -117,9 +114,8 @@ export default {
       roleForm: {
         name: "",
         describe: "",
-        permission: [1,2],
+        permission: [1, 2],
       },
-      formLabelWidth: "120px",
       treeData: [
         {
           id: 1,
@@ -186,11 +182,12 @@ export default {
           { required: true, message: "请选择功能权限", trigger: "change" },
         ],
       },
+      formDisable: false,
     };
   },
   methods: {
     /** 搜索 */
-    searchEnterFun() {
+    searchEnterRole() {
       if (this.searchRole) {
         console.log(
           "%c搜索角色：",
@@ -201,20 +198,12 @@ export default {
         console.log("%c没有值：", "color:red;font-size:18px;font-weight:bold;");
       }
     },
-    /** 新增角色操作 */
-    addRole() {
-      this.dialogFormVisible = true;
-      this.roleTitle = "新增角色";
-    },
-    /** 修改角色操作 */
-    amendRole() {
-      console.log("%c修改角色：", "color:red;font-size:18px;font-weight:bold;");
-    },
+
     /** 删除角色操作 */
     deleteRole(row) {
       this.$confirm(
-        '是否确认删除角色名为"' + row.userName + '"的数据项?',
-        "警告",
+        '此操作将永久删除名为"' + row.userName + '"的角色，是否继续?',
+        "提示",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
@@ -234,9 +223,26 @@ export default {
           });
         });
     },
+    /** 修改角色操作 */
+    amendRole() {
+      this.dialogFormVisible = true;
+      this.formDisable = false;
+      this.roleTitle = "编辑角色";
+      console.log("%c修改角色：", "color:red;font-size:18px;font-weight:bold;");
+    },
     /** 查看角色操作 */
     lookRole() {
+      this.dialogFormVisible = true;
+      this.formDisable = true;
+      this.roleTitle = "查看角色";
       console.log("%c查看角色：", "color:red;font-size:18px;font-weight:bold;");
+    },
+
+    /** 新增角色操作 */
+    addRole() {
+      this.dialogFormVisible = true;
+      this.formDisable = false;
+      this.roleTitle = "新增角色";
     },
     /** 弹窗操作 */
     closeRoleForm() {
@@ -251,11 +257,19 @@ export default {
     submitForm() {
       this.$refs["roleForm"].validate((valid) => {
         if (valid) {
-          console.log(
-            "%c提交：",
-            "color:red;font-size:18px;font-weight:bold;",
-            this.roleForm
-          );
+          if (this.roleTitle === "新增角色") {
+            console.log(
+              "%c提交新增：",
+              "color:red;font-size:18px;font-weight:bold;",
+              this.roleForm
+            );
+          } else if (this.roleTitle === "编辑角色") {
+            console.log(
+              "%c提交编辑：",
+              "color:red;font-size:18px;font-weight:bold;",
+              this.roleForm
+            );
+          }
         } else {
           return false;
         }
@@ -278,7 +292,25 @@ export default {
   .treeBox {
     border: 1px solid #dcdfe6;
     border-radius: 4px;
-    padding: 10px 0px;
+    div {
+      padding: 5px 0px;
+    }
+  }
+  .dis_treeBox {
+    cursor: not-allowed;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    div {
+      padding: 5px 0px;
+      pointer-events: none;
+      background-color: #f5f7fa;
+      .el-tree {
+        position: relative;
+        cursor: default;
+        color: #606266;
+        background-color: #f5f7fa;
+      }
+    }
   }
 }
 </style>
