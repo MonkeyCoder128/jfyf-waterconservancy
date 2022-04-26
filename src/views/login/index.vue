@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { Loginform } from "@/Api/login";
+import { Loginform, getUserInfo } from "@/Api/login";
 import Cookies from "js-cookie";
 import { decrypt, encrypt } from "@/utiles/jsencrypt";
 export default {
@@ -131,13 +131,20 @@ export default {
             Cookies.remove("rememberMe");
           }
           Loginform(this.loginForm).then((res) => {
-            if (res.data.code === 200) {
+            if (res.data.code === "200") {
               this.$message({
                 showClose: true,
                 message: "登录成功",
                 type: "success",
               });
-              this.$router.push({ path: "/screen" });
+              getUserInfo().then((res) => {
+                console.log(
+                  "%获取用户信息",
+                  "color:red;font-size:18px;font-weight:bold;",
+                  res
+                );
+              });
+              // this.$router.push({ path: "/screen" });
             } else {
               this.$message({
                 showClose: true,
@@ -151,14 +158,6 @@ export default {
           // this.$router.push({ path: "/screen" });
         }
       });
-
-      // getUserInfo().then((res) => {
-      //   console.log(
-      //     "%获取用户信息",
-      //     "color:red;font-size:18px;font-weight:bold;",
-      //     res
-      //   );
-      // });
     },
   },
 };
