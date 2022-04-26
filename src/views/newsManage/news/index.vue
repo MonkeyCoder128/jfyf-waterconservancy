@@ -9,14 +9,14 @@
           v-model="searchMes"
           @keyup.enter.native="searchEnterRole"
           @click.native="searchEnterRole"
-          size="mini"
+          size="small"
           clearable
         >
         </el-input>
         <div class="InfoTime">
           <span>日期</span>
           <el-date-picker
-            size="mini"
+            size="small"
             v-model="searchTime"
             type="daterange"
             range-separator="-"

@@ -43,18 +43,18 @@
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
                 <el-button
-                  size="mini"
+                  size="small"
                   type="text"
                   @click="check(scope.row.id)"
                   >查看</el-button
                 >
                 <el-button
-                  size="mini"
+                  size="small"
                   type="text"
                   @click="dowmload(scope.row.id)"
                   >下载</el-button
                 >
-                <el-button size="mini" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579"
+                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579"
                   >删除</el-button
                 >
               </template>

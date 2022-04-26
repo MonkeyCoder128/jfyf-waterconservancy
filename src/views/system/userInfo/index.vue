@@ -11,7 +11,7 @@
         <el-form-item label="用户角色" prop="roleType">
           <el-select
             v-model="user.roleType"
-            size="mini"
+            size="small"
             placeholder="请选择用户角色"
           >
             <el-option
@@ -25,7 +25,7 @@
         </el-form-item>
         <el-form-item label="用户名称" prop="name">
           <el-input
-            size="mini"
+            size="small"
             v-model="user.name"
             autocomplete="off"
             :disabled="formDisable"
@@ -33,7 +33,7 @@
         </el-form-item>
         <el-form-item label="用户账号" prop="phone">
           <el-input
-            size="mini"
+            size="small"
             v-model="user.phone"
             autocomplete="off"
             :disabled="formDisable"
@@ -45,7 +45,7 @@
           v-if="this.$route.query.type === 'edit'"
         >
           <el-input
-            size="mini"
+            size="small"
             v-model="user.newPassword"
             placeholder="请输入新密码"
             type="password"
@@ -57,15 +57,15 @@
           v-if="this.$route.query.type === 'edit'"
         >
           <el-input
-            size="mini"
+            size="small"
             v-model="user.confirmPassword"
             placeholder="请确认新密码"
             type="password"
           />
         </el-form-item>
         <el-form-item>
-          <el-button @click="closeForm()" size="mini">取 消</el-button>
-          <el-button type="primary" size="mini" @click="submitForm()"
+          <el-button @click="closeForm()" size="small">取 消</el-button>
+          <el-button type="primary" size="small" @click="submitForm()"
             >提 交</el-button
           >
         </el-form-item>

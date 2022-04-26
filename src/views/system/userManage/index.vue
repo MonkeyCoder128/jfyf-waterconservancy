@@ -2,7 +2,7 @@
   <div class="userPage">
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
-        <el-button type="primary" size="mini" @click="addUser()" plain
+        <el-button type="primary" size="small" @click="addUser()" plain
           >新增用户</el-button
         >
         <el-input
@@ -12,7 +12,7 @@
           v-model="searchUser"
           @keyup.enter.native="searchEnterUser"
           @click.native="searchEnterUser"
-          size="mini"
+          size="small"
           clearable
         >
         </el-input>

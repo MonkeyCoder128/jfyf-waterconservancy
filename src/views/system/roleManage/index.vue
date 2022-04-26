@@ -2,7 +2,7 @@
   <div class="rolePage">
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
-        <el-button type="primary" size="mini" @click="addRole()" plain
+        <el-button type="primary" size="small" @click="addRole()" plain
           >新增角色</el-button
         >
         <el-input
@@ -12,7 +12,7 @@
           v-model="searchRole"
           @keyup.enter.native="searchEnterRole"
           @click.native="searchEnterRole"
-          size="mini"
+          size="small"
           clearable
         >
         </el-input>
@@ -82,8 +82,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="closeRoleForm()" size="mini">取 消</el-button>
-        <el-button type="primary" size="mini" @click="submitForm()"
+        <el-button @click="closeRoleForm()" size="small">取 消</el-button>
+        <el-button type="primary" size="small" @click="submitForm()"
           >确 定</el-button
         >
       </div>
