@@ -71,6 +71,9 @@
           <el-dropdown>
             <el-button type="text"><i class="el-icon-s-custom"></i> </el-button>
             <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native.prevent="screen"
+                >返回大屏</el-dropdown-item
+              >
               <el-dropdown-item @click.native.prevent="outLogin"
                 >退出登录</el-dropdown-item
               >
@@ -104,11 +107,11 @@ export default {
       rightmenu: false,
       path: "/",
       nav_menu_data: [
-        {
-          title: "首页",
-          path: "/screen",
-          icon: "el-icon-s-platform",
-        },
+        // {
+        //   title: "首页",
+        //   path: "/screen",
+        //   icon: "el-icon-s-platform",
+        // },
         {
           title: "实时监测",
           path: "/setTime",
@@ -255,6 +258,9 @@ export default {
         }
       }
       this.fullscreen = !this.fullscreen;
+    },
+    screen() {
+      this.$router.push({ path: "/screen" });
     },
     outLogin() {
       this.$router.push({ path: "/" });

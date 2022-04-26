@@ -14,21 +14,27 @@ const constantRoutes = [
   },
 
   {
+    path: '/screen',
+    component: () => import('@/views/screen/index'),
+    hidden: true
+  },
+
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
 
-  {
-    path: '/screen',
-    component: Layout,
-    children: [{
-      path: '/screen',
-      name: 'screen',
-      component: () => import('@/views/screen/index'),
-      meta: { title: '首页', icon: 'home' }
-    }]
-  },
+  // {
+  //   path: '/screen',
+  //   component: Layout,
+  //   children: [{
+  //     path: '/screen',
+  //     name: 'screen',
+  //     component: () => import('@/views/screen/index'),
+  //     meta: { title: '首页', icon: 'home' }
+  //   }]
+  // },
 
   {
     path: '/setTime',
