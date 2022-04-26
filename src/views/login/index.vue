@@ -111,14 +111,18 @@ export default {
         "color:red;font-size:18px;font-weight:bold;"
       );
     },
-    
-              // getUserInfo().then((res) => {
-              //   console.log(
-              //     "%获取用户信息",
-              //     "color:red;font-size:18px;font-weight:bold;",
-              //     res
-              //   );
-              // });
+    // getuserMessage() {
+    //   getUserInfo().then((res) => {
+    //     if (res.data.code === "200") {
+    //       console.log(
+    //         "%当前用户信息",
+    //         "color:red;font-size:18px;font-weight:bold;",
+    //         res.data
+    //       );
+    //     }
+    //   });
+    // },
+
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
@@ -145,8 +149,10 @@ export default {
                 message: "登录成功",
                 type: "success",
               });
-              // this.$router.push({ path: "/screen" });
+              // this.getuserMessage();
+              this.$router.push({ path: "/screen" });
             } else {
+              this.loading = false;
               this.$message({
                 showClose: true,
                 message: res.data.message,

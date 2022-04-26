@@ -14,7 +14,7 @@ export function Loginform(data) {
 // 获取用户信息
 export function getUserInfo() {
     return request({
-        method: 'POST',
+        method: 'GET',
         url: '/admin/info',
         Headers: {
             contentType: 'application/json'
