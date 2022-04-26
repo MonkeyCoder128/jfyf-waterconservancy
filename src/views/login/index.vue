@@ -111,6 +111,14 @@ export default {
         "color:red;font-size:18px;font-weight:bold;"
       );
     },
+    
+              // getUserInfo().then((res) => {
+              //   console.log(
+              //     "%获取用户信息",
+              //     "color:red;font-size:18px;font-weight:bold;",
+              //     res
+              //   );
+              // });
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
@@ -136,13 +144,6 @@ export default {
                 showClose: true,
                 message: "登录成功",
                 type: "success",
-              });
-              getUserInfo().then((res) => {
-                console.log(
-                  "%获取用户信息",
-                  "color:red;font-size:18px;font-weight:bold;",
-                  res
-                );
               });
               // this.$router.push({ path: "/screen" });
             } else {
