@@ -48,15 +48,15 @@
             :header-cell-style="{background:'#F7F8FC',color:'#333333'}"
             style="width: 100%"
           >
-            <el-table-column prop="name" label="异常位置" align="center">
+            <el-table-column prop="exceptionLocation" label="异常位置" align="center">
             </el-table-column>
-            <el-table-column prop="size" label="设备异常" align="center">
+            <el-table-column prop="exceptionType" label="设备异常" align="center">
             </el-table-column>
-            <el-table-column prop="type" label="点位异常" align="center">
+            <el-table-column prop="exceptionType2" label="点位异常" align="center">
             </el-table-column>
-            <el-table-column prop="reportTime" label="上报时间" align="center">
+            <el-table-column prop="reportDate" label="上报时间" align="center">
             </el-table-column>
-            <el-table-column prop="situation" label="异常上报情况" align="center">
+            <el-table-column prop="reportType" label="异常上报情况" align="center">
             </el-table-column>
             <el-table-column prop="progress" label="进展" align="center">
             </el-table-column>
@@ -94,8 +94,9 @@
   </el-col>
 </el-row>
 </template>
-<script>
 
+<script>
+import {InintData} from '@/Api/safe'
 export default {
   name:'',
   data () {
@@ -110,29 +111,12 @@ export default {
       tableData: {
         list: [
           {
-            name: 'craig',
-            size: '178kb',
-            type: 'excel',
-            reportTime: '2019-07-14',
-            situation: '/',
-            progress: '等待维修'
+            exceptionLocation: '',
+            exceptionType: '',
+            reportDate: '',
+            reportType: '',
+            progress: ''
           },
-          {
-            name: 'edison',
-            size: '178kb',
-            type: 'word',
-            reportTime: '2019-07-14',
-            situation: '/',
-            progress: '等待维修'
-          },
-          {
-            name: 'daniue',
-            size: '178kb',
-            type: 'pdf',
-            reportTime: '2019-07-14',
-            situation: '/',
-            progress: '等待维修'
-          }
         ],
         totalCount: 0,
         pageSize: 10,
@@ -142,7 +126,18 @@ export default {
       listLoading: false,
     };
   },
+  created(){
+    this.init();
+  },
   methods: {
+    // 获取数据
+    init(){
+      InintData({},window.sessionStorage.getItem("token")).then(res=>{
+        if(res.data.code == 200){
+          this.tableData.list = res.data.result.data;
+        }
+      })
+    },
     // 查询数据
     serchData () {
       this.tableData.currPage = 1

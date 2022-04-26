@@ -137,6 +137,7 @@ export default {
                 message: "登录成功",
                 type: "success",
               });
+              window.sessionStorage.setItem("token", res.data.token);
               this.$router.push({ path: "/screen" });
             } else {
               this.$message({
@@ -147,7 +148,6 @@ export default {
               return false;
             }
           });
-          // window.sessionStorage.setItem("token", "11111111111");
           // this.$router.push({ path: "/screen" });
         }
       });
