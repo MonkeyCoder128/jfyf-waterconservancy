@@ -298,7 +298,7 @@ export default {
 }
 .app-main {
   position: relative;
-  height: 95vh;
+  height: 93.4vh;
   overflow: hidden;
   margin: 8px;
 }
