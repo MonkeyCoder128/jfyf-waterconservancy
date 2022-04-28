@@ -2,19 +2,8 @@
   <div class="messagePage">
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
-        <el-input
-          style="width: 320px"
-          placeholder="搜索条例"
-          suffix-icon="el-icon-search"
-          v-model="searchMes"
-          @keyup.enter.native="searchEnterRole"
-          @click.native="searchEnterRole"
-          size="small"
-          clearable
-        >
-        </el-input>
         <div class="InfoTime">
-          <span>日期</span>
+          <span style="margin-right: 10px">日期</span>
           <el-date-picker
             size="small"
             v-model="searchTime"
@@ -22,63 +11,138 @@
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
+            value-format="yyyy-MM-dd 00:00:00"
+            @input="handleDate"
           >
           </el-date-picker>
         </div>
+        <div class="InfoTime">
+          <span style="margin: 0 10px 0 30px">消息类型</span>
+          <el-select
+            @change="changeType"
+            v-model="queryParams.type"
+            size="small"
+            placeholder="请选择消息类型"
+          >
+            <el-option
+              v-for="item in optionsType"
+              :key="item.key"
+              :label="item.value"
+              :value="item.key"
+            >
+            </el-option>
+          </el-select>
+        </div>
+        <el-button
+          style="margin-left: 15px"
+          type="primary"
+          @click="resetTab()"
+          size="small"
+          >重置</el-button
+        >
       </div>
-      <el-table :data="tableData" style="width: 100%" border>
-        <el-table-column prop="title" label="消息内容" />
-        <el-table-column prop="type" label="消息类型" />
-        <el-table-column prop="details" label="消息时间" />
+      <el-table :data="newsData" style="width: 100%" border>
+        <el-table-column prop="content" label="消息内容" />
+        <el-table-column prop="type" label="消息类型">
+          <template slot-scope="scope">
+            {{ scope.row.type === "0" ? "异常状态预警" : "申请解除异常状态" }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="createTime" label="消息时间" />
       </el-table>
+      <el-pagination
+        style="margin-top: 25px; text-align: center"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryParams.currentPage"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="queryParams.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-card>
   </div>
 </template>
  
 <script>
+import { newsList, newsType } from "@/Api/news";
 export default {
   name: "MessageManage",
   data() {
     return {
-      searchMes: "",
+      queryParams: {
+        currentPage: 1,
+        pageSize: 10,
+        type: "",
+        startDate: "",
+        endDate: "",
+      },
       searchTime: "",
-      tableData: [
-        {
-          title: "消息标题一",
-          type: "告警消息",
-          details: "2022-4-25 ",
-        },
-        {
-          title: "消息标题二",
-          type: "提示消息",
-          details: "2022-4-25 ",
-        },
-        {
-          title: "消息标题三",
-          type: "通知消息",
-          details: "2022-4-25 ",
-        },
-        {
-          title: "消息标题四",
-          type: "展示消息",
-          details: "2022-4-25 ",
-        },
-      ],
+      optionsType: [],
+      total: 0,
+      newsData: [],
     };
   },
-  created() {},
-  methods: {
-    /** 搜索 */
-    searchEnterRole() {
-      if (this.searchMes) {
-        console.log(
-          "%c搜索条例：",
-          "color:red;font-size:18px;font-weight:bold;",
-          this.searchMes
-        );
-      } else {
-        console.log("%c没有值：", "color:red;font-size:18px;font-weight:bold;");
+  created() {
+    this.getNewsList();
+    newsType(window.sessionStorage.getItem("token")).then((res) => {
+      if (res.data.code === 200) {
+        this.optionsType = res.data.result;
       }
+    });
+  },
+  methods: {
+    /** 表格筛选 */
+    changeType(val) {
+      this.queryParams.type = val;
+      this.getNewsList();
+      console.log(
+        "%c返回消息类型：",
+        "color:red;font-size:18px;font-weight:bold;",
+        val
+      );
+    },
+    /** 重置 */
+    resetTab() {
+      this.searchTime = "";
+      this.queryParams.type = "";
+      this.queryParams.startDate = "";
+      this.queryParams.endDate = "";
+      this.getNewsList();
+    },
+    /** 表格分页 */
+    handleSizeChange(val) {
+      this.queryParams.size = val;
+      this.getNewsList();
+    },
+    handleCurrentChange(val) {
+      this.queryParams.page = val;
+      this.getNewsList();
+    },
+    /** 时间筛选 */
+    handleDate(e) {
+      this.$nextTick(() => {
+        if (e) {
+          this.queryParams.startDate = e[0];
+          this.queryParams.endDate = e[1];
+        } else {
+          this.queryParams.startDate = "";
+          this.queryParams.endDate = "";
+        }
+        this.getNewsList();
+      });
+    },
+    /** 获取消息列表 */
+    getNewsList() {
+      newsList(this.queryParams, window.sessionStorage.getItem("token")).then(
+        (res) => {
+          if (res.data.code === 200) {
+            this.newsData = res.data.result.records;
+            this.total = res.data.result.total;
+          }
+        }
+      );
     },
   },
 };
@@ -99,7 +163,6 @@ export default {
       align-items: center;
       span {
         white-space: nowrap;
-        margin: 0 10px 0 30px;
       }
     }
   }

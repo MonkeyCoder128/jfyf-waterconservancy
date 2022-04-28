@@ -12,12 +12,24 @@ export function Loginform(data) {
     })
 }
 // 获取用户信息
-export function getUserInfo() {
+export function getUserInfo(token) {
     return request({
         method: 'GET',
         url: '/admin/info',
-        Headers: {
-            contentType: 'application/json'
+        headers: {
+            contentType: 'application/json',
+            Authorization: token,
+        },
+    })
+}
+//用户菜单接口
+export function menuList(token) {
+    return request({
+        method: 'GET',
+        url: '/menu/getMenuList',
+        headers: {
+            contentType: 'application/json',
+            Authorization: token,
         },
     })
 }

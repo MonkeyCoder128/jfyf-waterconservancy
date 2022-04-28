@@ -11,7 +11,7 @@
         <span class="title">水利水库管理系统</span>
         <el-form-item prop="username">
           <el-input
-            v-model="loginForm.username"
+            v-model.trim="loginForm.username"
             type="text"
             auto-complete="off"
             prefix-icon="el-icon-user"
@@ -21,7 +21,7 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            v-model="loginForm.password"
+            v-model.trim="loginForm.password"
             type="password"
             auto-complete="off"
             placeholder="密码"
@@ -32,7 +32,7 @@
         </el-form-item>
         <el-form-item prop="code">
           <el-input
-            v-model="loginForm.code"
+            v-model.trim="loginForm.code"
             auto-complete="off"
             placeholder="请输入验证码"
             style="width: 63%; margin-right: 2%"
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { Loginform, getUserInfo } from "@/Api/login";
+import { Loginform, menuList, getUserInfo } from "@/Api/login";
 import Cookies from "js-cookie";
 import { decrypt, encrypt } from "@/utiles/jsencrypt";
 export default {
@@ -101,9 +101,7 @@ export default {
       loading: false,
     };
   },
-  created() {
-    this.getCode();
-  },
+  created() {},
   methods: {
     getCode() {
       console.log(
@@ -111,17 +109,6 @@ export default {
         "color:red;font-size:18px;font-weight:bold;"
       );
     },
-    // getuserMessage() {
-    //   getUserInfo().then((res) => {
-    //     if (res.data.code === "200") {
-    //       console.log(
-    //         "%当前用户信息",
-    //         "color:red;font-size:18px;font-weight:bold;",
-    //         res.data
-    //       );
-    //     }
-    //   });
-    // },
 
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
@@ -142,26 +129,70 @@ export default {
             Cookies.remove("password");
             Cookies.remove("rememberMe");
           }
-          Loginform(this.loginForm).then((res) => {
-            if (res.data.code === "200") {
-              this.$message({
-                showClose: true,
-                message: "登录成功",
-                type: "success",
-              });
-              window.sessionStorage.setItem("token", res.data.token);
-              this.$router.push({ path: "/screen" });
-            } else {
-              this.loading = false;
-              this.$message({
-                showClose: true,
-                message: res.data.message,
-                type: "error",
-              });
+          Loginform(this.loginForm)
+            .then((res) => {
+              if (res.data.code === "200") {
+                this.$message({
+                  showClose: true,
+                  message: "登录成功",
+                  type: "success",
+                });
+                window.sessionStorage.setItem("token", res.data.token);
+                this.$router.push({ path: "/screen" });
+              } else {
+                this.loading = false;
+                this.$message({
+                  showClose: true,
+                  message: res.data.message,
+                  type: "error",
+                });
+              }
+              return res.data.token;
+            })
+            .then((res) => {
+              menuList(window.sessionStorage.getItem("token"))
+                .then((res) => {
+                  if (res.data.code === 200) {
+                    console.log(
+                      "%c动态菜单：",
+                      "color:red;font-size:18px;font-weight:bold;",
+                      res.data
+                    );
+                  }
+                })
+                .then(() => {
+                  getUserInfo(window.sessionStorage.getItem("token"))
+                    .then((response) => {
+                      if (response.data.code === 200) {
+                        console.log(
+                          "%c用户信息：",
+                          "color:blue;font-size:18px;font-weight:bold;",
+                          response.data
+                        );
+                        //用户ID存储
+                        window.sessionStorage.setItem(
+                          "userId",
+                          response.data.userId
+                        );
+                      }
+                      return response;
+                    })
+                    .catch(() => {
+                      this.$message({
+                        showClose: true,
+                        message: "用户信息获取异常",
+                        type: "error",
+                      });
+                      return false;
+                    });
+                })
+                .catch(() => {
+                  return false;
+                });
+            })
+            .catch(() => {
               return false;
-            }
-          });
-          // this.$router.push({ path: "/screen" });
+            });
         }
       });
     },

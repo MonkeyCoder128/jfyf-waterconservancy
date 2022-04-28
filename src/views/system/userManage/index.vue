@@ -9,7 +9,7 @@
           style="width: 320px"
           placeholder="搜索用户"
           suffix-icon="el-icon-search"
-          v-model="searchUser"
+          v-model.trim="queryParams.message"
           @keyup.enter.native="searchEnterUser"
           @click.native="searchEnterUser"
           size="small"
@@ -17,13 +17,16 @@
         >
         </el-input>
       </div>
-      <el-table :data="userList" style="width: 100%" border>
-        <el-table-column prop="userName" label="用户名称" />
+      <el-table :data="userData" style="width: 100%" border>
+        <el-table-column prop="name" label="用户名称" />
         <el-table-column prop="roleName" label="角色" />
-        <el-table-column prop="area" label="地区" />
-        <el-table-column prop="account" label="用户账号" />
-        <el-table-column prop="state" label="用户状态" />
-        <el-table-column prop="time" label="注册时间" />
+        <el-table-column prop="username" label="用户账号" />
+        <el-table-column prop="status" label="用户状态">
+          <template slot-scope="scope">
+            {{ scope.row.status === "NORMAL" ? "正常" : "禁用" }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="createTime" label="注册时间" />
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button @click="amendUser(scope.row)" type="text">
@@ -32,48 +35,88 @@
             <el-button @click="deleteUser(scope.row)" type="text">
               删除
             </el-button>
-            <el-button @click="enable(scope.row)" type="text"> 启用 </el-button>
-            <el-button @click="deactivate(scope.row)" type="text">
+            <el-button
+              @click="enable(scope.row, 'NORMAL')"
+              type="text"
+              v-if="scope.row.status === 'PROHIBIT'"
+            >
+              启用
+            </el-button>
+            <el-button
+              @click="deactivate(scope.row, 'PROHIBIT')"
+              type="text"
+              v-if="scope.row.status === 'NORMAL'"
+            >
               停用
             </el-button>
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        style="margin-top: 25px; text-align: center"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryParams.page"
+        :page-sizes="[5, 10, 15, 20]"
+        :page-size="queryParams.size"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-card>
   </div>
 </template>
  
 <script>
+import {
+  userList,
+  deleteUserGet,
+  updateUserState,
+} from "@/Api/user";
 export default {
   name: "UserManage",
   data() {
     return {
-      searchUser: "",
-      userList: [
-        {
-          userId: "001",
-          userName: "用户一",
-          roleName: "昵称一",
-          area: "男",
-          account: "15896741523",
-          state: "启用",
-          time: true,
-          time: "2022-04-24",
-        },
-      ],
+      queryParams: {
+        page: 1,
+        size: 10,
+        message: "",
+      },
+      total: 0,
+      userData: [],
     };
   },
+  created() {
+    this.getUserList();
+  },
   methods: {
+    /** 表格分页 */
+    handleSizeChange(val) {
+      this.queryParams.size = val;
+      this.getUserList();
+    },
+    handleCurrentChange(val) {
+      this.queryParams.page = val;
+      this.getUserList();
+    },
+    /** 获取用户列表 */
+    getUserList() {
+      userList(this.queryParams, window.sessionStorage.getItem("token")).then(
+        (res) => {
+          if (res.data.code === 200) {
+            this.userData = res.data.result.data;
+            this.total = res.data.result.total;
+          }
+        }
+      );
+    },
     /** 搜索 */
     searchEnterUser() {
-      if (this.searchUser) {
-        console.log(
-          "%c搜索用户：",
-          "color:red;font-size:18px;font-weight:bold;",
-          this.searchUser
-        );
+      if (this.queryParams.message) {
+        this.getUserList();
       } else {
-        console.log("%c没有值：", "color:red;font-size:18px;font-weight:bold;");
+        this.queryParams.message = "";
+        this.getUserList();
       }
     },
     /** 编辑用户操作 */
@@ -89,7 +132,7 @@ export default {
     /** 删除用户操作 */
     deleteUser(row) {
       this.$confirm(
-        '此操作将永久删除名为"' + row.userName + '"的用户，是否继续?',
+        "此操作将永久删除名为" + row.name + " 的用户，是否继续?",
         "提示",
         {
           confirmButtonText: "确定",
@@ -98,9 +141,17 @@ export default {
         }
       )
         .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!",
+          deleteUserGet(
+            row.userId,
+            window.sessionStorage.getItem("token")
+          ).then((res) => {
+            if (res.data.code === 200) {
+              this.$message({
+                message: "已删除！",
+                type: "success",
+              });
+              this.getUserList();
+            }
           });
         })
         .catch(() => {
@@ -111,16 +162,28 @@ export default {
         });
     },
     /** 启用用户操作 */
-    enable(row) {
-      this.$confirm('确认启用"' + row.userName + '"的用户账号?', "提示", {
+    enable(row, sate) {
+      let userState = {
+        userId: row.userId,
+        status: sate.toString(),
+      };
+      this.$confirm('确认启用"' + row.name + '"的用户账号?', "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          this.$message({
-            type: "success",
-            message: "已启用!",
+          updateUserState(
+            userState,
+            window.sessionStorage.getItem("token")
+          ).then((res) => {
+            if (res.data.code === 200) {
+              this.$message({
+                message: "已启用！",
+                type: "success",
+              });
+              this.getUserList();
+            }
           });
         })
         .catch(() => {
@@ -131,16 +194,28 @@ export default {
         });
     },
     /** 停用用户权限操作 */
-    deactivate(row) {
-      this.$confirm('确认停用"' + row.userName + '"的用户账号?', "提示", {
+    deactivate(row, sate) {
+      let userState = {
+        userId: row.userId,
+        status: sate.toString(),
+      };
+      this.$confirm('确认停用"' + row.name + '"的用户账号?', "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          this.$message({
-            type: "success",
-            message: "已停用!",
+          updateUserState(
+            userState,
+            window.sessionStorage.getItem("token")
+          ).then((res) => {
+            if (res.data.code === 200) {
+              this.$message({
+                message: "已停用！",
+                type: "success",
+              });
+              this.getUserList();
+            }
           });
         })
         .catch(() => {

@@ -8,17 +8,17 @@
         label-width="90px"
         style="width: 45%"
       >
-        <el-form-item label="用户角色" prop="roleType">
+        <el-form-item label="用户角色" prop="roleId">
           <el-select
-            v-model="user.roleType"
+            v-model="user.roleId"
             size="small"
             placeholder="请选择用户角色"
           >
             <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="item in optionsRole"
+              :key="item.roleId"
+              :label="item.roleName"
+              :value="item.roleId"
             >
             </el-option>
           </el-select>
@@ -26,27 +26,28 @@
         <el-form-item label="用户名称" prop="name">
           <el-input
             size="small"
-            v-model="user.name"
+            v-model.trim="user.name"
             autocomplete="off"
             :disabled="formDisable"
           ></el-input>
         </el-form-item>
-        <el-form-item label="用户账号" prop="phone">
+        <el-form-item label="用户账号" prop="username">
           <el-input
+            onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"
             size="small"
-            v-model="user.phone"
+            v-model.trim="user.username"
             autocomplete="off"
             :disabled="formDisable"
           ></el-input>
         </el-form-item>
         <el-form-item
           label="修改密码"
-          prop="newPassword"
+          prop="password"
           v-if="this.$route.query.type === 'edit'"
         >
           <el-input
             size="small"
-            v-model="user.newPassword"
+            v-model.trim="user.password"
             placeholder="请输入新密码"
             type="password"
           />
@@ -58,7 +59,7 @@
         >
           <el-input
             size="small"
-            v-model="user.confirmPassword"
+            v-model.trim="user.confirmPassword"
             placeholder="请确认新密码"
             type="password"
           />
@@ -75,41 +76,41 @@
 </template>
  
 <script>
+import { roleList } from "@/Api/role";
+import {
+  addinsertUser,
+  deleteUserGet,
+  viewUserInfo,
+  updateUserInfo,
+  updatePassWd,
+} from "@/Api/user";
 export default {
   name: "UserInfo",
   data() {
     const equalToPassword = (rule, value, callback) => {
-      if (this.user.newPassword !== value) {
+      if (this.user.password !== value) {
         callback(new Error("两次输入的密码不一致"));
       } else {
         callback();
       }
     };
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "巡检员",
-        },
-        {
-          value: "选项2",
-          label: "站长",
-        },
-        {
-          value: "选项3",
-          label: "水坝巡检员",
-        },
-      ],
+      queryParams: {
+        page: 1,
+        size: 10000,
+        message: "",
+      },
+      optionsRole: [],
       user: {
-        userId: "",
-        roleType: "",
+        userId: null,
+        roleId: "",
         name: "",
-        phone: "",
-        newPassword: "",
+        username: "",
+        password: "",
         confirmPassword: "",
       },
       userRules: {
-        roleType: [
+        roleId: [
           {
             required: true,
             message: "请选择用户角色",
@@ -118,11 +119,26 @@ export default {
         ],
         name: [
           { required: true, message: "请输入用户名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          {
+            min: 3,
+            max: 10,
+            message: "长度在 3 到 10 个字符",
+            trigger: "blur",
+          },
         ],
-        phone: [{ required: true, message: "请填写用户账号", trigger: "blur" }],
-
-        newPassword: [
+        username: [
+          {
+            required: true,
+            message: "请填写用户账号",
+            trigger: "blur",
+          },
+          {
+            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            message: "请输入正确的手机号码",
+            trigger: "blur",
+          },
+        ],
+        password: [
           { required: true, message: "新密码不能为空", trigger: "blur" },
           {
             min: 6,
@@ -139,6 +155,7 @@ export default {
       formDisable: false,
     };
   },
+
   methods: {
     /** 取消 */
     closeForm() {
@@ -152,18 +169,36 @@ export default {
       this.$refs["user"].validate((valid) => {
         if (valid) {
           if (this.$route.query.type === "add") {
-            console.log(
-              "%c提交新增：",
-              "color:red;font-size:18px;font-weight:bold;",
-              this.user
-            );
+            addinsertUser(
+              this.user,
+              window.sessionStorage.getItem("token")
+            ).then((res) => {
+              if (res.data.code === 200) {
+                this.$message({
+                  message: "用户新增成功！",
+                  type: "success",
+                });
+                this.$router.push({
+                  path: "/system/userManage",
+                });
+              }
+            });
           } else if (this.$route.query.type === "edit") {
             this.user.userId = this.$route.query.id;
-            console.log(
-              "%c提交编辑：",
-              "color:red;font-size:18px;font-weight:bold;",
-              this.user
-            );
+            updateUserInfo(
+              this.user,
+              window.sessionStorage.getItem("token")
+            ).then((res) => {
+              if (res.data.code === 200) {
+                this.$message({
+                  message: "修改成功！",
+                  type: "success",
+                });
+                this.$router.push({
+                  path: "/system/userManage",
+                });
+              }
+            });
           }
         } else {
           return false;
@@ -175,8 +210,25 @@ export default {
     if (this.$route.query.type === "add") {
       this.formDisable = false;
     } else if (this.$route.query.type === "edit") {
+      viewUserInfo(
+        this.$route.query.id,
+        window.sessionStorage.getItem("token")
+      ).then((res) => {
+        if (res.data.code === 200) {
+          this.user = res.data.result;
+          this.user.password = "";
+          this.user.roleId = Number(res.data.result.roleId);
+        }
+      });
       this.formDisable = true;
     }
+    roleList(this.queryParams, window.sessionStorage.getItem("token")).then(
+      (res) => {
+        if (res.data.code === 200) {
+          this.optionsRole = res.data.result.data;
+        }
+      }
+    );
   },
 };
 </script>
