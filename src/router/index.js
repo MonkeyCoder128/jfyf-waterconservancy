@@ -135,13 +135,13 @@ const constantRoutes = [
         component: () => import('@/views/search/emergency/index'),
         meta: { title: '事故上报', icon: 'user' }
       },
-      // {
-      //   path: '/search/emergency',
-      //   name: 'childrenEme',
-      //   hidden: true,
-      //   component: () => import('@/views/search/emergency/childrenEme'),
-      //   meta: { title: '查看记录', icon: 'el-icon-user' }
-      // },
+      {
+        path: '/search/emergency',
+        name: 'childrenEme',
+        hidden: true,
+        component: () => import('@/views/search/emergency/childrenEme'),
+        meta: { title: '查看记录', icon: 'el-icon-user' }
+      },
     ]
   },
 

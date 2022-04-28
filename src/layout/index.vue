@@ -6,7 +6,7 @@
         <el-menu
           background-color="#304156"
           text-color="#fff"
-          active-text-color="#fff"
+          active-text-color="#409EFF"
           border-bottom="none"
           router
           :default-active="path"
@@ -173,7 +173,7 @@ export default {
               path: "/search/safe",
             },
             {
-              title: "事故上报",
+              title: "巡检记录",
               path: "/search/emergency",
             },
           ],

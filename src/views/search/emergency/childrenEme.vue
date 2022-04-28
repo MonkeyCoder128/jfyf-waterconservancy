@@ -45,9 +45,9 @@
                 <i class="el-icon-plus"></i>
                 <span class="el-upload__text">*点击添加图片</span>
               </el-upload>
-              <!-- <el-dialog :visible.sync="dialogVisible">
+              <el-dialog :visible.sync="dialogVisible">
                 <img width="100%" :src="formOne.descriptionImageList" alt="">
-              </el-dialog> -->
+              </el-dialog>
               <el-col :span="14">
                 <el-input type="textarea" v-model="formOne.description" placeholder="请输入详细问题描述"></el-input>
               </el-col>
@@ -80,10 +80,10 @@
                 </el-col>
               </el-form-item>
             </div>
-            <el-form-item v-if="showUserButton">
+            <!-- <el-form-item v-if="showUserButton">
               <el-button>取消</el-button>
               <el-button type="primary" @click="onSubmit">提交</el-button>
-            </el-form-item>
+            </el-form-item> -->
           </el-form>
         </el-card>
       </el-col>
@@ -110,7 +110,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8" v-else>
+      <el-col :span="8">
         <el-card shadow="always" class="el-card">
           <p class="record">巡检提交记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
@@ -144,7 +144,7 @@ export default {
   data(){
     return{
       // 页面title
-      pageTitle: '安全巡检',
+      pageTitle: '巡检记录',
       // 根据身份key值判断展示的内容
       showInfo: true,
       // 表单1数据
@@ -236,18 +236,16 @@ export default {
           this.formOne.reportUserName = res.data.result.reportUserName;
           this.formOne.description = res.data.result.description;
           this.formOne.descriptionImageList = res.data.result.descriptionImageList;
-          // console.log(res.data.result.descriptionImageList);
+          this.imgArr = res.data.result.descriptionImageList;
           this.formOne.progress = String(res.data.result.progress);
           this.formOne.remark = res.data.result.remark;
           this.formOne.remarkImageList = res.data.result.remarkImageList;
           this.formOne.exceptionType = String(res.data.result.exceptionType);
-          this.imgArr = res.data.result.descriptionImageList;
         }
       }),
       // 根据id获取右侧信息回显
       InspectionId(this.$route.query.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
-          console.log(res.data.result);
           for(let i in res.data.result){
             for(let k in this.Xjresult){
               if(res.data.result[i].progress == this.Xjresult[k].progress){
@@ -255,7 +253,6 @@ export default {
               }
             }
           }
-          console.log(this.Xjresult);
         }
       })
     },
@@ -292,7 +289,7 @@ export default {
     },
     // 删除上传好的图片时的钩子函数
     handleRemove(file, fileList) {
-      this.formOne.descriptionImageList.pop();
+      console.log(file, fileList);
     },
     handleRemove_(file, fileList) {
       console.log(file, fileList);
@@ -308,7 +305,7 @@ export default {
       }
     },
     handleBeforeUpload_(file){
-      if(this.formOne.remarkImageList.length>1){
+      if(this.formOne.remarkImageList.length>4){
         this.$message({
           message: '最多上传五张图片！',
           type: 'warning'
