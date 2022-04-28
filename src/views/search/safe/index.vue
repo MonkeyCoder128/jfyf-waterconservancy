@@ -9,7 +9,7 @@
               <div class="block" :span='6'>
                 <span class="demonstration"></span>
                 <el-date-picker
-                  v-model="formData.dataTime"
+                  v-model="formData.reportDate"
                   type="datetimerange"
                   start-placeholder="开始日期"
                   end-placeholder="结束日期"
@@ -18,21 +18,18 @@
               </div>
             </el-form-item>
             <el-form-item label="异常上报情况：">
-              <el-select clearable v-model="formData.type" placeholder="情况上报">
-                <el-option label="已上报" value="1"></el-option>
-                <el-option label="未上报" value="2"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="设备异常：">
-              <el-select clearable v-model="formData.type" placeholder="设备异常">
-                <el-option label="异常1" value="1"></el-option>
-                <el-option label="异常2" value="2"></el-option>
+              <el-select clearable v-model="formData.reportType" placeholder="情况上报">
+                <el-option label="已上报" value="2"></el-option>
+                <el-option label="未上报" value="1"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="异常情况：">
-              <el-select clearable v-model="formData.type" placeholder="异常情况">
-                <el-option label="情况1" value="1"></el-option>
-                <el-option label="情况2" value="2"></el-option>
+              <el-select multiple clearable v-model="formData.exceptionTypes" placeholder="异常情况">
+                <el-option label="流速、流量" value=1>流速、流量</el-option>
+                <el-option label="渗透压" value=2>渗透压</el-option>
+                <el-option label="位移" value=3>位移</el-option>
+                <el-option label="水质" value=4>水质</el-option>
+                <el-option label="设备功能" value=5>设备功能</el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
@@ -47,18 +44,40 @@
             v-loading="listLoading"
             :header-cell-style="{background:'#F7F8FC',color:'#333333'}"
             style="width: 100%"
+            :key="tableData.list.id"
           >
             <el-table-column prop="exceptionLocation" label="异常位置" align="center">
             </el-table-column>
-            <el-table-column prop="exceptionType" label="设备异常" align="center">
+            <el-table-column prop="deviceStatus" label="设备状态" align="center">
+              <template slot-scope="scope">
+                <span style="color:#ddb90a" v-if="scope.row.deviceStatus == 1">设备离线</span>  
+                <span v-else>设备在线</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="exceptionType2" label="点位异常" align="center">
+            <el-table-column prop="exceptionType" label="异常分类" align="center">
+              <template slot-scope="scope">
+                <span v-if="scope.row.exceptionType == 1">流速流量异常</span>
+                <span v-if="scope.row.exceptionType == 2">渗透压异常</span>
+                <span v-if="scope.row.exceptionType == 3">位移</span>
+                <span v-if="scope.row.exceptionType == 4">水质异常</span>
+                <span v-if="scope.row.exceptionType == 5">设备功能异常</span>
+              </template>
             </el-table-column>
             <el-table-column prop="reportDate" label="上报时间" align="center">
             </el-table-column>
             <el-table-column prop="reportType" label="异常上报情况" align="center">
+              <template slot-scope="scope">
+                <span style="color:#ff6579" v-if="scope.row.reportType == 1">未上报</span>
+                <span v-else>已上报</span>
+              </template>
             </el-table-column>
             <el-table-column prop="progress" label="进展" align="center">
+              <template slot-scope="scope">
+                <span v-if="scope.row.progress == 0">平台预警</span>
+                <span v-if="scope.row.progress == 1">等待维修</span>
+                <span v-if="scope.row.progress == 2">维修中</span>
+                <span v-if="scope.row.progress == 3">已解决</span>
+              </template>
             </el-table-column>
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
@@ -66,7 +85,10 @@
                   size="small"
                   type="text"
                   @click="check(scope.row.id)"
-                  >异常上报</el-button
+                  >
+                  <span v-if="scope.row.reportType == 1">异常上报</span>
+                  <span style="color:#23db3a" v-else>查看/编辑</span>
+                  </el-button
                 >
                 <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579"
                   >解除异常</el-button
@@ -96,26 +118,31 @@
 </template>
 
 <script>
-import {InintData} from '@/Api/safe'
+import {InintData,ReportErr} from '@/Api/safe'
 export default {
   name:'',
   data () {
     return {
       // 表单查询数据
       formData: {
-        dataTime: '',
-        size: '',
-        type: '',
+        reportDate: [],
+        endDate: '',
+        startDate: '',
+        reportType: '',
+        exceptionTypes: '',
+        status:'1',
       },
       // 表格数据
       tableData: {
         list: [
           {
+            id: '',
             exceptionLocation: '',
             exceptionType: '',
             reportDate: '',
             reportType: '',
-            progress: ''
+            progress: '',
+            deviceStatus:'',
           },
         ],
         totalCount: 0,
@@ -124,6 +151,8 @@ export default {
         totalPage: 1
       },
       listLoading: false,
+      // 操作按钮文字显示
+      controlScopeText:'异常上报',
     };
   },
   created(){
@@ -132,16 +161,30 @@ export default {
   methods: {
     // 获取数据
     init(){
-      InintData({},window.sessionStorage.getItem("token")).then(res=>{
+      this.listLoading = true;
+      InintData({status:1},window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
+          this.listLoading = false;
         }
       })
     },
     // 查询数据
     serchData () {
-      this.tableData.currPage = 1
-      this.getdata()
+      this.listLoading = true;
+      this.tableData.currPage = 1;
+      this.formData.startDate = '';
+      this.formData.endDate = '';
+      if(this.formData.reportDate !== '' && this.formData.reportDate !== null){
+        this.formData.startDate = this.formData.reportDate[0];
+        this.formData.endDate = this.formData.reportDate[1];
+      }
+      InintData(this.formData, window.sessionStorage.getItem("token")).then(res=>{
+        if(res.data.code == 200){
+          this.tableData.list = res.data.result.data;
+          this.listLoading = false;
+        }
+      })
     },
     // 改变页数
     changeCurrent (val) {
@@ -159,22 +202,32 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        console.log('解除异常' + id);
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+        ReportErr({id,status:2,progress:4},window.sessionStorage.getItem("token")).then(res=>{
+          if(res.data.code == 200){
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: '异常解除成功!'
+            });
+            this.init();
+          }else{
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: '已取消解除！'
+            }); 
+          }
+        })
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: '已取消解除！'
         });          
       });
     },
     // 异常上报
     check(id){
-      console.log('异常上报' + id);
-      this.$router.push({name:'childrenSafe',query: {id:'1'}})
+      this.$router.push({name:'childrenSafe',query: {id}})
     },
     // 从后台查询数据
     getdata () {
@@ -204,6 +257,14 @@ export default {
       })
     },
   },
+  // 监听查询时间的变化
+  // watch:{
+  //   'formData.reportDate'(oldval,newval){
+  //     this.formData.startDate = oldval[0];
+  //     this.formData.endDate = oldval[1];
+  //     console.log(this.formData.startDate);
+  //   }
+  // }
 }
 </script>
 <style lang="scss" scoped>

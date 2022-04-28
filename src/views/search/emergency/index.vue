@@ -10,7 +10,7 @@
                 <div class="block">
                   <span class="demonstration"></span>
                   <el-date-picker
-                    v-model="formData.dataTime"
+                    v-model="formData.reportDate"
                     type="datetimerange"
                     start-placeholder="开始日期"
                     end-placeholder="结束日期"
@@ -19,29 +19,26 @@
                 </div>
               </el-form-item>
               <el-form-item label="异常情况管理：">
-                <el-select clearable v-model="formData.type" placeholder="请选择">
-                  <el-option label="管理1" value="1"></el-option>
-                  <el-option label="管理2" value="2"></el-option>
+                <el-select clearable v-model="formData.status" placeholder="请选择">
+                  <el-option label="已解除" value="2"></el-option>
+                  <el-option label="未解除" value="1"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="异常上报情况：">
-                <el-select clearable v-model="formData.type" placeholder="请选择">
-                  <el-option label="异常1" value="1"></el-option>
-                  <el-option label="异常2" value="2"></el-option>
+              <el-form-item label="异常情况：">
+                <el-select multiple clearable v-model="formData.exceptionTypes" placeholder="异常情况">
+                  <el-option label="流速、流量" value=1>流速、流量</el-option>
+                  <el-option label="渗透压" value=2>渗透压</el-option>
+                  <el-option label="位移" value=3>位移</el-option>
+                  <el-option label="水质" value=4>水质</el-option>
+                  <el-option label="设备功能" value=5>设备功能</el-option>
                 </el-select>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item label="设备异常：">
-                <el-select clearable v-model="formData.type" placeholder="请选择">
-                  <el-option label="异常1" value="1"></el-option>
-                  <el-option label="异常2" value="2"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="异常情况：">
-                <el-select clearable v-model="formData.type" placeholder="请选择">
-                  <el-option label="异常1" value="1"></el-option>
-                  <el-option label="异常2" value="2"></el-option>
+              <el-form-item label="异常上报情况：">
+                <el-select clearable v-model="formData.reportType" placeholder="请选择">
+                  <el-option label="已上报" value="2"></el-option>
+                  <el-option label="未上报" value="1"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item>
@@ -58,19 +55,45 @@
             :header-cell-style="{background:'#F7F8FC',color:'#333333'}"
             style="width: 100%"
           >
-            <el-table-column prop="name" label="异常位置" align="center">
+            <el-table-column prop="exceptionLocation" label="异常位置" align="center">
             </el-table-column>
-            <el-table-column prop="size" label="设备异常" align="center">
+            <el-table-column prop="deviceStatus" label="设备状态" align="center">
+              <template slot-scope="scope">
+                <span style="color:#ddb90a" v-if="scope.row.deviceStatus == 1">设备离线</span>  
+                <span v-else>设备在线</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="type" label="点位异常" align="center">
+            <el-table-column prop="exceptionType" label="异常分类" align="center">
+              <template slot-scope="scope">
+                <span v-if="scope.row.exceptionType == 1">流速流量异常</span>
+                <span v-if="scope.row.exceptionType == 2">渗透压异常</span>
+                <span v-if="scope.row.exceptionType == 3">位移</span>
+                <span v-if="scope.row.exceptionType == 4">水质异常</span>
+                <span v-if="scope.row.exceptionType == 5">设备功能异常</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="reportTime" label="上报时间" align="center">
+            <el-table-column prop="reportDate" label="上报时间" align="center">
             </el-table-column>
-            <el-table-column prop="situation" label="异常上报情况" align="center">
+            <el-table-column prop="reportType" label="异常上报情况" align="center">
+              <template slot-scope="scope">
+                <span style="color:#ff6579" v-if="scope.row.reportType == 1">未上报</span>
+                <span v-else>已上报</span>
+              </template>
             </el-table-column>
             <el-table-column prop="progress" label="进展" align="center">
+              <template slot-scope="scope">
+                <span v-if="scope.row.progress == 0">平台预警</span>
+                <span v-if="scope.row.progress == 1">等待维修</span>
+                <span v-if="scope.row.progress == 2">维修中</span>
+                <span v-if="scope.row.progress == 3">维修完成</span>
+                <span v-if="scope.row.progress == 4">已解决</span>
+              </template>
             </el-table-column>
-            <el-table-column prop="administration" label="异常情况管理" align="center">
+            <el-table-column prop="status" label="异常情况管理" align="center">
+              <template slot-scope="scope">
+                <span style="color:#ff6579" v-if="scope.row.status == 1">未解除异常</span>
+                <span v-if="scope.row.status == 2">已解除异常</span>
+              </template>
             </el-table-column>
             <el-table-column label="操作" align="center">
               <template slot-scope="scope">
@@ -78,11 +101,12 @@
                   size="small"
                   type="text"
                   @click="check(scope.row.id)"
-                  >查看</el-button
-                >
-                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579"
-                  >解除异常</el-button
-                >
+                  >查看
+                </el-button>
+                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579">
+                  <span v-if="scope.row.status == 1">未处理</span>
+                  <span v-if="scope.row.status == 2">已处理</span>
+                </el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -107,47 +131,33 @@
 </el-row>
 </template>
 <script>
-
+import {InintData,ReportErr} from '@/Api/safe'
 export default {
   name:'',
   data () {
     return {
       // 表单查询数据
       formData: {
-        dataTime: '',
-        size: '',
-        type: '',
+        reportDate: [],
+        endDate: '',
+        startDate: '',
+        reportType: '',
+        exceptionTypes: '',
+        status:'',
       },
       // 表格数据
       tableData: {
         list: [
           {
-            name: 'craig',
-            size: '178kb',
-            type: '点位一',
-            reportTime: '2019-07-14',
-            situation: '/',
-            progress: '等待维修',
-            administration:'已解除'
+            id: '',
+            exceptionLocation: '',
+            exceptionType: '',
+            reportDate: '',
+            reportType: '',
+            progress: '',
+            deviceStatus:'',
+            status:'',
           },
-          {
-            name: 'edison',
-            size: '178kb',
-            type: '点位二',
-            reportTime: '2019-07-14',
-            situation: '/',
-            progress: '等待维修',
-            administration:'已解除'
-          },
-          {
-            name: 'daniue',
-            size: '178kb',
-            type: '点位三',
-            reportTime: '2019-07-14',
-            situation: '/',
-            progress: '等待维修',
-            administration:'已解除'
-          }
         ],
         totalCount: 0,
         pageSize: 10,
@@ -159,11 +169,37 @@ export default {
       labelPosition: 'right',
     };
   },
+  created(){
+    this.init();
+  },
   methods: {
+    // 获取数据
+    init(){
+      this.listLoading = true;
+      InintData({},window.sessionStorage.getItem("token")).then(res=>{
+        if(res.data.code == 200){
+          this.tableData.list = res.data.result.data;
+          this.listLoading = false;
+        }
+      })
+    },
     // 查询数据
     serchData () {
       this.tableData.currPage = 1
-      this.getdata()
+      this.listLoading = true;
+      this.tableData.currPage = 1;
+      this.formData.startDate = '';
+      this.formData.endDate = '';
+      if(this.formData.reportDate !== '' && this.formData.reportDate !== null){
+        this.formData.startDate = this.formData.reportDate[0];
+        this.formData.endDate = this.formData.reportDate[1];
+      }
+      InintData(this.formData, window.sessionStorage.getItem("token")).then(res=>{
+        if(res.data.code == 200){
+          this.tableData.list = res.data.result.data;
+          this.listLoading = false;
+        }
+      })
     },
     // 改变页数
     changeCurrent (val) {
@@ -176,12 +212,11 @@ export default {
     },
     // 解除异常
     deletedata (id) {
-      console.log('解除异常' + id);
+      // console.log('解除异常' + id);
     },
     // 查看异常情况
     check(id){
-      console.log('查看异常' + id);
-      this.$router.push({name:'childrenSafe',query: {id:'2'}})
+      this.$router.push({name:'childrenEme',query: {id}})
     },
     // 从后台查询数据
     getdata () {
