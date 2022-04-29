@@ -37,23 +37,16 @@ const constantRoutes = [
   // },
 
   {
-    path: '/setTime',
+    path: '/realtimeMnitor',
     component: Layout,
-    name: 'setTime',
+    name: 'realtimeMnitor',
     meta: { title: '实时监测', icon: 'el-icon-user' },
     children: [
       {
-        path: '/setTime/Dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/setTime/Dashboard/index'),
+        path: '/realtimeMnitor/realtime',
+        name: 'realtime',
+        component: () => import('@/views/realtimeMnitor/realtime/index'),
         meta: { title: '仪表盘、折线图', icon: 'user' }
-      },
-      {
-        path: '/setTime/report',
-        name: 'report',
-        hidden: true,
-        component: () => import('@/views/setTime/report/index'),
-        meta: { title: '报表', icon: 'user' }
       },
     ]
   },
@@ -65,18 +58,39 @@ const constantRoutes = [
     meta: { title: '检测分析', icon: 'el-icon-user' },
     children: [
       {
-        path: '/explain/warning',
-        name: 'warning',
-        component: () => import('@/views/explain/warning/index'),
-        meta: { title: '预警', icon: 'user' }
+        path: '/explain/waterVelocity',
+        name: 'waterVelocity',
+        component: () => import('@/views/explain/waterVelocity/index'),
+        meta: { title: '流速、流量', icon: 'user' }
       },
       {
-        path: '/explain/data',
-        name: 'data',
-        hidden: true,
-        component: () => import('@/views/explain/data/index'),
-        meta: { title: '数据分析', icon: 'user' }
+        path: '/explain/waterStage',
+        name: 'waterStage',
+        component: () => import('@/views/explain/waterStage/index'),
+        meta: { title: '水位', icon: 'user' }
       },
+      {
+        path: '/explain/osmoticPressure',
+        name: 'osmoticPressure',
+        hidden: true,
+        component: () => import('@/views/explain/osmoticPressure/index'),
+        meta: { title: '库压渗压', icon: 'user' }
+      },
+      {
+        path: '/explain/waterQuality',
+        name: 'waterQuality',
+        hidden: true,
+        component: () => import('@/views/explain/waterQuality/index'),
+        meta: { title: '水质分析', icon: 'user' }
+      },
+      {
+        path: '/explain/deformation',
+        name: 'deformation',
+        hidden: true,
+        component: () => import('@/views/explain/deformation/index'),
+        meta: { title: '形变位移', icon: 'user' }
+      },
+      
     ]
   },
 

@@ -132,7 +132,7 @@ export default {
   created() {},
   methods: {
     Login() {
-      this.$router.push({ path: "/setTime" });
+      this.$router.push({ path: "/realtimeMnitor" });
     },
     outLogin() {
       this.$router.push({ path: "/" });

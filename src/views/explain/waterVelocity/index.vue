@@ -2,7 +2,7 @@
   <el-row :gutter="12">
   <el-col :span="24">
     <el-card shadow="always">
-      数据分析
+      流速、流量
     </el-card>
   </el-col>
 </el-row>

@@ -114,18 +114,13 @@ export default {
         // },
         {
           title: "实时监测",
-          path: "/setTime",
+          path: "/realtimeMnitor",
           icon: "el-icon-view",
           children: [
             {
-              title: "仪表盘、折线图",
-              path: "/setTime/Dashboard",
+              title: "实时数据",
+              path: "/realtimeMnitor/realtime",
               icon: "el-icon-data-line",
-            },
-            {
-              title: "报表",
-              path: "/setTime/report",
-              icon: "el-icon-tickets",
             },
           ],
         },
@@ -135,13 +130,26 @@ export default {
           icon: "el-icon-s-opportunity",
           children: [
             {
-              title: "预警",
-              path: "/explain/warning",
+              title: "流速、流量",
+              path: "/explain/waterVelocity",
             },
             {
-              title: "数据分析",
-              path: "/explain/data",
+              title: "水位",
+              path: "/explain/waterStage",
             },
+            {
+              title: "库压渗压",
+              path: "/explain/osmoticPressure",
+            },
+            {
+              title: "水质分析",
+              path: "/explain/waterQuality",
+            },
+            {
+              title: "形变位移",
+              path: "/explain/deformation",
+            },
+            
           ],
         },
         {
