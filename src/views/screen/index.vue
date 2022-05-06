@@ -25,40 +25,35 @@
           <el-col :span="6" class="screen_left">
             <div class="box">
               <div class="box_nav">安全监测</div>
-              <el-table :data="tableData" class="table"  :header-cell-style="{background:'transparent!important'}">
-                <el-table-column prop="date" label="时间" min-width="90px">
-                </el-table-column>
-                <el-table-column prop="name" label="设备" min-width="30px">
-                </el-table-column>
-                <el-table-column prop="address" label="原因"> </el-table-column>
-              </el-table>
+              <outbox />
             </div>
             <div class="box">
               <div class="box_nav">坝基变形监测</div>
+              <deformation />
             </div>
             <div class="box">
               <div class="box_nav">水质监测</div>
               <el-row>
-                <el-col :span="12"><pie></pie></el-col>
+                <el-col :span="12"><pie /></el-col>
                 <el-col :span="12"
                   ><div class="box_shuizhi">
                     <el-row class="shuizhi1">
                       <el-col :span="2" class="square"></el-col>
-                      <el-col :span="14" style="padding-left: 20px"
+                      <el-col :span="13" style="padding-left: 20px"
                         >二氧化碳</el-col
                       >
                       <el-col :span="2" class="p_shuizhi1">30%</el-col>
                     </el-row>
                     <el-row class="shuizhi2">
                       <el-col :span="2" class="square1"></el-col>
-                      <el-col :span="14" style="padding-left: 20px"
+                      <el-col :span="13" style="padding-left: 20px"
                         >氢含量</el-col
                       >
                       <el-col :span="2" class="p_shuizhi2">10%</el-col>
                     </el-row>
                     <el-row class="shuizhi3">
                       <el-col :span="2" class="square2"></el-col>
-                      <el-col :span="14" style="padding-left: 20px"
+                      <el-col :span="13" style="padding-left: 20px"
                         >氧含量</el-col
                       >
                       <el-col :span="2" class="p_shuizhi3">60%</el-col>
@@ -84,6 +79,7 @@
             </div>
             <div class="box_right">
               <div class="box_nav">流速、流量监测</div>
+              <flow />
             </div>
           </el-col>
         </el-row>
@@ -92,42 +88,25 @@
   </el-row>
 </template>
 <script>
-import broken from "./components/broken.vue";
+import outbox from "./components/outbox.vue";
+import deformation from "./components/deformation.vue";
 import pie from "./components/pie.vue";
 import weather from "./components/weather.vue";
+import broken from "./components/broken.vue";
 import pressure from "./components/pressure.vue";
+import flow from "./components/flow.vue";
 export default {
   components: {
-    broken,
+    outbox,
+    deformation,
     pie,
+    weather,
+    broken,
     pressure,
-    weather
+    flow,
   },
   data() {
-    return {
-      tableData: [
-        {
-          date: "2016-05-02 11:20:24",
-          name: "A1区",
-          address: "设备离线",
-        },
-        {
-          date: "2016-05-02 11:20:24",
-          name: "A1区",
-          address: "设备离线",
-        },
-        {
-          date: "2016-05-02 11:20:24",
-          name: "A1区",
-          address: "设备离线",
-        },
-        {
-          date: "2016-05-02 11:20:24",
-          name: "A1区",
-          address: "设备离线",
-        },
-      ],
-    };
+    return {};
   },
   created() {},
   methods: {
@@ -192,6 +171,7 @@ export default {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.3);
   padding: 16px;
+  overflow: hidden;
 }
 .box_right {
   height: 21.1vh;
@@ -221,38 +201,45 @@ export default {
 .el-table th.el-table__cell.is-leaf {
   border-bottom: 1px dashed #142f38;
 }
-/deep/  .el-table, .el-table__expanded-cell {
-    background-color: transparent;
+/deep/ .el-table,
+.el-table__expanded-cell {
+  background-color: transparent;
 }
 /deep/ .el-table tr {
-    background-color: transparent!important;
+  background-color: transparent !important;
 }
-/deep/ .el-table--enable-row-transition .el-table__body td, .el-table .cell{
-   background-color: transparent;
+/deep/ .el-table--enable-row-transition .el-table__body td,
+.el-table .cell {
+  background-color: transparent;
 }
-/ddep/ .el-table th.el-table__cell{
-  background-color: transparent!important;
+/ddep/ .el-table th.el-table__cell {
+  background-color: transparent !important;
 }
-/deep/ .el-table thead {color: #bebec2;}
-/deep/.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell{
+/deep/ .el-table thead {
+  color: #bebec2;
+}
+/deep/.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: transparent;
 }
 
-.el-table::before {//去除底部白线
-	 left: 0;
-	 bottom: 0;
-	 width: 100%;
-	 height: 0px;
+.el-table::before {
+  //去除底部白线
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
 }
 .box_shuizhi {
   display: flex;
   flex-direction: column;
+  font-size: 15px;
+  line-height: 13px;
 }
 .square,
 .square1,
 .square2 {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background: #148f97;
 }
 .square1 {

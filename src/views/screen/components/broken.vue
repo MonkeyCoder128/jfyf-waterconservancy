@@ -1,5 +1,5 @@
 <template>
-  <div id="broken" style="width: 340px; height: 135px; margin-top: 1vh"></div>
+  <div id="broken" style="width: 340px; height: 135px;"></div>
 </template>
 <script>
 export default {
@@ -14,7 +14,7 @@ export default {
       var option = {
         grid: {
           left: "10",
-          top: "10%",
+          top: "25%",
           left: "3%",
           right: "2%",
           bottom: "3%",

@@ -1,5 +1,8 @@
 <template>
-  <div id="pie" style="width: 170px; height:  170px; margin-top: 3vh"></div>
+  <div style="position: relative">
+    <div id="pie" style="width: 170px; height: 170px; margin-top: 3vh"></div>
+    <img src="../../../assets/image/juxing.png" alt="" class="juxing" />
+  </div>
 </template>
 <script>
 export default {
@@ -42,12 +45,18 @@ export default {
             },
             data: [
               { value: 1048, name: "二氧化碳" },
-              { value: 735, name: "氢含量" },
+              { value: 200, name: "氢含量" },
               { value: 580, name: "氧含量" },
-              { value: 484, name: "二氧化碳" },
-              { value: 300, name: "氢含量" },
-              { value: 100, name: "氧含量" },
             ],
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  //自定义颜色
+                  var colorList = ["#115cb9", "#1289ba", "#148f97"];
+                  return colorList[params.dataIndex];
+                },
+              },
+            },
           },
         ],
       };
@@ -56,3 +65,12 @@ export default {
   },
 };
 </script>
+<style  lang="scss" scoped>
+.juxing {
+  position: absolute;
+  top: 35px;
+  left: 36px;
+  width: 99px;
+  height: 99px;
+}
+</style>

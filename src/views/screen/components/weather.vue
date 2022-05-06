@@ -1,8 +1,31 @@
 <template>
-  <div
-    id="weather"
-    style="width: 270px; height: 140px;overflow: hidden;"
-  ></div>
+  <div id="weather_box">
+    <el-row style="margin: 1.2vh auto 1vh">
+      <el-col :span="3"
+        ><img
+          src="https://cctv202.com/img/rain.png"
+          width="30px"
+          height="30px"
+        />
+      </el-col>
+      <el-col :span="15" class="rain" style="color: #fff"
+        ><div style="font-size:32px;">18</div>
+        <div class="rain_p">
+          <div>℃</div>
+          小雨
+        </div></el-col
+      >
+      <el-col :span="2"
+        ><el-button type="primary" class="btn_title"
+          >蓝色暴雨预警</el-button
+        ></el-col
+      >
+    </el-row>
+    <div
+      id="weather"
+      style="width: 270px; height: 140px; overflow: hidden"
+    ></div>
+  </div>
 </template>
 <script>
 export default {
@@ -62,7 +85,7 @@ export default {
             type: "category",
             boundaryGap: false,
             position: "top",
-            offset: 40,
+            offset: 50,
             zlevel: 100,
             axisLine: {
               show: false,
@@ -81,32 +104,32 @@ export default {
                     // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[0]] + '.png')
                     image: "https://cctv202.com/img/rain.png",
                   },
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                 },
                 1: {
                   backgroundColor: {
                     // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[1]] + '.png')
                     image: "https://cctv202.com/img/sun.png",
                   },
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                 },
                 2: {
                   backgroundColor: {
                     // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[2]] + '.png')
-                    image: "https://cctv202.com/img/rain.png",
+                    image: "https://cctv202.com/img/sun.png",
                   },
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                 },
                 3: {
                   backgroundColor: {
                     // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[3]] + '.png')
-                    image: "https://cctv202.com/img/rain.png",
+                    image: "https://cctv202.com/img/sun.png",
                   },
-                  height: 25,
-                  width: 25,
+                  height: 20,
+                  width: 20,
                 },
                 b: {
                   // color: 'white',
@@ -132,7 +155,6 @@ export default {
             color: "white",
           },
         },
-        
       };
 
       weather.setOption(option);
@@ -140,3 +162,28 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+#weather_box {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.btn_title {
+  color: #4bc4f1;
+  background-color: rgba(62, 160, 200, 0.3);
+  width: 4vw;
+  height: 2.5vh;
+  font-size: 12px;
+  padding: 0;
+  margin-top: 0.9vh;
+}
+.rain {
+  display: flex;
+  flex-direction: row;
+}
+.rain_p{
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+}
+</style>
