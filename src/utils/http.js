@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from '@/config/index'
 import { getToken } from "@/utils/auth";
+import { Message, MessageBox, Notification } from "element-ui";
 const http = axios.create({
     baseURL: config.devServer.proxy['/api'].target, // api的base_url
     timeout: 10000 // 请求超时时间
@@ -15,7 +16,7 @@ http.interceptors.request.use((config) => {
 })
 // 响应拦截器
 http.interceptors.response.use((ret) => {
-    console.log("%c响应拦截器：", "color:red;font-size:18px;font-weight:bold;", ret);
+    console.log("%c响应拦截器：", "color:red;font-size:18px;font-weight:bold;", ret.data.code);
     let code = ret.data.code;
     if (code == null) {
         code = ret.status;
@@ -31,7 +32,7 @@ http.interceptors.response.use((ret) => {
         location.reload();
     } else if (code != 200) {
         Notification.error({
-            title: ret.data.msg
+            title: ret.data.message
         });
         return Promise.reject("error");
     } else {

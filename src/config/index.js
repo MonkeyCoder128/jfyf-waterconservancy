@@ -10,7 +10,8 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://112.125.88.230/jfyf', //杨磊
+        target: 'http://10.1.5.203:8000/jfyf', //杨磊
+        // target: 'http://10.1.5.37/jfyf', //荆蔚杰
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
