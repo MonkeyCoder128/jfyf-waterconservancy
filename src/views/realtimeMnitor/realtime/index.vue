@@ -222,8 +222,10 @@
         <span>设备状态监测</span>
       </div>
       <div class="deviceMenu">
-        <div>正常运行设备：<span style="color: #1c48bf">14台</span></div>
-        <div>异常设备：<span style="color: #ea951c">2台</span></div>
+        <div>正常运行设备：<span style="color: #1c48bf; margin-right: 20px">14台</span></div>
+        <div>
+          异常设备：<span style="color: #ea951cx">2台</span>
+        </div>
       </div>
       <el-table :data="deviceData" style="width: 100%" border>
         <el-table-column prop="name" label="设备名称" />

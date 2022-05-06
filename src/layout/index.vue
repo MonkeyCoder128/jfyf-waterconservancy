@@ -314,7 +314,7 @@ export default {
   position: relative;
   height: 93.4vh;
   overflow: hidden;
-  margin: 8px;
+  margin: 10px;
 }
 .sidebar {
   width: 200px;

@@ -216,8 +216,9 @@ const constantRoutes = [
 //   routes: constantRoutes
 // })
 const router = new VueRouter({
+  // mode: 'history',
+  base:process.env.BASE_URL,
   routes: constantRoutes,
-  mode: 'history',
 })
 
 //获取原型对象上的push函数
