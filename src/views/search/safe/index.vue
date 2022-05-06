@@ -76,7 +76,8 @@
                 <span v-if="scope.row.progress == 0">平台预警</span>
                 <span v-if="scope.row.progress == 1">等待维修</span>
                 <span v-if="scope.row.progress == 2">维修中</span>
-                <span v-if="scope.row.progress == 3">已解决</span>
+                <span v-if="scope.row.progress == 3">维修完成</span>
+                <span v-if="scope.row.progress == 4">已解决</span>
               </template>
             </el-table-column>
             <el-table-column label="操作" align="center">
@@ -90,14 +91,19 @@
                   <span style="color:#23db3a" v-else>查看/编辑</span>
                   </el-button
                 >
-                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579"
-                  >解除异常</el-button
-                >
+                <el-button :disabled="scope.row.status == 1 ? true : false" size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579">
+                  <span style="color:gray" v-if="scope.row.status == 1">
+                    已解除异常
+                  </span>
+                  <span style="color:#409EFF" v-if="scope.row.status == 3">
+                    申请解除异常
+                  </span>
+                </el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
-        <div class="con-page" v-if="tableData.totalPage > 1">
+        <div class="con-page">
           <el-pagination
             background
             :page-size="tableData.pageSize"
@@ -130,7 +136,7 @@ export default {
         startDate: '',
         reportType: '',
         exceptionTypes: '',
-        status:'1',
+        status:'',
       },
       // 表格数据
       tableData: {
@@ -162,17 +168,24 @@ export default {
     // 获取数据
     init(){
       this.listLoading = true;
-      InintData({status:1},window.sessionStorage.getItem("token")).then(res=>{
+      this.tableData.currPage = 1;
+      InintData({status:[1,3]},window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
+          this.tableData.totalCount = res.data.result.total;
+        }else{
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.data.msg,
+          });
         }
       })
     },
     // 查询数据
     serchData () {
       this.listLoading = true;
-      this.tableData.currPage = 1;
       this.formData.startDate = '';
       this.formData.endDate = '';
       if(this.formData.reportDate !== '' && this.formData.reportDate !== null){
@@ -183,17 +196,23 @@ export default {
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
+        }else{
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.data.msg,
+          });
         }
       })
     },
     // 改变页数
     changeCurrent (val) {
       this.tableData.currPage = val
-      this.getdata()
+      this.init();
     },
     handleSizeChange (val) {
       this.tableData.pageSize = val
-      this.getdata()
+      this.init();
     },
     // 解除异常
     deletedata (id) {
@@ -270,8 +289,16 @@ export default {
 <style lang="scss" scoped>
   .el-card{
     height: 93vh;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  /deep/::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
   }
   .el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{
     width: 300px;
+  }
+  .con-page{
+    margin-top: 15px;
   }
 </style>

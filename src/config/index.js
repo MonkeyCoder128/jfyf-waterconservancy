@@ -7,9 +7,9 @@ const modeUrlObj = {
   // 开发环境
   'development': {
     // baseURL: 'http://10.1.5.156:8000/jfyf',//孙少鹏
-    //baseURL: 'http://10.1.5.203:8000/jfyf',//杨磊
+    // baseURL: 'http://10.1.5.203:8000/jfyf',//杨磊
     baseURL: 'http://10.1.5.37:8000/jfyf',//荆蔚杰
-    authBaseURL: ''
+    // authBaseURL: 'http://112.125.88.230:8080/reservoir-web/'
   },
   // 测试环境
   'test': {
