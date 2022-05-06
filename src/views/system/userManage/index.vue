@@ -72,7 +72,7 @@ import {
   userList,
   deleteUserGet,
   updateUserState,
-} from "@/Api/user";
+} from "@/api/user";
 export default {
   name: "UserManage",
   data() {

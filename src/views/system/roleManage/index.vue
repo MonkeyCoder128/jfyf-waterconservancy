@@ -112,7 +112,7 @@ import {
   addRole,
   updateRole,
   viewRoleInfo,
-} from "@/Api/role";
+} from "@/api/role";
 export default {
   //checkstate  1选中 0不选
   name: "UserManage",

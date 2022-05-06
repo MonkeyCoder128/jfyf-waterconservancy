@@ -1,6 +1,6 @@
 import axios from 'axios'
 import config from '@/config/index'
-import { getToken } from "@/utiles/auth";
+import { getToken } from "@/utils/auth";
 const http = axios.create({
     baseURL: config.devServer.proxy['/api'].target, // api的base_url
     timeout: 10000 // 请求超时时间

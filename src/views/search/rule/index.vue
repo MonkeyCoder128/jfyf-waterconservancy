@@ -111,7 +111,7 @@
 </el-row>
 </template>
 <script>
-  import {Regulations,DeleteRule,InsertRule} from '@/Api/safe'
+  import {Regulations,DeleteRule,InsertRule} from '@/api/safe'
   export default {
     name:'',
     data () {

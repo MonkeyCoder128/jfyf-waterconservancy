@@ -66,7 +66,7 @@
 </template>
  
 <script>
-import { newsList, newsType } from "@/Api/news";
+import { newsList, newsType } from "@/api/news";
 export default {
   name: "MessageManage",
   data() {

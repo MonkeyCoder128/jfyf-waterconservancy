@@ -1,4 +1,4 @@
-import request from "@/utiles/http";
+import request from "@/utils/http";
 
 // 登录方法
 export function Loginform(data) {

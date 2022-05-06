@@ -1,4 +1,4 @@
-import request from "@/utiles/http";
+import request from "@/utils/http";
 
 // 获取用户信息方法
 export function InintData(data,token) {

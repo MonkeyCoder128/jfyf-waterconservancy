@@ -1,4 +1,4 @@
-import request from "@/utiles/http";
+import request from "@/utils/http";
 
 // 消息列表展示,条件查询
 export function newsList(data, token) {

@@ -131,7 +131,7 @@
 </el-row>
 </template>
 <script>
-import {InintData,ReportErr} from '@/Api/safe'
+import {InintData,ReportErr} from '@/api/safe'
 export default {
   name:'',
   data () {

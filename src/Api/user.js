@@ -1,4 +1,4 @@
-import request from "@/utiles/http";
+import request from "@/utils/http";
 
 // 获取用户列表
 export function userList(query, token) {

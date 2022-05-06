@@ -66,9 +66,9 @@
 </template>
 
 <script>
-import { Loginform, menuList, getUserInfo } from "@/Api/login";
+import { Loginform, menuList, getUserInfo } from "@/api/login";
 import Cookies from "js-cookie";
-import { decrypt, encrypt } from "@/utiles/jsencrypt";
+import { decrypt, encrypt } from "@/utils/jsencrypt";
 export default {
   data() {
     return {

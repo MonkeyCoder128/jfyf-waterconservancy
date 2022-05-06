@@ -76,14 +76,14 @@
 </template>
  
 <script>
-import { roleList } from "@/Api/role";
+import { roleList } from "@/api/role";
 import {
   addinsertUser,
   deleteUserGet,
   viewUserInfo,
   updateUserInfo,
   updatePassWd,
-} from "@/Api/user";
+} from "@/api/user";
 export default {
   name: "UserInfo",
   data() {

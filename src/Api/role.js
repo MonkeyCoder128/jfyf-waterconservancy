@@ -1,4 +1,4 @@
-import request from "@/utiles/http";
+import request from "@/utils/http";
 
 // 查询角色列表
 export function roleList(query, token) {

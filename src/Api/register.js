@@ -1,4 +1,4 @@
-import request from "@/utiles/http";
+import request from "@/utils/http";
 
 //检测账号是否存在
 export function ExistAccount(name){

@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import {ReportErr,SelectReport,InspectionId} from '@/Api/safe'
+import {ReportErr,SelectReport,InspectionId} from '@/api/safe'
 export default {
   data(){
     return{
