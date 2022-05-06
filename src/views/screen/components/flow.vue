@@ -17,7 +17,7 @@ export default {
         animation: true,
         grid: {
           top: "5%",
-          bottom: "0%",
+          bottom: "22%",
           right: "5%",
         },
         xAxis: {
@@ -31,7 +31,7 @@ export default {
           splitLine: {
             show: true,
             lineStyle: {
-              color: "rgba(77, 128, 254, 0.2)",
+              color: "#148f97",
               width: 2,
             },
           },
@@ -40,7 +40,7 @@ export default {
             margin: 14,
             fontSize: 12,
             textStyle: {
-              color: "#65D5FF", //X轴文字颜色
+              color: "#fff", //X轴文字颜色
             },
           },
         },
@@ -55,7 +55,7 @@ export default {
             splitLine: {
               show: true,
               lineStyle: {
-                color: "rgba(77, 128, 254, 0.2)",
+                color: "#148f97",
                 width: 2,
               },
             },

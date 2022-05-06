@@ -24,15 +24,54 @@
         <el-row type="flex" class="row-bg" justify="space-between">
           <el-col :span="6" class="screen_left">
             <div class="box">
-              <div class="box_nav">安全监测</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">安全监测</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <outbox />
             </div>
             <div class="box">
-              <div class="box_nav">坝基变形监测</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">坝基变形监测</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <deformation />
             </div>
             <div class="box">
-              <div class="box_nav">水质监测</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">水质监测</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <el-row>
                 <el-col :span="12"><pie /></el-col>
                 <el-col :span="12"
@@ -63,7 +102,26 @@
               </el-row>
             </div>
           </el-col>
-          <el-col :span="6" class="screen_cont"><div></div></el-col>
+          <el-col :span="13" class="screen_cont"
+            ><div class="box_cont box_cont_top"></div>
+            <div class="box_cont">
+              <div class="box_nav"><el-row :gutter="20">
+                  <el-col :span="1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">水库概况</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row></div>
+            </div>
+            <div class="box_cont">
+              <div class="box_nav">大坝巡查</div>
+            </div></el-col
+          >
           <el-col :span="6" class="screen_right">
             <div class="box_right">
               <div class="box_nav">天气</div>
@@ -163,7 +221,8 @@ export default {
   flex-direction: column;
 }
 .box,
-.box_right {
+.box_right,
+.box_cont {
   width: 20vw;
   height: 28.5vh;
   margin-top: 1vh;
@@ -176,14 +235,30 @@ export default {
 .box_right {
   height: 21.1vh;
 }
+.box_cont {
+  width: 45vw;
+  height: 20.5vh;
+}
+.box_cont_top {
+  height: 44.5vh;
+}
 .box_nav {
-  width: 339px;
-  height: 30px;
+  width: 86%;
   color: #87e9eb;
-  background: url("../../assets/image/box_nav.png");
-  padding-left: 22px;
   line-height: 29px;
   text-shadow: 0 0 10px #87e9eb, 0 0 5px #87e9eb;
+  border-top: solid 1px #142a33;
+  border-bottom: solid 1px #142a33;
+  margin: 0 auto;
+}
+.icon_title2,
+.icon_title3 {
+  position: absolute;
+  top: 0;
+  right: 2vw;
+}
+.icon_title3 {
+  right: 1vw;
 }
 /deep/::-webkit-scrollbar {
   display: none; /* Chrome Safari */

@@ -7,7 +7,7 @@
           <span>设备:流量计A</span>
           <div class="chartDataBox">
             <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
-            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart :chartData="gaugeAllData2" :width="'100%'" :height="'100%'" />
           </div>
         </div>
         <div class="echartsBox" style="background-color: blue">
@@ -78,6 +78,7 @@ export default {
   data() {
     return {
       gaugeAllData: {},
+      gaugeAllData2: {},
       tableData: [
         {
           date: "2016-05-02",
@@ -109,6 +110,8 @@ export default {
   },
   created() {
     this.gaugeAllData = this.getALLPieItem();
+    
+    this.gaugeAllData2 = this.getALLPieItem2();
   },
   methods: {
     /** 查看预警分析 */
@@ -120,6 +123,104 @@ export default {
     },
     /**对比饼状图 */
     getALLPieItem() {
+      let data = {
+        series: [
+          {
+            type: "gauge",
+            radius: "90%",
+            startAngle: 220,
+            min: 0,
+            max: 240,
+            splitNumber: 24,
+            itemStyle: {
+              color: [
+                [
+                  1,
+                  new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    {
+                      offset: 0.1,
+                      color: "#42E7E7 ",
+                    },
+                    {
+                      offset: 0.6,
+                      color: "#3E82FF",
+                    },
+                    {
+                      offset: 1,
+                      color: "#3E82FF",
+                    },
+                  ]),
+                ],
+              ],
+              shadowColor: "#3E82FF",
+              shadowBlur: 10,
+              shadowOffsetX: 2,
+              shadowOffsetY: 2,
+            },
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 18,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              lineStyle: {
+                width: 18,
+                color: [
+                  [
+                    1,
+                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                      {
+                        offset: 0.2,
+                        color: "#42E7E7",
+                      },
+                      {
+                        offset: 0.4,
+                        color: "#42E7E7",
+                      },
+                      {
+                        offset: 0.6,
+                        color: "#42E7E7",
+                      },
+                    ]),
+                  ],
+                ],
+              },
+            },
+            axisLabel: {
+              show: false,
+            },
+            detail: {
+              width: "60%",
+              offsetCenter: [0, 0],
+              formatter: function (value) {
+                return "{value|" + value.toFixed(0) + "}{unit|m/s}";
+              },
+              rich: {
+                value: {
+                  fontSize: 24,
+                  fontWeight: "bolder",
+                  color: "#3672E9",
+                },
+                unit: {
+                  fontSize: 14,
+                  color: "#3672E9",
+                },
+              },
+            },
+            data: [
+              {
+                value: 100,
+              },
+            ],
+          },
+        ],
+      };
+      return data;
+    },
+    getALLPieItem2() {
       let data = {
         series: [
           {
