@@ -91,8 +91,8 @@
             </el-table-column>
             <el-table-column prop="status" label="异常情况管理" align="center">
               <template slot-scope="scope">
-                <span style="color:#ff6579" v-if="scope.row.status == 1">未解除异常</span>
                 <span v-if="scope.row.status == 2">已解除异常</span>
+                <span style="color:#ff6579" v-else>未解除异常</span>
               </template>
             </el-table-column>
             <el-table-column label="操作" align="center">
@@ -104,14 +104,14 @@
                   >查看
                 </el-button>
                 <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579">
-                  <span v-if="scope.row.status == 1">未处理</span>
                   <span v-if="scope.row.status == 2">已处理</span>
+                  <span v-else>未处理</span>
                 </el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
-        <div class="con-page" v-if="tableData.totalPage > 1">
+        <div class="con-page">
           <el-pagination
             background
             :page-size="tableData.pageSize"
@@ -175,17 +175,18 @@ export default {
   methods: {
     // 获取数据
     init(){
+      this.tableData.currPage = 1;
       this.listLoading = true;
       InintData({},window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
+          this.tableData.totalCount = res.data.result.total;
         }
       })
     },
     // 查询数据
     serchData () {
-      this.tableData.currPage = 1
       this.listLoading = true;
       this.tableData.currPage = 1;
       this.formData.startDate = '';
@@ -203,12 +204,12 @@ export default {
     },
     // 改变页数
     changeCurrent (val) {
-      this.tableData.currPage = val
-      this.getdata()
+      this.tableData.currPage = val;
+      this.init();
     },
     handleSizeChange (val) {
-      this.tableData.pageSize = val
-      this.getdata()
+      this.tableData.pageSize = val;
+      this.init();
     },
     // 解除异常
     deletedata (id) {
@@ -251,8 +252,16 @@ export default {
 <style lang="scss" scoped>
   .el-card{
     height: 93vh;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  /deep/::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
   }
   .el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{
     width: 300px;
+  }
+  .con-page{
+    margin-top: 15px;
   }
 </style>

@@ -45,3 +45,40 @@ export function InspectionId(id,token) {
     },
   })
 }
+
+// 管理条例列表展示、搜索
+export function Regulations(data,token) {
+  return request({
+    method: 'POST',
+    url: '/reservoirInspectionRuleController/search',
+    headers: {
+      Authorization: token,
+    },
+    data:data,
+  })
+}
+
+// 删除管理条例
+export function DeleteRule(data,token) {
+  return request({
+    method: 'DELETE',
+    url: '/reservoirInspectionRuleController/deleteRule',
+    headers: {
+      Authorization: token,
+    },
+    data:data,
+  })
+}
+
+// 新增管理条例
+export function InsertRule(data,token) {
+  return request({
+    method: 'POST',
+    url: '/reservoirInspectionRuleController/insertRule',
+    headers: {
+      Authorization: token,
+    },
+    data:data,
+  })
+}
+

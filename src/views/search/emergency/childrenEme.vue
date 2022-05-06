@@ -36,7 +36,7 @@
                 <img class="imgShow" v-for="(item,i) in this.imgArr" :key="i" :src="item" alt="">
               </div>
               <el-upload
-                action="http://10.1.5.156:8002/upload/uploadFileByDate"
+                action="http://112.125.88.230:8002/upload/uploadFileByDate"
                 list-type="picture-card"
                 :on-remove="handleRemove"
                 :on-success="handlePictureSuccess"
@@ -62,7 +62,7 @@
               </el-form-item>
               <el-form-item label="备注：">
                 <el-upload
-                  action="http://10.1.5.156:8002/upload/uploadFileByDate"
+                  action="http://112.125.88.230:8002/upload/uploadFileByDate"
                   list-type="picture-card"
                   :on-remove="handleRemove_"
                   :on-success="handlePictureSuccess_"
@@ -92,14 +92,32 @@
           <p class="record">巡检提交记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
-              <h5 v-if="item.progress == 0">平台预警</h5>
-              <h5 v-if="item.progress == 1">等待维修</h5>
-              <h5 v-if="item.progress == 2">维修中</h5>
-              <h5 v-if="item.progress == 3">维修完成</h5>
-              <h5 v-if="item.progress == 4">已解决</h5>
+              <h5 v-if="item.progress == 0">
+                <i class="el-icon-circle-check"></i>
+                平台预警
+              </h5>
+              <h5 v-if="item.progress == 1">
+                <i class="el-icon-circle-check"></i>
+                等待维修
+              </h5>
+              <h5 v-if="item.progress == 2">
+                <i class="el-icon-circle-check"></i>
+                维修中
+              </h5>
+              <h5 v-if="item.progress == 3">
+                <i class="el-icon-circle-check"></i>
+                维修完成
+              </h5>
+              <h5 v-if="item.progress == 4">
+                <i class="el-icon-circle-check"></i>
+                已解决
+              </h5>
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span>{{message.remark}}</span>
+                  <span>
+                    <i class="el-icon-star-on"></i>
+                    {{message.remark}}
+                  </span>
                   <span>{{message.creatDate}}</span>
                 </li>
               </div>
@@ -115,22 +133,32 @@
           <p class="record">巡检提交记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
-              <h5 v-if="item.progress == 0">平台预警</h5>
-              <h5 v-if="item.progress == 1">等待维修</h5>
+              <h5 v-if="item.progress == 0">
+                <i class="el-icon-circle-check"></i>
+                平台预警
+              </h5>
+              <!-- <h5 v-if="item.progress == 1">等待维修</h5>
               <h5 v-if="item.progress == 2">维修中</h5>
-              <h5 v-if="item.progress == 3">维修完成</h5>
-              <h5 v-if="item.progress == 4">已解决</h5>
+              <h5 v-if="item.progress == 3">维修完成</h5> -->
+              <h5 v-if="item.progress == 4">
+                <i class="el-icon-circle-check"></i>
+                已解决
+              </h5>
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span>{{message.remark}}</span>
+                  <span>
+                    <i class="el-icon-star-on"></i>
+                    {{message.remark}}
+                  </span>
                   <span>{{message.creatDate}}</span>
                 </li>
               </div>
-              <div class="nulldata" v-if="item.reportRecordList == null">
+              <!-- <div class="nulldata" v-if="item.reportRecordList == null">
                 <span>暂无数据</span>
-              </div>
+              </div> -->
             </ul>
           </div>
+          <span v-if="this.formOne.progress != 4" class="otherSpan">暂无数据</span>
         </el-card>
       </el-col>
     </div>
@@ -241,6 +269,7 @@ export default {
           this.formOne.remark = res.data.result.remark;
           this.formOne.remarkImageList = res.data.result.remarkImageList;
           this.formOne.exceptionType = String(res.data.result.exceptionType);
+          console.log(this.formOne.progress);
         }
       }),
       // 根据id获取右侧信息回显
@@ -384,6 +413,13 @@ export default {
       border-radius: 6px;
     }
   }
+  .otherSpan{
+    font-size: 14px;
+    display: inline-block;
+    color: gray;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
   .record{
     text-align: center;
     margin: 10px auto 30px;
@@ -391,14 +427,20 @@ export default {
   }
   .jindu{
     h5{
+      display: flex;
+      align-items: center;
       margin-top: 10px;
       color: #409eff;
+      i{
+        font-size: 30px;
+        margin-right: 10px;
+      }
     }
     div{
       li{
         list-style: none;
         margin-top: 10px;
-        margin-left: 10px;
+        margin-left: 40px;
         span:nth-child(1){
           color: #67c23a;
           margin-right: 5px;
@@ -415,7 +457,7 @@ export default {
         font-size: 14px;
         display: inline-block;
         color: gray;
-        margin-left: 10px;
+        margin-left: 40px;
         margin-top: 10px;
       }
     }
