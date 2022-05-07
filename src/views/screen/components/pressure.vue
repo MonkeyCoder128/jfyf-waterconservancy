@@ -37,16 +37,29 @@ export default {
               width: 1,
             },
           },
+          axisLabel:{
+            show:'false'
+          },
+          axisTick:{
+            show:'true'
+          }
         },
         yAxis: {
           type: "value",
           splitLine: { show: false },
           axisLine: {
+            show:'true',
             lineStyle: {
               color: "#c6c6c9",
               width: 1,
             },
           },
+          axisLabel:{
+            show:'false'
+          },
+          axisTick:{
+            show:'false'
+          }
         },
 
         series: [

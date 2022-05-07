@@ -3,8 +3,12 @@
     <div class="cardMenu">
       <span class="cardTitle">当前数据</span>
       <div class="echartsBoxContent">
-        <div class="echartsBox" style="background-color: pink">
+        <div class="echartsBox">
           <span>设备:流量计A</span>
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart :chartData="gaugeAllData2" :width="'100%'" :height="'100%'" />
+          </div>
         </div>
         <div class="echartsBox" style="background-color: blue">
           <span>设备:流量计B</span>
@@ -66,10 +70,15 @@
   </div>
 </template>
 <script>
+import * as echarts from "echarts";
+import Chart from "@/views/screenChart/chart";
 export default {
   name: "WaterVelocity",
+  components: { Chart },
   data() {
     return {
+      gaugeAllData: {},
+      gaugeAllData2: {},
       tableData: [
         {
           date: "2016-05-02",
@@ -99,7 +108,11 @@ export default {
       ],
     };
   },
-  created() {},
+  created() {
+    this.gaugeAllData = this.getALLPieItem();
+    
+    this.gaugeAllData2 = this.getALLPieItem2();
+  },
   methods: {
     /** 查看预警分析 */
     seeAnalyse() {
@@ -107,6 +120,203 @@ export default {
         "%c查看预警分析：",
         "color:red;font-size:18px;font-weight:bold;"
       );
+    },
+    /**对比饼状图 */
+    getALLPieItem() {
+      let data = {
+        series: [
+          {
+            type: "gauge",
+            radius: "90%",
+            startAngle: 220,
+            min: 0,
+            max: 240,
+            splitNumber: 24,
+            itemStyle: {
+              color: [
+                [
+                  1,
+                  new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    {
+                      offset: 0.1,
+                      color: "#42E7E7 ",
+                    },
+                    {
+                      offset: 0.6,
+                      color: "#3E82FF",
+                    },
+                    {
+                      offset: 1,
+                      color: "#3E82FF",
+                    },
+                  ]),
+                ],
+              ],
+              shadowColor: "#3E82FF",
+              shadowBlur: 10,
+              shadowOffsetX: 2,
+              shadowOffsetY: 2,
+            },
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 18,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              lineStyle: {
+                width: 18,
+                color: [
+                  [
+                    1,
+                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                      {
+                        offset: 0.2,
+                        color: "#42E7E7",
+                      },
+                      {
+                        offset: 0.4,
+                        color: "#42E7E7",
+                      },
+                      {
+                        offset: 0.6,
+                        color: "#42E7E7",
+                      },
+                    ]),
+                  ],
+                ],
+              },
+            },
+            axisLabel: {
+              show: false,
+            },
+            detail: {
+              width: "60%",
+              offsetCenter: [0, 0],
+              formatter: function (value) {
+                return "{value|" + value.toFixed(0) + "}{unit|m/s}";
+              },
+              rich: {
+                value: {
+                  fontSize: 24,
+                  fontWeight: "bolder",
+                  color: "#3672E9",
+                },
+                unit: {
+                  fontSize: 14,
+                  color: "#3672E9",
+                },
+              },
+            },
+            data: [
+              {
+                value: 100,
+              },
+            ],
+          },
+        ],
+      };
+      return data;
+    },
+    getALLPieItem2() {
+      let data = {
+        series: [
+          {
+            type: "gauge",
+            radius: "90%",
+            startAngle: 220,
+            min: 0,
+            max: 240,
+            splitNumber: 24,
+            itemStyle: {
+              color: [
+                [
+                  1,
+                  new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    {
+                      offset: 0.1,
+                      color: "#42E7E7 ",
+                    },
+                    {
+                      offset: 0.6,
+                      color: "#3E82FF",
+                    },
+                    {
+                      offset: 1,
+                      color: "#3E82FF",
+                    },
+                  ]),
+                ],
+              ],
+              shadowColor: "#3E82FF",
+              shadowBlur: 10,
+              shadowOffsetX: 2,
+              shadowOffsetY: 2,
+            },
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 18,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              lineStyle: {
+                width: 18,
+                color: [
+                  [
+                    1,
+                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                      {
+                        offset: 0.2,
+                        color: "#42E7E7",
+                      },
+                      {
+                        offset: 0.4,
+                        color: "#42E7E7",
+                      },
+                      {
+                        offset: 0.6,
+                        color: "#42E7E7",
+                      },
+                    ]),
+                  ],
+                ],
+              },
+            },
+            axisLabel: {
+              show: false,
+            },
+            detail: {
+              width: "60%",
+              offsetCenter: [0, 0],
+              formatter: function (value) {
+                return "{value|" + value.toFixed(0) + "}{unit|m/s}";
+              },
+              rich: {
+                value: {
+                  fontSize: 24,
+                  fontWeight: "bolder",
+                  color: "#3672E9",
+                },
+                unit: {
+                  fontSize: 14,
+                  color: "#3672E9",
+                },
+              },
+            },
+            data: [
+              {
+                value: 100,
+              },
+            ],
+          },
+        ],
+      };
+      return data;
     },
   },
 };
@@ -130,11 +340,17 @@ export default {
       font-size: 14px;
       color: #333333;
     }
+    .chartDataBox {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
   .cardMenu {
     width: 100%;
     height: 260px;
-    background-color: plum;
+    background-color: #ffffff;
     border-radius: 5px;
     padding: 0 8px;
     .echartsBoxContent {
@@ -142,7 +358,7 @@ export default {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      div {
+      .echartsBox {
         width: 32.5%;
       }
     }

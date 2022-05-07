@@ -30,7 +30,7 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item prop="code">
+        <!-- <el-form-item prop="code">
           <el-input
             v-model.trim="loginForm.code"
             auto-complete="off"
@@ -43,7 +43,7 @@
           <div class="login-code">
             <img src="../../assets/image/profile.jpeg" @click="getCode" />
           </div>
-        </el-form-item>
+        </el-form-item> -->
         <el-checkbox
           v-model="loginForm.rememberMe"
           style="margin: 0px 0px 25px 2px; float: left"
@@ -69,6 +69,7 @@
 import { Loginform, menuList, getUserInfo } from "@/api/login";
 import Cookies from "js-cookie";
 import { decrypt, encrypt } from "@/utils/jsencrypt";
+import { Debounce, Throttle } from "@/utils/public.js"; //自己要注意自己的路径
 export default {
   data() {
     return {
@@ -94,9 +95,9 @@ export default {
             message: "密码不能为空",
           },
         ],
-        code: [
-          { required: true, trigger: "change", message: "验证码不能为空" },
-        ],
+        // code: [
+        //   { required: true, trigger: "change", message: "验证码不能为空" },
+        // ],
       },
       loading: false,
     };
@@ -110,7 +111,7 @@ export default {
       );
     },
 
-    handleLogin() {
+    handleLogin: Debounce(function () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true;
@@ -139,7 +140,7 @@ export default {
                 });
                 window.sessionStorage.setItem("token", res.data.token);
                 this.$router.push({ path: "/screen" });
-              } else {
+              } else if (res.data.code !== "200") {
                 this.loading = false;
                 this.$message({
                   showClose: true,
@@ -195,7 +196,7 @@ export default {
             });
         }
       });
-    },
+    }),
   },
 };
 </script>
