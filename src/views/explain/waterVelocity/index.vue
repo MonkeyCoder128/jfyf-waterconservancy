@@ -14,11 +14,29 @@
             />
           </div>
         </div>
-        <div class="echartsBox" style="background-color: blue">
+        <div class="echartsBox">
           <span>设备:流量计B</span>
+
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
+          </div>
         </div>
-        <div class="echartsBox" style="background-color: green">
+        <div class="echartsBox">
           <span>设备:流量计C</span>
+
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -126,27 +144,6 @@ export default {
     },
     /**仪表盘蓝色渐变 */
     getBluegradient() {
-      var colorFormatOnChart = (value, max) => {
-        if (value / max < 0.1) {
-          return [
-            [0.1, "rgba(62, 130, 255, 1)"],
-            [1, "rgba(66, 231, 231, 1)"],
-          ];
-        } else {
-          return [
-            [0.1, "#17D5F7"],
-            [0.2, "#17D5F7"],
-            [0.3, "#17D5F7"],
-            [0.4, "#17D5F7"],
-            [0.5, "#1BF0AC"],
-            [0.6, "#1BF0AC"],
-            [0.7, "#1BF0AC"],
-            [0.8, "#1BF0AC"],
-            [0.9, "rgba(147, 255, 203, 1)"],
-            [1, "rgba(147, 255, 203, 1)"],
-          ];
-        }
-      };
       let data = {
         series: [
           //外层光晕渐变
@@ -279,9 +276,14 @@ export default {
               formatter: "{value} m/s",
               color: "#3672E9",
             },
+            title: {
+              offsetCenter: [0, "65%"],
+              fontSize: 14,
+            },
             data: [
               {
                 value: 60,
+                name: "流速m/s",
               },
             ],
           },
@@ -299,7 +301,18 @@ export default {
               lineStyle: {
                 width: 0,
                 shadowBlur: 0,
-                color: colorFormatOnChart(30, 100),
+                color: [
+                  [0.1, "#17D5F7"],
+                  [0.2, "#17D5F7"],
+                  [0.3, "#17D5F7"],
+                  [0.4, "#17D5F7"],
+                  [0.5, "#1BF0AC"],
+                  [0.6, "#1BF0AC"],
+                  [0.7, "#1BF0AC"],
+                  [0.8, "#1BF0AC"],
+                  [0.9, "rgba(147, 255, 203, 1)"],
+                  [1, "rgba(147, 255, 203, 1)"],
+                ],
               },
             },
             axisTick: {
@@ -327,27 +340,6 @@ export default {
     },
     /**仪表盘黄色渐变 */
     getYellowgradient() {
-      var colorFormatOnChart = (value, max) => {
-        if (value / max < 0.1) {
-          return [
-            [0.1, "rgba(42, 192, 231, 1)"],
-            [1, "rgba(243, 216, 106, 1)"],
-          ];
-        } else {
-          return [
-            [0.1, "#17D5F7"],
-            [0.2, "#17D5F7"],
-            [0.3, "#17D5F7"],
-            [0.4, "#17D5F7"],
-            [0.5, "#1BF0AC"],
-            [0.6, "#1BF0AC"],
-            [0.7, "#1BF0AC"],
-            [0.8, "#1BF0AC"],
-            [0.9, "rgba(147, 255, 203, 1)"],
-            [1, "rgba(147, 255, 203, 1)"],
-          ];
-        }
-      };
       let data = {
         series: [
           //外层光晕渐变
@@ -450,7 +442,7 @@ export default {
               roundCap: true,
               lineStyle: {
                 width: 14,
-                color: [[1, "rgba(243, 216, 106, 0.4)"]],//刻度线背景色
+                color: [[1, "rgba(243, 216, 106, 0.4)"]], //刻度线背景色
               },
             },
             axisTick: {
@@ -480,9 +472,14 @@ export default {
               formatter: "{value} m/s",
               color: "#40C3D9",
             },
+            title: {
+              offsetCenter: [0, "65%"],
+              fontSize: 14,
+            },
             data: [
               {
                 value: 60,
+                name: "流量m/s",
               },
             ],
           },
@@ -500,7 +497,18 @@ export default {
               lineStyle: {
                 width: 0,
                 shadowBlur: 0,
-                color: colorFormatOnChart(30, 100),
+                color: [
+                  [0.1, "rgba(63, 194, 218, 0.4)"],
+                  [0.2, "rgba(63, 194, 218, 0.4)"],
+                  [0.3, "rgba(63, 194, 218, 0.4)"],
+                  [0.4, "rgba(63, 194, 218, 0.4)"],
+                  [0.5, "rgba(63, 194, 218, 0.4)"],
+                  [0.6, "rgba(147, 255, 203, 0.8)"],
+                  [0.7, "#F3D86A"],
+                  [0.8, "#F3D86A"],
+                  [0.9, "rgba(243, 216, 106, 1)"],
+                  [1, "rgba(243, 216, 106, 1)"],
+                ],
               },
             },
             axisTick: {
