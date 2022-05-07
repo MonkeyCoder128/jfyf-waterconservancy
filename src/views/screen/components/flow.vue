@@ -13,157 +13,165 @@ export default {
       var echarts = require("echarts");
       var flow = this.$echarts.init(document.getElementById("flow"));
       var option = {
-        backgroundColor: "#031d33",
-        animation: true,
         grid: {
-          top: "5%",
-          bottom: "22%",
-          right: "5%",
+          top: "10%",
+          left: "10%",
+          right: "2%",
+          bottom: "14%",
+        },
+        tooltip: {
+          show: false,
         },
         xAxis: {
-          data: ["消防烟感", "摄像机", "环境烟感", "路灯", "地磁"],
+          data: [
+            "1月",
+            "2月",
+            "3月",
+            "4月",
+            "5月",
+            "6月",
+          ],
           axisLine: {
-            show: false, //隐藏X轴轴线
-          },
-          axisTick: {
-            show: false, //隐藏X轴轴线
-          },
-          splitLine: {
-            show: true,
             lineStyle: {
-              color: "#148f97",
-              width: 2,
+              color: "transparent", //底部边框颜色
             },
           },
           axisLabel: {
-            show: true,
-            margin: 14,
-            fontSize: 12,
             textStyle: {
-              color: "#fff", //X轴文字颜色
+              color: "#fff", //底部文字颜色
+              fontSize: 12,
             },
           },
         },
         yAxis: [
           {
             type: "value",
-            gridIndex: 0,
-            min: 0,
-            max: 100,
-            interval: 10,
-            // splitNumber: 4,
             splitLine: {
               show: true,
               lineStyle: {
-                color: "#148f97",
-                width: 2,
+                color: "rgba(255,255,255,0.2)", //网格线的颜色
+                width: 1,
+                type: "solid",
               },
             },
-            axisTick: {
-              show: false,
-            },
             axisLine: {
-              show: true,
+              show: false,
               lineStyle: {
-                color: "rgba(77, 128, 254, 0.2)",
+                color: "transparent", //左边框颜色
               },
             },
             axisLabel: {
               show: true,
-              margin: 14,
-              fontSize: 16,
+              fontSize: 12,
               textStyle: {
-                color: "#65D5FF",
+                color: "#ADD6FF", //左文字颜色
               },
             },
           },
         ],
         series: [
           {
-            name: "设备在线率",
+            name: "毕业学员",
             type: "bar",
-            barWidth: 16,
+            barWidth: 30,
+            showBackground: true,
+            backgroundStyle: {
+              color: "rgba(21,136,209,0.1)",
+            },
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "rgba(146, 225, 255, 1)",
+                    // color: '#00FFE3',//渐变1
+                    color: "rgba(21,136,209,1)", //渐变1
                   },
                   {
                     offset: 1,
-                    color: "rgba(0, 151, 251, 1)",
+                    // color: '#4693EC',//渐变2
+                    color: "rgba(21,136,209,1)", //渐变2
                   },
                 ]),
               },
             },
-            data: [21, 43, 56, 32, 64],
-            z: 10,
+            data: [20, 80, 100, 40, 34, 90],
+            z: 0,
             zlevel: 0,
+            // label: {
+            //     show: true,
+            //     position: 'top',
+            //     fontSize: 14,
+            //     color: '#fff', //柱状顶部文字颜色
+            //     formatter: function (params) {
+            //         return '20%';
+            //     },
+            // },
           },
           {
-            // 分隔
             type: "pictorialBar",
+            barWidth: 30,
             itemStyle: {
               normal: {
-                color: "#0F375F",
+                color: "rgba(0,63,119,1)", //数据的间隔颜色
               },
             },
             symbolRepeat: "fixed",
-            symbolMargin: 6,
+            symbolMargin: 3,
             symbol: "rect",
-            symbolClip: true,
-            symbolSize: [18, 2],
-            symbolPosition: "start",
-            symbolOffset: [1, 1],
-            data: [21, 43, 56, 32, 64],
-            width: 2,
-            z: 0,
-            zlevel: 1,
+            symbolSize: [30, 4],
+            symbolPosition: "end",
+            symbolOffset: [0, 0],
+            data: [20, 80, 100, 40, 34, 90],
+            z: 1,
+            zlevel: 0,
           },
           {
-            name: "外框",
-            type: "bar",
-            barGap: "-110%", // 设置外框粗细
-            data: [100, 100, 100, 100, 100, 100, 100],
-            barWidth: 16,
+            type: "pictorialBar",
+            barWidth: 30,
             itemStyle: {
               normal: {
-                color: "transparent", // 填充色
-                // barBorderRadius: 0, //圆角半径
-                label: {
-                  // 标签显示位置
-                  show: false,
-                  position: "top", // insideTop 或者横向的 insideLeft
-                },
+                color: "transparent", //数据的间隔颜色
               },
             },
-            z: 0,
-          },
-          {
-            name: "背影",
-            type: "line",
-            smooth: true, //平滑曲线显示
-            showAllSymbol: false, //显示所有图形。
-            symbolSize: 0,
-            lineStyle: {
-              width: 0,
+            // symbolRepeat: 'fixed',
+            symbolMargin: 3,
+            symbol: "rect",
+            symbolSize: [30, 4],
+
+            // symbolPosition: 'start',
+            // symbolOffset: [0, 0],
+            data: [20, 80, 100, 40, 34, 90],
+            z: 1,
+            zlevel: 0,
+            label: {
+              show: true,
+              position: "top",
+              fontSize: 14,
+              color: "#fff", //柱状顶部文字颜色
+              formatter: function (params) {
+                return "20%";
+              },
             },
-            areaStyle: {
-              color: "rgba(0, 151, 251, 0.1)",
-            },
-            data: [21, 43, 56, 32, 64],
-            z: 5,
           },
-        ],
-        dataZoom: [
-          {
-            type: "slider",
-            show: false,
-            xAxisIndex: [0],
-            endValue: 4,
-            startValue: 0,
-          },
+          // {
+          //     name: '毕业学员',
+          //     type: 'bar',
+          //     barGap: '-125%',
+          //     data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
+          //     barWidth: 30,
+          //     itemStyle: {
+          //         normal: {
+          //             color: 'transparent',
+          //             barBorderColor: 'transparent',//柱状外边框颜色
+          //             barBorderWidth: 1,
+          //             label: {
+          //                 show: false,
+          //                 position: 'top',
+          //             },
+          //         },
+          //     },
+          //     z: 2,
+          // },
         ],
       };
 

@@ -26,7 +26,7 @@
             <div class="box">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1"
+                  <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">安全监测</el-col>
@@ -43,7 +43,7 @@
             <div class="box">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1"
+                  <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">坝基变形监测</el-col>
@@ -60,7 +60,7 @@
             <div class="box">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1"
+                  <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">水质监测</el-col>
@@ -73,40 +73,17 @@
                 </el-row>
               </div>
               <el-row>
-                <el-col :span="12"><pie /></el-col>
-                <el-col :span="12"
-                  ><div class="box_shuizhi">
-                    <el-row class="shuizhi1">
-                      <el-col :span="2" class="square"></el-col>
-                      <el-col :span="13" style="padding-left: 20px"
-                        >二氧化碳</el-col
-                      >
-                      <el-col :span="2" class="p_shuizhi1">30%</el-col>
-                    </el-row>
-                    <el-row class="shuizhi2">
-                      <el-col :span="2" class="square1"></el-col>
-                      <el-col :span="13" style="padding-left: 20px"
-                        >氢含量</el-col
-                      >
-                      <el-col :span="2" class="p_shuizhi2">10%</el-col>
-                    </el-row>
-                    <el-row class="shuizhi3">
-                      <el-col :span="2" class="square2"></el-col>
-                      <el-col :span="13" style="padding-left: 20px"
-                        >氧含量</el-col
-                      >
-                      <el-col :span="2" class="p_shuizhi3">60%</el-col>
-                    </el-row>
-                  </div></el-col
-                >
+                <el-col :span="24"><pie /></el-col>
               </el-row>
             </div>
           </el-col>
-          <el-col :span="13" class="screen_cont"
-            ><div class="box_cont box_cont_top"></div>
+          <el-col :span="11" class="screen_cont"
+            ><div class="box_cont box_cont_top"><img src="../../assets/image/3d.png" class="threed"  alt=""
+                  /></div>
             <div class="box_cont">
-              <div class="box_nav"><el-row :gutter="20">
-                  <el-col :span="1"
+              <div class="box_nav box_nav1">
+                <el-row :gutter="19">
+                  <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">水库概况</el-col>
@@ -116,27 +93,98 @@
                   <el-col :span="1" class="icon_title3">
                     <img src="../../assets/image/dp_title3.png" alt=""
                   /></el-col>
-                </el-row></div>
+                </el-row>
+                <el-row :gutter="20">
+                  <el-col :span="6"><div class="bg-purple">库前水位<div class="num">1344m³</div></div></el-col>
+                  <el-col :span="6"><div class="bg-purple">库存<div class="num">1256m³</div></div></el-col>
+                  <el-col :span="6"><div class="bg-purple">出库<div class="num">6587m³</div></div></el-col>
+                  <el-col :span="6"><div class="bg-purple">入库<div class="num">5687m³</div></div></el-col>
+                </el-row>
+              </div>
             </div>
             <div class="box_cont">
-              <div class="box_nav">大坝巡查</div>
-            </div></el-col
-          >
+              <div class="box_nav box_nav1">
+                <el-row :gutter="20">
+                  <el-col :span="1" class="title1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">大坝巡查</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div></div
+          ></el-col>
           <el-col :span="6" class="screen_right">
             <div class="box_right">
-              <div class="box_nav">天气</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1" class="title1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">天气</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <weather></weather>
             </div>
             <div class="box_right">
-              <div class="box_nav">渗透压监测</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1" class="title1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">渗透压监测</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <broken></broken>
             </div>
             <div class="box_right">
-              <div class="box_nav">压力/应力监测</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1" class="title1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">压力/应力监测</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <pressure></pressure>
             </div>
             <div class="box_right">
-              <div class="box_nav">流速、流量监测</div>
+              <div class="box_nav">
+                <el-row :gutter="20">
+                  <el-col :span="1" class="title1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
+                  /></el-col>
+                  <el-col :span="19">流速、流量监测</el-col>
+                  <el-col :span="1" class="icon_title2">
+                    <img src="../../assets/image/dp_title2.png" alt=""
+                  /></el-col>
+                  <el-col :span="1" class="icon_title3">
+                    <img src="../../assets/image/dp_title3.png" alt=""
+                  /></el-col>
+                </el-row>
+              </div>
               <flow />
             </div>
           </el-col>
@@ -189,9 +237,9 @@ export default {
 }
 .nav {
   width: 100%;
-  height: 161px;
-  background: url("../../assets/image/nav.png");
+  background: url("../../assets/image/top.png");
   background-size: 100% 100%;
+  background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
   z-index: 9999;
 }
@@ -199,7 +247,7 @@ export default {
   font-size: 30px;
 }
 .row-bg {
-  padding: 88px;
+  padding: 88px 25px;
   padding-bottom: 0;
 }
 .p_nav {
@@ -223,33 +271,42 @@ export default {
 .box,
 .box_right,
 .box_cont {
-  width: 20vw;
   height: 28.5vh;
   margin-top: 1vh;
   position: relative;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.3);
-  padding: 16px;
+  padding: 16px 0;
   overflow: hidden;
 }
 .box_right {
   height: 21.1vh;
 }
 .box_cont {
-  width: 45vw;
   height: 20.5vh;
 }
 .box_cont_top {
   height: 44.5vh;
+  background: none;
 }
-.box_nav {
+.box_nav,
+.box_nav1 {
   width: 86%;
-  color: #87e9eb;
+  height: 35px;
+  color: #2e89e0;
   line-height: 29px;
-  text-shadow: 0 0 10px #87e9eb, 0 0 5px #87e9eb;
+  text-shadow: 0 0 10px #2e89e0, 0 0 2px #87e9eb;
   border-top: solid 1px #142a33;
   border-bottom: solid 1px #142a33;
   margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+.box_nav1 {
+  width: 95%;
+}
+.title1 {
+  padding-top: 5px;
 }
 .icon_title2,
 .icon_title3 {
@@ -263,39 +320,6 @@ export default {
 /deep/::-webkit-scrollbar {
   display: none; /* Chrome Safari */
 }
-.table {
-  width: 100%;
-  margin-top: 5px;
-  color: #bebec2;
-}
-/deep/.el-table__body-wrapper {
-  height: 152px;
-  overflow: auto;
-}
-/deep/.el-table td.el-table__cell,
-.el-table th.el-table__cell.is-leaf {
-  border-bottom: 1px dashed #142f38;
-}
-/deep/ .el-table,
-.el-table__expanded-cell {
-  background-color: transparent;
-}
-/deep/ .el-table tr {
-  background-color: transparent !important;
-}
-/deep/ .el-table--enable-row-transition .el-table__body td,
-.el-table .cell {
-  background-color: transparent;
-}
-/ddep/ .el-table th.el-table__cell {
-  background-color: transparent !important;
-}
-/deep/ .el-table thead {
-  color: #bebec2;
-}
-/deep/.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
-  background-color: transparent;
-}
 
 .el-table::before {
   //去除底部白线
@@ -304,41 +328,29 @@ export default {
   width: 100%;
   height: 0px;
 }
-.box_shuizhi {
+
+.bg-purple {
+  width: 100%;
+  height: 10vh;
+  margin-top: 3vh;
+  background: #0e1629;
+  border: 1px solid #3885e5;
+  // opacity: 0.36;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 15px;
-  line-height: 13px;
 }
-.square,
-.square1,
-.square2 {
-  width: 15px;
-  height: 15px;
-  background: #148f97;
-}
-.square1 {
-  background: #1289ba;
-}
-.square2 {
-  background: #115cb9;
-}
-.shuizhi1,
-.shuizhi2,
-.shuizhi3 {
-  margin-top: 1.5vh;
+.num{
   color: #fff;
+  font-size: 24px;
 }
-.shuizhi1 {
-  margin-top: 7vh;
-}
-.p_shuizhi1 {
-  color: #148f97;
-}
-.p_shuizhi2 {
-  color: #1289ba;
-}
-.p_shuizhi3 {
-  color: #115cb9;
+.threed{
+  margin:4% auto 0;
+  width: 594px;
+  height: 356px;
+  display: block;
 }
 </style>

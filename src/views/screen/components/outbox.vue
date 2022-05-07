@@ -3,9 +3,9 @@
   <!-- vue 实现无限向上滚动 -->
   <div id="outbox">
     <div class="outbox">
-      <div style="width: 7.6vw">时间</div>
-      <div style="width: 3vw">设备</div>
-      <div>原因</div>
+      <div style="width: 56%">时间</div>
+      <div style="width: 20%">设备</div>
+      <div style="width: 24%">原因</div>
     </div>
     <div id="box">
       <div
@@ -22,12 +22,12 @@
           style="
             display: flex;
             flex-direction: row;
-            border-bottom: dashed 1px #084549;
+            border-bottom: solid 1px #132540;
           "
         >
-          <div>{{ item.time }}</div>
-          <div style="margin-left: 15px">{{ item.name }}</div>
-          <div style="margin-left: 15px; color: red">{{ item.shebei }}</div>
+          <div style="width: 56%">{{ item.time }}</div>
+          <div style="width: 20%">{{ item.name }}</div>
+          <div style="width: 24%;color: red">{{ item.shebei }}</div>
         </div>
       </div>
     </div>
@@ -90,26 +90,27 @@ export default {
 }
 #outbox {
   width: 85%;
+  height: 80%;
   margin: 1vh auto 0;
   color: #8b8b91;
+  overflow: hidden;
 }
 .outbox {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #084549;
+  border-bottom: 1px solid #142e4e;
   font-size: 16px;
   height: 30px !important;
 }
 #box {
   margin: 0 auto;
   width: 100%;
-  height: 172px;
   line-height: 30px;
   overflow: hidden;
   transition: all 0.5s;
   color: #e3e3e4;
   font-size: 14px;
-  border-bottom: solid 1px #084549;
+  border-bottom: solid 1px #142e4e;
 }
 .anim {
   transition: all 0.5s;
