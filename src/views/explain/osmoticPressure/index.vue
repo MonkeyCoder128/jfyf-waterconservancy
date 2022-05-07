@@ -1,8 +1,239 @@
 <template>
-  <el-row :gutter="12">
-    <el-col :span="24">
-      <el-card shadow="always"> 库压渗压 </el-card>
-    </el-col>
-  </el-row>
+  <div class="waterStagePage">
+    <div class="cardMenu">
+      <span class="cardTitle">当前数据</span>
+      <div class="echartsBoxContent">
+        <div class="echartsBox">
+          <span>设备:流量计A</span>
+          <equipmentChart></equipmentChart>
+        </div>
+        <div class="echartsBox">
+          <span>设备:流量计B</span>
+          <equipmentChart></equipmentChart>
+        </div>
+        <div class="echartsBox">
+          <span>设备:流量计C</span>
+          <equipmentChart></equipmentChart>
+        </div>
+      </div>
+    </div>
+    <div class="bottomBox">
+      <div class="cardBottom">
+        <span class="cardTitle">检测状态</span>
+        <div class="testStatus">
+          <div>
+            当前监测状态：<span style="color: #1c48bf; font-size: 14px; margin-right: 20px">正常</span>
+          </div>
+          <div>
+            预警总次数：<span style="color: #ea951c; font-size: 14px">20次</span>
+          </div>
+        </div>
+        <div class="echartsBox" style="margin: 10px 0">
+          <span>预警数据对比</span>
+          <div class="warningBox">
+            <warningCharts/>
+            <ul>
+              <li>
+                <span></span>
+                <span>A设备</span>
+                <span>53%</span>
+              </li>
+              <li>
+                <span></span>
+                <span>B设备</span>
+                <span>30%</span>
+              </li>
+              <li>
+                <span></span>
+                <span>C设备</span>
+                <span>17%</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span class="cardTitle">预警分析</span>
+        <el-table :data="tableData" :row-style="{ height: '0' }" :cell-style="{ padding: '0' }">
+          <el-table-column prop="date" label="监测点" />
+          <el-table-column prop="name" label="预警次数" />
+          <el-table-column prop="type" label="设备状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.type === '0'">在线</span>
+              <span v-if="scope.row.type === '1'" style="color: #de1111">离线</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button @click="seeAnalyse(scope.row)" type="text">
+                查看
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="cardBottom">
+        <span class="cardTitle">预警统计</span>
+        <div class="brokenLineCharts">
+          <brokenLineCharts/>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+<script>
+import equipmentChart from './components/equipmentChart.vue';
+import warningCharts from './components/warningCharts.vue';
+import brokenLineCharts from './components/brokenLineChart.vue';
+  export default {
+    name: "WaterVelocity",
+    components:{
+      warningCharts,
+      brokenLineCharts,
+      equipmentChart,
+    },
+    data() {
+      return {
+        tableData: [{
+            date: "2016-05-02",
+            name: "王小虎1",
+            type: "0",
+          },
+          {
+            date: "2016-05-02",
+            name: "王小虎1",
+            type: "0",
+          },
+          {
+            date: "2016-05-02",
+            name: "王小虎1",
+            type: "0",
+          },
+          {
+            date: "2016-05-02",
+            name: "王小虎1",
+            type: "0",
+          },
+          {
+            date: "2016-05-02",
+            name: "王小虎1",
+            type: "0",
+          },
+        ],
+        optionOne: '',
+      };
+    },
+    methods: {
 
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+  .waterStagePage {
+    .cardTitle {
+      font-size: 16px;
+      color: #333333;
+      line-height: 46px;
+    }
+
+    .echartsBox {
+      border: 1px solid #eeeeee;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      height: 200px;
+      span {
+        font-size: 14px;
+        color: #333333;
+      }
+      .warningBox{
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        ul{
+          width: 30%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          li{
+            width: 100%;
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            span:nth-child(1){
+              display: inline-block;
+              width: 20px;
+              height: 20px;
+              background-color: #115cb9;
+            }
+          }
+          li:nth-child(2){
+            span:nth-child(1){
+              background-color: #148f97;
+            }
+          }
+          li:nth-child(3){
+            span:nth-child(1){
+              background-color: #1289ba;
+            }
+          }
+        }
+      }
+    }
+
+    .cardMenu {
+      width: 100%;
+      height: 260px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 0 8px;
+
+      .echartsBoxContent {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        div {
+          width: 32.5%;
+        }
+      }
+    }
+
+    .bottomBox {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 13px;
+      .cardBottom {
+        width: 49.5%;
+        height: auto;
+        min-height: 800px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 0 8px;
+        .testStatus {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          div {
+            display: flex;
+            align-items: center;
+            span {
+              color: #333333;
+              line-height: 25px;
+            }
+          }
+        }
+        .brokenLineCharts{
+          width: 300px;
+          height: 300px;
+        }
+      }
+    }
+  }
+</style>

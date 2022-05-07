@@ -26,12 +26,13 @@
             </el-form-item>
             <el-button class="addTerm" size="small" @click="dialogVisible = true">新增条例</el-button>
           </el-form>
-
         </div>
+        <el-button v-if="isAllSelect == true" style="margin-bottom:10px" type="danger" size="small" @click="allSearch">删除{{this.selectNumber}}项</el-button>
         <div class="con-table">
           <el-table
             :data="tableData.list"
             v-loading="listLoading"
+            @selection-change='selectAll'
             :header-cell-style="{background:'#F7F8FC',color:'#333333'}"
             style="width: 100%"
           >
@@ -169,6 +170,12 @@
         listLoading: false,
         // 控制上传条例dialog的显示
         dialogVisible: false,
+        // 控制删除全选按钮的显示和隐藏
+        isAllSelect: false,
+        // 全选框选择了几条
+        selectNumber: '',
+        // 存储全选数据的id
+        arrDeletId: [],
       };
     },
     created(){
@@ -253,12 +260,20 @@
       },
       // 删除数据
       deletedata (id) {
+        let arr;
+        if(id.length !== undefined){
+          arr = this.arrDeletId;
+        }else{
+          let a = [];
+          a.push(id);
+          arr = a;
+        }
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          DeleteRule([id],window.sessionStorage.getItem("token")).then(res=>{
+          DeleteRule(arr,window.sessionStorage.getItem("token")).then(res=>{
             if(res.data.code == 200){
               this.$message({
                 type: 'success',
@@ -313,7 +328,6 @@
           this.newRuleDate.fileSuffix = res.result[0].fileSuffix;
           this.newRuleDate.uploadDate = res.result[0].uploadDate;
           this.newRuleDate.ruleName = res.result[0].fileName;
-          console.log(this.newRuleDate);
         }else{
           this.$message({
             message: '文件上传失败,请重新上传！',
@@ -326,7 +340,24 @@
         InsertRule([this.newRuleDate],window.sessionStorage.getItem("token")).then(res=>{
           console.log(res);
           this.initData();
-        })
+          this.dialogVisible = false;
+        });
+      },
+      // 删除全选的文件
+      allSearch(){
+        this.deletedata(this.arrDeletId);
+      },
+      // 监听用户是否勾选全选按钮
+      selectAll(attr){
+        if(attr.length>1){
+          this.isAllSelect = true;
+          this.selectNumber = attr.length;
+          for(let i in attr){
+            this.arrDeletId.push(attr[i].id);
+          }
+        }else{
+          this.isAllSelect = false;
+        }
       }
     },
   }

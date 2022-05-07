@@ -188,6 +188,7 @@ export default {
       this.listLoading = true;
       this.formData.startDate = '';
       this.formData.endDate = '';
+      this.formData.status = [1,3];
       if(this.formData.reportDate !== '' && this.formData.reportDate !== null){
         this.formData.startDate = this.formData.reportDate[0];
         this.formData.endDate = this.formData.reportDate[1];
