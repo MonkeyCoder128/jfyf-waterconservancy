@@ -111,7 +111,7 @@ export default {
       );
     },
 
-    handleLogin: Debounce(function () {
+    handleLogin:(function () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true;
