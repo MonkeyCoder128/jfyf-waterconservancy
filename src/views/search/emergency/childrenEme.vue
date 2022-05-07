@@ -417,7 +417,7 @@ export default {
     font-size: 14px;
     display: inline-block;
     color: gray;
-    margin-left: 20px;
+    margin-left: 40px;
     margin-top: 10px;
   }
   .record{

@@ -81,7 +81,7 @@
               </el-form-item>
             </div>
             <el-form-item v-if="showUserButton">
-              <el-button>取消</el-button>
+              <el-button @click="cancel">取消</el-button>
               <el-button type="primary" @click="onSubmit">提交</el-button>
             </el-form-item>
           </el-form>
@@ -365,6 +365,10 @@ export default {
           type: 'warning'
         });
       }
+    },
+    // 点击取消，回退上级页面
+    cancel(){
+      this.$router.go(-1);
     }
   }
 }
@@ -423,7 +427,7 @@ export default {
     font-size: 14px;
     display: inline-block;
     color: gray;
-    margin-left: 20px;
+    margin-left: 40px;
     margin-top: 10px;
   }
   .jindu{

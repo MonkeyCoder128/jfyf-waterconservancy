@@ -1,7 +1,7 @@
 module.exports = {
   publicPath: "reservoir-web", // 公共路径 默认为"/"，建议使用"./"相对路径
   devServer: {   // 本地服务器配置(npm run serve)
-    port: 8000, // 端口
+    port: 8786, // 端口
     host: "localhost", // 域名
     https: false, // 是否开启https
     open: true,	// 是否在开启服务器后自动打开浏览器访问该服务器 

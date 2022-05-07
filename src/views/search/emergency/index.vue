@@ -143,7 +143,7 @@ export default {
         startDate: '',
         reportType: '',
         exceptionTypes: '',
-        status:'',
+        status: '',
       },
       // 表格数据
       tableData: {
@@ -191,6 +191,16 @@ export default {
       this.tableData.currPage = 1;
       this.formData.startDate = '';
       this.formData.endDate = '';
+      if(this.formData.status == ''){
+        this.formData.status = [];
+      }else{
+        console.log(typeof this.formData.status == 'string');
+        if(typeof this.formData.status == 'string'){
+          let arr = [];
+          arr.push(Number(this.formData.status));
+          this.formData.status = arr;
+        }
+      }
       if(this.formData.reportDate !== '' && this.formData.reportDate !== null){
         this.formData.startDate = this.formData.reportDate[0];
         this.formData.endDate = this.formData.reportDate[1];
