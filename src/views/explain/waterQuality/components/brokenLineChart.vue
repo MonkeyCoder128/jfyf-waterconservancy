@@ -204,7 +204,7 @@
                 borderColor: 'rgba(0,0,0,.4)',
               },
               itemStyle: {
-                color: "rgba(25,163,223,1)",
+                color: "#5faece",
                 borderColor: "#646ace",
                 borderWidth: 0
 
@@ -257,7 +257,7 @@
                 borderColor: 'rgba(0,0,0,.4)',
               },
               itemStyle: {
-                color: "rgba(10,219,250,1)",
+                color: "#2e73bf",
                 borderColor: "#646ace",
                 borderWidth: 0
               },
@@ -309,7 +309,7 @@
                 borderColor: 'rgba(0,0,0,.4)',
               },
               itemStyle: {
-                color: "#2ad9c9",
+                color: "#2e9ca2",
                 borderColor: "#666666",
                 borderWidth: 0
               },

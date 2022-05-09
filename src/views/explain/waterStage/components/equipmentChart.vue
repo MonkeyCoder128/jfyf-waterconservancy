@@ -17,7 +17,8 @@
         );
         var option = {
           backgroundColor: '',
-          series: [{
+          series: [
+            {
               name: '刻度',
               type: 'gauge',
               radius: '100%', //图表尺寸
