@@ -143,7 +143,7 @@
           <span>预警状态</span>
         </div>
         <div class="bottomMenu">
-          <div class="chartDataBox" style="width: 70%">
+          <div class="chartDataBox" style="width: 50%">
             <Chart
               :chartData="alarmStateData"
               :width="'100%'"
@@ -965,7 +965,7 @@ export default {
               lineStyle: {
                 width: 0,
                 color: [
-                  [0.15, "#52c3ff"],
+                  [0, "#3E82FF"],
                   [0.55, "#3d7fff"],
                   [1, "#66ffff"],
                 ],
@@ -1007,7 +1007,7 @@ export default {
                 width: 0,
                 shadowBlur: 10,
                 color: [
-                  [0.15, "#52c3ff"],
+                  [0.15, "#3E82FF"],
                   [0.55, "#3d7fff"],
                   [1, "#66ffff"],
                 ],
@@ -1164,7 +1164,7 @@ export default {
             name: "内置圆",
             type: "pie",
             center: ["30%", "50%"],
-            radius: ["35%", "45%"], // 这个属性修改圆环宽度
+            radius: ["40%", "50%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
@@ -1203,7 +1203,7 @@ export default {
               borderRadius: 4,
               rich: {
                 a: {
-                  color: "#37ABC1",
+                  color: "inherit", //继承颜色，设置颜色一致对应
                   lineHeight: 22,
                   align: "center",
                 },
@@ -1666,7 +1666,7 @@ export default {
           clockWise: false,
           hoverAnimation: false,
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["40%", "50%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -1692,7 +1692,7 @@ export default {
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["40%", "50%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -1717,6 +1717,10 @@ export default {
           value: i,
           textStyle: {
             rich: {
+              name: {
+                color: color[i],
+                padding: [0, 5],
+              },
               circle: {
                 color: color[i],
                 padding: [0, 5],
@@ -1730,7 +1734,7 @@ export default {
         color: color,
         grid: {
           top: "0",
-          bottom: "56%",
+          bottom: "50%",
           left: "40%",
           containLabel: false,
         },
@@ -1745,33 +1749,19 @@ export default {
               show: false,
             },
             axisLabel: {
-              formatter: function (params) {
+              formatter: function (params, index) {
                 let item = chartData[params];
-                console.log(item);
+                console.log(params, index, item);
                 return (
                   "{line|}{circle|●}{name|" +
                   item.name +
-                  "}：{percent|" +
+                  "：" +
                   item.percent +
                   "}"
                 );
               },
               interval: 0,
               inside: true,
-              textStyle: {
-                color: "#666",
-                fontSize: 14,
-                rich: {
-                  name: {
-                    color: "#666",
-                    fontSize: 12,
-                  },
-                  percent: {
-                    color: "#333",
-                    fontSize: 12,
-                  },
-                },
-              },
               show: true,
             },
             data: lineYAxis,
@@ -1859,12 +1849,12 @@ export default {
       .bottomMenu {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         .scrollContent::-webkit-scrollbar {
           display: none;
         }
         .scrollContent {
-          width: 29%;
+          width: 32%;
           max-height: 170px;
           overflow-y: auto;
           div {
