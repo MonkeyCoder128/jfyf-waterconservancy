@@ -919,7 +919,7 @@ export default {
     min-height: calc(100% - 430px);
   }
   .cardBottom {
-    min-height: 790px;
+    min-height: 870px;
   }
   .charts {
     height: 730px;
