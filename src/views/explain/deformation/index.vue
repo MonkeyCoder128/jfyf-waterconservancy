@@ -581,7 +581,7 @@ export default {
             name: "内置圆",
             type: "pie",
             center: ["40%", "50%"],
-            radius: ["45%", "55%"], // 这个属性修改圆环宽度
+            radius: ["50%", "60%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
@@ -615,6 +615,24 @@ export default {
             },
             labelLine: {
               show: false,
+            },
+            label: {
+              formatter: "{a|{c}/次}{abg|}\n{hr|}\n ",
+              borderWidth: 1,
+              borderRadius: 4,
+              rich: {
+                a: {
+                  color: "inherit", //继承颜色，设置颜色一致对应
+                  lineHeight: 22,
+                  align: "center",
+                },
+                hr: {
+                  borderColor: "#EEEEEE",
+                  width: "100%",
+                  borderWidth: 1,
+                  height: 0,
+                },
+              },
             },
             data: [
               { value: 500, name: "A设备" },

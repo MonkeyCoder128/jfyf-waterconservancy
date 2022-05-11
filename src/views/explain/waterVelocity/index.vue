@@ -567,6 +567,7 @@ export default {
           itemGap: 30,
           textStyle: {
             fontSize: 14, //字体大小
+            color: "inherit",
           },
           formatter: function (name) {
             let target, percentage;
@@ -587,7 +588,7 @@ export default {
             name: "内置圆",
             type: "pie",
             center: ["40%", "50%"],
-            radius: ["45%", "55%"], // 这个属性修改圆环宽度
+            radius: ["50%", "60%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
@@ -622,6 +623,24 @@ export default {
             labelLine: {
               show: false,
             },
+            label: {
+              formatter: "{a|{c}/次}{abg|}\n{hr|}\n ",
+              borderWidth: 1,
+              borderRadius: 4,
+              rich: {
+                a: {
+                  color: "inherit", //继承颜色，设置颜色一致对应
+                  lineHeight: 22,
+                  align: "center",
+                },
+                hr: {
+                  borderColor: "#EEEEEE",
+                  width: "100%",
+                  borderWidth: 1,
+                  height: 0,
+                },
+              },
+            },
             data: [
               { value: 500, name: "A设备" },
               { value: 335, name: "B设备" },
@@ -652,6 +671,9 @@ export default {
           itemGap: 36,
         },
         grid: {
+          left: "3%",
+          right: "3%",
+          top: "5%",
           bottom: "15%",
           containLabel: true,
         },
@@ -697,6 +719,7 @@ export default {
         yAxis: [
           {
             type: "value",
+            splitNumber: 8, // 配置 Y 轴数值间隔
             axisLabel: {
               textStyle: {
                 color: "#666",
