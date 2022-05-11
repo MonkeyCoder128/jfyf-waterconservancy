@@ -231,7 +231,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -259,7 +259,7 @@ export default {
             axisLine: {
               roundCap: true,
               lineStyle: {
-                width: 14,
+                width: 16,
                 color: [[1, "rgba(66, 231, 231, 0.4)"]],
               },
             },
@@ -306,7 +306,7 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "80%", //图表尺寸
+            radius: "78%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -427,7 +427,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -455,7 +455,7 @@ export default {
             axisLine: {
               roundCap: true,
               lineStyle: {
-                width: 14,
+                width: 16,
                 color: [[1, "rgba(243, 216, 106, 0.4)"]], //刻度线背景色
               },
             },
@@ -502,7 +502,7 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "80%", //图表尺寸
+            radius: "78%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
