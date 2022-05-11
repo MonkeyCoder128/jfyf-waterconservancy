@@ -29,7 +29,7 @@ export default {
           {
             name: "Access From",
             type: "pie",
-            radius: ["70%", "80%"],
+            radius: ["65%", "80%"],
             avoidLabelOverlap: false,
             label: {
               show: false,
@@ -57,6 +57,9 @@ export default {
                   var colorList = ["#115cb9", "#1289ba", "#148f97"];
                   return colorList[params.dataIndex];
                 },
+                borderRadius: 0,
+                borderColor: "#fff",
+                borderWidth: 3,
               },
             },
           },

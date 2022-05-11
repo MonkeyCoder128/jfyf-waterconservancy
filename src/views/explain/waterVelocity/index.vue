@@ -7,14 +7,36 @@
           <span>设备:流量计A</span>
           <div class="chartDataBox">
             <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
-            <Chart :chartData="gaugeAllData2" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
           </div>
         </div>
-        <div class="echartsBox" style="background-color: blue">
+        <div class="echartsBox">
           <span>设备:流量计B</span>
+
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
+          </div>
         </div>
-        <div class="echartsBox" style="background-color: green">
+        <div class="echartsBox">
           <span>设备:流量计C</span>
+
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -109,9 +131,8 @@ export default {
     };
   },
   created() {
-    this.gaugeAllData = this.getALLPieItem();
-    
-    this.gaugeAllData2 = this.getALLPieItem2();
+    this.gaugeAllData = this.getBluegradient();
+    this.gaugeAllData2 = this.getYellowgradient();
   },
   methods: {
     /** 查看预警分析 */
@@ -121,198 +142,393 @@ export default {
         "color:red;font-size:18px;font-weight:bold;"
       );
     },
-    /**对比饼状图 */
-    getALLPieItem() {
+    /**仪表盘蓝色渐变 */
+    getBluegradient() {
       let data = {
         series: [
+          //外层光晕渐变
+          {
+            type: "gauge",
+            radius: "100%",
+            center: ["50%", "60%"],
+            startAngle: 180,
+            endAngle: 10,
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                width: 3,
+                color: [
+                  [
+                    1,
+                    {
+                      x: 0,
+                      y: 1,
+                      x2: 0,
+                      y2: 0,
+                      colorStops: [
+                        {
+                          offset: 0.6,
+                          color: "rgba(62, 130, 255, 0)", // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "rgba(67, 142, 255, 0.77)", // 100% 处的颜色
+                        },
+                      ],
+                    },
+                  ],
+                ],
+                borderColor: "#000",
+                borderWidth: "2",
+              },
+            },
+            axisLabel: {
+              show: false,
+            }, //刻度标签。
+            axisTick: {
+              show: false,
+              splitNumber: 5,
+              lineStyle: {
+                color: "#fff",
+                width: 2,
+              },
+            }, //刻度样式
+            splitLine: {
+              show: false,
+            }, //分隔线样式
+            detail: {
+              show: false,
+            },
+            title: {
+              show: false,
+            },
+          },
           {
             type: "gauge",
             radius: "90%",
-            startAngle: 220,
+            startAngle: 200,
+            endAngle: -20,
             min: 0,
-            max: 240,
-            splitNumber: 24,
-            itemStyle: {
-              color: [
-                [
-                  1,
-                  new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            max: 100,
+            splitNumber: 1,
+            center: ["50%", "60%"],
+            progress: {
+              show: true,
+              width: 14,
+              roundCap: true,
+              itemStyle: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
                     {
-                      offset: 0.1,
-                      color: "#42E7E7 ",
-                    },
-                    {
-                      offset: 0.6,
-                      color: "#3E82FF",
+                      offset: 0,
+                      color: "rgba(66, 231, 231, 1)", // 100% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "#3E82FF",
+                      color: "rgba(62, 130, 255, 1)", // 0% 处的颜色
                     },
-                  ]),
-                ],
-              ],
-              shadowColor: "#3E82FF",
-              shadowBlur: 10,
-              shadowOffsetX: 2,
-              shadowOffsetY: 2,
-            },
-            progress: {
-              show: true,
-              roundCap: true,
-              width: 18,
+                  ],
+                  global: false, // 缺省为 false
+                },
+              },
             },
             pointer: {
               show: false,
             },
             axisLine: {
+              roundCap: true,
               lineStyle: {
-                width: 18,
-                color: [
-                  [
-                    1,
-                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                      {
-                        offset: 0.2,
-                        color: "#42E7E7",
-                      },
-                      {
-                        offset: 0.4,
-                        color: "#42E7E7",
-                      },
-                      {
-                        offset: 0.6,
-                        color: "#42E7E7",
-                      },
-                    ]),
-                  ],
-                ],
+                width: 14,
+                color: [[1, "rgba(66, 231, 231, 0.4)"]],
               },
             },
+            axisTick: {
+              show: true,
+              splitNumber: 1,
+              lineStyle: {
+                width: 0, //不显示刻度
+              },
+            },
+            splitLine: {
+              show: false,
+            },
             axisLabel: {
+              show: true,
+            },
+            anchor: {
+              show: false,
+            },
+            title: {
               show: false,
             },
             detail: {
               width: "60%",
-              offsetCenter: [0, 0],
-              formatter: function (value) {
-                return "{value|" + value.toFixed(0) + "}{unit|m/s}";
-              },
-              rich: {
-                value: {
-                  fontSize: 24,
-                  fontWeight: "bolder",
-                  color: "#3672E9",
-                },
-                unit: {
-                  fontSize: 14,
-                  color: "#3672E9",
-                },
-              },
+              borderRadius: 8,
+              offsetCenter: [0, -10],
+              fontSize: 18,
+              formatter: "{value} m/s",
+              color: "#3672E9",
+            },
+            title: {
+              offsetCenter: [0, "65%"],
+              fontSize: 14,
             },
             data: [
               {
-                value: 100,
+                value: 60,
+                name: "流速m/s",
               },
             ],
+          },
+
+          //内层刻度线渐变
+          {
+            type: "gauge",
+            splitNumber: 4, //刻度数量
+            radius: "80%", //图表尺寸
+            startAngle: 200,
+            endAngle: -20,
+            center: ["50%", "60%"],
+            axisLine: {
+              show: true,
+              lineStyle: {
+                width: 0,
+                shadowBlur: 0,
+                color: [
+                  [0.1, "#17D5F7"],
+                  [0.2, "#17D5F7"],
+                  [0.3, "#17D5F7"],
+                  [0.4, "#17D5F7"],
+                  [0.5, "#1BF0AC"],
+                  [0.6, "#1BF0AC"],
+                  [0.7, "#1BF0AC"],
+                  [0.8, "#1BF0AC"],
+                  [0.9, "rgba(147, 255, 203, 1)"],
+                  [1, "rgba(147, 255, 203, 1)"],
+                ],
+              },
+            },
+            axisTick: {
+              show: true,
+              lineStyle: {
+                color: "auto",
+                width: 3,
+              },
+              length: 3,
+              splitNumber: 9,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            pointer: {
+              show: false,
+            },
           },
         ],
       };
       return data;
     },
-    getALLPieItem2() {
+    /**仪表盘黄色渐变 */
+    getYellowgradient() {
       let data = {
         series: [
+          //外层光晕渐变
+          {
+            type: "gauge",
+            radius: "100%",
+            center: ["50%", "60%"],
+            startAngle: 180,
+            endAngle: 10,
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                width: 3,
+                color: [
+                  [
+                    1,
+                    {
+                      x: 0,
+                      y: 1,
+                      x2: 0,
+                      y2: 0,
+                      colorStops: [
+                        {
+                          offset: 0.6,
+                          color: "rgba(62, 130, 255, 0)", // 0% 处的颜色
+                        },
+                        {
+                          offset: 1,
+                          color: "rgba(59, 194, 220, 0.77)", // 100% 处的颜色
+                        },
+                      ],
+                    },
+                  ],
+                ],
+                borderColor: "#000",
+                borderWidth: "2",
+              },
+            },
+            axisLabel: {
+              show: false,
+            }, //刻度标签。
+            axisTick: {
+              show: false,
+              splitNumber: 5,
+              lineStyle: {
+                color: "#fff",
+                width: 2,
+              },
+            }, //刻度样式
+            splitLine: {
+              show: false,
+            }, //分隔线样式
+            detail: {
+              show: false,
+            },
+            title: {
+              show: false,
+            },
+          },
           {
             type: "gauge",
             radius: "90%",
-            startAngle: 220,
+            startAngle: 200,
+            endAngle: -20,
             min: 0,
-            max: 240,
-            splitNumber: 24,
-            itemStyle: {
-              color: [
-                [
-                  1,
-                  new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            max: 100,
+            splitNumber: 1,
+            center: ["50%", "60%"],
+            progress: {
+              show: true,
+              width: 14,
+              roundCap: true,
+              itemStyle: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
                     {
-                      offset: 0.1,
-                      color: "#42E7E7 ",
-                    },
-                    {
-                      offset: 0.6,
-                      color: "#3E82FF",
+                      offset: 0,
+                      color: "rgba(243, 216, 106, 1)", // 0% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "#3E82FF",
+                      color: "rgba(42, 192, 231, 1)", // 100% 处的颜色
                     },
-                  ]),
-                ],
-              ],
-              shadowColor: "#3E82FF",
-              shadowBlur: 10,
-              shadowOffsetX: 2,
-              shadowOffsetY: 2,
-            },
-            progress: {
-              show: true,
-              roundCap: true,
-              width: 18,
+                  ],
+                  global: false, // 缺省为 false
+                },
+              },
             },
             pointer: {
               show: false,
             },
             axisLine: {
+              roundCap: true,
               lineStyle: {
-                width: 18,
-                color: [
-                  [
-                    1,
-                    new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                      {
-                        offset: 0.2,
-                        color: "#42E7E7",
-                      },
-                      {
-                        offset: 0.4,
-                        color: "#42E7E7",
-                      },
-                      {
-                        offset: 0.6,
-                        color: "#42E7E7",
-                      },
-                    ]),
-                  ],
-                ],
+                width: 14,
+                color: [[1, "rgba(243, 216, 106, 0.4)"]], //刻度线背景色
               },
             },
+            axisTick: {
+              show: true,
+              splitNumber: 1,
+              lineStyle: {
+                width: 0, //不显示刻度
+              },
+            },
+            splitLine: {
+              show: false,
+            },
             axisLabel: {
+              show: true,
+            },
+            anchor: {
+              show: false,
+            },
+            title: {
               show: false,
             },
             detail: {
               width: "60%",
-              offsetCenter: [0, 0],
-              formatter: function (value) {
-                return "{value|" + value.toFixed(0) + "}{unit|m/s}";
-              },
-              rich: {
-                value: {
-                  fontSize: 24,
-                  fontWeight: "bolder",
-                  color: "#3672E9",
-                },
-                unit: {
-                  fontSize: 14,
-                  color: "#3672E9",
-                },
-              },
+              borderRadius: 8,
+              offsetCenter: [0, -10],
+              fontSize: 18,
+              formatter: "{value} m/s",
+              color: "#40C3D9",
+            },
+            title: {
+              offsetCenter: [0, "65%"],
+              fontSize: 14,
             },
             data: [
               {
-                value: 100,
+                value: 60,
+                name: "流量m/s",
               },
             ],
+          },
+
+          //内层刻度线渐变
+          {
+            type: "gauge",
+            splitNumber: 4, //刻度数量
+            radius: "80%", //图表尺寸
+            startAngle: 200,
+            endAngle: -20,
+            center: ["50%", "60%"],
+            axisLine: {
+              show: true,
+              lineStyle: {
+                width: 0,
+                shadowBlur: 0,
+                color: [
+                  [0.1, "rgba(63, 194, 218, 0.4)"],
+                  [0.2, "rgba(63, 194, 218, 0.4)"],
+                  [0.3, "rgba(63, 194, 218, 0.4)"],
+                  [0.4, "rgba(63, 194, 218, 0.4)"],
+                  [0.5, "rgba(63, 194, 218, 0.4)"],
+                  [0.6, "rgba(147, 255, 203, 0.8)"],
+                  [0.7, "#F3D86A"],
+                  [0.8, "#F3D86A"],
+                  [0.9, "rgba(243, 216, 106, 1)"],
+                  [1, "rgba(243, 216, 106, 1)"],
+                ],
+              },
+            },
+            axisTick: {
+              show: true,
+              lineStyle: {
+                color: "auto",
+                width: 3,
+              },
+              length: 3,
+              splitNumber: 9,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            pointer: {
+              show: false,
+            },
           },
         ],
       };

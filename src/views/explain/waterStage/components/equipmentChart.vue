@@ -52,6 +52,12 @@
                   ]
                 }
               },
+              // progress: {
+              //   show: true,
+              //   roundCap: true,
+              //   width: 13 //显示的环形的宽度
+              // },
+              //刻度标签
               axisTick: {
                 show: true,
                 lineStyle: {
@@ -61,6 +67,7 @@
                 length: -2,
                 splitNumber: 8
               },
+              //刻度样式
               splitLine: {
                 show: true,
                 length: -8,
@@ -69,6 +76,7 @@
                   width: 2
                 }
               },
+              //仪表盘轴线
               axisLabel: {
                 show: false
               },
@@ -76,6 +84,7 @@
                 show: false,
               },
               detail: {
+                show: false,
                 offsetCenter: [0, '50%'], // x, y，单位px
                 textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                   color: '#000',
@@ -85,7 +94,7 @@
                 formatter: '水位mm'
               },
               title: {
-                show: true,
+                show: false,
                 offsetCenter: [0, '70%'], // x, y，单位px
                 textStyle: {
                   color: '#29669B',
@@ -104,101 +113,49 @@
               splitNumber: 0, //刻度数量
               startAngle: 225,
               endAngle: -45,
+              progress: {
+                show: true,
+                roundCap: true,
+                width: 10, //显示的环形的宽度
+              },
+              itemStyle:{//渐变颜色
+                color:new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                  {
+                    offset: 0.00,
+                    color: '#34aac1'
+                  },
+                  {
+                    offset: 0.20,
+                    color: '#b1c88a'
+                  },
+                  
+                  {
+                    offset: 0.60,
+                    color: '#fcd55e'
+                  },
+                  
+                  {
+                    offset: 0.70,
+                    color: '#efa830'
+                  },
+                  
+                  {
+                    offset: 0.80,
+                    color: '#ea951c'
+                  },
+                  {
+                    offset: 1,
+                    color: '#ea951c'
+                  }
+                ])
+              },
+              //仪表盘轴线相关配置，即里面的灰色环形
               axisLine: {
                 show: true,
+                distance: 10,
+                color: 'black',
                 lineStyle: {
                   width: 10,
-                  color: [
-                    [
-                      0.9, new echarts.graphic.LinearGradient(
-                        0, 0, 1, 0, [
-                          {
-                            offset: 0.05,
-                            color: '#adc78a'
-                          },
-                          {
-                            offset: 0.10,
-                            color: '#78bba3'
-                          },
-                          {
-                            offset: 0.15,
-                            color: '#66b6aa'
-                          },
-                          {
-                            offset: 0.20,
-                            color: '#3babbf'
-                          },
-                          {
-                            offset: 0.25,
-                            color: '#21a6cb'
-                          },
-                          {
-                            offset: 0.30,
-                            color: '#2ca8c6'
-                          },
-                          {
-                            offset: 0.35,
-                            color: '#22a6ca'
-                          },
-                          {
-                            offset: 0.40,
-                            color: '#47afb9'
-                          },
-                          {
-                            offset: 0.45,
-                            color: '#74baa5'
-                          },
-                          {
-                            offset: 0.50,
-                            color: '#87be9b'
-                          },
-                          {
-                            offset: 0.55,
-                            color: '#98c294'
-                          },
-                          {
-                            offset: 0.60,
-                            color: '#cecf7b'
-                          },
-                          {
-                            offset: 0.65,
-                            color: '#dfd373'
-                          },
-                          {
-                            offset: 0.70,
-                            color: '#dfd373'
-                          },
-                          {
-                            offset: 0.75,
-                            color: '#f2d86a'
-                          },
-                          {
-                            offset: 0.80,
-                            color: '#fcd45e'
-                          },
-                          {
-                            offset: 0.85,
-                            color: '#eb9920'
-                          },
-                          {
-                            offset: 0.90,
-                            color: '#efa730'
-                          },
-                          {
-                            offset: 0.95,
-                            color: '#ea951c'
-                          },
-                          {
-                            offset: 1,
-                            color: '#ea951c'
-                          }
-                        ]
-                      )
-                    ],
-                    [
-                      1, '#f9dfbb'
-                    ]
-                  ]
                 }
               },
               //分隔线样式。
@@ -208,6 +165,7 @@
               axisLabel: {
                 show: false
               },
+              //刻度样式
               axisTick: {
                 show: false
               },
@@ -225,6 +183,7 @@
               //仪表盘详情，用于显示数据。
               detail: {
                 show: true,
+                roundCap:true,
                 offsetCenter: [0, '16%'],
                 color: '#000',
                 formatter: function (params) {
@@ -236,9 +195,9 @@
               },
               data: [{
                 name: "正常率",
-                value: 90.61
+                value: 80.61
               }]
-            }
+            },
           ]
         };
         myChart.setOption(option);

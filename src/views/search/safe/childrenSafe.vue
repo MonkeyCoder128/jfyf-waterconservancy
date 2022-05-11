@@ -6,13 +6,13 @@
     </div>
     <!--begin 设备异常所展示的部分 -->
     <div v-if="showInfo === true">
-      <el-col :span="16">
+      <el-col :span="18">
         <el-card shadow="always" class="el-card">
           <el-form v-loading="listLoading" :label-position="labelPosition" ref="form" :model="formOne" label-width="100px">
             <el-row>
               <el-col :span="8">
                 <el-form-item label="上报人：">
-                  <el-input v-model="formOne.reportUserName" placeholder="请输入姓名"></el-input>
+                  <el-input :disabled="true" v-model="formOne.reportUserName" placeholder="请输入姓名"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -87,9 +87,9 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="8" v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
+      <el-col :span="6" v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
         <el-card shadow="always" class="el-card">
-          <p class="record">巡检提交记录</p>
+          <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
@@ -116,10 +116,12 @@
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
                   <span>
-                    <i class="el-icon-star-on"></i>
+                    <i class="">*</i>
+                    {{message.creatDate}}
+                    </span>
+                  <span>
                     {{message.remark}}
                   </span>
-                  <span>{{message.creatDate}}</span>
                 </li>
               </div>
               <div class="nulldata" v-if="item.reportRecordList == null">
@@ -129,9 +131,9 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8" v-else>
+      <el-col :span="6" v-else>
         <el-card shadow="always" class="el-card">
-          <p class="record">巡检提交记录</p>
+          <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
@@ -148,10 +150,12 @@
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
                   <span>
-                    <i class="el-icon-star-on"></i>
+                    <i class="">*</i>
+                    {{message.creatDate}}
+                  </span>
+                  <span>
                     {{message.remark}}
                   </span>
-                  <span>{{message.creatDate}}</span>
                 </li>
               </div>
               <!-- <div class="nulldata" v-if="item.reportRecordList == null">
@@ -419,9 +423,9 @@ export default {
     }
   }
   .record{
-    text-align: center;
     margin: 10px auto 30px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    font-weight: 600;
   }
   .otherSpan{
     font-size: 14px;
@@ -435,7 +439,7 @@ export default {
       display: flex;
       align-items: center;
       margin-top: 10px;
-      color: #409eff;
+      color: #1c48bf;
       i{
         font-size: 30px;
         margin-right: 10px;
@@ -446,14 +450,18 @@ export default {
         list-style: none;
         margin-top: 10px;
         margin-left: 40px;
+        display: flex;
+        flex-direction: column;
         span:nth-child(1){
-          color: #67c23a;
+          // color: #67c23a;
           margin-right: 5px;
           font-size: 14px;
         }
         span:nth-child(2){
           color: gray;
-          font-size: 12px;
+          font-size: 14px;
+          margin-top: 5px;
+          margin-left: 10px;
         }
       }
     }

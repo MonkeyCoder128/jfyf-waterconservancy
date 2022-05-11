@@ -91,8 +91,8 @@
           },
           legend: {
             align: "left",
-            right: '10%',
-            top: '10%',
+            right: 'center',
+            bottom: '0%',
             type: 'plain',
             textStyle: {
               color: '#666666',
@@ -100,9 +100,10 @@
             },
             // icon:'rect',
             itemGap: 25,
-            itemWidth: 18,
-            icon: 'path://M0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z',
-
+            itemWidth: 48,
+            itemHeight: 8,
+            // icon: 'path://M0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z',
+            icon: '',
             data: [{
                 name: 'A设备'
               },
@@ -192,9 +193,9 @@
           series: [{
               name: 'A设备',
               type: 'line',
-              symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
+              // symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
               showAllSymbol: true,
-              symbolSize: 0,
+              symbolSize: [8,8],
               smooth: true,
               lineStyle: {
                 normal: {
@@ -204,7 +205,7 @@
                 borderColor: 'rgba(0,0,0,.4)',
               },
               itemStyle: {
-                color: "#5faece",
+                color: "rgba(25,163,223,1)",
                 borderColor: "#646ace",
                 borderWidth: 0
 
@@ -245,9 +246,9 @@
             {
               name: 'B设备',
               type: 'line',
-              symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
+              // symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
               showAllSymbol: true,
-              symbolSize: 0,
+              symbolSize: [8,8],
               smooth: true,
               lineStyle: {
                 normal: {
@@ -257,7 +258,7 @@
                 borderColor: 'rgba(0,0,0,.4)',
               },
               itemStyle: {
-                color: "#2e73bf",
+                color: "rgba(10,219,250,1)",
                 borderColor: "#646ace",
                 borderWidth: 0
               },
@@ -297,9 +298,9 @@
             {
               name: 'C设备',
               type: 'line',
-              symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
+              // symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
               showAllSymbol: true,
-              symbolSize: 0,
+              symbolSize: [8,8],
               smooth: true,
               lineStyle: {
                 normal: {
@@ -309,7 +310,7 @@
                 borderColor: 'rgba(0,0,0,.4)',
               },
               itemStyle: {
-                color: "#2e9ca2",
+                color: "#2ad9c9",
                 borderColor: "#666666",
                 borderWidth: 0
               },
@@ -368,6 +369,6 @@
 <style lang="scss" scoped>
   #brokenLineCharts {
     width: 700px;
-    height: 550px;
+    height: 530px;
   }
 </style>

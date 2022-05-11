@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
-    <div id="pie" style="width: 170px; height: 170px; margin-top: 3vh"></div>
-    <img src="../../../assets/image/juxing.png" alt="" class="juxing" />
+    <div id="pie" style="width: 100%; height: 170px; margin-top: 3vh"></div>
+    <!-- <img src="../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
 </template>
 <script>
@@ -12,55 +12,137 @@ export default {
   methods: {
     myecharts() {
       var pie = this.$echarts.init(document.getElementById("pie"));
+      var ydata = [
+        {
+          name: "二氧化碳",
+          value: 18,
+        },
+        {
+          name: "氢含量",
+          value: 16,
+        },
+        {
+          name: "氧含量",
+          value: 15,
+        },
+        {
+          name: "氦含量",
+          value: 14,
+        },
+        {
+          name: "氮含量",
+          value: 10,
+        },
+      ];
+      var color = [
+        "#1289BA ",
+        "#148F97",
+        "#E7B20A",
+        "#115CB9",
+        "#EB9A26",
+      ];
+      var xdata = [
+        "二氧化碳",
+        "氢含量",
+        "氧含量",
+        "氦含量",
+        "氮含量",
+      ];
+
       var option = {
-        // tooltip: {
-        //   trigger: "item",
-        // },
-        grid: {
-          top: "10%",
-          left: "3%",
-          right: "2%",
-          bottom: "3%",
-          containLabel: true,
+        color: color,
+        legend: {
+          color:'#fff',
+          orient: "vartical",
+          x: "left",
+          top: "center",
+          left: "70%",
+          bottom: "0%",
+          data: xdata,
+          itemWidth: 8,
+          itemHeight: 8,
+          itemGap: 16,
+
+          formatter: function (name) {
+            return "" + name;
+          },
         },
         series: [
           {
-            name: "Access From",
             type: "pie",
-            radius: ["70%", "80%"],
+            clockwise: false, //饼图的扇区是否是顺时针排布
+            minAngle: 2, //最小的扇区角度（0 ~ 360）
+            radius: ["50%", "60%"],
+            center: ["30%", "50%"],
             avoidLabelOverlap: false,
-            label: {
-              show: false,
-              position: "center",
-            },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: "20",
-                fontWeight: "bold",
+            itemStyle: {
+              //图形样式
+              normal: {
+                // borderColor: "#ffffff",
+                borderWidth: 6,
               },
             },
-            labelLine: {
-              show: false,
-            },
-            data: [
-              { value: 1048, name: "二氧化碳" },
-              { value: 200, name: "氢含量" },
-              { value: 580, name: "氧含量" },
-            ],
-            itemStyle: {
+            label: {
               normal: {
-                color: function (params) {
-                  //自定义颜色
-                  var colorList = ["#115cb9", "#1289ba", "#148f97"];
-                  return colorList[params.dataIndex];
+                formatter: "{text|{b}}\n{c} ({d}%)",
+                rich: {
+                  text: {
+                    color: "#fff",
+                    fontSize: 8,
+                    align: "center",
+                    verticalAlign: "middle",
+                  },
+                  value: {
+                    color: "#fff",
+                    fontSize: 8,
+                    align: "center",
+                    verticalAlign: "middle",
+                  },
                 },
               },
+              // emphasis: {
+              //   show: true,
+              //   textStyle: {
+              //     fontSize: 24,
+              //   },
+              // },
             },
+            data: ydata,
           },
         ],
       };
       pie.setOption(option);
+
+      setTimeout(function () {
+        pie.on("mouseover", function (params) {
+          if (params.name == ydata[0].name) {
+            pie.dispatchAction({
+              type: "highlight",
+              seriesIndex: 0,
+              dataIndex: 0,
+            });
+          } else {
+            pie.dispatchAction({
+              type: "downplay",
+              seriesIndex: 0,
+              dataIndex: 0,
+            });
+          }
+        });
+
+        pie.on("mouseout", function (params) {
+          pie.dispatchAction({
+            type: "highlight",
+            seriesIndex: 0,
+            dataIndex: 0,
+          });
+        });
+        pie.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: 0,
+        });
+      }, 1000);
     },
   },
 };
@@ -68,9 +150,9 @@ export default {
 <style  lang="scss" scoped>
 .juxing {
   position: absolute;
-  top: 35px;
-  left: 36px;
-  width: 99px;
-  height: 99px;
+  top: 36px;
+  left: 56px;
+  width: 38px;
+  height: 38px;
 }
-</style>
+</style>  

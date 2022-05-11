@@ -4,36 +4,63 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline" size="small">
-            <el-form-item label="法律法规名称：">
-              <el-input clearable v-model="formData.ruleName" placeholder="名称"></el-input>
+          <el-form :inline="true" :model="formData" class="demo-form-inline" size="small" ref="ruleForm">
+            <el-form-item label="" class="changeInputClass">
+              <el-input 
+              clearable 
+              v-model="formData.ruleName" 
+              placeholder="搜索条例"
+              suffix-icon="el-icon-search">
+              </el-input>
             </el-form-item>
-            <el-form-item label="日期：">
+            <el-form-item label="时间">
               <div class="block">
                 <span class="demonstration"></span>
                 <el-date-picker
                   v-model="formData.uploadDate"
                   type="datetimerange"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
                   :default-time="['12:00:00']"
                   value-format="yyyy-MM-dd 00:00:00">
                 </el-date-picker>
               </div>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" size="small" @click="serchData">查询</el-button>
+              <el-button style="background-color:#1c48bf; border: 1px solid #1c48bf;border-radius:5px;" type="primary" size="small" @click="serchData">查询</el-button>
+              <el-button style="border: 1px solid #1c48bf; border-radius:5px; color:#1c48bf;" size="small" @click="resetForm('ruleForm')" >重置</el-button>
             </el-form-item>
-            <el-button class="addTerm" size="small" @click="dialogVisible = true">新增条例</el-button>
+            <el-button class="addTerm" size="small" @click="dialogVisible = true">上传条例</el-button>
           </el-form>
         </div>
-        <el-button v-if="isAllSelect == true" style="margin-bottom:10px" type="danger" size="small" @click="allSearch">删除{{this.selectNumber}}项</el-button>
+        <!-- 全选选中出现 -->
+        <div v-if="isAllSelect == true" style="margin-bottom:10px;">
+          <el-button 
+          style="border: 1px solid #D72A13; border-radius:5px; color:#D72A13;" 
+          size="small" 
+          @click="allSearch">
+            删除{{this.selectNumber}}项
+          </el-button>
+          <el-button 
+          style="border: 1px solid #148F97; border-radius:5px; color:#148F97;" 
+          size="small" 
+          @click="allSelectDownload">
+            下载{{this.selectNumber}}项
+          </el-button>
+          <el-button 
+          style="border: 1px solid #999999; border-radius:5px; color:#999999;" 
+          size="small" 
+          @click="allSelectCancel">
+            取消{{this.selectNumber}}项
+          </el-button>
+        </div>
         <div class="con-table">
           <el-table
             :data="tableData.list"
             v-loading="listLoading"
             @selection-change='selectAll'
-            :header-cell-style="{background:'#F7F8FC',color:'#333333'}"
+            ref="multipleTable"
+            :header-cell-style="{background:'#EEEEEE',color:'#333333'}"
             style="width: 100%"
           >
             <el-table-column
@@ -53,16 +80,18 @@
                 <el-button
                   size="small"
                   type="text"
+                  style="color:#1c48bf"
                   @click="check(scope.row.filePreviewPath)"
                   >查看</el-button
                 >
                 <el-button
                   size="small"
                   type="text"
+                  style="color:#148f97"
                   @click="download(scope.row.filePreviewPath)"
                   >下载</el-button
                 >
-                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579"
+                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#d72a13"
                   >删除</el-button
                 >
               </template>
@@ -77,31 +106,31 @@
             :page-sizes="[10, 20, 50, 100]"
             :total="tableData.pagination.total"
             :current-page="tableData.pagination.current"
-            layout="sizes,prev, pager, next"
+            layout="prev,pager,next,sizes,jumper"
             @current-change="changeCurrent"
             @size-change="handleSizeChange"
           >
           </el-pagination>
         </div>
         <el-dialog
-          title="新增条例文件"
+          title="上传条例"
           :visible.sync="dialogVisible"
           width="30%">
           <el-upload
             class="upload-demo"
             drag
             action="http://112.125.88.230:8002/upload/uploadFileByDate"
-            multiple
+            :multiple="false"
             :before-upload="beforeAvatarUpload"
             :on-success="handleFileSuccess"
             name='fileData'>
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传pdf/word/excel文件，且不超过3M</div>
+            <div class="el-upload__tip" slot="tip">*只能上传pdf/word文件，且不超过10M</div>
+            <i style="font-size:50px; margin-bottom:10px" class="el-icon-plus"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em style="color:#1c48bf">点击上传</em></div>
           </el-upload>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="uploadFile">确 定</el-button>
+            <el-button style="border: 1px solid #bdbdbd;border-radius:5px; color:gray" size="small" @click="dialogVisible = false">取 消</el-button>
+            <el-button style="background-color:#1c48bf; border: 1px solid #1c48bf;border-radius:5px; color:#fff" size="small" @click="uploadFile">上传</el-button>
           </span>
         </el-dialog>
         <!-- <iframe src='http://127.0.0.1/file/2022-04-24/221807266527969280.jpg' width='100%' height='100%' frameborder='1'>
@@ -176,6 +205,9 @@
         selectNumber: '',
         // 存储全选数据的id
         arrDeletId: [],
+        // 存储全选数据的filePreviewPath
+        arrDeletFilePreviewPath: [],
+        count: 0,
       };
     },
     created(){
@@ -296,7 +328,21 @@
       },
       // 下载数据
       download(url){
-        window.location.href = url;
+        if(typeof url == 'string'){
+          window.location.href = url;
+        }else if(typeof url == 'object'){
+          for(var k in url){
+            this.downloadURL(url[k]);
+          }
+        }
+      },
+      downloadURL(url){
+        var hiddenIFrameID = 'hiddenDownloader' + this.count++;
+        var iframe = document.createElement('iframe');
+        iframe.id = hiddenIFrameID;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        iframe.src = url;
       },
       // 查看数据
       check(url){
@@ -308,13 +354,13 @@
       beforeAvatarUpload(file) {
         // console.log(file);
         const isJPG = file.type === 'application/pdf' || 'application/vnd.ms-excel' || 'docx';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt2M = file.size / 1024 / 1024 < 9;
 
         if (!isJPG) {
-          this.$message.error('上传文件只能是 pdf/xls/docx 格式!');
+          this.$message.error('上传文件只能是 pdf/docx 格式!');
         }
         if (!isLt2M) {
-          this.$message.error('上传文件大小不能超过 2MB!');
+          this.$message.error('上传文件大小不能超过 10MB!');
         }
         return isJPG && isLt2M;
       },
@@ -354,11 +400,26 @@
           this.selectNumber = attr.length;
           for(let i in attr){
             this.arrDeletId.push(attr[i].id);
+            this.arrDeletFilePreviewPath.push(attr[i].filePreviewPath)
           }
         }else{
           this.isAllSelect = false;
         }
-      }
+      },
+      // 下载全选的文件
+      allSelectDownload(attr){
+        this.download(this.arrDeletFilePreviewPath)
+      },
+      // 取消全选的文件
+      allSelectCancel(){
+        this.$refs.multipleTable.clearSelection();
+      },
+      // 表单重置
+      resetForm(formName) {
+        // this.$refs[formName].resetFields();
+        this.formData.ruleName = '';
+        this.formData.uploadDate = '';
+      },
     },
   }
 </script>
@@ -371,8 +432,14 @@
   /deep/::-webkit-scrollbar {
     display: none; /* Chrome Safari */
   }
+  .el-date-editor--datetimerange.el-input, .el-date-editor--datetimerange.el-input__inner{
+    width: 300px;
+  }
   .addTerm{
     float: right;
+    border: 1px solid #319da4;
+    color: #319da4;
+    border-radius: 5px;
   }
   /deep/ .el-upload--text{
     width: 100%;
@@ -382,5 +449,56 @@
   }
   .con-page{
     margin-top: 15px;
+    float: right;
+  }
+  // 设置pagination分页的样式
+  /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active{
+    background-color: rgb(28, 72, 191);
+  }
+  /deep/ .el-pagination.is-background .el-pager li:not(.disabled).hover{
+    color: rgb(28, 72, 191);
+  }
+  /deep/ .el-pagination__jump{
+    margin-left: 0px;
+  }
+  /deep/ .el-pagination.is-background .el-pager li{
+    border-radius: 5px;
+  }
+  /deep/ .btn-prev{
+    border-radius: 5px !important; 
+  }
+  /deep/.btn-next{
+    border-radius: 5px !important;
+  }
+  /deep/ .el-pagination .el-select .el-input .el-input__inner{
+    border-radius: 5px;
+  }
+  /deep/ .el-input__inner{
+    border-radius: 5px;
+  }
+  // dialog上传文件的样式
+  /deep/ .el-upload-dragger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 140px;
+    margin-top: 10px;
+  }
+  .el-upload__tip{
+    position: absolute;
+    top: 60px;
+  }
+  /deep/ .el-dialog__body{
+    padding-bottom: 15px;
+  }
+  // /deep/ .el-dialog__header{
+  //   border-bottom: 1px solid #e7e7e7;
+  // }
+
+  // 设置input样式
+  .changeInputClass{
+    /deep/ .el-input__inner{
+      width: 170px;
+    }
   }
 </style>

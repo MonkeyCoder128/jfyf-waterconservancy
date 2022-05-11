@@ -94,27 +94,27 @@ import brokenLineCharts from './components/brokenLineChart.vue';
       return {
         tableData: [{
             date: "2016-05-02",
-            name: "王小虎1",
+            name: "王小虎",
             type: "0",
           },
           {
             date: "2016-05-02",
-            name: "王小虎1",
+            name: "李小龙",
+            type: "1",
+          },
+          {
+            date: "2016-05-02",
+            name: "张小凡",
+            type: "1",
+          },
+          {
+            date: "2016-05-02",
+            name: "赵小强",
             type: "0",
           },
           {
             date: "2016-05-02",
-            name: "王小虎1",
-            type: "0",
-          },
-          {
-            date: "2016-05-02",
-            name: "王小虎1",
-            type: "0",
-          },
-          {
-            date: "2016-05-02",
-            name: "王小虎1",
+            name: "孙晓宁",
             type: "0",
           },
         ],
@@ -140,7 +140,7 @@ import brokenLineCharts from './components/brokenLineChart.vue';
       border-radius: 5px;
       display: flex;
       flex-direction: column;
-      padding: 8px;
+      padding: 10px 20px;
       height: 200px;
       span {
         font-size: 14px;
@@ -190,12 +190,12 @@ import brokenLineCharts from './components/brokenLineChart.vue';
       height: 260px;
       background-color: #ffffff;
       border-radius: 5px;
-      padding: 0 8px;
+      padding: 5px 20px;
 
       .echartsBoxContent {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         div {
           width: 32.5%;
@@ -215,7 +215,7 @@ import brokenLineCharts from './components/brokenLineChart.vue';
         min-height: 800px;
         background-color: #ffffff;
         border-radius: 5px;
-        padding: 0 8px;
+        padding: 5px 20px;
         .testStatus {
           display: flex;
           align-items: center;

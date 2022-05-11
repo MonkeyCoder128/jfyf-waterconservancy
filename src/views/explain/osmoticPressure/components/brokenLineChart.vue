@@ -91,8 +91,8 @@
           },
           legend: {
             align: "left",
-            right: '10%',
-            top: '10%',
+            right: 'center',
+            bottom: '0%',
             type: 'plain',
             textStyle: {
               color: '#666666',
@@ -100,9 +100,10 @@
             },
             // icon:'rect',
             itemGap: 25,
-            itemWidth: 18,
-            icon: 'path://M0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z',
-
+            itemWidth: 48,
+            itemHeight: 8,
+            // icon: 'path://M0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z',
+            icon: '',
             data: [{
                 name: 'A设备'
               },
@@ -192,9 +193,9 @@
           series: [{
               name: 'A设备',
               type: 'line',
-              symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
+              // symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
               showAllSymbol: true,
-              symbolSize: 0,
+              symbolSize: [8,8],
               smooth: true,
               lineStyle: {
                 normal: {
@@ -236,7 +237,7 @@
                       color: "#ffffff"
                     }
                   ], false),
-                  shadowColor: 'rgba(25,163,223, 0.5)', //阴影颜色
+                  shadowColor: 'rgba(25,163,223, 0.8)', //阴影颜色
                   shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
                 }
               },
@@ -245,9 +246,9 @@
             {
               name: 'B设备',
               type: 'line',
-              symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
+              // symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
               showAllSymbol: true,
-              symbolSize: 0,
+              symbolSize: [8,8],
               smooth: true,
               lineStyle: {
                 normal: {
@@ -288,7 +289,7 @@
                       color: "#ffffff"
                     }
                   ], false),
-                  shadowColor: 'rgba(10,219,250, 0.5)', //阴影颜色
+                  shadowColor: 'rgba(10,219,250, 0.8)', //阴影颜色
                   shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
                 }
               },
@@ -297,9 +298,9 @@
             {
               name: 'C设备',
               type: 'line',
-              symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
+              // symbol: 'circle', // 默认是空心圆（中间是白色的），改成实心圆
               showAllSymbol: true,
-              symbolSize: 0,
+              symbolSize: [8,8],
               smooth: true,
               lineStyle: {
                 normal: {
@@ -340,7 +341,7 @@
                       color: "white"
                     }
                   ], false),
-                  shadowColor: 'rgba(10,219,250, 0.5)', //阴影颜色
+                  shadowColor: 'rgba(10,219,250, 0.8)', //阴影颜色
                   shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
                 }
               },
@@ -368,6 +369,6 @@
 <style lang="scss" scoped>
   #brokenLineCharts {
     width: 700px;
-    height: 550px;
+    height: 530px;
   }
 </style>

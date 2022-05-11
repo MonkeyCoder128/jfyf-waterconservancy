@@ -4,47 +4,44 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="110px" :label-position='labelPosition' size="small">
-            <el-row>
-              <el-form-item label="日期：">
-                <div class="block">
-                  <span class="demonstration"></span>
-                  <el-date-picker
-                    v-model="formData.reportDate"
-                    type="datetimerange"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期"
-                    :default-time="['12:00:00']">
-                  </el-date-picker>
-                </div>
-              </el-form-item>
-              <el-form-item label="异常情况管理：">
-                <el-select clearable v-model="formData.status" placeholder="请选择">
-                  <el-option label="已解除" value="2"></el-option>
-                  <el-option label="未解除" value="1"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="异常情况：">
-                <el-select multiple clearable v-model="formData.exceptionTypes" placeholder="异常情况">
-                  <el-option label="流速、流量" value=1>流速、流量</el-option>
-                  <el-option label="渗透压" value=2>渗透压</el-option>
-                  <el-option label="位移" value=3>位移</el-option>
-                  <el-option label="水质" value=4>水质</el-option>
-                  <el-option label="设备功能" value=5>设备功能</el-option>
-                </el-select>
-              </el-form-item>
-            </el-row>
-            <el-row>
-              <el-form-item label="异常上报情况：">
-                <el-select clearable v-model="formData.reportType" placeholder="请选择">
-                  <el-option label="已上报" value="2"></el-option>
-                  <el-option label="未上报" value="1"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" size="small" @click="serchData">查询</el-button>
-              </el-form-item>
-            </el-row>
+          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="" :label-position='labelPosition' size="small" ref="ruleForm">
+            <el-form-item label="时间">
+              <div class="block">
+                <span class="demonstration"></span>
+                <el-date-picker
+                  v-model="formData.reportDate"
+                  type="datetimerange"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  :default-time="['12:00:00']">
+                </el-date-picker>
+              </div>
+            </el-form-item>
+            <el-form-item label="异常情况" class="changeInputClass">
+              <el-select multiple clearable v-model="formData.exceptionTypes" placeholder="异常情况">
+                <el-option label="流速、流量" value=1>流速、流量</el-option>
+                <el-option label="渗透压" value=2>渗透压</el-option>
+                <el-option label="位移" value=3>位移</el-option>
+                <el-option label="水质" value=4>水质</el-option>
+                <el-option label="设备功能" value=5>设备功能</el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="巡检管理" class="changeInputClass">
+              <el-select clearable v-model="formData.status" placeholder="请选择">
+                <el-option label="已解除" value="2"></el-option>
+                <el-option label="未解除" value="1"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="上报情况" class="changeInputClass">
+              <el-select clearable v-model="formData.reportType" placeholder="请选择">
+                <el-option label="已上报" value="2"></el-option>
+                <el-option label="未上报" value="1"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button style="background-color:#1c48bf; border: 1px solid #1c48bf;border-radius:5px;" type="primary" size="small" @click="serchData">查询</el-button>
+              <el-button style="border: 1px solid #1c48bf;border-radius:5px; color:#1c48bf" size="small" @click="resetForm('ruleForm')" >重置</el-button>
+            </el-form-item>
           </el-form>
 
         </div>
@@ -52,31 +49,31 @@
           <el-table
             :data="tableData.list"
             v-loading="listLoading"
-            :header-cell-style="{background:'#F7F8FC',color:'#333333'}"
+            :header-cell-style="{background:'#EEEEEE',color:'#333333'}"
             style="width: 100%"
           >
             <el-table-column prop="exceptionLocation" label="异常位置" align="center">
             </el-table-column>
             <el-table-column prop="deviceStatus" label="设备状态" align="center">
               <template slot-scope="scope">
-                <span style="color:#ddb90a" v-if="scope.row.deviceStatus == 1">设备离线</span>  
-                <span v-else>设备在线</span>
+                <span style="color:#F8C202;" v-if="scope.row.deviceStatus == 1">离线</span>  
+                <span v-else>在线</span>
               </template>
             </el-table-column>
             <el-table-column prop="exceptionType" label="异常分类" align="center">
               <template slot-scope="scope">
-                <span v-if="scope.row.exceptionType == 1">流速流量异常</span>
-                <span v-if="scope.row.exceptionType == 2">渗透压异常</span>
-                <span v-if="scope.row.exceptionType == 3">位移</span>
-                <span v-if="scope.row.exceptionType == 4">水质异常</span>
-                <span v-if="scope.row.exceptionType == 5">设备功能异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 1">流速流量异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 2">渗透压异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 3">位移</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 4">水质异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 5">设备功能异常</span>
               </template>
             </el-table-column>
             <el-table-column prop="reportDate" label="上报时间" align="center">
             </el-table-column>
             <el-table-column prop="reportType" label="异常上报情况" align="center">
               <template slot-scope="scope">
-                <span style="color:#ff6579" v-if="scope.row.reportType == 1">未上报</span>
+                <span style="color:#D72A13" v-if="scope.row.reportType == 1">未上报</span>
                 <span v-else>已上报</span>
               </template>
             </el-table-column>
@@ -92,7 +89,7 @@
             <el-table-column prop="status" label="异常情况管理" align="center">
               <template slot-scope="scope">
                 <span v-if="scope.row.status == 2">已解除异常</span>
-                <span style="color:#ff6579" v-else>未解除异常</span>
+                <span style="color:#D72A13;" v-else>未解除异常</span>
               </template>
             </el-table-column>
             <el-table-column label="操作" align="center">
@@ -100,12 +97,13 @@
                 <el-button
                   size="small"
                   type="text"
+                  style="color:#1C48BF;"
                   @click="check(scope.row.id)"
                   >查看
                 </el-button>
-                <el-button size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579">
-                  <span v-if="scope.row.status == 2">已处理</span>
-                  <span v-else>未处理</span>
+                <el-button size="small" type="text" @click="deletedata(scope.row.id)">
+                  <span style="color:#606266;" v-if="scope.row.status == 2">已处理</span>
+                  <span style="color:#D72A13;" v-else>未处理</span>
                 </el-button>
               </template>
             </el-table-column>
@@ -119,7 +117,7 @@
             :page-sizes="[10, 20, 50, 100]"
             :total="tableData.totalCount"
             :current-page="tableData.currPage"
-            layout="sizes,prev, pager, next"
+            layout="prev,pager,next,sizes,jumper"
             @current-change="changeCurrent"
             @size-change="handleSizeChange"
           >
@@ -256,6 +254,14 @@ export default {
         this.listLoading = false
       })
     },
+    // 表单重置
+    resetForm(formName) {
+      // this.$refs[formName].resetFields();
+      this.formData.reportDate = '';
+      this.formData.exceptionTypes = '';
+      this.formData.reportType = '';
+      this.formData.status = '';
+    },
   },
 }
 </script>
@@ -273,5 +279,37 @@ export default {
   }
   .con-page{
     margin-top: 15px;
+    float: right;
+  }
+  // 设置pagination分页的样式
+  /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active{
+    background-color: rgb(28, 72, 191);
+  }
+  /deep/ .el-pagination.is-background .el-pager li:not(.disabled).hover{
+    color: rgb(28, 72, 191);
+  }
+  /deep/ .el-pagination__jump{
+    margin-left: 0px;
+  }
+  /deep/ .el-pagination.is-background .el-pager li{
+    border-radius: 5px;
+  }
+  /deep/ .btn-prev{
+    border-radius: 5px !important; 
+  }
+  /deep/.btn-next{
+    border-radius: 5px !important;
+  }
+  /deep/ .el-pagination .el-select .el-input .el-input__inner{
+    border-radius: 5px;
+  }
+  /deep/ .el-input__inner{
+    border-radius: 5px;
+  }
+  // 设置input样式
+  .changeInputClass{
+    /deep/ .el-input__inner{
+      width: 170px;
+    }
   }
 </style>
