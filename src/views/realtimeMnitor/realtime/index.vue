@@ -1855,7 +1855,7 @@ export default {
         }
         .scrollContent {
           width: 32%;
-          max-height: 170px;
+          max-height: 200px;
           overflow-y: auto;
           div {
             width: 100%;

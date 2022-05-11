@@ -61,30 +61,30 @@
           <Chart :chartData="warningData" :width="'100%'" :height="'100%'" />
         </div>
         <span class="cardTitle">预警分析</span>
-        <el-table
-          :data="tableData"
-          :row-style="{ height: '0' }"
-          :cell-style="{ padding: '0' }"
-          :header-cell-style="{ background: '#EEEEEE' }"
-        >
-          <el-table-column prop="date" label="监测点" />
-          <el-table-column prop="name" label="预警次数" />
-          <el-table-column prop="type" label="设备状态">
-            <template slot-scope="scope">
-              <span v-if="scope.row.type === '1'">在线</span>
-              <span v-if="scope.row.type === '0'" style="color: #de1111"
-                >离线</span
-              >
-            </template>
-          </el-table-column>
-          <el-table-column label="操作">
-            <template slot-scope="scope">
-              <el-button @click="seeAnalyse(scope.row)" type="text">
-                查看
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+        <div style="height: calc(100% - 200px)">
+          <el-table
+            :data="tableData"
+            :header-cell-style="{ background: '#EEEEEE' }"
+          >
+            <el-table-column prop="date" label="监测点" />
+            <el-table-column prop="name" label="预警次数" />
+            <el-table-column prop="type" label="设备状态">
+              <template slot-scope="scope">
+                <span v-if="scope.row.type === '1'">在线</span>
+                <span v-if="scope.row.type === '0'" style="color: #de1111"
+                  >离线</span
+                >
+              </template>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button @click="seeAnalyse(scope.row)" type="text">
+                  查看
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
       <div class="cardBottom">
         <span class="cardTitle">预警统计</span>
@@ -99,7 +99,7 @@
 import * as echarts from "echarts";
 import Chart from "@/views/screenChart/chart";
 export default {
-  name: "deformation",
+  name: "Deformation",
   components: { Chart },
   data() {
     return {
@@ -144,7 +144,13 @@ export default {
   },
   methods: {
     /** 查看预警分析 */
-    seeAnalyse() {
+    seeAnalyse(row) {
+      this.$router.push({
+        path: "/explain/alarmAnalysis",
+        query: {
+          id: row.id,
+        },
+      });
       console.log(
         "%c查看预警分析：",
         "color:red;font-size:18px;font-weight:bold;"
@@ -561,6 +567,7 @@ export default {
           itemGap: 30,
           textStyle: {
             fontSize: 14, //字体大小
+            color: "inherit",
           },
           formatter: function (name) {
             let target, percentage;
@@ -647,24 +654,16 @@ export default {
     /**预警统计图表 */
     getStatData() {
       let color = ["#148F97", "#115CB9", "rgba(17, 92, 185, 0.6)"];
-      const hexToRgba = (hex, opacity) => {
-        let rgbaColor = "";
-        let reg = /^#[\da-f]{6}$/i;
-        if (reg.test(hex)) {
-          rgbaColor = `rgba(${parseInt("0x" + hex.slice(1, 3))},${parseInt(
-            "0x" + hex.slice(3, 5)
-          )},${parseInt("0x" + hex.slice(5, 7))},${opacity})`;
-        }
-        return rgbaColor;
-      };
-
       let data = {
         legend: {
-          bottom: 30,
+          bottom: 5,
           itemGap: 36,
         },
         grid: {
-          bottom: "15%",
+          left: "3%",
+          right: "3%",
+          top: "6%",
+          bottom: "6%",
           containLabel: true,
         },
         tooltip: {
@@ -709,6 +708,7 @@ export default {
         yAxis: [
           {
             type: "value",
+            splitNumber: 8, // 配置 Y 轴数值间隔
             axisLabel: {
               textStyle: {
                 color: "#666",
@@ -899,7 +899,51 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
+@media screen and (min-width: 2000px) and (max-width: 3840px) {
+  .chartDataBox {
+    height: 360px;
+  }
+
+  .cardMenu {
+    min-height: 430px;
+    .echartsBoxContent {
+      height: 360px;
+    }
+    .echartsBox {
+      height: 360px;
+    }
+  }
+  .bottomBox {
+    min-height: calc(100% - 430px);
+  }
+  .cardBottom {
+    min-height: 790px;
+  }
+  .charts {
+    height: 730px;
+  }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1920px) {
+  .chartDataBox {
+    height: 200px;
+  }
+
+  .cardMenu {
+    min-height: 260px;
+    .echartsBoxContent {
+      height: 200px;
+    }
+  }
+  .cardBottom {
+    height: 600px;
+  }
+  .charts {
+    height: 560px;
+  }
+}
 .deformationPage {
+  height: 100%;
   .cardTitle {
     font-size: 16px;
     color: #333333;
@@ -917,7 +961,6 @@ export default {
       color: #333333;
     }
     .chartDataBox {
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -925,7 +968,6 @@ export default {
   }
   .cardMenu {
     width: 100%;
-    height: 260px;
     background-color: #ffffff;
     border-radius: 5px;
     padding: 0 8px;
@@ -947,8 +989,6 @@ export default {
     margin-top: 13px;
     .cardBottom {
       width: 49.5%;
-      height: auto;
-      min-height: 800px;
       background-color: #ffffff;
       border-radius: 5px;
       padding: 0 8px;
@@ -964,9 +1004,6 @@ export default {
             line-height: 25px;
           }
         }
-      }
-      .charts {
-        height: 560px;
       }
     }
   }
