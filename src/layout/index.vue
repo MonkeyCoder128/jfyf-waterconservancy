@@ -153,8 +153,6 @@ export default {
             //   title: "预警分析",
             //   path: "/explain/alarmAnalysis",
             // },
-            
-            
           ],
         },
         {
@@ -307,7 +305,7 @@ export default {
   overflow: hidden;
 }
 .navbar {
-  height: 4.9vh;
+  height: 60px;
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -317,7 +315,7 @@ export default {
 }
 .app-main {
   position: relative;
-  height: 93.4vh;
+  min-height: calc(100vh - 60px);
   overflow: hidden;
   margin: 10px;
 }

@@ -1864,8 +1864,8 @@ export default {
           display: none;
         }
         .scrollContent {
-          width: 29%;
-          max-height: 170px;
+          width: 32%;
+          max-height: 200px;
           overflow-y: auto;
           div {
             width: 100%;
