@@ -1836,11 +1836,11 @@ export default {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     .echartBox {
       padding: 10px;
-      width: 32%;
-      height: 230px;
+      width: 33%;
+      height: 280px;
       background-color: #ffffff;
       margin-bottom: 22px;
       display: flex;
