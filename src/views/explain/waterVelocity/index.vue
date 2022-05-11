@@ -899,11 +899,13 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-@media screen and (min-width:2000px) and (max-width:3840px) {
+@media screen and (min-width: 2000px) and (max-width: 3840px) {
+  .echartsBox {
+    height: 360px;
+  }
   .chartDataBox {
     height: 360px;
   }
-
   .cardMenu {
     min-height: 430px;
     .echartsBoxContent {
@@ -924,11 +926,13 @@ export default {
   }
 }
 
-@media screen and (min-width:960px) and (max-width:1920px) {
+@media screen and (min-width: 960px) and (max-width: 1920px) {
+  .echartsBox {
+    height: 200px;
+  }
   .chartDataBox {
     height: 200px;
   }
-
   .cardMenu {
     min-height: 260px;
     .echartsBoxContent {
@@ -955,7 +959,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 8px;
-    height: 200px;
     span {
       font-size: 14px;
       color: #333333;
