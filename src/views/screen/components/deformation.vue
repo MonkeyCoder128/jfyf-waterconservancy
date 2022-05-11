@@ -1,12 +1,13 @@
 <template>
-  <div style="position: relative">
-    <div id="deformation" style="width: 100%; height: 250px"></div>
-  </div>
+    <div id="deformation"></div>
 </template>
 <script>
 export default {
   mounted() {
     this.myecharts();
+    window.addEventListener("resize", function () {
+      myecharts.resize();
+    });
   },
   methods: {
     myecharts() {
@@ -15,188 +16,144 @@ export default {
         document.getElementById("deformation")
       );
 
+      var zzx1 = ["300", "100", "100", "300", "200"];
+      var wgx1 = ["100", "-100", "-200", "400", "-100"];
       var option = {
-        tooltip: {
-          trigger: "item",
-        },
         grid: {
-          left: "15%",
-          top: "10%",
-          right: "10%",
-          bottom: "35%",
+          left: "5%",
+          right: "8%",
+          bottom: "15%",
+          top: "25%",
+          containLabel: true,
         },
         legend: {
-          show: true,
-          icon: "circle",
-          orient: "horizontal",
-          top: "90.5%",
-          right: "center",
-          itemWidth: 16.5,
-          itemHeight: 6,
-          // itemGap: 30,
+          data: ["垂直位移", "水平位移"],
+          right: 30,
+          top: 1,
           textStyle: {
-            // color: '#FFFFFF'
-            color: "#C9C8CD",
-            fontSize: 12,
+            color: "#fff",
+            fontSize: 14,
+          },
+          itemWidth: 12,
+          itemHeight: 12,
+          color: "#fff",
+        },
+        xAxis: {
+          type: "category",
+          data: ["2016", "2017", "2018", "2019", "2020"],
+          axisLine: {
+              show: true,
+              lineStyle: {
+                color: "#193e69",
+              },
+            },
+            axisTick: {
+              show: false,
+            },
+          axisLabel: {
+            color: "#fff", 
           },
         },
-        xAxis: [
-          {
-            data: [
-              "监测中心站",
-              "调查中心",
-              "核与辐射安全中心",
-              "宣传教育中心",
-            ],
-            axisLabel: {
-              textStyle: {
-                color: "#38455D",
-                fontSize: 12,
-              },
-              margin: 20, //刻度标签与轴线之间的距离。
-            },
 
-            axisLine: {
-              show: true, //不显示x轴
-              lineStyle: {
-                color: "#E2E8EC",
-              },
-            },
-            axisTick: {
-              show: false, //不显示刻度
-            },
-            boundaryGap: true,
-            splitLine: {
-              show: false,
-              width: 0.08,
-              lineStyle: {
-                type: "solid",
-                color: "#03202E",
-              },
+        yAxis: {
+          type: "value",
+          name: "(mm)",
+          nameTextStyle: {
+            color: "#ffffff",
+            padding: [0, 30, -7, 0]
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "#112039", //左侧显示线
             },
           },
-        ],
-        yAxis: [
-          {
-            splitLine: {
+          axisLine: {
               show: true,
               lineStyle: {
-                color: "#E2E8EC",
-                type: "dashed",
+                color: "#193e69",
               },
             },
             axisTick: {
               show: false,
             },
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: "#E2E8EC",
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: "#38455D",
-                fontSize: 12,
-              },
-            },
+          axisLabel: {
+            formatter: "{value}",
+            color: "#fff",
+            fontSize: 14,
           },
-        ],
+        },
         series: [
           {
-            //柱底圆片
-            name: "",
             type: "pictorialBar",
-            symbolSize: [0, 10], //调整截面形状
-            symbolOffset: [0, 10],
-            z: 12,
-            itemStyle: {
-              normal: {
-                color: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "#02D6EA",
-                    },
-                    {
-                      offset: 1,
-                      color: "#02D6EA",
-                    },
-                  ],
-                  false
-                ),
-              },
-            },
-            data: ["50", "75", "105", "130"],
-          },
-
-          //柱体
-          {
-            name: "",
-            type: "bar",
-            barWidth: 30,
-            barGap: "0%",
-            itemStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  type: "linear",
-                  global: false,
-                  colorStops: [
-                    {
-                      //第一节下面
-                      offset: 0,
-                      color: "#057DFE",
-                    },
-                    {
-                      offset: 1,
-                      color: "#02D7EA",
-                    },
-                  ],
-                },
-              },
-            },
-
-            data: ["50", "75", "105", "130"],
-          },
-
-          //柱顶圆片
-          {
-            name: "",
-            type: "pictorialBar",
-            symbolSize: [30, 20], //调整截面形状
-            symbolOffset: [0, -10],
-            z: 12,
+            symbolSize: [25, 8],
+            symbolOffset: [-16, -4],
             symbolPosition: "end",
+            z: 12,
+            color: "#e7b20a",
+            data: zzx1,
+          },
+          //1底
+          {
+            type: "pictorialBar",
+            symbolSize: [25, 8],
+            symbolOffset: [-16, 4],
+            z: 12,
+            color: "#816819",
+            data: zzx1,
+          },
+          //2头部
+          {
+            type: "pictorialBar",
+            symbolSize: [25, 8],
+            symbolOffset: [15,0],
+            symbolPosition: "end",
+            z: 12,
+            color: "#1397a0",
+            data: wgx1,
+          },
+          //2底部
+          {
+            name: "",
+            type: "pictorialBar",
+            symbolSize: [25, 8],
+            symbolOffset: [16, 4],
+            color: "#155c69",
+            z: 12,
+            data: wgx1,
+          },
+          //2柱体
+          {
+            name: "垂直位移",
+            type: "bar",
+            barWidth: "25",
             itemStyle: {
               normal: {
-                color: new echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "#50A7FF",
-                    },
-                    {
-                      offset: 1,
-                      color: "#02D6EA",
-                    },
-                  ],
-                  false
-                ),
+                opacity: 1,
+                color: "#816819",
+                barBorderRadius: 0,
               },
             },
-            data: ["50", "75", "105", "130"],
+            label: {
+              show: false,
+            },
+            data: zzx1,
+          },
+          //2柱体
+          {
+            name: "水平位移",
+            type: "bar",
+            barWidth: "27",
+            itemStyle: {
+              normal: {
+                color: "#155c69",
+                barBorderRadius: 0,
+              },
+            },
+            label: {
+              show: false,
+            },
+            data: wgx1,
           },
         ],
       };
@@ -206,3 +163,10 @@ export default {
   },
 };
 </script>
+<style  lang="scss" scoped>
+#deformation {
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+}
+</style>

@@ -9,7 +9,7 @@
         />
       </el-col>
       <el-col :span="15" class="rain" style="color: #fff"
-        ><div style="font-size:32px;">18</div>
+        ><div style="font-size: 32px">18</div>
         <div class="rain_p">
           <div>℃</div>
           小雨
@@ -21,16 +21,16 @@
         ></el-col
       >
     </el-row>
-    <div
-      id="weather"
-      style="width: 270px; height: 140px; overflow: hidden"
-    ></div>
+    <div id="weather"></div>
   </div>
 </template>
 <script>
 export default {
   mounted() {
     this.myecharts();
+    window.addEventListener("resize", function () {
+      myecharts.resize();
+    });
   },
   methods: {
     myecharts() {
@@ -69,7 +69,7 @@ export default {
               formatter: ["{a|{value}}"].join("\n"),
               rich: {
                 a: {
-                  // color: 'white',
+                  color: "white",
                   fontSize: 14,
                 },
               },
@@ -132,9 +132,10 @@ export default {
                   width: 20,
                 },
                 b: {
-                  // color: 'white',
+                  color: "white",
                   fontSize: 12,
                   lineHeight: 30,
+                  width: 80,
                   height: 20,
                 },
               },
@@ -144,7 +145,7 @@ export default {
               fontSize: 14,
             },
             // data: this.weatherdata.weather
-            data: ["20/12℃", "27/14℃", "27/14℃", "27/14℃"],
+            data: ["20/12℃", "27/14℃", "27/18℃", "27/22℃"],
           },
         ],
         yAxis: {
@@ -163,6 +164,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#weather {
+  width: 90%;
+  height: 140px;
+  overflow: hidden;
+}
 #weather_box {
   width: 90%;
   margin: 0 auto;
@@ -181,7 +187,7 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.rain_p{
+.rain_p {
   display: flex;
   flex-direction: column;
   font-size: 10px;
