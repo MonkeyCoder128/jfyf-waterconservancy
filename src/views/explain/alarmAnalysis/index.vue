@@ -1,55 +1,63 @@
 <template>
-  <div class="messagePage">
+  <div class="alarmAnalysisPage">
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
         <div class="InfoTime">
-          <span style="margin-right: 10px">日期</span>
-          <el-date-picker
-            size="small"
-            v-model="searchTime"
-            type="daterange"
-            range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            value-format="yyyy-MM-dd 00:00:00"
-            @input="handleDate"
-          >
-          </el-date-picker>
-        </div>
-        <div class="InfoTime">
-          <span style="margin: 0 10px 0 30px">消息类型</span>
-          <el-select
-            @change="changeType"
-            v-model="queryParams.type"
-            size="small"
-            placeholder="请选择消息类型"
-          >
-            <el-option
-              v-for="item in optionsType"
-              :key="item.key"
-              :label="item.value"
-              :value="item.key"
+          <div class="InfoTime">
+            <span style="margin-right: 10px">设备</span>
+            <el-select
+              @change="changeType"
+              v-model="queryParams.type"
+              size="small"
+              placeholder="请选择消息类型"
             >
-            </el-option>
-          </el-select>
+              <el-option
+                v-for="item in optionsType"
+                :key="item.key"
+                :label="item.value"
+                :value="item.key"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <div class="InfoTime">
+            <span style="margin: 0 10px 0 30px">时间</span>
+            <el-date-picker
+              size="small"
+              v-model="searchTime"
+              type="daterange"
+              range-separator="-"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              value-format="yyyy-MM-dd 00:00:00"
+              @input="handleDate"
+            >
+            </el-date-picker>
+          </div>
+          <el-button
+            style="margin-left: 15px"
+            @click="querySearch()"
+            size="small"
+            type="primary"
+            >查询</el-button
+          >
+          <el-button style="margin-left: 15px" @click="resetTab()" size="small"
+            >重置</el-button
+          >
         </div>
-        <el-button
-          style="margin-left: 15px"
-          type="primary"
-          @click="resetTab()"
-          size="small"
-          >重置</el-button
-        >
+        <el-button style="float: right" @click="exportTable()" size="small"
+          >表格导出
+        </el-button>
       </div>
-      <el-table :data="newsData" style="width: 100%"
-          :header-cell-style="{ background: '#EEEEEE' }">
-        <el-table-column prop="content" label="消息内容" />
-        <el-table-column prop="type" label="消息类型">
-          <template slot-scope="scope">
-            {{ scope.row.type === "0" ? "异常状态预警" : "申请解除异常状态" }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="createTime" label="消息时间" />
+      <el-table
+        :data="newsData"
+        style="width: 100%"
+        :header-cell-style="{ background: '#EEEEEE' }"
+      >
+        <el-table-column prop="content" label="序号" />
+        <el-table-column prop="createTime" label="监测点位" />
+        <el-table-column prop="createTime" label="上报时间" />
+        <el-table-column prop="type" label="上报数据" />
       </el-table>
       <el-pagination
         style="margin-top: 25px; text-align: center"
@@ -69,7 +77,7 @@
 <script>
 import { newsList, newsType } from "@/api/news";
 export default {
-  name: "MessageManage",
+  name: "alarmAnalysis",
   data() {
     return {
       queryParams: {
@@ -103,6 +111,12 @@ export default {
         "color:red;font-size:18px;font-weight:bold;",
         val
       );
+    },
+    querySearch() {
+      console.log("%c查询：", "color:red;font-size:18px;font-weight:bold;");
+    },
+    exportTable() {
+      console.log("%c导出：", "color:red;font-size:18px;font-weight:bold;");
     },
     /** 重置 */
     resetTab() {
@@ -150,7 +164,7 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-.messagePage {
+.alarmAnalysisPage {
   .el-card {
     height: 93vh;
   }
@@ -158,6 +172,7 @@ export default {
   .InfoBar {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
     .InfoTime {
       display: flex;

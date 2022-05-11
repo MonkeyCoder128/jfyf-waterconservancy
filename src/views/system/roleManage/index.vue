@@ -17,7 +17,8 @@
         >
         </el-input>
       </div>
-      <el-table :data="roleData" style="width: 100%" border>
+      <el-table :data="roleData" style="width: 100%"
+          :header-cell-style="{ background: '#EEEEEE' }">
         <el-table-column prop="roleName" label="角色名称" />
         <el-table-column prop="roleMsg" label="角色描述" />
         <el-table-column prop="createDate" label="注册时间" />
