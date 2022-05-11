@@ -3,8 +3,18 @@
     <el-col :span="24">
       <div class="home_bg">
         <el-row type="flex" class="nav" justify="end">
+          <p class="time">{{ nowTime }}</p>
           <p class="p_nav">智慧水坝管理平台</p>
-          <el-col :span="1"
+          <div class="login" @click="Login">
+            <img
+              src="../../assets/image/xitong.png"
+              alt=""
+              width="20"
+              height="20"
+            />
+            <p style="padding-left: 10px">进入系统</p>
+          </div>
+          <!-- <el-col :span="1"
             ><el-dropdown trigger="click">
               <el-button type="text"
                 ><i class="el-icon-s-custom"></i>
@@ -18,7 +28,7 @@
                 >
               </el-dropdown-menu>
             </el-dropdown></el-col
-          >
+          > -->
         </el-row>
 
         <el-row type="flex" class="row-bg" justify="space-between">
@@ -78,8 +88,21 @@
             </div>
           </el-col>
           <el-col :span="11" class="screen_cont"
-            ><div class="box_cont box_cont_top"><img src="../../assets/image/3d.png" class="threed"  alt=""
-                  /></div>
+            ><div class="box_cont box_cont_top">
+              <!-- <div>
+                <iframe
+                  name="iframeMap"
+                  id="iframeMapViewComponent"
+                  width="100%"
+                  height="470px"
+                  v-bind:src="smgHtmlPath"
+                  frameborder="0"
+                  scrolling="no"
+                  ref="iframeDom"
+                ></iframe>
+              </div> -->
+              <img src="../../assets/image/3d.png" class="threed" alt="" />
+            </div>
             <div class="box_cont">
               <div class="box_nav box_nav1">
                 <el-row :gutter="19">
@@ -95,26 +118,53 @@
                   /></el-col>
                 </el-row>
                 <el-row :gutter="20">
-                  <el-col :span="6"><div class="bg-purple">库前水位<div class="num">1344m³</div></div></el-col>
-                  <el-col :span="6"><div class="bg-purple">库存<div class="num">1256m³</div></div></el-col>
-                  <el-col :span="6"><div class="bg-purple">出库<div class="num">6587m³</div></div></el-col>
-                  <el-col :span="6"><div class="bg-purple">入库<div class="num">5687m³</div></div></el-col>
+                  <el-col :span="6"
+                    ><div class="bg-purple">
+                      库前水位
+                      <div class="num">1344m³</div>
+                    </div></el-col
+                  >
+                  <el-col :span="6"
+                    ><div class="bg-purple">
+                      库存
+                      <div class="num">1256m³</div>
+                    </div></el-col
+                  >
+                  <el-col :span="6"
+                    ><div class="bg-purple">
+                      出库
+                      <div class="num">6587m³</div>
+                    </div></el-col
+                  >
+                  <el-col :span="6"
+                    ><div class="bg-purple">
+                      入库
+                      <div class="num">5687m³</div>
+                    </div></el-col
+                  >
                 </el-row>
               </div>
             </div>
             <div class="box_cont">
-              <div class="box_nav box_nav1">
-                <el-row :gutter="20">
+              <div class="box_nav2">
+                <el-row :gutter="20" class="box_daba">
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">大坝巡查</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
+                  <el-col :span="10" class="p_xj"
+                    ><dam /><span>已巡检175</span></el-col
+                  >
+                  <el-col :span="10" class="p_xj" style="margin-left:10px;"
+                    ><dam2 /><span>已维修100</span></el-col
+                  >
+                </el-row>
+                <el-row :gutter="20" class="box_daba">
+                  <el-col :span="1" class="title1"
+                    ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
+                  <el-col :span="19">设备巡查统计</el-col>
+                  <patrol />
                 </el-row>
               </div></div
           ></el-col>
@@ -201,6 +251,9 @@ import weather from "./components/weather.vue";
 import broken from "./components/broken.vue";
 import pressure from "./components/pressure.vue";
 import flow from "./components/flow.vue";
+import patrol from "./components/patrol.vue";
+import dam from "./components/dam.vue";
+import dam2 from "./components/dam2.vue";
 export default {
   components: {
     outbox,
@@ -210,12 +263,92 @@ export default {
     broken,
     pressure,
     flow,
+    patrol,
+    dam,
+    dam2,
   },
   data() {
-    return {};
+    return {
+      nowTime: "",
+      //smgHtmlPath:'www.cctv202.com'
+    };
   },
   created() {},
+  // mounted() {
+  //   this.iframeWin = this.$refs.iframeDom.contentWindow;
+  // },
+  mounted() {
+    this.nowTimes();
+  },
   methods: {
+    timeFormate(timeStamp) {
+      let year = new Date(timeStamp).getFullYear();
+      let month =
+        new Date(timeStamp).getMonth() + 1 < 10
+          ? "0" + (new Date(timeStamp).getMonth() + 1)
+          : new Date(timeStamp).getMonth() + 1;
+      let date =
+        new Date(timeStamp).getDate() < 10
+          ? "0" + new Date(timeStamp).getDate()
+          : new Date(timeStamp).getDate();
+      let hh =
+        new Date(timeStamp).getHours() < 10
+          ? "0" + new Date(timeStamp).getHours()
+          : new Date(timeStamp).getHours();
+      let mm =
+        new Date(timeStamp).getMinutes() < 10
+          ? "0" + new Date(timeStamp).getMinutes()
+          : new Date(timeStamp).getMinutes();
+      let ss =
+        new Date(timeStamp).getSeconds() < 10
+          ? "0" + new Date(timeStamp).getSeconds()
+          : new Date(timeStamp).getSeconds();
+      var d = new Date(timeStamp).getDay();
+      let day;
+      if (d == 0) {
+        day = "日";
+      } else if (d == 1) {
+        day = "一";
+      } else if (d == 2) {
+        day = "二";
+      } else if (d == 3) {
+        day = "三";
+      } else if (d == 4) {
+        day = "四";
+      } else if (d == 5) {
+        day = "五";
+      } else if (d == 6) {
+        day = "六";
+      }
+      this.nowTime =
+        year +
+        "年" +
+        month +
+        "月" +
+        date +
+        "日" +
+        "\xa0" +
+        "\xa0" +
+        "星期" +
+        day +
+        "\xa0" +
+        "\xa0" +
+        hh +
+        ":" +
+        mm +
+        ":" +
+        ss +
+        "   ";
+    },
+    nowTimes() {
+      this.timeFormate(new Date());
+      setInterval(this.nowTimes, 1000);
+      this.clear();
+    },
+    clear() {
+      clearInterval(this.nowTimes);
+      this.nowTimes = null;
+    },
     Login() {
       this.$router.push({ path: "/realtimeMnitor" });
     },
@@ -243,6 +376,33 @@ export default {
   position: absolute;
   z-index: 9999;
 }
+.time {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  font-size: 18px;
+  font-family: PingFang SC;
+  font-weight: 380;
+  color: #4496e1;
+  line-height: 54px;
+}
+.login {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 18px;
+  right: 30px;
+  font-size: 16px;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #2e89e0;
+  line-height: 22px;
+  justify-content: center;
+  align-items: center;
+}
+.login :hover {
+  cursor: pointer;
+}
 .el-icon-s-custom {
   font-size: 30px;
 }
@@ -252,15 +412,13 @@ export default {
 }
 .p_nav {
   width: 100%;
+  font-size: 30px;
   text-align: center;
-  font-size: 31px;
-  line-height: 72px;
-  background: linear-gradient(#96f6fa, #4cabb0, #214f51);
-  -webkit-background-clip: text;
-  color: transparent;
+  font-family: PingFang SC;
   font-weight: bold;
-  letter-spacing: 23px;
-  margin-left: 105px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 81px;
+  text-shadow: 0px 10px 10px rgba(33, 38, 54, 0.75);
 }
 .screen_left,
 .screen_cont,
@@ -283,10 +441,10 @@ export default {
   height: 21.1vh;
 }
 .box_cont {
-  height: 20.5vh;
+  height: 21.1vh;
 }
 .box_cont_top {
-  height: 44.5vh;
+  height: 43.5vh;
   background: none;
 }
 .box_nav,
@@ -296,14 +454,27 @@ export default {
   color: #2e89e0;
   line-height: 29px;
   text-shadow: 0 0 10px #2e89e0, 0 0 2px #87e9eb;
-  border-top: solid 1px #142a33;
-  border-bottom: solid 1px #142a33;
+  border-top: solid 1px #111e38;
+  border-bottom: solid 1px #111e38;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
 }
 .box_nav1 {
   width: 95%;
+}
+.box_nav2 {
+  width: 95%;
+  height: 35px;
+  display: flex;
+  flex-direction: row;
+  color: #2e89e0;
+  line-height: 29px;
+  text-shadow: 0 0 10px #2e89e0, 0 0 2px #87e9eb;
+  margin: 0 auto;
+}
+.box_daba {
+  width: 52%;
 }
 .title1 {
   padding-top: 5px;
@@ -342,15 +513,31 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 15px;
+  box-shadow: 0px 0px 10px #3885e5 inset;
 }
-.num{
+.num {
   color: #fff;
   font-size: 24px;
 }
-.threed{
-  margin:4% auto 0;
+.threed {
+  margin: 4% auto 0;
   width: 594px;
   height: 356px;
   display: block;
+}
+.box_dam {
+  display: flex;
+  flex-direction: row;
+}
+.p_xj {
+  position: relative;
+}
+.p_xj span {
+  position: absolute;
+  bottom: 10%;
+  left: 44%;
+  color: #fff;
+  text-shadow:none !important;
+  font-size: 12px;
 }
 </style>

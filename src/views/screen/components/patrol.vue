@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative">
-    <div id="flow"></div>
+    <div id="patrol"></div>
   </div>
 </template>
 <script>
@@ -11,7 +11,7 @@ export default {
   methods: {
     myecharts() {
       var echarts = require("echarts");
-      var flow = this.$echarts.init(document.getElementById("flow"));
+      var patrol = this.$echarts.init(document.getElementById("patrol"));
       var option = {
         grid: {
           top: "15%",
@@ -23,7 +23,7 @@ export default {
           show: false,
         },
         xAxis: {
-          data: ["11.50", "12.00", "12.10", "12.20", "12.30", "12.40", "12.50"],
+          data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
           axisLine: {
             show: true,
             lineStyle: {
@@ -43,7 +43,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "(mm)",
+            name: "(次)",
             nameTextStyle: {
               color: "#ffffff",
               padding: [0, 30, -7, 0]
@@ -59,7 +59,7 @@ export default {
             splitLine: {
               show: true,
               lineStyle: {
-                color: "#11223b", //网格线的颜色
+                color: "rgba(255,255,255,0.2)", //网格线的颜色
                 width: 1,
                 type: "solid",
               },
@@ -67,7 +67,7 @@ export default {
             axisLine: {
               show: true,
               lineStyle: {
-                color: "#397cbc", //底部边框颜色
+                color: "397cbc", //底部边框颜色
               },
             },
             axisTick: {
@@ -106,7 +106,7 @@ export default {
                 ]),
               },
             },
-            data: [20, 80, 20, 40, 34, 30, 20],
+            data: [30, 60, 56, 45, 21, 60, 46],
             z: 0,
             zlevel: 0,
             // label: {
@@ -134,7 +134,7 @@ export default {
             symbolSize: [20, 1],
             symbolPosition: "end",
             symbolOffset: [0, 0],
-            data: [20, 80, 20, 40, 34, 30, 20],
+            data: [30, 60, 56, 45, 21, 60, 46],
             z: 1,
             zlevel: 0,
           },
@@ -149,11 +149,11 @@ export default {
             // symbolRepeat: 'fixed',
             symbolMargin: 3,
             symbol: "rect",
-            symbolSize: [20, 8],
+            symbolSize: [30, 4],
 
             // symbolPosition: 'start',
             // symbolOffset: [0, 0],
-            data: [20, 80, 20, 40, 34, 30, 20],
+            data: [30, 60, 56, 45, 21, 60, 46],
             z: 1,
             zlevel: 0,
             label: {
@@ -168,16 +168,15 @@ export default {
           },
         ],
       };
-
-      flow.setOption(option);
+      patrol.setOption(option);
     },
   },
 };
 </script>
 <style  lang="scss" scoped>
-#flow {
+#patrol {
   width: 95%;
   height: 140px;
-  margin: 0 auto;
+  margin: 35px auto 0;
 }
 </style>

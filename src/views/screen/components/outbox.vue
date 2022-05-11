@@ -62,7 +62,7 @@ export default {
     scroll() {
       //建一个方法
       let con1 = this.$refs.con1;
-      con1.style.marginTop = "-30px"; //设置style样式 向上移动30px
+      //con1.style.marginTop = "-30px"; //设置style样式 向上移动30px
       this.animate = !this.animate; //
       var that = this; // 在异步函数中会出现this的偏移问题，此处一定要先保存好this的指向
       setTimeout(function () {
