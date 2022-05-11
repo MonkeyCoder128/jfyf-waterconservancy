@@ -153,7 +153,7 @@ import test from './components/test.vue';
       min-height: calc(100% - 430px);
     }
     .cardBottom {
-      min-height: 790px;
+      min-height: 870px;
     }
     .charts {
       height: 730px;
