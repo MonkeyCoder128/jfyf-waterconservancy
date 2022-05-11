@@ -128,6 +128,53 @@ import brokenLineCharts from './components/brokenLineChart.vue';
 </script>
 
 <style lang="scss" scoped>
+  @media screen and (min-width: 2000px) and (max-width: 3840px) {
+    .echartsBox {
+      height: 360px;
+    }
+    .chartDataBox {
+      height: 360px;
+    }
+    .cardMenu {
+      min-height: 430px;
+      .echartsBoxContent {
+        height: 360px;
+      }
+      .echartsBox {
+        height: 360px;
+      }
+    }
+    .bottomBox {
+      min-height: calc(100% - 430px);
+    }
+    .cardBottom {
+      min-height: 790px;
+    }
+    .charts {
+      height: 730px;
+    }
+  }
+
+  @media screen and (min-width: 960px) and (max-width: 1920px) {
+    .echartsBox {
+      height: 200px;
+    }
+    .chartDataBox {
+      height: 200px;
+    }
+    .cardMenu {
+      min-height: 260px;
+      .echartsBoxContent {
+        height: 200px;
+      }
+    }
+    .cardBottom {
+      height: 600px;
+    }
+    .charts {
+      height: 560px;
+    }
+  }
   .waterStagePage {
     .cardTitle {
       font-size: 16px;
