@@ -17,7 +17,11 @@
         >
         </el-input>
       </div>
-      <el-table :data="userData" style="width: 100%" border>
+      <el-table
+        :data="userData"
+        style="width: 100%"
+        :header-cell-style="{ background: '#EEEEEE' }"
+      >
         <el-table-column prop="name" label="用户名称" />
         <el-table-column prop="roleName" label="角色" />
         <el-table-column prop="username" label="用户账号" />
@@ -68,11 +72,7 @@
 </template>
  
 <script>
-import {
-  userList,
-  deleteUserGet,
-  updateUserState,
-} from "@/api/user";
+import { userList, deleteUserGet, updateUserState } from "@/api/user";
 export default {
   name: "UserManage",
   data() {

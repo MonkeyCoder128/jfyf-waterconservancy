@@ -90,6 +90,13 @@ const constantRoutes = [
         component: () => import('@/views/explain/deformation/index'),
         meta: { title: '形变位移', icon: 'user' }
       },
+      {
+        path: '/explain/alarmAnalysis',
+        name: 'alarmAnalysis',
+        hidden: true,
+        component: () => import('@/views/explain/alarmAnalysis/index'),
+        meta: { title: '预警分析', icon: 'user' }
+      },
       
     ]
   },

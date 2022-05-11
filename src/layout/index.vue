@@ -149,6 +149,11 @@ export default {
               title: "形变位移",
               path: "/explain/deformation",
             },
+            // {
+            //   title: "预警分析",
+            //   path: "/explain/alarmAnalysis",
+            // },
+            
             
           ],
         },
