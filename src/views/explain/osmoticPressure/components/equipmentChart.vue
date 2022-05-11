@@ -17,7 +17,8 @@
         );
         var option = {
           backgroundColor: '',
-          series: [{
+          series: [
+            {
               name: '刻度',
               type: 'gauge',
               radius: '100%', //图表尺寸
@@ -47,7 +48,7 @@
                 splitNumber: 8
               },
               splitLine: {
-                show: true,
+                show: false,
                 length: -8,
                 lineStyle: {
                   color: 'auto',
@@ -61,13 +62,13 @@
                 show: false,
               },
               detail: {
-                offsetCenter: [0, '50%'], // x, y，单位px
+                offsetCenter: [0, '70%'], // x, y，单位px
                 textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                   color: '#000',
                   fontSize: 12,
                 },
                 // formatter: '水位mm：{value}'
-                formatter: '水位mm'
+                formatter: '库压渗压Mpa'
               },
               title: {
                 show: true,
@@ -81,6 +82,48 @@
                 name: "",
                 value: 11
               }]
+            },
+            {
+              name: "刻度",
+              type: "gauge",
+              radius: "101%", //图表尺寸
+              center: ["50%", "57.5%"],
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  width: 0,
+                  shadowBlur: 10,
+                  color: [
+                    [0.00, '#53c3ff'],
+                    [0.20, '#469dff'],
+                    [0.40, '#3d7fff'],
+                    [0.60, '#57d2ff'],
+                    [0.80, '#66ffff'],
+                    [1, '#66ffff']
+                  ]
+                },
+              },
+              axisTick: {
+                show: false,
+              },
+              splitLine: {
+                show: true,
+                length: -8,
+                lineStyle: {
+                  color: "auto",
+                  width: 2,
+                },
+              },
+              axisLabel: {
+                show: false,
+              },
+              pointer: {
+                //仪表盘指针
+                show: false,
+              },
+              detail: {
+                show: false,
+              },
             },
             {
               type: 'gauge',

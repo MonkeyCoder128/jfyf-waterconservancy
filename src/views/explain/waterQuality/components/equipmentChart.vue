@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
     <div ref="equipmentChart" id="equipmentChart"></div>
-    <img src="../../../../assets/image/juxing.png" alt="" class="juxing" />
+    <!-- <img src="../../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
 </template>
 <script>
@@ -19,85 +19,105 @@ export default {
       var equipmentChart = this.$echarts.init(
         this.$refs.equipmentChart
       );
+      var dataCake = [
+        { name: "二氧化碳", percentage: "43.67%" },
+        { name: "氢含量", percentage: "29.26%" },
+        { name: "氧含量", percentage: "27.07%" },
+        { name: "氮含量", percentage: "29.26%" },
+        { name: "氦含量", percentage: "27.07%" },
+      ];
       var option = {
         tooltip: {
           trigger: "item",
+          formatter: "{b}: {c} ({d}%)",
         },
         legend: {
-          type: "scroll",
-          orient: "vertical",
-          top: "center",
-          right: 40,
-          itemHeight: 17,
-          itemWidth: 17,
+          orient: "rect",
+          left: "50%", //图例距离左的距离
+          top: "15%",
+          itemGap: 15,
+          itemHeight: 10,
+          itemWidth: 10,
           textStyle: {
-            color: "black",
-            padding: [10, 10],
-            fontSize: 12,
+            fontSize: 14, //字体大小
+          },
+          formatter: function (name) {
+            let target, percentage;
+            for (let i = 0; i < dataCake.length; i++) {
+              if (dataCake[i].name === name) {
+                target = dataCake[i].value;
+                percentage = dataCake[i].percentage;
+              }
+            }
+            let arr = [name + " ", " " + percentage];
+            return arr.join(" ");
           },
         },
+        color: ["#EA951C", "#3F85FF", "#F3B63E", "#37ABC1", "#32DFDF"],
         series: [
           {
-            //name: "Access From",
+            name: "内置圆",
             type: "pie",
-            radius: ["52%", "65%"],
-            center: ["35%", "55%"],
-            avoidLabelOverlap: false,
-            itemStyle: {
-              borderRadius: 0,
-              borderColor: "#fff",
-              borderWidth: 3,
+            center: ["30%", "50%"],
+            radius: ["35%", "45%"], // 这个属性修改圆环宽度
+            silent: true,
+            labelLine: {
+              show: false,
             },
             label: {
               show: false,
-              position: "center",
             },
-
-            color: ["#ea951c", "#3f85ff", "#f3b63e", "#37abc1", "#32dfdf"],
-            labelLine: {
-              show: false,
+            itemStyle: {
+              color: "#F8C202",
+              borderWidth: 3,
+              borderColor: "#fff",
             },
             data: [
-              { value: 2.5, name: "二氧化碳",
-                formatter:function(value){
-                  return  value + '%'
-                }
-              },
-              { value: 3, name: "氢含量" },
-              { value: 2.5, name: "氦含量" },
-              { value: 3, name: "氧含量" },
-              { value: 4, name: "氮含量" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
             ],
+          },
+          {
+            name: "饼图数据",
+            type: "pie",
+            center: ["30%", "50%"],
+            radius: ["55%", "70%"],
+            silent: true,
+            itemStyle: {
+              borderWidth: 3,
+              borderColor: "#fff",
+            },
             labelLine: {
-              normal: {
-                show: false,
-              },
+              show: false,
             },
             label: {
-              position: "outer",
-              show: true,
-              itemStyle:{
-                color:(params)=> {
-                  var index = params.dataIndex;
-                  return this.colorList[index];
+              formatter: "{a|{c}mol/L}{abg|}\n{hr|}\n ",
+              borderWidth: 1,
+              borderRadius: 4,
+              rich: {
+                a: {
+                  color: "inherit", //设置外层标识字体颜色与饼图颜色一致
+                  lineHeight: 22,
+                  align: "center",
+                },
+                hr: {
+                  borderColor: "#EEEEEE",
+                  width: "100%",
+                  borderWidth: 1,
+                  height: 0,
                 },
               },
-              color:(params)=> {
-                var index = params.dataIndex;
-                return this.colorList[index];
-              },
-              fontSize: 10,
-              padding: [20, -20],
-              formatter: ["{c}" + "mol/L"].join("\n"),
             },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: "16",
-                fontWeight: "bold",
-                color:["#ea951c", "#3f85ff", "#f3b63e", "#37abc1", "#32dfdf"],
-              },
-            },
+
+            data: [
+              { value: 500, name: "二氧化碳" },
+              { value: 335, name: "氢含量" },
+              { value: 310, name: "氧含量" },
+              { value: 335, name: "氮含量" },
+              { value: 310, name: "氦含量" },
+            ],
           },
         ],
       };
@@ -115,8 +135,8 @@ export default {
   height: 75px;
 }
 #equipmentChart{
-  width: 400px;
-  height: 160px;
+  width: 500px;
+  height: 170px;
   margin-top: 0px;
 }
 </style>  

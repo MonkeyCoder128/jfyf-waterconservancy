@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative">
     <div ref="warningCharts" id="warningCharts"></div>
-    <img src="../../../../assets/image/juxing.png" alt="" class="juxing" />
+    <!-- <img src="../../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
 </template>
 <script>
@@ -27,7 +27,31 @@ export default {
         },
         series: [
           {
-            name: "Access From",
+            name: "内置圆",
+            type: "pie",
+            center: ["50%", "50%"],
+            radius: ["50%", "59%"], // 这个属性修改圆环宽度
+            silent: true,
+            labelLine: {
+              show: false,
+            },
+            label: {
+              show: false,
+            },
+            itemStyle: {
+              color: "#F8C202",
+              borderWidth: 4,
+              borderColor: "#fff",
+            },
+            data: [
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+            ],
+          },
+          {
+            name: "外层圆",
             type: "pie",
             radius: ["65%", "80%"],
             avoidLabelOverlap: false,
@@ -76,11 +100,11 @@ export default {
   height: 170px;
   margin-top: 0px;
 }
-.juxing {
-  position: absolute;
-  top: 35px;
-  left: 36px;
-  width: 99px;
-  height: 99px;
-}
+// .juxing {
+//   position: absolute;
+//   top: 35px;
+//   left: 36px;
+//   width: 99px;
+//   height: 99px;
+// }
 </style>

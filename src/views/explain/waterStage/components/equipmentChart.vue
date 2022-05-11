@@ -22,7 +22,7 @@
               name: '刻度',
               type: 'gauge',
               radius: '100%', //图表尺寸
-              center: ['50%', '55%'],
+              center: ['50%', '55.5%'],
               axisLine: {
                 show: true,
                 lineStyle: {
@@ -65,11 +65,11 @@
                   width: 2
                 },
                 length: -2,
-                splitNumber: 8
+                splitNumber: 7
               },
               //刻度样式
               splitLine: {
-                show: true,
+                show: false,
                 length: -8,
                 lineStyle: {
                   color: 'auto',
@@ -84,8 +84,8 @@
                 show: false,
               },
               detail: {
-                show: false,
-                offsetCenter: [0, '50%'], // x, y，单位px
+                show: true,
+                offsetCenter: [0, '70%'], // x, y，单位px
                 textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                   color: '#000',
                   fontSize: 12,
@@ -107,16 +107,70 @@
               }]
             },
             {
+              name: "刻度",
+              type: "gauge",
+              radius: "101%", //图表尺寸
+              center: ["50%", "57.5%"],
+              axisLine: {
+                show: true,
+                lineStyle: {
+                  width: 0,
+                  shadowBlur: 10,
+                  color: [
+                    [0.15, "#66b6aa"],
+                    [0.2, "#3babbf"],
+                    [0.25, "#21a6cb"],
+                    [0.3, "#2ca8c6"],
+                    [0.35, "#22a6ca"],
+                    [0.4, "#47afb9"],
+                    [0.45, "#74baa5"],
+                    [0.5, "#87be9b"],
+                    [0.55, "#98c294"],
+                    [0.6, "#cecf7b"],
+                    [0.65, "#dfd373"],
+                    [0.7, "#f2d86a"],
+                    [0.75, "#f7c34c"],
+                    [0.8, "#fcd45e"],
+                    [0.85, "#eb9920"],
+                    [0.9, "#efa730"],
+                    [0.95, "#ea951c"],
+                    [1, "#ea951c"],
+                  ],
+                },
+              },
+              axisTick: {
+                show: false,
+              },
+              splitLine: {
+                show: true,
+                length: -8,
+                lineStyle: {
+                  color: "auto",
+                  width: 2,
+                },
+              },
+              axisLabel: {
+                show: false,
+              },
+              pointer: {
+                //仪表盘指针
+                show: false,
+              },
+              detail: {
+                show: false,
+              },
+            },
+            {
               type: 'gauge',
-              radius: '80%',
-              center: ['50%', '55%'],
+              radius: '79%',
+              center: ['50%', '56%'],
               splitNumber: 0, //刻度数量
               startAngle: 225,
               endAngle: -45,
               progress: {
                 show: true,
                 roundCap: true,
-                width: 10, //显示的环形的宽度
+                width: 12, //显示的环形的宽度
               },
               itemStyle:{//渐变颜色
                 color:new echarts.graphic.LinearGradient(0, 0, 1, 0, [
