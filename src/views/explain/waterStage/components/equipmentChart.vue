@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <div ref="equipmentChart" id="equipmentChart"></div>
   </div>
 </template>
@@ -7,6 +7,9 @@
   export default {
     mounted() {
       this.getLoadEcharts();
+      window.addEventListener("resize", function () {
+        getLoadEcharts.resize();
+      });
     },
     methods: {
       // 获取echarts
@@ -16,6 +19,14 @@
           this.$refs.equipmentChart,
         );
         var option = {
+          // 给echarts设置百分比自适应
+          grid: {
+            left: "5%",
+            right: "5%",
+            top: "20%",
+            bottom: "20%",
+            containLabel: true,
+          },
           backgroundColor: '',
           series: [
             {
@@ -84,7 +95,7 @@
                 show: false,
               },
               detail: {
-                show: true,
+                show: false,
                 offsetCenter: [0, '70%'], // x, y，单位px
                 textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
                   color: '#000',
@@ -93,18 +104,6 @@
                 // formatter: '水位mm：{value}'
                 formatter: '水位mm'
               },
-              title: {
-                show: false,
-                offsetCenter: [0, '70%'], // x, y，单位px
-                textStyle: {
-                  color: '#29669B',
-                  fontSize: 14
-                }
-              },
-              data: [{
-                name: "",
-                value: 11
-              }]
             },
             {
               name: "刻度",
@@ -163,14 +162,16 @@
             {
               type: 'gauge',
               radius: '79%',
+              min: 0,
+              max: 100,
               center: ['50%', '56%'],
-              splitNumber: 0, //刻度数量
+              splitNumber: 1, //刻度数量
               startAngle: 225,
               endAngle: -45,
               progress: {
                 show: true,
                 roundCap: true,
-                width: 12, //显示的环形的宽度
+                width: 10, //显示的环形的宽度
               },
               itemStyle:{//渐变颜色
                 color:new echarts.graphic.LinearGradient(0, 0, 1, 0, [
@@ -210,47 +211,43 @@
                 color: 'black',
                 lineStyle: {
                   width: 10,
+                  color: [[1, "#f9dfbb"]], //刻度线背景色
                 }
               },
               //分隔线样式。
               splitLine: {
                 show: false,
               },
+              //仪表盘刻度显示值
               axisLabel: {
-                show: false
+                show: true,
               },
               //刻度样式
               axisTick: {
-                show: false
+                show: false,
               },
               pointer: {
-                show: false
-              },
-              title: {
-                show: true,
-                offsetCenter: [0, '-30%'], // x, y，单位px
-                textStyle: {
-                  color: '#000',
-                  fontSize: 12
-                }
+                show: false,
               },
               //仪表盘详情，用于显示数据。
               detail: {
-                show: true,
-                roundCap:true,
-                offsetCenter: [0, '16%'],
-                color: '#000',
-                formatter: function (params) {
-                  return params + '%'
-                },
-                textStyle: {
-                  fontSize: 12
-                }
+                width: "60%",
+                borderRadius: 8,
+                offsetCenter: [0, 0],
+                fontSize: 18,
+                formatter: "{value} mm",
+                color: "#EA951C",
               },
-              data: [{
-                name: "正常率",
-                value: 80.61
-              }]
+              title: {
+                offsetCenter: [0, 60],
+                fontSize: 14,
+              },
+              data: [
+                {
+                  value: 80,
+                  name: "水位mm",
+                },
+              ],
             },
           ]
         };
@@ -260,8 +257,13 @@
   };
 </script>
 <style lang="scss" scoped>
+.box{
+  width: 100% !important;
+  height: 100%;
   #equipmentChart {
-    width: 500px;
-    height: 170px;
+    margin: 0 auto;
+    width: 95%;
+    height: 100%;
   }
+}
 </style>

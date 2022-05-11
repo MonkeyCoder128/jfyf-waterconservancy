@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative">
+  <div class="box">
     <div ref="equipmentChart" id="equipmentChart"></div>
     <!-- <img src="../../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
@@ -13,6 +13,9 @@ export default {
   },
   mounted() {
     this.myecharts();
+    window.addEventListener("resize", function () {
+      myecharts.resize();
+    });
   },
   methods: {
     myecharts() {
@@ -31,11 +34,19 @@ export default {
           trigger: "item",
           formatter: "{b}: {c} ({d}%)",
         },
+        // 给echarts设置百分比自适应
+        grid: {
+          left: "5%",
+          right: "5%",
+          top: "20%",
+          bottom: "20%",
+          containLabel: true,
+        },
         legend: {
           orient: "rect",
-          left: "50%", //图例距离左的距离
-          top: "15%",
-          itemGap: 15,
+          right: "5%", //图例距离左的距离
+          top: "5%",
+          itemGap: 13,
           itemHeight: 10,
           itemWidth: 10,
           textStyle: {
@@ -127,16 +138,13 @@ export default {
 };
 </script>
 <style  lang="scss" scoped>
-.juxing {
-  position: absolute;
-  top: 50px;
-  left: 103px;
-  width: 75px;
-  height: 75px;
-}
-#equipmentChart{
-  width: 500px;
-  height: 170px;
-  margin-top: 0px;
+.box{
+  width: 100% !important;
+  height: 100%;
+  #equipmentChart {
+    margin: 0 auto;
+    width: 95%;
+    height: 100%;
+  }
 }
 </style>  

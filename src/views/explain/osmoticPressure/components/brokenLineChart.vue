@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <div ref="brokenLineCharts" id="brokenLineCharts"></div>
   </div>
 </template>
@@ -7,6 +7,9 @@
   export default {
     mounted() {
       this.myCharts();
+      window.addEventListener("resize", function () {
+        myCharts.resize();
+      });
     },
     methods: {
       myCharts() {
@@ -19,6 +22,14 @@
         let shebeiB = ["15", "45", "35", "30", "35", "20"];
         let shebeiC = ["60", "68", "55", "45", "56", "50"];
         var option = {
+          // 给echarts设置百分比自适应
+          grid: {
+            left: "5%",
+            right: "5%",
+            top: "20%",
+            bottom: "20%",
+            containLabel: true,
+          },
           backgroundColor: '',
           tooltip: {
             trigger: 'axis',
@@ -153,7 +164,7 @@
             data: xLabel
           }],
           yAxis: [{
-            name: 'craig.cao',
+            // name: 'craig.cao',
             nameTextStyle: {
               color: "#666666",
               fontSize: 16,
@@ -367,8 +378,13 @@
   };
 </script>
 <style lang="scss" scoped>
+.box{
+  width: 100% !important;
+  height: 100%;
   #brokenLineCharts {
-    width: 700px;
-    height: 530px;
+    margin: 0 auto;
+    width: 95%;
+    height: 100%;
   }
+}
 </style>
