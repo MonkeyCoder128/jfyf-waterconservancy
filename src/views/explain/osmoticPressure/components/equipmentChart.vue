@@ -229,7 +229,7 @@
                 borderRadius: 8,
                 offsetCenter: [0, 0],
                 fontSize: 18,
-                formatter: "{value} mm",
+                formatter: "{value} Mpa",
                 color: "#49a5ff",
               },
               title: {
