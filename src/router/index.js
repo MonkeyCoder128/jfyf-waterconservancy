@@ -102,22 +102,22 @@ const constantRoutes = [
   },
 
   {
-    path: '/vide',
+    path: '/video',
     component: Layout,
     name: 'vide',
     meta: { title: '视频监控', icon: 'el-icon-user' },
     children: [
       {
-        path: '/vide/realtime',
+        path: '/video/realtime',
         name: 'userindex',
-        component: () => import('@/views/vide/realtime/index'),
+        component: () => import('@/views/video/realtime/index'),
         meta: { title: '实时', icon: 'user' }
       },
       {
-        path: '/vide/playback',
+        path: '/video/playback',
         name: 'playback',
         hidden: true,
-        component: () => import('@/views/vide/playback/index'),
+        component: () => import('@/views/video/playback/index'),
         meta: { title: '回放', icon: 'user' }
       },
     ]
@@ -223,7 +223,7 @@ const constantRoutes = [
 //   routes: constantRoutes
 // })
 const router = new VueRouter({
-  // mode: 'history',
+  mode: 'history',
   base:process.env.BASE_URL,
   routes: constantRoutes,
 })

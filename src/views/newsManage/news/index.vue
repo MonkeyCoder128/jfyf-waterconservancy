@@ -5,13 +5,14 @@
         <div class="InfoTime">
           <span style="margin-right: 10px">日期</span>
           <el-date-picker
-            size="small"
+            size="mini"
             v-model="searchTime"
             type="daterange"
             range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            value-format="yyyy-MM-dd 00:00:00"
+            start-placeholder="开始时间"
+            end-placeholder="结束时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            :default-time="['00:00:00', '23:59:59']"
             @input="handleDate"
           >
           </el-date-picker>
@@ -21,7 +22,7 @@
           <el-select
             @change="changeType"
             v-model="queryParams.type"
-            size="small"
+            size="mini"
             placeholder="请选择消息类型"
           >
             <el-option
@@ -37,12 +38,15 @@
           style="margin-left: 15px"
           type="primary"
           @click="resetTab()"
-          size="small"
+          size="mini"
           >重置</el-button
         >
       </div>
-      <el-table :data="newsData" style="width: 100%"
-          :header-cell-style="{ background: '#EEEEEE' }">
+      <el-table
+        :data="newsData"
+        style="width: 100%"
+        :header-cell-style="{ background: '#EEEEEE' }"
+      >
         <el-table-column prop="content" label="消息内容" />
         <el-table-column prop="type" label="消息类型">
           <template slot-scope="scope">
@@ -52,7 +56,8 @@
         <el-table-column prop="createTime" label="消息时间" />
       </el-table>
       <el-pagination
-        style="margin-top: 25px; text-align: center"
+        background
+        style="margin-top: 25px; text-align: right"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryParams.currentPage"

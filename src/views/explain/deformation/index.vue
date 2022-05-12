@@ -64,6 +64,8 @@
         <div style="height: calc(100% - 200px)">
           <el-table
             :data="tableData"
+            :row-style="{ height: '0' }"
+            :cell-style="{ padding: '0' }"
             :header-cell-style="{ background: '#EEEEEE' }"
           >
             <el-table-column prop="date" label="监测点" />

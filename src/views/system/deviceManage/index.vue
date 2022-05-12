@@ -1,7 +1,11 @@
 <template>
   <div class="messagePage">
     <el-card shadow="always" class="el-card">
-      <el-table :data="tableData" style="width: 100%">
+      <el-table
+        :data="tableData"
+        style="width: 100%"
+        :header-cell-style="{ background: '#EEEEEE' }"
+      >
         <el-table-column prop="title" label="标题" />
         <el-table-column prop="type" label="类型" />
         <el-table-column prop="details" label="详情" />

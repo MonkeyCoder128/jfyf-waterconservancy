@@ -28,7 +28,7 @@ http.interceptors.response.use((ret) => {
         return ret.data;
     }
     if (code === 302) {
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: "/login" });
         location.reload();
     } else if (code != 200) {
         Notification.error({

@@ -8,8 +8,8 @@
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
-              @change="changeType"
-              v-model="typeValue"
+              @change="changeFlowRate"
+              v-model="flowRateType"
               size="mini"
               placeholder="请选择消息类型"
             >
@@ -36,8 +36,8 @@
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
-              @change="changeType"
-              v-model="typeValue"
+              @change="changeWaterLevel"
+              v-model="waterLevelType"
               size="mini"
               placeholder="请选择消息类型"
             >
@@ -63,8 +63,8 @@
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
-              @change="changeType"
-              v-model="typeValue"
+              @change="changeOsmometer"
+              v-model="osmometerType"
               size="mini"
               placeholder="请选择消息类型"
             >
@@ -90,8 +90,8 @@
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
-              @change="changeType"
-              v-model="typeValue"
+              @change="changeWaterQuality"
+              v-model="waterQualityType"
               size="mini"
               placeholder="请选择消息类型"
             >
@@ -117,8 +117,8 @@
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
-              @change="changeType"
-              v-model="typeValue"
+              @change="changeDeformation"
+              v-model="deformationType"
               size="mini"
               placeholder="请选择消息类型"
             >
@@ -143,7 +143,7 @@
           <span>预警状态</span>
         </div>
         <div class="bottomMenu">
-          <div class="chartDataBox" style="width: 70%">
+          <div class="chartDataBox" style="width: 60%">
             <Chart
               :chartData="alarmStateData"
               :width="'100%'"
@@ -191,7 +191,6 @@
         border-radius: 5px;
         background: #ffffff;
         padding: 21px;
-        margin: 0 10px;
       "
     >
       <div class="topMenu">
@@ -215,7 +214,7 @@
       >
         <el-table-column prop="name" label="设备名称" />
         <el-table-column prop="address" label="位置" />
-        <el-table-column prop="type" label="设备状态">
+        <el-table-column prop="type" label="设备状态" width="300px">
           <template slot-scope="scope">
             <span v-if="scope.row.type === '0'" style="color: #ea951c"
               >异常</span
@@ -256,26 +255,30 @@ export default {
       shiftData: {}, //形变
       offsetData: {}, //位移
       alarmStateData: {}, //预警状态
-      typeValue: "",
+      flowRateType: "",
+      waterLevelType: "",
+      osmometerType: "",
+      waterQualityType: "",
+      deformationType: "",
       optionsType: [
         {
-          value: "选项1",
+          value: "设备A",
           label: "黄金糕",
         },
         {
-          value: "选项2",
+          value: "设备B",
           label: "双皮奶",
         },
         {
-          value: "选项3",
+          value: "设备C",
           label: "蚵仔煎",
         },
         {
-          value: "选项4",
+          value: "设备D",
           label: "龙须面",
         },
         {
-          value: "选项5",
+          value: "设备E",
           label: "北京烤鸭",
         },
       ],
@@ -342,15 +345,35 @@ export default {
   },
 
   methods: {
-    /** 图表数据类型筛选 */
-    changeType(val) {
-      this.typeValue = val;
-      console.log(
-        "%c类型：",
-        "color:red;font-size:18px;font-weight:bold;",
-        val
-      );
+    /** 流速流量---类型筛选 */
+    changeFlowRate(val) {
+      this.flowRateType = val;
+      this.speedData = this.getSpeedData();
+      this.fluxData = this.getFluxData();
     },
+    /** 水位---类型筛选 */
+    changeWaterLevel(val) {
+      this.waterLevelType = val;
+      this.waterLevelData = this.getWaterLevelData();
+    },
+    /** 库压渗压---类型筛选 */
+    changeOsmometer(val) {
+      this.osmometerType = val;
+      this.pressureData = this.getPressureData();
+    },
+
+    /** 水质分析---类型筛选 */
+    changeWaterQuality(val) {
+      this.waterQualityType = val;
+      this.waterQuality = this.getWaterQuality();
+    },
+    /** 形变位移---类型筛选 */
+    changeDeformation(val) {
+      this.deformationType = val;
+      this.shiftData = this.getShiftData();
+      this.offsetData = this.getOffsetData();
+    },
+
     /**仪表盘蓝色渐变------流速 */
     getSpeedData() {
       let data = {
@@ -358,7 +381,7 @@ export default {
           //外层光晕渐变
           {
             type: "gauge",
-            radius: "100%",
+            radius: "90%",
             center: ["50%", "60%"],
             startAngle: 180,
             endAngle: 10,
@@ -417,7 +440,7 @@ export default {
           },
           {
             type: "gauge",
-            radius: "90%",
+            radius: "80%",
             startAngle: 200,
             endAngle: -20,
             min: 0,
@@ -426,7 +449,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -454,7 +477,7 @@ export default {
             axisLine: {
               roundCap: true,
               lineStyle: {
-                width: 14,
+                width: 16,
                 color: [[1, "rgba(66, 231, 231, 0.4)"]],
               },
             },
@@ -501,7 +524,7 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "80%", //图表尺寸
+            radius: "70%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -554,7 +577,7 @@ export default {
           //外层光晕渐变
           {
             type: "gauge",
-            radius: "100%",
+            radius: "90%",
             center: ["50%", "60%"],
             startAngle: 180,
             endAngle: 10,
@@ -613,7 +636,7 @@ export default {
           },
           {
             type: "gauge",
-            radius: "90%",
+            radius: "80%",
             startAngle: 200,
             endAngle: -20,
             min: 0,
@@ -622,7 +645,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -650,7 +673,7 @@ export default {
             axisLine: {
               roundCap: true,
               lineStyle: {
-                width: 14,
+                width: 16,
                 color: [[1, "rgba(243, 216, 106, 0.4)"]], //刻度线背景色
               },
             },
@@ -697,7 +720,7 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "80%", //图表尺寸
+            radius: "70%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -750,7 +773,7 @@ export default {
           {
             name: "刻度点",
             type: "gauge",
-            radius: "100%", //图表尺寸
+            radius: "95%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "58%"],
@@ -807,7 +830,7 @@ export default {
           {
             name: "刻度",
             type: "gauge",
-            radius: "100%", //图表尺寸
+            radius: "95%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -862,7 +885,7 @@ export default {
           },
           {
             type: "gauge",
-            radius: "84%",
+            radius: "80%",
             startAngle: 200,
             endAngle: -20,
             min: 0,
@@ -871,7 +894,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -956,7 +979,7 @@ export default {
           {
             name: "刻度点",
             type: "gauge",
-            radius: "100%", //图表尺寸
+            radius: "95%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "58%"],
@@ -997,7 +1020,7 @@ export default {
           {
             name: "刻度",
             type: "gauge",
-            radius: "100%", //图表尺寸
+            radius: "95%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -1037,7 +1060,7 @@ export default {
           },
           {
             type: "gauge",
-            radius: "84%",
+            radius: "80%",
             startAngle: 200,
             endAngle: -20,
             min: 0,
@@ -1046,7 +1069,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -1164,7 +1187,7 @@ export default {
             name: "内置圆",
             type: "pie",
             center: ["30%", "50%"],
-            radius: ["35%", "45%"], // 这个属性修改圆环宽度
+            radius: ["40%", "50%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
@@ -1235,7 +1258,7 @@ export default {
           //外层光晕渐变
           {
             type: "gauge",
-            radius: "100%",
+            radius: "90%",
             center: ["50%", "60%"],
             startAngle: 180,
             endAngle: 10,
@@ -1294,7 +1317,7 @@ export default {
           },
           {
             type: "gauge",
-            radius: "90%",
+            radius: "80%",
             startAngle: 200,
             endAngle: -20,
             min: 0,
@@ -1303,7 +1326,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -1331,7 +1354,7 @@ export default {
             axisLine: {
               roundCap: true,
               lineStyle: {
-                width: 14,
+                width: 16,
                 color: [[1, "rgba(66, 231, 231, 0.4)"]],
               },
             },
@@ -1378,7 +1401,7 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "80%", //图表尺寸
+            radius: "70%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -1431,7 +1454,7 @@ export default {
           //外层光晕渐变
           {
             type: "gauge",
-            radius: "100%",
+            radius: "90%",
             center: ["50%", "60%"],
             startAngle: 180,
             endAngle: 10,
@@ -1490,7 +1513,7 @@ export default {
           },
           {
             type: "gauge",
-            radius: "90%",
+            radius: "80%",
             startAngle: 200,
             endAngle: -20,
             min: 0,
@@ -1499,7 +1522,7 @@ export default {
             center: ["50%", "60%"],
             progress: {
               show: true,
-              width: 14,
+              width: 16,
               roundCap: true,
               itemStyle: {
                 color: {
@@ -1527,7 +1550,7 @@ export default {
             axisLine: {
               roundCap: true,
               lineStyle: {
-                width: 14,
+                width: 16,
                 color: [[1, "rgba(243, 216, 106, 0.4)"]], //刻度线背景色
               },
             },
@@ -1574,7 +1597,7 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "80%", //图表尺寸
+            radius: "70%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "60%"],
@@ -1661,12 +1684,12 @@ export default {
       // 图表option整理
       chartData.forEach((v, i) => {
         pieSeries.push({
-          name: "沪昆线到达晚点情况",
+          name: "",
           type: "pie",
           clockWise: false,
           hoverAnimation: false,
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["40%", "50%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -1692,7 +1715,7 @@ export default {
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["40%", "50%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -1730,7 +1753,7 @@ export default {
         color: color,
         grid: {
           top: "0",
-          bottom: "56%",
+          bottom: "45%",
           left: "40%",
           containLabel: false,
         },
@@ -1852,7 +1875,7 @@ export default {
       width: 33%;
       height: 280px;
       background-color: #ffffff;
-      margin-bottom: 22px;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: column;
       border-radius: 5px;
@@ -1864,7 +1887,8 @@ export default {
           display: none;
         }
         .scrollContent {
-          width: 32%;
+          width: 35%;
+          margin-right: 15px;
           max-height: 200px;
           overflow-y: auto;
           div {

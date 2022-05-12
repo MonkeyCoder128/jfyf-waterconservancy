@@ -155,7 +155,7 @@
                   <el-col :span="10" class="p_xj"
                     ><dam /><span>已巡检175</span></el-col
                   >
-                  <el-col :span="10" class="p_xj" style="margin-left:10px;"
+                  <el-col :span="10" class="p_xj" style="margin-left: 10px"
                     ><dam2 /><span>已维修100</span></el-col
                   >
                 </el-row>
@@ -350,7 +350,7 @@ export default {
       this.nowTimes = null;
     },
     Login() {
-      this.$router.push({ path: "/realtimeMnitor" });
+      this.$router.push({ path: "/realtimeMnitor/realtime" });
     },
     outLogin() {
       this.$router.push({ path: "/" });
@@ -537,7 +537,7 @@ export default {
   bottom: 10%;
   left: 44%;
   color: #fff;
-  text-shadow:none !important;
+  text-shadow: none !important;
   font-size: 12px;
 }
 </style>

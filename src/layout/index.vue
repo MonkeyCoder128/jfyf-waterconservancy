@@ -9,28 +9,32 @@
           active-text-color="#409EFF"
           border-bottom="none"
           router
-          :default-active="path"
+          :default-active="menuPath || path"
           class="el-menu-vertical-demo"
           :collapse="isCollapse"
         >
           <template v-for="(item, index) in nav_menu_data">
-            <el-submenu v-if="item.children" :index="item.path" :key="index">
+            <el-submenu
+              v-if="item.sonMenuList"
+              :index="item.menuPath"
+              :key="index"
+            >
               <template slot="title">
-                <i :class="item.icon"></i>
-                <span>{{ item.title }}</span>
+                <i :class="item.menuIcon"></i>
+                <span>{{ item.name }}</span>
               </template>
               <el-menu-item-group
-                v-for="(item2, index2) in item.children"
+                v-for="(item2, index2) in item.sonMenuList"
                 :key="index2"
               >
-                <el-menu-item :index="item2.path" :key="index2">{{
-                  item2.title
+                <el-menu-item :index="item2.menuPath" :key="index2">{{
+                  item2.name
                 }}</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-menu-item v-else :index="item.path" :key="item.index">
-              <i :class="item.icon"></i>
-              <span slot="title">{{ item.title }}</span>
+            <el-menu-item v-else :index="item.menuPath" :key="item.index">
+              <i :class="item.menuIcon"></i>
+              <span slot="title">{{ item.name }}</span>
             </el-menu-item>
           </template>
         </el-menu>
@@ -92,6 +96,7 @@
 </template>
 
 <script>
+import { menuList } from "@/api/login";
 export default {
   name: "Layout",
   computed: {
@@ -101,17 +106,13 @@ export default {
   },
   data() {
     return {
+      menuPath: "",
       fullscreen: false,
       isCollapse: false,
       leftmenu: true,
       rightmenu: false,
       path: "/",
       nav_menu_data: [
-        // {
-        //   title: "首页",
-        //   path: "/screen",
-        //   icon: "el-icon-s-platform",
-        // },
         {
           title: "实时监测",
           path: "/realtimeMnitor",
@@ -149,24 +150,20 @@ export default {
               title: "形变位移",
               path: "/explain/deformation",
             },
-            // {
-            //   title: "预警分析",
-            //   path: "/explain/alarmAnalysis",
-            // },
           ],
         },
         {
           title: "视频监控",
-          path: "/vide",
+          path: "/video",
           icon: "el-icon-video-camera",
           children: [
             {
               title: "实时",
-              path: "/vide/realtime",
+              path: "/video/realtime",
             },
             {
               title: "回放",
-              path: "/vide/playback",
+              path: "/video/playback",
             },
           ],
         },
@@ -224,6 +221,16 @@ export default {
   },
   created() {
     this.onRouteChanged();
+    menuList(window.sessionStorage.getItem("token")).then((res) => {
+      if (res.data.code === 200) {
+        this.nav_menu_data = res.data.result;
+        console.log(
+          "%c动态菜单：",
+          "color:blue;font-size:18px;font-weight:bold;",
+          res.data
+        );
+      }
+    });
   },
   methods: {
     onRouteChanged() {
@@ -285,6 +292,70 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/*分页插件样式更改*/
+/deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
+  border: 1px solid #1c48bf;
+  background-color: #ffffff;
+  color: #1c48bf;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+}
+/deep/.el-pagination__jump {
+  margin-left: 0;
+}
+/deep/.el-pagination span:not([class*="suffix"]),
+.el-pagination button {
+  border-radius: 5px;
+}
+/deep/.el-pagination.is-background .el-pager li {
+  width: 26px;
+  height: 26px;
+  background: #ffffff;
+  border: 1px solid #999999;
+  border-radius: 5px;
+}
+/deep/.el-pagination.is-background .btn-prev:disabled,
+.el-pagination.is-background .btn-next:disabled {
+  width: 26px;
+  height: 26px;
+  background: #ffffff;
+  border: 1px solid #999999;
+  border-radius: 5px;
+}
+/deep/.el-pagination.is-background .btn-next {
+  width: 26px;
+  height: 26px;
+  background: #ffffff;
+  border: 1px solid #999999;
+  border-radius: 5px;
+}
+/deep/.el-pagination__editor.el-input .el-input__inner {
+  width: 40px;
+  border: 1px solid #999999;
+}
+/deep/.el-pagination .el-select .el-input .el-input__inner {
+  width: 85px;
+  border-radius: 5px;
+  border: 1px solid #999999;
+}
+/deep/.el-pagination .el-select .el-input {
+  width: 80px;
+}
+
+/*表格样式更改*/
+/deep/.el-table .cell {
+  color: #333333;
+}
+/*表格顶部按钮样式更改*/
+/deep/.el-button--primary.is-plain {
+  color: #1c48bf;
+  background: #ffffff;
+  /* border-color: #a4b6e5; */
+  border: 1px solid #319da4;
+  color: #319da4;
+}
+
 .box {
   display: flex;
   flex-direction: row;
@@ -302,6 +373,7 @@ export default {
   height: 100%;
 }
 ::v-deep .el-submenu {
+  background-color: red;
   overflow: hidden;
 }
 .navbar {
@@ -321,7 +393,6 @@ export default {
 }
 .sidebar {
   width: 200px;
-  background-color: rgb(48, 65, 86);
   border: none;
   height: 100vh;
   overflow: scroll;
