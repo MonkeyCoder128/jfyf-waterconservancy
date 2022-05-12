@@ -1,65 +1,134 @@
 <template>
-  <div style="position: relative">
-    <div id="pie" style="width: 95%; height: 200px; margin: 0 atuo"></div>
-    <img src="../../../assets/image/juxing.png" alt="" class="juxing" />
-  </div>
+  <div id="pie" style="width: 100%; height: 100%; margin-top: -3%"></div>
 </template>
 <script>
 export default {
   mounted() {
     this.myecharts();
-    window.addEventListener("resize", function () {
-      myecharts.resize();
-    });
   },
   methods: {
     myecharts() {
       var pie = this.$echarts.init(document.getElementById("pie"));
+      let colors = ["#1289ba", "#148f97", "#e7b20a", "#115cb9", "#eb9a26"];
+      var dataCake = [
+        { value: 50, name: "二氧化碳" },
+        { value: 40, name: "氢含量" },
+        { value: 30, name: "氧含量" },
+        { value: 20, name: "氮含量" },
+        { value: 10, name: "氦含量" },
+      ];
       var option = {
-        tooltip: {
-          trigger: "item",
+        grid: {
+          left: "0%",
+          right: "0%",
+          bottom: "10%",
+          top: "10%",
+          containLabel: true,
         },
         legend: {
-          type: "scroll",
           orient: "vertical",
+          right: "4%",
           top: "center",
-          right: 40,
-          itemHeight: 17,
-          itemWidth: 17,
+          itemHeight: 20,
+          itemWidth: 20,
+          padding: [10, 10],
+          fontSize: 20,
           textStyle: {
-            color: "#fff",
-            padding: [10, 10],
-            fontSize: 15,
+            rich: {
+              t0: {
+                color: colors[0],
+              },
+              t1: {
+                color: colors[1],
+              },
+              t2: {
+                color: colors[2],
+              },
+              t3: {
+                color: colors[3],
+              },
+              t4: {
+                color: colors[4],
+              },
+              white: {
+                color: "#fff",
+              },
+            },
+          },
+          formatter: function (param) {
+            let index = dataCake.findIndex((v) => v.name == param);
+            let str = `{white|${param}}{t${index}|${
+              dataCake[index].value + "%"
+            }}`;
+
+            console.log(param);
+            return str;
           },
         },
         series: [
           {
-            //name: "Access From",
+            name: "内置圆",
             type: "pie",
-            radius: ["52%", "65%"],
             center: ["35%", "55%"],
-            avoidLabelOverlap: false,
-            itemStyle: {
-              borderRadius: 10,
-              borderColor: "rgba(0, 0, 0, 0.3)",
-              borderWidth: 2,
+            radius: ["35%", "42%"],
+            silent: true,
+            labelLine: {
+              show: false,
             },
+            label: {
+              show: false,
+            },
+            itemStyle: {
+              color: "#F8C202",
+              borderWidth: 4,
+              borderColor: "#0b111f",
+            },
+            data: [
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+              { value: 500, name: "" },
+            ],
+          },
+          {
+            name: "外层圆",
+            type: "pie",
+            center: ["35%", "55%"],
+            radius: ["45%", "55%"],
+            avoidLabelOverlap: false,
             label: {
               show: false,
               position: "center",
             },
-
-            color: ["#1289ba", "#148f97", "#e7b20a", "#115cb9", "#eb9a26"],
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: "10",
+                fontWeight: "bold",
+              },
+            },
             labelLine: {
               show: false,
             },
-            data: [
-              { value: 4, name: "二氧化碳" },
-              { value: 3, name: "氢含量" },
-              { value: 2, name: "氦含量" },
-              { value: 4, name: "氧含量" },
-              { value: 2, name: "氮含量" },
-            ],
+            data: dataCake,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  //自定义颜色
+                  var colorList = [
+                    "#1289ba",
+                    "#148f97",
+                    "#e7b20a",
+                    "#115cb9",
+                    "#eb9a26",
+                  ];
+                  return colorList[params.dataIndex];
+                },
+                borderRadius: 0,
+                borderColor: "#0b111f",
+                borderWidth: 3,
+              },
+            },
             labelLine: {
               normal: {
                 show: false,
@@ -70,7 +139,7 @@ export default {
               show: true,
               color: "#fff",
               fontSize: 12,
-              padding: [20, -20],
+              padding: [20, -30],
               formatter: ["{c}" + "mol/L"].join("\n"),
             },
             emphasis: {
@@ -83,17 +152,9 @@ export default {
           },
         ],
       };
+
       pie.setOption(option);
     },
   },
 };
 </script>
-<style  lang="scss" scoped>
-.juxing {
-  position: absolute;
-  top: 32%;
-  left: 23%;
-  width: 20%;
-  height: 47%;
-}
-</style>  

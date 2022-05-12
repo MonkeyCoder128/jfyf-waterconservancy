@@ -1,7 +1,5 @@
 <template>
-  <div style="position: relative">
     <div id="patrol"></div>
-  </div>
 </template>
 <script>
 export default {
@@ -12,12 +10,13 @@ export default {
     myecharts() {
       var echarts = require("echarts");
       var patrol = this.$echarts.init(document.getElementById("patrol"));
+      let centerArr = ["50%", "70%"];
       var option = {
         grid: {
           top: "15%",
           left: "10%",
           right: "2%",
-          bottom: "16%",
+          bottom: "30%",
         },
         tooltip: {
           show: false,
@@ -59,7 +58,7 @@ export default {
             splitLine: {
               show: true,
               lineStyle: {
-                color: "rgba(255,255,255,0.2)", //网格线的颜色
+                color: "#11223b", //网格线的颜色
                 width: 1,
                 type: "solid",
               },
@@ -175,8 +174,7 @@ export default {
 </script>
 <style  lang="scss" scoped>
 #patrol {
-  width: 95%;
-  height: 140px;
-  margin: 35px auto 0;
+  width: 96%;
+  height: 100%;
 }
 </style>

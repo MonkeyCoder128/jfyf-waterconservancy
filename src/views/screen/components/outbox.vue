@@ -4,8 +4,8 @@
   <div id="outbox">
     <div class="outbox">
       <div style="width: 56%">时间</div>
-      <div style="width: 20%">设备</div>
-      <div style="width: 24%">原因</div>
+      <div style="width: 26%">设备</div>
+      <div style="width: 18%">原因</div>
     </div>
     <div id="box">
       <div
@@ -26,8 +26,8 @@
           "
         >
           <div style="width: 56%">{{ item.time }}</div>
-          <div style="width: 20%">{{ item.name }}</div>
-          <div style="width: 24%;color: red">{{ item.shebei }}</div>
+          <div style="width: 23%">{{ item.name }}</div>
+          <div style="width: 21%;color: red">{{ item.shebei }}</div>
         </div>
       </div>
     </div>
@@ -89,9 +89,9 @@ export default {
   padding: 0;
 }
 #outbox {
-  width: 85%;
-  height: 80%;
-  margin: 1vh auto 0;
+  width: 92%;
+  height:calc(100% - 43px);
+  margin: 2% auto 0;
   color: #8b8b91;
   overflow: hidden;
 }
@@ -107,6 +107,7 @@ export default {
   width: 100%;
   line-height: 30px;
   overflow: hidden;
+  //height: calc(100% - 40px);
   transition: all 0.5s;
   color: #e3e3e4;
   font-size: 14px;
@@ -116,7 +117,7 @@ export default {
   transition: all 0.5s;
 }
 /deep/#con1 {
-  height: 200px;
+  height: 50%;
   overflow: hidden !important;
 }
 #con1 li {
