@@ -32,8 +32,8 @@
         </el-row>
 
         <el-row type="flex" class="row-bg" justify="space-between">
-          <el-col :span="6" class="screen_left">
-            <div class="box">
+          <el-col class="screen_left">
+            <div class="box" style="margin-top: 0 !important">
               <div class="box_nav">
                 <el-row :gutter="20">
                   <el-col :span="1" class="title1"
@@ -82,13 +82,14 @@
                   /></el-col>
                 </el-row>
               </div>
-              <el-row>
-                <el-col :span="24"><pie /></el-col>
-              </el-row>
+              <pie />
             </div>
           </el-col>
-          <el-col :span="11" class="screen_cont"
-            ><div class="box_cont box_cont_top">
+          <el-col class="screen_cont"
+            ><div
+              class="box_cont box_cont_top"
+              style="margin-top: 0 !important"
+            >
               <!-- <div>
                 <iframe
                   name="iframeMap"
@@ -103,40 +104,42 @@
               </div> -->
               <img src="../../assets/image/3d.png" class="threed" alt="" />
             </div>
-            <div class="box_cont">
+            <div class="box_cont" style="margin-top: 0 !important">
               <div class="box_nav box_nav1">
                 <el-row :gutter="19">
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">水库概况</el-col>
-                  <el-col :span="1" class="icon_title2">
+                  <el-col :span="1" class="icon_title2 icon_title4">
                     <img src="../../assets/image/dp_title2.png" alt=""
                   /></el-col>
-                  <el-col :span="1" class="icon_title3">
+                  <el-col :span="1" class="icon_title3 icon_title5">
                     <img src="../../assets/image/dp_title3.png" alt=""
                   /></el-col>
                 </el-row>
-                <el-row :gutter="20">
-                  <el-col :span="6"
+              </div>
+              <div class="box_content">
+                <el-row :gutter="20" class="shuiwei">
+                  <el-col :span="6" style="height: 100%"
                     ><div class="bg-purple">
                       库前水位
                       <div class="num">1344m³</div>
                     </div></el-col
                   >
-                  <el-col :span="6"
+                  <el-col :span="6" style="height: 100%"
                     ><div class="bg-purple">
                       库存
                       <div class="num">1256m³</div>
                     </div></el-col
                   >
-                  <el-col :span="6"
+                  <el-col :span="6" style="height: 100%"
                     ><div class="bg-purple">
                       出库
                       <div class="num">6587m³</div>
                     </div></el-col
                   >
-                  <el-col :span="6"
+                  <el-col :span="6" style="height: 100%"
                     ><div class="bg-purple">
                       入库
                       <div class="num">5687m³</div>
@@ -145,31 +148,39 @@
                 </el-row>
               </div>
             </div>
-            <div class="box_cont">
-              <div class="box_nav2">
-                <el-row :gutter="20" class="box_daba">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
-                  <el-col :span="19">大坝巡查</el-col>
-                  <el-col :span="10" class="p_xj"
-                    ><dam /><span>已巡检175</span></el-col
-                  >
-                  <el-col :span="10" class="p_xj" style="margin-left: 10px"
-                    ><dam2 /><span>已维修100</span></el-col
-                  >
-                </el-row>
-                <el-row :gutter="20" class="box_daba">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
-                  <el-col :span="19">设备巡查统计</el-col>
-                  <patrol />
-                </el-row>
+            <div class="box_cont2">
+              <div style="width: 50%; display: flex; flex-direction: row">
+                <div style="width: 50%">
+                  <div class="box_nav box_nav2">
+                    <el-row :gutter="19">
+                      <el-col :span="1" class="title1"
+                        ><img src="../../assets/image/dp_title1.png" alt=""
+                      /></el-col>
+                      <el-col :span="19">大坝巡查</el-col>
+                    </el-row>
+                  </div>
+                  <dam />
+                  <p class="p_xj">已巡检175</p>
+                </div>
+                <div style="width: 50%">
+                  <dam2 />
+                  <span class="p_xj2">已维修100</span>
+                </div>
+              </div>
+              <div style="width: 50%">
+                <div class="box_nav box_nav2">
+                  <el-row :gutter="19">
+                    <el-col :span="1" class="title1"
+                      ><img src="../../assets/image/dp_title1.png" alt=""
+                    /></el-col>
+                    <el-col :span="19">设备巡检统计</el-col>
+                  </el-row>
+                </div>
+                <patrol />
               </div></div
           ></el-col>
-          <el-col :span="6" class="screen_right">
-            <div class="box_right">
+          <el-col class="screen_right">
+            <div class="box_right" style="margin-top: 0 !important">
               <div class="box_nav">
                 <el-row :gutter="20">
                   <el-col :span="1" class="title1"
@@ -407,11 +418,12 @@ export default {
   font-size: 30px;
 }
 .row-bg {
-  padding: 88px 25px;
-  padding-bottom: 0;
+  padding: 88px 25px 0;
+  height: calc(100% - 14px);
 }
 .p_nav {
   width: 100%;
+  height: 81px;
   font-size: 30px;
   text-align: center;
   font-family: PingFang SC;
@@ -426,11 +438,21 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.screen_left {
+  width: 25%;
+}
+.screen_cont {
+  width: 48%;
+}
+.screen_right {
+  width: 25%;
+}
 .box,
 .box_right,
-.box_cont {
-  height: 28.5vh;
-  margin-top: 1vh;
+.box_cont,
+.box_cont2 {
+  height: 40.5%;
+  margin-top: 3%;
   position: relative;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.3);
@@ -438,18 +460,35 @@ export default {
   overflow: hidden;
 }
 .box_right {
-  height: 21.1vh;
+  height: 23.6%;
+  margin-top: 3%;
 }
 .box_cont {
-  height: 21.1vh;
+  width: 100%;
+  height: 23.6%;
+  margin-top: 3%;
+}
+.box_cont2 {
+  width: 100%;
+    height: 24%;
+    margin-top: 1.4%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 2%;
 }
 .box_cont_top {
-  height: 43.5vh;
+  height: 50.5%;
   background: none;
 }
+.box_content {
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+}
+
 .box_nav,
 .box_nav1 {
-  width: 86%;
+  width: calc(100% - 40px);
   height: 35px;
   color: #2e89e0;
   line-height: 29px;
@@ -459,6 +498,7 @@ export default {
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 .box_nav1 {
   width: 95%;
@@ -466,15 +506,15 @@ export default {
 .box_nav2 {
   width: 95%;
   height: 35px;
-  display: flex;
-  flex-direction: row;
   color: #2e89e0;
   line-height: 29px;
   text-shadow: 0 0 10px #2e89e0, 0 0 2px #87e9eb;
-  margin: 0 auto;
+  border: none;
+  text-align: none;
 }
 .box_daba {
-  width: 52%;
+  width: 100%;
+  height: 100%;
 }
 .title1 {
   padding-top: 5px;
@@ -483,10 +523,16 @@ export default {
 .icon_title3 {
   position: absolute;
   top: 0;
-  right: 2vw;
+  right: 5%;
 }
 .icon_title3 {
-  right: 1vw;
+  right: 2%;
+}
+.icon_title4 {
+  right: -0.5%;
+}
+.icon_title5 {
+  right: 1.5%;
 }
 /deep/::-webkit-scrollbar {
   display: none; /* Chrome Safari */
@@ -499,25 +545,29 @@ export default {
   width: 100%;
   height: 0px;
 }
-
+.shuiwei {
+  margin-top: 3%;
+  height: 66%;
+}
 .bg-purple {
-  width: 100%;
-  height: 10vh;
-  margin-top: 3vh;
+  height: 100%;
   background: #0e1629;
-  border: 1px solid #3885e5;
+  //border: 1px solid #3885e5;
   // opacity: 0.36;
+  color: #2268c7;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 15px;
-  box-shadow: 0px 0px 10px #3885e5 inset;
+  font-size: 16px;
+  box-shadow: 0px 0px 20px #3885e5 inset;
+  margin: 0 auto;
 }
 .num {
   color: #fff;
   font-size: 24px;
+  padding-top: 2%;
 }
 .threed {
   margin: 4% auto 0;
@@ -529,15 +579,16 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.p_xj {
-  position: relative;
-}
-.p_xj span {
+.p_xj,
+.p_xj2 {
+  width: 100%;
+  text-align: center;
   position: absolute;
-  bottom: 10%;
-  left: 44%;
   color: #fff;
-  text-shadow: none !important;
-  font-size: 12px;
+  top: 71%;
+  left: -36%;
+}
+.p_xj2 {
+  left: -11%;
 }
 </style>
