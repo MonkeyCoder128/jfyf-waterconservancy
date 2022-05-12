@@ -51,13 +51,11 @@
         </el-checkbox>
         <el-form-item style="width: 100%">
           <el-button
-            :loading="loading"
             type="primary"
             style="width: 100%; height: 50px"
             @click.native.prevent="handleLogin"
           >
-            <span v-if="!loading">登 录</span>
-            <span v-else>登 录 中...</span>
+            <span>登 录</span>
           </el-button>
         </el-form-item>
       </el-form>
@@ -99,7 +97,6 @@ export default {
         //   { required: true, trigger: "change", message: "验证码不能为空" },
         // ],
       },
-      loading: false,
     };
   },
   created() {},
@@ -111,10 +108,9 @@ export default {
       );
     },
 
-    handleLogin:(function () {
+    handleLogin: function () {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.loading = true;
           if (this.loginForm.rememberMe) {
             Cookies.set("username", this.loginForm.username, {
               expires: 30,
@@ -141,7 +137,6 @@ export default {
                 window.sessionStorage.setItem("token", res.data.token);
                 this.$router.push({ path: "/screen" });
               } else if (res.data.code !== "200") {
-                this.loading = false;
                 this.$message({
                   showClose: true,
                   message: res.data.message,
@@ -196,7 +191,7 @@ export default {
             });
         }
       });
-    }),
+    },
   },
 };
 </script>

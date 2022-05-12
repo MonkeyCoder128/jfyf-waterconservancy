@@ -1,7 +1,5 @@
 <template>
-  <div style="position: relative">
     <div id="flow"></div>
-  </div>
 </template>
 <script>
 export default {
@@ -15,9 +13,9 @@ export default {
       var option = {
         grid: {
           top: "15%",
-          left: "10%",
+          left: "8%",
           right: "2%",
-          bottom: "16%",
+          bottom: "28%",
         },
         tooltip: {
           show: false,
@@ -177,7 +175,7 @@ export default {
 <style  lang="scss" scoped>
 #flow {
   width: 95%;
-  height: 140px;
+  height: 100%;
   margin: 0 auto;
 }
 </style>

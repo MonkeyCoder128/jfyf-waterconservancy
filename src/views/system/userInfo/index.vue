@@ -87,13 +87,6 @@ import {
 export default {
   name: "UserInfo",
   data() {
-    const equalToPassword = (rule, value, callback) => {
-      if (this.user.password !== value) {
-        callback(new Error("两次输入的密码不一致"));
-      } else {
-        callback();
-      }
-    };
     return {
       queryParams: {
         page: 1,
@@ -109,49 +102,7 @@ export default {
         password: "",
         confirmPassword: "",
       },
-      userRules: {
-        roleId: [
-          {
-            required: true,
-            message: "请选择用户角色",
-            trigger: "change",
-          },
-        ],
-        name: [
-          { required: true, message: "请输入用户名称", trigger: "blur" },
-          {
-            min: 3,
-            max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur",
-          },
-        ],
-        username: [
-          {
-            required: true,
-            message: "请填写用户账号",
-            trigger: "blur",
-          },
-          {
-            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
-            message: "请输入正确的手机号码",
-            trigger: "blur",
-          },
-        ],
-        password: [
-          { required: true, message: "新密码不能为空", trigger: "blur" },
-          {
-            min: 6,
-            max: 20,
-            message: "长度在 6 到 20 个字符",
-            trigger: "blur",
-          },
-        ],
-        confirmPassword: [
-          { required: true, message: "确认密码不能为空", trigger: "blur" },
-          { required: true, validator: equalToPassword, trigger: "blur" },
-        ],
-      },
+      userRules: {},
       formDisable: false,
     };
   },
@@ -207,9 +158,74 @@ export default {
     },
   },
   created() {
+    const equalToPassword = (rule, value, callback) => {
+      if (this.user.password !== value) {
+        callback(new Error("两次输入的密码不一致"));
+      } else {
+        callback();
+      }
+    };
     if (this.$route.query.type === "add") {
       this.formDisable = false;
+      this.userRules = {
+        roleId: [
+          {
+            required: true,
+            message: "请选择用户角色",
+            trigger: "change",
+          },
+        ],
+        name: [
+          { required: true, message: "请输入用户名称", trigger: "blur" },
+          {
+            min: 3,
+            max: 10,
+            message: "长度在 3 到 10 个字符",
+            trigger: "blur",
+          },
+        ],
+        username: [
+          {
+            required: true,
+            message: "请填写用户账号",
+            trigger: "blur",
+          },
+          {
+            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            message: "请输入正确的手机号码",
+            trigger: "blur",
+          },
+        ],
+        password: [
+          { required: true, message: "新密码不能为空", trigger: "blur" },
+          {
+            min: 6,
+            max: 20,
+            message: "长度在 6 到 20 个字符",
+            trigger: "blur",
+          },
+        ],
+        confirmPassword: [
+          { required: true, message: "确认密码不能为空", trigger: "blur" },
+          { required: true, validator: equalToPassword, trigger: "blur" },
+        ],
+      };
     } else if (this.$route.query.type === "edit") {
+      this.userRules = {
+        password: [
+          { required: true, message: "新密码不能为空", trigger: "blur" },
+          {
+            min: 6,
+            max: 20,
+            message: "长度在 6 到 20 个字符",
+            trigger: "blur",
+          },
+        ],
+        confirmPassword: [
+          { required: true, message: "确认密码不能为空", trigger: "blur" },
+          { required: true, validator: equalToPassword, trigger: "blur" },
+        ],
+      };
       viewUserInfo(
         this.$route.query.id,
         window.sessionStorage.getItem("token")

@@ -2,9 +2,6 @@
   <div class="userPage">
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
-        <el-button type="primary" size="small" @click="addUser()" plain
-          >新增用户</el-button
-        >
         <el-input
           style="width: 320px"
           placeholder="搜索用户"
@@ -12,10 +9,13 @@
           v-model.trim="queryParams.message"
           @keyup.enter.native="searchEnterUser"
           @click.native="searchEnterUser"
-          size="small"
+          size="mini"
           clearable
         >
         </el-input>
+        <el-button type="primary" size="mini" @click="addUser()" plain
+          >新增用户</el-button
+        >
       </div>
       <el-table
         :data="userData"
@@ -57,13 +57,14 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        style="margin-top: 25px; text-align: center"
+        background
+        style="margin-top: 25px; text-align: right"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryParams.page"
         :page-sizes="[5, 10, 15, 20]"
         :page-size="queryParams.size"
-        layout="total, sizes, prev, pager, next, jumper"
+        layout="  prev, pager, next,sizes, jumper"
         :total="total"
       >
       </el-pagination>

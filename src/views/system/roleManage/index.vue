@@ -2,9 +2,6 @@
   <div class="rolePage">
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
-        <el-button type="primary" size="small" @click="addRole()" plain
-          >新增角色</el-button
-        >
         <el-input
           style="width: 320px"
           placeholder="搜索已创建的角色"
@@ -12,13 +9,24 @@
           v-model.trim="queryParams.message"
           @keyup.enter.native="searchEnterRole"
           @click.native="searchEnterRole"
-          size="small"
+          size="mini"
           clearable
         >
         </el-input>
+        <el-button
+          class="addButtonGreen"
+          type="primary"
+          size="mini"
+          @click="addRole()"
+          plain
+          >新增角色</el-button
+        >
       </div>
-      <el-table :data="roleData" style="width: 100%"
-          :header-cell-style="{ background: '#EEEEEE' }">
+      <el-table
+        :data="roleData"
+        style="width: 100%"
+        :header-cell-style="{ background: '#EEEEEE' }"
+      >
         <el-table-column prop="roleName" label="角色名称" />
         <el-table-column prop="roleMsg" label="角色描述" />
         <el-table-column prop="createDate" label="注册时间" />
@@ -37,7 +45,8 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        style="margin-top: 25px; text-align: center"
+        background
+        style="margin-top: 25px; text-align: right"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryParams.page"
@@ -279,28 +288,30 @@ export default {
     /** 查看角色操作 */
     lookRole(val) {
       this.dialogFormVisible = true;
-      this.formDisable = true;
+      // this.formDisable = true;
       this.roleTitle = "查看角色";
       this.roleForm.name = val.roleName;
       this.roleForm.roleMsg = val.roleMsg;
+      this.roleForm.roleId = val.roleId;
       viewRoleInfo(
         this.roleForm.roleId,
         window.sessionStorage.getItem("token")
       ).then((res) => {
         if (res.data.code === 200) {
-          this.treeData = res.data.result;
-          const recursive = (data, callback) => {
+          const recursiveLook = (data, callback) => {
             data.forEach((v) => {
               callback(v);
               if (v.ChildNodes instanceof Array)
-                recursive(v.ChildNodes, callback);
+                recursiveLook(v.ChildNodes, callback);
             });
           };
-          const idArr = [];
-          recursive(res.data.result, (d) => {
-            if (d.checkstate == 1 && !idArr.includes(d.id)) idArr.push(d.id);
+          const idArrLook = [];
+          recursiveLook(res.data.result, (d) => {
+            if (d.checkstate == 1 && !idArrLook.includes(d.id))
+              idArrLook.push(d.id);
           });
-          this.roleForm.authList = idArr;
+          this.treeData = res.data.result;
+          this.roleForm.authList = idArrLook;
         }
       });
     },

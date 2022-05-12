@@ -1,7 +1,5 @@
 <template>
-  <div style="position: relative">
     <div id="dam2"></div>
-  </div>
 </template>
 <script>
 export default {
@@ -111,7 +109,7 @@ export default {
             name: "最外圈冷热标签",
             type: "gauge",
             z: 2,
-            radius: "5%",
+            radius: "25%",
             splitNumber: 1,
             startAngle: 180,
             endAngle: 0,
@@ -135,7 +133,7 @@ export default {
               textStyle: {
                 color: "#fff",
                 fontSize: 12,
-                padding:[10,-115]
+                padding:[10,-100]
               },
               formatter: function (val) {
                 return label[val];
@@ -176,18 +174,19 @@ export default {
                 label: {
                   rotate: 90,
                   position: "inside",
-                  width: 10,
-                  height: 10,
-                  padding: 1,
+                  width: 2,
+                  height: 2,
+                  padding: 2,
                   verticalAlign: "bottom",
-                  backgroundColor: colorList[0],
-                  borderRadius: 50,
-                  borderWidth: 2,
-                  // borderColor: colorList[0],
-                  shadowColor: "#33394c",
+                  backgroundColor: "#fff",
+                  borderRadius: 10,
+                  borderWidth: 1.5,
+                  borderColor: colorList[0],
+                  shadowColor: "#fff",
                   shadowBlur: 10,
                   shadowOffsetY: 1,
                 },
+                
               },
               {
                 //画剩余的刻度圆环
@@ -214,8 +213,8 @@ export default {
 </script>
 <style  lang="scss" scoped>
 #dam2 {
-  width: 120%;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 </style>

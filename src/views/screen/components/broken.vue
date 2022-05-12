@@ -5,9 +5,6 @@
 export default {
   mounted() {
     this.myecharts();
-    window.addEventListener("resize", function () {
-      myecharts.resize();
-    });
   },
   methods: {
     myecharts() {
@@ -16,10 +13,10 @@ export default {
       var fontColor = "#fff";
       var option = {
         grid: {
-          left: "6%",
-          right: "8%",
-          top: "20%",
-          bottom: "20%",
+          left: "5%",
+          right: "5%",
+          top: "15%",
+          bottom: "15%",
           containLabel: true,
         },
         tooltip: {
@@ -150,7 +147,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #broken {
-  width: 95%;
+  width: 98%;
   height: 100%;
   margin: 0 auto;
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="weather_box">
-    <el-row style="margin: 1.2vh auto 1vh">
+    <el-row class="weater_p">
       <el-col :span="3"
         ><img
           src="https://cctv202.com/img/rain.png"
@@ -28,9 +28,6 @@
 export default {
   mounted() {
     this.myecharts();
-    window.addEventListener("resize", function () {
-      myecharts.resize();
-    });
   },
   methods: {
     myecharts() {
@@ -170,18 +167,16 @@ export default {
   overflow: hidden;
 }
 #weather_box {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
 .btn_title {
   color: #4bc4f1;
   background-color: rgba(62, 160, 200, 0.3);
-  width: 4vw;
-  height: 2.5vh;
-  font-size: 12px;
-  padding: 0;
-  margin-top: 0.9vh;
+  padding: 5px;
+  position: absolute;
+  right: 0;
 }
 .rain {
   display: flex;
@@ -191,5 +186,9 @@ export default {
   display: flex;
   flex-direction: column;
   font-size: 10px;
+}
+.weater_p {
+  margin: 4% auto 1%;
+  width: calc(100% - 39px);
 }
 </style>

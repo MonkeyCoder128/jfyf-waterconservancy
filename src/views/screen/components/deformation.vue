@@ -5,9 +5,6 @@
 export default {
   mounted() {
     this.myecharts();
-    window.addEventListener("resize", function () {
-      myecharts.resize();
-    });
   },
   methods: {
     myecharts() {
@@ -20,15 +17,15 @@ export default {
       var wgx1 = ["100", "-100", "-200", "400", "-100"];
       var option = {
         grid: {
-          left: "5%",
-          right: "8%",
-          bottom: "15%",
-          top: "25%",
+          left: "1.2%",
+          right: "2%",
+          bottom: "10%",
+          top: "15%",
           containLabel: true,
         },
         legend: {
           data: ["垂直位移", "水平位移"],
-          right: 30,
+          right: 5,
           top: 1,
           textStyle: {
             color: "#fff",
