@@ -567,9 +567,10 @@ export default {
           left: "50%", //图例距离左的距离
           top: "15%",
           itemGap: 30,
+          itemHeight: 17,
+          itemWidth: 17,
           textStyle: {
             fontSize: 14, //字体大小
-            color: "inherit",
           },
           formatter: function (name) {
             let target, percentage;

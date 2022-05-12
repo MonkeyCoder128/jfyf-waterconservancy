@@ -150,7 +150,22 @@
               :height="'100%'"
             />
           </div>
-          <div class="scrollContent">
+          <marquee
+            id="affiche"
+            align="left"
+            behavior="scroll"
+            direction="up"
+            height="300"
+            width="200"
+            hspace="50"
+            vspace="20"
+            loop="-1"
+            scrollamount="4"
+            scrolldelay="10"
+            onMouseOut="this.start()"
+            onMouseOver="this.stop()"
+            class="scrollContent"
+          >
             <div class="warningStage">
               <i class="el-icon-warning-outline"></i><span>A1区水位过高</span>
             </div>
@@ -181,7 +196,7 @@
             <div class="earlyWarning">
               <i class="el-icon-warning-outline"></i><span>A1区气象预警</span>
             </div>
-          </div>
+          </marquee>
         </div>
       </div>
     </div>
@@ -1162,10 +1177,12 @@ export default {
           formatter: "{b}: {c} ({d}%)",
         },
         legend: {
-          orient: "rect",
+          orient: "vertical",
           left: "50%", //图例距离左的距离
           top: "15%",
           itemGap: 15,
+          itemHeight: 17,
+          itemWidth: 17,
           textStyle: {
             fontSize: 14, //字体大小
           },
@@ -1891,6 +1908,7 @@ export default {
           margin-right: 15px;
           max-height: 200px;
           overflow-y: auto;
+          cursor: pointer;
           div {
             width: 100%;
             padding: 0 10px;
