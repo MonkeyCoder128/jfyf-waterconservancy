@@ -22,12 +22,13 @@ export default {
       var equipmentChart = this.$echarts.init(
         this.$refs.equipmentChart
       );
+      let colors = ["#1289ba", "#148f97", "#e7b20a", "#115cb9", "#eb9a26"];
       var dataCake = [
-        { name: "二氧化碳", percentage: "43.67%" },
-        { name: "氢含量", percentage: "29.26%" },
-        { name: "氧含量", percentage: "27.07%" },
-        { name: "氮含量", percentage: "29.26%" },
-        { name: "氦含量", percentage: "27.07%" },
+        { name: "二氧化碳", value: "43.67%" },
+        { name: "氢含量", value: "29.26%" },
+        { name: "氧含量", value: "27.07%" },
+        { name: "氮含量", value: "29.26%" },
+        { name: "氦含量", value: "27.07%" },
       ];
       var option = {
         tooltip: {
@@ -44,25 +45,60 @@ export default {
         },
         legend: {
           orient: "rect",
-          right: "5%", //图例距离左的距离
-          top: "5%",
+          right: "2%", //图例距离左的距离
+          top: "2%",
           itemGap: 13,
-          itemHeight: 10,
-          itemWidth: 10,
+          itemHeight: 16,
+          itemWidth: 16,
+          fontSize: 14,
+          // textStyle: {
+          //   fontSize: 14, //字体大小
+          //   color: "inherit", //设置dataCake中的文字颜色跟饼图一致
+          // },
           textStyle: {
-            fontSize: 14, //字体大小
-            color: "inherit", //设置dataCake中的文字颜色跟饼图一致
+            rich: {
+              t0: {
+                fontSize: 14,
+                color: colors[0],
+              },
+              t1: {
+                fontSize: 14,
+                color: colors[1],
+              },
+              t2: {
+                fontSize: 14,
+                color: colors[2],
+              },
+              t3: {
+                fontSize: 14,
+                color: colors[3],
+              },
+              t4: {
+                fontSize: 14,
+                color: colors[4],
+              },
+              white: {
+                color: "black",
+              },
+            },
           },
-          formatter: function (name) {
-            let target, percentage;
-            for (let i = 0; i < dataCake.length; i++) {
-              if (dataCake[i].name === name) {
-                target = dataCake[i].value;
-                percentage = dataCake[i].percentage;
-              }
-            }
-            let arr = [name + " ", " " + percentage];
-            return arr.join(" ");
+          formatter: function (param) {
+            // let target, percentage;
+            // for (let i = 0; i < dataCake.length; i++) {
+            //   if (dataCake[i].name === name) {
+            //     target = dataCake[i].value;
+            //     percentage = dataCake[i].percentage;
+            //   }
+            // }
+            // let arr = [name + " ", " " + percentage];
+            // return arr.join(" ");
+            let index = dataCake.findIndex((v) => v.name == param);
+            let str = `    {white|${param}}     {t${index}|${
+              dataCake[index].value + "%"
+            }}`;
+
+            console.log(param);
+            return str;
           },
         },
         color: ["#EA951C", "#3F85FF", "#F3B63E", "#37ABC1", "#32DFDF"],
