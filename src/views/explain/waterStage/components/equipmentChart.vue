@@ -7,9 +7,9 @@
   export default {
     mounted() {
       this.getLoadEcharts();
-      window.addEventListener("resize", function () {
-        getLoadEcharts.resize();
-      });
+      // window.addEventListener("resize", function () {
+      //   getLoadEcharts.resize();
+      // });
     },
     methods: {
       // 获取echarts

@@ -13,9 +13,9 @@ export default {
   },
   mounted() {
     this.myecharts();
-    window.addEventListener("resize", function () {
-      myecharts.resize();
-    });
+    // window.addEventListener("resize", function () {
+    //   myecharts.resize();
+    // });
   },
   methods: {
     myecharts() {
@@ -51,6 +51,7 @@ export default {
           itemWidth: 10,
           textStyle: {
             fontSize: 14, //字体大小
+            color: "inherit", //设置dataCake中的文字颜色跟饼图一致
           },
           formatter: function (name) {
             let target, percentage;
@@ -70,7 +71,8 @@ export default {
             name: "内置圆",
             type: "pie",
             center: ["30%", "50%"],
-            radius: ["35%", "45%"], // 这个属性修改圆环宽度
+            radius: ["47%", "59%"], // 这个属性修改圆环宽度
+            // offsetCenter:[0,-10],
             silent: true,
             labelLine: {
               show: false,
@@ -121,7 +123,6 @@ export default {
                 },
               },
             },
-
             data: [
               { value: 500, name: "二氧化碳" },
               { value: 335, name: "氢含量" },

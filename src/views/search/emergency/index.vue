@@ -10,10 +10,11 @@
                 <span class="demonstration"></span>
                 <el-date-picker
                   v-model="formData.reportDate"
-                  type="datetimerange"
+                  type="daterange"
                   start-placeholder="开始时间"
                   end-placeholder="结束时间"
-                  :default-time="['12:00:00']">
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  :default-time="['00:00:00','23:59:59']">
                 </el-date-picker>
               </div>
             </el-form-item>
@@ -130,6 +131,7 @@
 </template>
 <script>
 import {InintData,ReportErr} from '@/api/safe'
+import { stringify } from 'querystring';
 export default {
   name:'',
   data () {
@@ -141,7 +143,7 @@ export default {
         startDate: '',
         reportType: '',
         exceptionTypes: '',
-        status: '',
+        status: [],
       },
       // 表格数据
       tableData: {
@@ -189,10 +191,12 @@ export default {
       this.tableData.currPage = 1;
       this.formData.startDate = '';
       this.formData.endDate = '';
+      // console.log(typeof this.formData.status);
       if(this.formData.status == ''){
         this.formData.status = [];
       }else{
-        console.log(typeof this.formData.status == 'string');
+        // console.log(typeof this.formData.status == 'string');
+        // 判断 this.formData.status 状态，如果为string，转成arr；
         if(typeof this.formData.status == 'string'){
           let arr = [];
           arr.push(Number(this.formData.status));
@@ -204,6 +208,8 @@ export default {
         this.formData.endDate = this.formData.reportDate[1];
       }
       InintData(this.formData, window.sessionStorage.getItem("token")).then(res=>{
+        // 接口请求完成之后把 this.formData.status 改正字符串格式
+        this.formData.status = String(this.formData.status);
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
@@ -257,10 +263,11 @@ export default {
     // 表单重置
     resetForm(formName) {
       // this.$refs[formName].resetFields();
-      this.formData.reportDate = '';
-      this.formData.exceptionTypes = '';
+      this.formData.reportDate = [];
+      this.formData.exceptionTypes = [];
       this.formData.reportType = '';
       this.formData.status = '';
+      this.init();
     },
   },
 }

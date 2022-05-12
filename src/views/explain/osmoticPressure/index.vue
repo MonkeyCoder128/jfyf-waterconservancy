@@ -195,12 +195,13 @@ import brokenLineCharts from './components/brokenLineChart.vue';
       }
       .warningBox{
         width: 80%;
+        height: 100%;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-content: center;
         ul{
-          width: 30%;
+          width: 60%;
           display: flex;
           flex-direction: column;
           justify-content: space-around;
@@ -213,19 +214,28 @@ import brokenLineCharts from './components/brokenLineChart.vue';
             align-items: center;
             span:nth-child(1){
               display: inline-block;
-              width: 20px;
-              height: 20px;
+              width: 17px;
+              height: 17px;
               background-color: #115cb9;
+            }
+            span:nth-child(3){
+              color: #115cb9;
             }
           }
           li:nth-child(2){
             span:nth-child(1){
               background-color: #148f97;
             }
+            span:nth-child(3){
+              color: #148f97;
+            }
           }
           li:nth-child(3){
             span:nth-child(1){
               background-color: #1289ba;
+            }
+            span:nth-child(3){
+              color: #1289ba;
             }
           }
         }
@@ -259,7 +269,7 @@ import brokenLineCharts from './components/brokenLineChart.vue';
       .cardBottom {
         width: 49.5%;
         height: auto;
-        min-height: 800px;
+        min-height: 600px;
         background-color: #ffffff;
         border-radius: 5px;
         padding: 5px 20px;

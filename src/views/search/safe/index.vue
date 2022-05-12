@@ -10,10 +10,11 @@
                 <span class="demonstration"></span>
                 <el-date-picker
                   v-model="formData.reportDate"
-                  type="datetimerange"
+                  type="daterange"
                   start-placeholder="开始时间"
                   end-placeholder="结束时间"
-                  :default-time="['12:00:00']">
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  :default-time="['00:00:00','23:59:59']">
                 </el-date-picker>
               </div>
             </el-form-item>
@@ -280,9 +281,10 @@ export default {
     // 表单重置
     resetForm(formName) {
       // this.$refs[formName].resetFields();
-      this.formData.reportDate = '';
-      this.formData.exceptionTypes = '';
+      this.formData.reportDate = [];
+      this.formData.exceptionTypes = [];
       this.formData.reportType = '';
+      this.init();
     },
   },
   // 监听查询时间的变化

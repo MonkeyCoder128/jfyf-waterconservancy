@@ -7,9 +7,9 @@
   export default {
     mounted() {
       this.myCharts();
-      window.addEventListener("resize", function () {
-        myCharts.resize();
-      });
+      // window.addEventListener("resize", function () {
+      //   myCharts.resize();
+      // });
     },
     methods: {
       myCharts() {
@@ -383,7 +383,7 @@
   height: 100%;
   #brokenLineCharts {
     margin: 0 auto;
-    width: 95%;
+    width: 100%;
     height: 100%;
   }
 }

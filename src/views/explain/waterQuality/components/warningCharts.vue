@@ -1,5 +1,5 @@
 <template>
-  <div style="position: relative">
+  <div style="position: relative" class="box">
     <div ref="warningCharts" id="warningCharts"></div>
     <!-- <img src="../../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
@@ -35,9 +35,6 @@ export default {
             labelLine: {
               show: false,
             },
-            label: {
-              show: false,
-            },
             itemStyle: {
               color: "#F8C202",
               borderWidth: 4,
@@ -56,8 +53,22 @@ export default {
             radius: ["65%", "80%"],
             avoidLabelOverlap: false,
             label: {
-              show: false,
-              position: "center",
+              formatter: "{a|{c}/次}{abg|}\n{hr|}\n ",
+              borderWidth: 1,
+              borderRadius: 4,
+              rich: {
+                a: {
+                  color: "inherit", //继承颜色，设置颜色一致对应
+                  lineHeight: 22,
+                  align: "center",
+                },
+                hr: {
+                  borderColor: "#EEEEEE",
+                  width: "100%",
+                  borderWidth: 1,
+                  height: 0,
+                },
+              },
             },
             emphasis: {
               label: {
@@ -95,10 +106,14 @@ export default {
 };
 </script>
 <style  lang="scss" scoped>
+.box{
+  width: 100% !important;
+  height: 100%;
+}
 #warningCharts{
-  width: 170px;
-  height: 170px;
-  margin-top: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
 }
 // .juxing {
 //   position: absolute;

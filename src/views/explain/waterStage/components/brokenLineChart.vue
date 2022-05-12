@@ -7,9 +7,9 @@
   export default {
     mounted() {
       this.myCharts();
-      window.addEventListener("resize", function () {
-        myCharts.resize();
-      });
+      // window.addEventListener("resize", function () {
+      //   myCharts.resize();
+      // });
     },
     methods: {
       myCharts() {
@@ -24,7 +24,7 @@
         var option = {
           // 给echarts设置百分比自适应
           grid: {
-            left: "5%",
+            left: "0%",
             right: "5%",
             top: "20%",
             bottom: "20%",
@@ -383,7 +383,7 @@
   height: 100%;
   #brokenLineCharts {
     margin: 0 auto;
-    width: 95%;
+    width: 100%;
     height: 100%;
   }
 }
