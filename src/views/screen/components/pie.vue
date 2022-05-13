@@ -61,7 +61,6 @@ export default {
               dataCake[index].value + "%"
             }}`;
 
-            console.log(param);
             return str;
           },
         },
