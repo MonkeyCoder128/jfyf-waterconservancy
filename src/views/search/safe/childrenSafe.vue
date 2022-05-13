@@ -65,9 +65,12 @@
             <div v-if="formOne.reportType == 2">
               <el-divider></el-divider>
               <el-form-item label="进展情况：">
-                <el-radio-group v-model="formOne.progress">
+                <el-radio-group v-if="formOne.exceptionType == 5" v-model="formOne.progress">
                   <!-- <el-radio label="1">等待维修</el-radio> -->
                   <el-radio label="2">维修中</el-radio>
+                  <el-radio label="3">维修完成</el-radio>
+                </el-radio-group>
+                <el-radio-group v-else v-model="formOne.progress">
                   <el-radio label="3">维修完成</el-radio>
                 </el-radio-group>
               </el-form-item>
@@ -101,14 +104,15 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="6">
+      <el-col 
+        :span="6"
+        v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
         <el-card shadow="always" class="el-card">
           <p class="record">巡检记录</p>
           <div v-for="(item,index) in this.Xjresult" :key="index">
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
-                <i class="el-icon-circle-check
-"></i>
+                <i class="el-icon-circle-check"></i>
                 平台预警
               </h5>
               <!-- <h5 v-if="item.progress == 1">
@@ -129,11 +133,21 @@
               </h5>
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span>
-                    <i class="">*</i>
+                  <span class="spantime">
+                    <i class="" v-if="item.progress == 0">预警时间：</i>
+                    <i class="" v-else>上报时间：</i>
                     {{message.creatDate}}
+                  </span>
+                  <div class="spanImgBox" v-if="message.imageList.length>0">
+                    <span 
+                    v-for="(imgList,q) in message.imageList" :key="q">
+                      <i>上报图片：</i>
+                      <img :src="imgList" alt="">
                     </span>
-                  <span>
+                  </div>
+                  <span class="spancontent">
+                    <i class="" v-if="item.progress == 0">预警内容：</i>
+                    <i class="" v-else>上报内容：</i>
                     {{message.remark}}
                   </span>
                 </li>
@@ -145,8 +159,10 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="6">
-        <!-- <el-card shadow="always" class="el-card">
+      <el-col 
+        :span="6"
+        v-else>
+        <el-card shadow="always" class="el-card">
           <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
@@ -154,31 +170,38 @@
                 <i class="el-icon-circle-check"></i>
                 平台预警
               </h5>
-              <h5 v-if="item.progress == 1">等待维修</h5>
-              <h5 v-if="item.progress == 2">维修中</h5>
-              <h5 v-if="item.progress == 3">维修完成</h5>
               <h5 v-if="item.progress == 4">
                 <i class="el-icon-circle-check"></i>
                 已解决
               </h5>
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span>
-                    <i class="">*</i>
+                  <span class="spantime">
+                    <i class="" v-if="item.progress == 0">预警时间：</i>
+                    <i class="" v-else>上报时间：</i>
                     {{message.creatDate}}
                   </span>
-                  <span>
+                  <div class="spanImgBox" v-if="message.imageList.length>0">
+                    <span 
+                    v-for="(imgList,q) in message.imageList" :key="q">
+                      <i>上报图片：</i>
+                      <img :src="imgList" alt="">
+                    </span>
+                  </div>
+                  <span class="spancontent">
+                    <i class="" v-if="item.progress == 0">预警内容：</i>
+                    <i class="" v-else>上报内容：</i>
                     {{message.remark}}
                   </span>
                 </li>
               </div>
-              <div class="nulldata" v-if="item.reportRecordList == null">
+              <!-- <div class="nulldata" v-if="item.reportRecordList == null">
                 <span>暂无数据</span>
-              </div>
+              </div> -->
             </ul>
           </div>
-          <span class="otherSpan">暂无数据</span>
-        </el-card> -->
+          <!-- <span class="otherSpan">暂无数据</span> -->
+        </el-card>
       </el-col>
     </div>
     <!--end 设备异常所展示的部分 -->
@@ -292,29 +315,26 @@ export default {
           this.formOne.remarkImageList = res.data.result.remarkImageList;
           this.formOne.exceptionType = String(res.data.result.exceptionType);
           this.imgArr = res.data.result.descriptionImageList;
+          console.log(this.formOne);
         }
       }),
       // 根据id获取右侧信息回显
       InspectionId(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
-          for(let i in res.data.result){
-            for(let k in this.Xjresult){
-              if(res.data.result[i].progress === this.Xjresult[k].progress){
-                console.log(123);
-                this.Xjresult[k] = res.data.result[i];
-              }
-            }
+          console.log(res.data.result);
+          if(res.data.result.length > 0){
+            this.Xjresult = res.data.result;
           }
-          // for(let i in this.Xjresult){
-          //   for(let k in res.data.result){
-          //     if(res.data.result[k].progress === this.Xjresult[i].progress){
-          //       this.Xjresult[i] = res.data.result[k];
+          // for(let i in res.data.result){
+          //   for(let k in this.Xjresult){
+          //     if(res.data.result[i].progress === this.Xjresult[k].progress){
+          //       console.log(123);
+          //       this.Xjresult[k] = res.data.result[i];
           //     }
           //   }
           // }
         }
       })
-      console.log(this.Xjresult);
     },
     // 返回上级路由
     goback(){
@@ -478,16 +498,34 @@ export default {
         margin-left: 40px;
         display: flex;
         flex-direction: column;
-        span:nth-child(1){
+        background-color: #EEEEEE;
+        box-sizing: border-box;
+        padding: 5px 8px;
+        border-radius: 5px;
+        i{
+          font-style: normal;
+        }
+        .spanImgBox{
+          span{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            font-size: 14px;
+            img{
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+        .spantime{
           // color: #67c23a;
           margin-right: 5px;
           font-size: 14px;
         }
-        span:nth-child(2){
+        .spancontent{
           color: gray;
           font-size: 14px;
           margin-top: 5px;
-          margin-left: 10px;
         }
       }
     }

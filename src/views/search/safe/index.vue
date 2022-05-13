@@ -249,7 +249,6 @@ export default {
     },
     // 异常上报
     check(row){
-      console.log(row);
       this.$router.push({name:'childrenSafe',params: {id:row.id,type:row.reportType}});
     },
     // 从后台查询数据
@@ -318,27 +317,27 @@ export default {
   // /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active{
   //   background-color: rgb(28, 72, 191);
   // }
-  /deep/ .el-pagination.is-background .el-pager li:not(.disabled).hover{
-    color: rgb(28, 72, 191);
-  }
-  /deep/ .el-pagination__jump{
-    margin-left: 0px;
-  }
-  /deep/ .el-pagination.is-background .el-pager li{
-    border-radius: 5px;
-  }
-  /deep/ .btn-prev{
-    border-radius: 5px !important; 
-  }
-  /deep/.btn-next{
-    border-radius: 5px !important;
-  }
-  /deep/ .el-pagination .el-select .el-input .el-input__inner{
-    border-radius: 5px;
-  }
-  /deep/ .el-input__inner{
-    border-radius: 5px;
-  }
+  // /deep/ .el-pagination.is-background .el-pager li:not(.disabled).hover{
+  //   color: rgb(28, 72, 191);
+  // }
+  // /deep/ .el-pagination__jump{
+  //   margin-left: 0px;
+  // }
+  // /deep/ .el-pagination.is-background .el-pager li{
+  //   border-radius: 5px;
+  // }
+  // /deep/ .btn-prev{
+  //   border-radius: 5px !important; 
+  // }
+  // /deep/.btn-next{
+  //   border-radius: 5px !important;
+  // }
+  // /deep/ .el-pagination .el-select .el-input .el-input__inner{
+  //   border-radius: 5px;
+  // }
+  // /deep/ .el-input__inner{
+  //   border-radius: 5px;
+  // }
   // 设置input样式
   .changeInputClass{
     /deep/ .el-input__inner{
