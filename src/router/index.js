@@ -46,7 +46,7 @@ const constantRoutes = [
         path: '/realtimeMnitor/realtime',
         name: 'realtime',
         component: () => import('@/views/realtimeMnitor/realtime/index'),
-        meta: { title: '仪表盘、折线图', icon: 'user' }
+        meta: { title: '实时数据', icon: 'user' }
       },
     ]
   },
@@ -104,7 +104,7 @@ const constantRoutes = [
   {
     path: '/video',
     component: Layout,
-    name: 'vide',
+    name: 'video',
     meta: { title: '视频监控', icon: 'el-icon-user' },
     children: [
       {
@@ -223,7 +223,7 @@ const constantRoutes = [
 //   routes: constantRoutes
 // })
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base:process.env.BASE_URL,
   routes: constantRoutes,
 })
