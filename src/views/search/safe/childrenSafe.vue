@@ -314,6 +314,7 @@ export default {
           // }
         }
       })
+      console.log(this.Xjresult);
     },
     // 返回上级路由
     goback(){
