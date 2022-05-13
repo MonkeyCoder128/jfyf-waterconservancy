@@ -563,15 +563,15 @@ export default {
           formatter: "{b}: {c} ({d}%)",
         },
         legend: {
+          data: ["A设备", "C设备", "B设备"],
           orient: "rect",
-          left: "50%", //图例距离左的距离
-          top: "15%",
+          left: "65%", //图例距离左的距离
           itemGap: 30,
           itemHeight: 17,
           itemWidth: 17,
           textStyle: {
             fontSize: 14, //字体大小
-            color: "inherit",
+            // color: "inherit",
           },
           formatter: function (name) {
             let target, percentage;
@@ -585,8 +585,8 @@ export default {
             return arr.join(" ");
           },
         },
-        color: ["#148F97", "#1289BA", "#115CB9"],
 
+        color: ["#148F97", "#1289BA", "#115CB9"],
         series: [
           {
             name: "内置圆",
@@ -995,10 +995,10 @@ export default {
     justify-content: space-between;
     margin-top: 13px;
     .cardBottom {
-      width: 49.5%;
+      width: 49.6%;
       background-color: #ffffff;
       border-radius: 5px;
-      padding: 0 8px;
+      padding: 0 15px;
       .testStatus {
         display: flex;
         align-items: center;

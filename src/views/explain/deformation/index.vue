@@ -565,7 +565,6 @@ export default {
         legend: {
           orient: "rect",
           left: "50%", //图例距离左的距离
-          top: "15%",
           itemGap: 30,
           itemHeight: 17,
           itemWidth: 17,
@@ -994,10 +993,10 @@ export default {
     justify-content: space-between;
     margin-top: 13px;
     .cardBottom {
-      width: 49.5%;
+      width: 49.6%;
       background-color: #ffffff;
       border-radius: 5px;
-      padding: 0 8px;
+      padding: 0 15px;
       .testStatus {
         display: flex;
         align-items: center;
