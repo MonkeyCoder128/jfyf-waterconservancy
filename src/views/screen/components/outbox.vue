@@ -68,7 +68,7 @@ export default {
       setTimeout(function () {
         that.items.push(that.items[0]); //尾部追加数组的第一个，放到数组最后
         that.items.shift(); //删除第一个元素
-        con1.style.marginTop = "0px"; //设置style样式 向上移动30px 再回到原位
+        //con1.style.marginTop = "0px"; //设置style样式 向上移动30px 再回到原位
         that.animate = !that.animate; // 这个地方如果不把animate 取反会出现消息回滚的现象，此时把ul 元素的过渡属性取消掉就可以完美实现无缝滚动的效果了
       }, 500);
     },

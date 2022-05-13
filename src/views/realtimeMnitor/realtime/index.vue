@@ -1729,8 +1729,8 @@ export default {
           type: "pie",
           silent: true,
           z: 1,
-          clockWise: false, //顺时加载
-          hoverAnimation: false, //鼠标移入变大
+          //: false, //顺时加载
+          // hoverAnimation: false, //鼠标移入变大
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
           center: ["40%", "55%"],
           label: {

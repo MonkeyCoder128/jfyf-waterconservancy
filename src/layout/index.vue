@@ -230,11 +230,11 @@ export default {
     menuList(window.sessionStorage.getItem("token")).then((res) => {
       if (res.data.code === 200) {
         this.nav_menu_data = res.data.result;
-        console.log(
-          "%c动态菜单：",
-          "color:blue;font-size:18px;font-weight:bold;",
-          res.data
-        );
+        // console.log(
+        //   "%c动态菜单：",
+        //   "color:blue;font-size:18px;font-weight:bold;",
+        //   res.data
+        // );
       }
     });
   },

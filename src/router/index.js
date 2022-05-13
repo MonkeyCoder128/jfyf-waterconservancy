@@ -197,7 +197,7 @@ const constantRoutes = [
         name: 'userInfo',
         hidden: true,
         component: () => import('@/views/system/userInfo/index'),
-        meta: { title: '', icon: 'user' }
+        meta: { title: '新增用户', icon: 'user' }
       }
     ]
   },
