@@ -104,7 +104,7 @@ const constantRoutes = [
   {
     path: '/video',
     component: Layout,
-    name: 'vide',
+    name: 'video',
     meta: { title: '视频监控', icon: 'el-icon-user' },
     children: [
       {
@@ -223,7 +223,7 @@ const constantRoutes = [
 //   routes: constantRoutes
 // })
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base:process.env.BASE_URL,
   routes: constantRoutes,
 })

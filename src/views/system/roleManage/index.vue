@@ -52,7 +52,7 @@
         :current-page="queryParams.page"
         :page-sizes="[5, 10, 15, 20]"
         :page-size="queryParams.size"
-        layout="total, sizes, prev, pager, next, jumper"
+        layout="  prev, pager, next,sizes, jumper"
         :total="total"
       >
       </el-pagination>
