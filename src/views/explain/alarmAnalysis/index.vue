@@ -60,13 +60,14 @@
         <el-table-column prop="type" label="上报数据" />
       </el-table>
       <el-pagination
-        style="margin-top: 25px; text-align: center"
+        background
+        style="margin-top: 25px; text-align: right"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryParams.currentPage"
         :page-sizes="[5, 10, 15, 20]"
         :page-size="queryParams.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
+        layout="  prev, pager, next,sizes, jumper"
         :total="total"
       >
       </el-pagination>

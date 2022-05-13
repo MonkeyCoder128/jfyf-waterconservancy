@@ -18,27 +18,32 @@
 </template>
 <style lang="scss" scoped>
 a {
-  text-decoration:none;
+  text-decoration: none;
 }
 .tags-view-container {
-  height: 40px;
+  display: flex;
+  align-items: center;
+  height: 50px;
   width: 100%;
   background: #fff;
   //border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
   .tags-view-item {
-    display: inline-block;
-    position: relative;
+    min-width: 90px;
+    white-space: nowrap;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5px;
     cursor: pointer;
     height: 26px;
-    line-height: 26px;
     border: 1px solid #eeeeee;
     color: #999999;
     background: #fff;
-    padding: 0 8px;
     font-size: 12px;
     margin-left: 5px;
-    margin-top: 4px;
+
     &:first-of-type {
       margin-left: 15px;
     }
@@ -46,19 +51,9 @@ a {
       margin-right: 15px;
     }
     &.active {
-      background-color: rgba(36, 123, 255, 1);
+      background-color: #1c48bf;
       color: #fff;
-      border-color: rgba(36, 123, 255, 1);
-      // &::before {
-      //   content: "";
-      //   background: #fff;
-      //   display: inline-block;
-      //   width: 8px;
-      //   height: 8px;
-      //   border-radius: 50%;
-      //   position: relative;
-      //   margin-right: 2px;
-      // }
+      border-color: #1c48bf;
     }
   }
 }
@@ -108,11 +103,8 @@ export default {
 <style lang="scss" scoped>
 .tags-view-item {
   .el-icon-close {
-    width: 16px;
-    height: 16px;
-    vertical-align: 2px;
+    font-size: 17px;
     border-radius: 50%;
-    text-align: center;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     transform-origin: 100% 50%;
     &:before {

@@ -1,44 +1,44 @@
 import axios from 'axios'
+import store from "@/store";
 import config from '@/config/index'
 import { getToken } from "@/utils/auth";
 import { Message, MessageBox, Notification } from "element-ui";
-const http = axios.create({
+const service = axios.create({
     baseURL: config.devServer.proxy['/api'].target, // api的base_url
-    timeout: 10000 // 请求超时时间
-})
-// 请求拦截器
-http.interceptors.request.use((config) => {
-    if (getToken()) {
-        config.headers["Token"] = getToken(); // 让每个请求携带自定义token 请根据实际情况自行修改
-    }
-    return config;
+    withCredentials: true, //跨域请求时发送cookies
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    timeout: 10000, // 请求超时时间
 
 })
+// 请求拦截器
+
+service.interceptors.request.use(
+    config => {
+        // 判断是否存在token,把token添加点请求头中，每次请求携带token传给后端
+        if (store.getters.token) {
+            config.headers['token'] = getToken()
+        }
+        return config
+    },
+    error => {
+        //处理错误请求
+        return Promise.reject(error)
+    }
+)
 // 响应拦截器
-http.interceptors.response.use((ret) => {
-    console.log("%c响应拦截器：", "color:red;font-size:18px;font-weight:bold;", ret.data.code);
-    let code = ret.data.code;
-    if (code == null) {
-        code = ret.status;
-    }
-    if (
-        code == null &&
-        ret.headers["content-type"] == "application/octet-stream"
-    ) {
-        return ret.data;
-    }
-    if (code === 302) {
-        this.$router.push({ path: "/login" });
-        location.reload();
-    } else if (code != 200) {
-        Notification.error({
-            title: ret.data.message
-        });
-        return Promise.reject("error");
+service.interceptors.response.use((response) => {
+    const res = response.data;
+    if (res.code !== 200) {
+        console.log("%c失败了：", "color:blue;font-size:18px;font-weight:bold;");
+        return res
     } else {
-        return ret;
+        //请求成功
+        return res
     }
+
 }, error => {
-    return Promise.reject(error);
+    return Promise.reject(error)
 })
-export default http
+export default service

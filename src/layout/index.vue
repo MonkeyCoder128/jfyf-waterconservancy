@@ -287,12 +287,8 @@ export default {
 }
 .navbar {
   height: 60px;
-  overflow: hidden;
-  position: relative;
-  background: #fff;
-  border-bottom: 1px solid #d8dce5;
-  padding: 5px;
   display: flex;
+  align-items: center;
 }
 .app-main {
   position: relative;
