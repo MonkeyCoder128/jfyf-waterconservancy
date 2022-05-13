@@ -46,7 +46,7 @@ const constantRoutes = [
         path: '/realtimeMnitor/realtime',
         name: 'realtime',
         component: () => import('@/views/realtimeMnitor/realtime/index'),
-        meta: { title: '仪表盘、折线图', icon: 'user' }
+        meta: { title: '实时数据', icon: 'user' }
       },
     ]
   },

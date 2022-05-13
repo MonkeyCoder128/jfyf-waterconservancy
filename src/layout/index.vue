@@ -43,7 +43,7 @@
     <div class="app">
       <!-- 头部 -->
       <div class="navbar">
-        <el-row type="flex">
+        <!-- <el-row type="flex">
           <el-radio-group
             v-model="isCollapse"
             class="nav_menu"
@@ -60,7 +60,8 @@
               /></el-radio-button>
             </div>
           </el-radio-group>
-        </el-row>
+        </el-row> -->
+        <Breadcrumb />
         <el-row type="flex" justify="end" class="nav_right">
           <el-tooltip
             class="item"
@@ -96,8 +97,13 @@
 </template>
 
 <script>
+import Breadcrumb from "./components/Breadcrumb.vue";
 import { menuList } from "@/api/login";
+
 export default {
+  components: {
+    Breadcrumb,
+  },
   name: "Layout",
   computed: {
     key() {
