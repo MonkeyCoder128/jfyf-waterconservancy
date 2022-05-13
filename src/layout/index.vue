@@ -1,72 +1,54 @@
 <template>
   <div class="box">
     <!-- 菜单 -->
-    <el-row class="tac">
-      <el-col :span="12">
-        <el-menu
-          background-color="#304156"
-          text-color="#fff"
-          active-text-color="#409EFF"
-          border-bottom="none"
-          router
-          :default-active="menuPath || path"
-          class="el-menu-vertical-demo"
-          :collapse="isCollapse"
-        >
-          <template v-for="(item, index) in nav_menu_data">
-            <el-submenu
-              v-if="item.sonMenuList"
-              :index="item.menuPath"
-              :key="index"
-            >
-              <template slot="title">
-                <i :class="item.menuIcon"></i>
-                <span>{{ item.name }}</span>
-              </template>
-              <el-menu-item-group
-                v-for="(item2, index2) in item.sonMenuList"
-                :key="index2"
-              >
-                <el-menu-item :index="item2.menuPath" :key="index2">{{
-                  item2.name
-                }}</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-menu-item v-else :index="item.menuPath" :key="item.index">
+    <div class="tac">
+      <span class="mentTitle">智慧水坝管理平台</span>
+      <el-menu
+        style="width: 221px"
+        text-color="#fff"
+        active-text-color="#409EFF"
+        border-bottom="none"
+        unique-opened="true"
+        router
+        :default-active="menuPath || path"
+        class="el-menu-vertical-demo"
+        :collapse="isCollapse"
+      >
+        <template v-for="(item, index) in nav_menu_data">
+          <el-submenu
+            v-if="item.sonMenuList"
+            :index="item.menuPath"
+            :key="index"
+          >
+            <template slot="title">
               <i :class="item.menuIcon"></i>
-              <span slot="title">{{ item.name }}</span>
-            </el-menu-item>
-          </template>
-        </el-menu>
-      </el-col>
-    </el-row>
+              <span>{{ item.name }}</span>
+            </template>
+            <el-menu-item-group
+              v-for="(item2, index2) in item.sonMenuList"
+              :key="index2"
+            >
+              <el-menu-item :index="item2.menuPath" :key="index2">{{
+                item2.name
+              }}</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-menu-item v-else :index="item.menuPath" :key="item.index">
+            <i :class="item.menuIcon"></i>
+            <span slot="title">{{ item.name }}</span>
+          </el-menu-item>
+        </template>
+      </el-menu>
+    </div>
     <div class="app">
       <!-- 头部 -->
       <div class="navbar">
-        <!-- <el-row type="flex">
-          <el-radio-group
-            v-model="isCollapse"
-            class="nav_menu"
-            style="margin-bottom: 20px"
-          >
-            <div @click="showmenu" v-show="leftmenu">
-              <el-radio-button :label="true"
-                ><i class="el-icon-s-fold"
-              /></el-radio-button>
-            </div>
-            <div @click="hidemenu" v-show="rightmenu">
-              <el-radio-button :label="false"
-                ><i class="el-icon-s-unfold"
-              /></el-radio-button>
-            </div>
-          </el-radio-group>
-        </el-row> -->
         <Breadcrumb />
         <el-row type="flex" justify="end" class="nav_right">
           <el-tooltip
             class="item"
             effect="dark"
-            content="全屏"
+            content="进入系统"
             placement="bottom"
           >
             <a href="javascript:;" @click="screen()"
@@ -118,111 +100,7 @@ export default {
       leftmenu: true,
       rightmenu: false,
       path: "/",
-      nav_menu_data: [
-        {
-          title: "实时监测",
-          path: "/realtimeMnitor",
-          icon: "el-icon-view",
-          children: [
-            {
-              title: "实时数据",
-              path: "/realtimeMnitor/realtime",
-              icon: "el-icon-data-line",
-            },
-          ],
-        },
-        {
-          title: "检测分析",
-          path: "/explain",
-          icon: "el-icon-s-opportunity",
-          children: [
-            {
-              title: "流速、流量",
-              path: "/explain/waterVelocity",
-            },
-            {
-              title: "水位",
-              path: "/explain/waterStage",
-            },
-            {
-              title: "库压渗压",
-              path: "/explain/osmoticPressure",
-            },
-            {
-              title: "水质分析",
-              path: "/explain/waterQuality",
-            },
-            {
-              title: "形变位移",
-              path: "/explain/deformation",
-            },
-          ],
-        },
-        {
-          title: "视频监控",
-          path: "/video",
-          icon: "el-icon-video-camera",
-          children: [
-            {
-              title: "实时",
-              path: "/video/realtime",
-            },
-            {
-              title: "回放",
-              path: "/video/playback",
-            },
-          ],
-        },
-        {
-          title: "巡检管理",
-          path: "/search",
-          icon: "el-icon-suitcase",
-          children: [
-            {
-              title: "管理条例",
-              path: "/search/rule",
-            },
-            {
-              title: "安全巡检",
-              path: "/search/safe",
-            },
-            {
-              title: "巡检记录",
-              path: "/search/emergency",
-            },
-          ],
-        },
-        {
-          title: "系统管理",
-          path: "/system",
-          icon: "el-icon-s-tools",
-          children: [
-            {
-              title: "设备管理",
-              path: "/system/deviceManage",
-            },
-            {
-              title: "角色管理",
-              path: "/system/roleManage",
-            },
-            {
-              title: "用户管理",
-              path: "/system/userManage",
-            },
-          ],
-        },
-        {
-          title: "消息管理",
-          path: "/newsManage",
-          icon: "el-icon-phone-outline",
-          children: [
-            {
-              title: "消息列表",
-              path: "/newsManage/news",
-            },
-          ],
-        },
-      ],
+      nav_menu_data: [],
     };
   },
   created() {
@@ -298,6 +176,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/*左侧菜单样式更改*/
+/deep/.el-menu {
+  border-right: solid 1px #e6e6e6;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  background-image: url("../assets/image/menuBar.jpg");
+}
+.el-menu-vertical-demo el-menu
 /*分页插件样式更改*/
 /deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
   border: 1px solid #1c48bf;
@@ -365,9 +253,25 @@ export default {
 .box {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
+.tac {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  .mentTitle {
+    font-size: 24px;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #283558;
+    height: 65px;
+    line-height: 65px;
+    text-align: center;
+  }
+}
+
 .app {
-  width: 100%;
+  width: calc(100% - 220px);
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -379,7 +283,6 @@ export default {
   height: 100%;
 }
 ::v-deep .el-submenu {
-  background-color: red;
   overflow: hidden;
 }
 .navbar {
