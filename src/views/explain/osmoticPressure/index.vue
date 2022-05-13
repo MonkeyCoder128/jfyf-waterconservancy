@@ -52,7 +52,11 @@
           </div>
         </div>
         <span class="cardTitle">预警分析</span>
-        <el-table :data="tableData" :row-style="{ height: '0' }" :cell-style="{ padding: '0' }">
+        <el-table 
+          :data="tableData" 
+          :row-style="{ height: '0' }" 
+          :cell-style="{ padding: '0' }"
+          :header-cell-style="{background:'#EEEEEE',color:'#333333'}">
           <el-table-column prop="date" label="监测点" />
           <el-table-column prop="name" label="预警次数" />
           <el-table-column prop="type" label="设备状态">

@@ -289,9 +289,9 @@ export default {
     float: right;
   }
   // 设置pagination分页的样式
-  /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active{
-    background-color: rgb(28, 72, 191);
-  }
+  // /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active{
+  //   background-color: rgb(28, 72, 191);
+  // }
   /deep/ .el-pagination.is-background .el-pager li:not(.disabled).hover{
     color: rgb(28, 72, 191);
   }
