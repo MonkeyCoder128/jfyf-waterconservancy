@@ -187,6 +187,10 @@ export default {
 }
 .el-menu-vertical-demo el-menu
 /*分页插件样式更改*/
+/deep/.el-pagination.is-background .el-pager li:not(.disabled).active{
+  
+  background-color: #ffffff;
+}
 /deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
   border: 1px solid #1c48bf;
   background-color: #ffffff;
