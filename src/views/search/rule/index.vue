@@ -483,39 +483,6 @@
     float: right;
   }
 
-  // 设置pagination分页的样式
-  // /deep/ .el-pagination.is-background .el-pager li:not(.disabled).active {
-  //   background-color: rgb(28, 72, 191);
-  // }
-
-  // /deep/ .el-pagination.is-background .el-pager li:not(.disabled).hover {
-  //   color: rgb(28, 72, 191);
-  // }
-
-  // /deep/ .el-pagination__jump {
-  //   margin-left: 0px;
-  // }
-
-  // /deep/ .el-pagination.is-background .el-pager li {
-  //   border-radius: 5px;
-  // }
-
-  // /deep/ .btn-prev {
-  //   border-radius: 5px !important;
-  // }
-
-  // /deep/.btn-next {
-  //   border-radius: 5px !important;
-  // }
-
-  // /deep/ .el-pagination .el-select .el-input .el-input__inner {
-  //   border-radius: 5px;
-  // }
-
-  // /deep/ .el-input__inner {
-  //   border-radius: 5px;
-  // }
-
   // dialog上传文件的样式
   /deep/ .el-upload-dragger {
     display: flex;
