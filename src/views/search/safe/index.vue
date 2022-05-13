@@ -87,7 +87,7 @@
                 <el-button
                   size="small"
                   type="text"
-                  @click="check(scope.row.id)"
+                  @click="check(scope.row)"
                   >
                   <span style="color:#1C48BF;" v-if="scope.row.reportType == 1">异常上报</span>
                   <span style="color:#0269E9;" v-else>编辑</span>
@@ -248,8 +248,9 @@ export default {
       });
     },
     // 异常上报
-    check(id){
-      this.$router.push({name:'childrenSafe',query: {id}})
+    check(row){
+      console.log(row);
+      this.$router.push({name:'childrenSafe',params: {id:row.id,type:row.reportType}});
     },
     // 从后台查询数据
     getdata () {

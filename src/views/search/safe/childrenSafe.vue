@@ -19,7 +19,11 @@
             <el-row>
               <el-col :span="8">
                 <el-form-item label="异常情况：">
-                  <el-select clearable v-model="formOne.exceptionType" placeholder="异常情况">
+                  <el-select 
+                    clearable 
+                    v-model="formOne.exceptionType" 
+                    placeholder="异常情况"
+                    :disabled="this.formOne.reportType == 2 ? true : false">
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -30,9 +34,10 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-form-item label="问题描述：">
-              <!-- 图片回显上来后的展示框 -->
-              <div class="imgShowBox">
+            <!-- 图片回显上来后的展示框 -->
+            <div class="reportImg">
+              <p>上报图片：</p>
+              <div class="imgShowBox" v-if="this.formOne.reportType == 2">
                 <img class="imgShow" v-for="(item,i) in this.imgArr" :key="i" :src="item" alt="">
               </div>
               <el-upload
@@ -41,26 +46,33 @@
                 :on-remove="handleRemove"
                 :on-success="handlePictureSuccess"
                 :before-upload="handleBeforeUpload"
+                v-if="this.formOne.reportType == 1"
                 name='fileData'>
                 <i class="el-icon-plus"></i>
                 <span class="el-upload__text">*点击添加图片</span>
               </el-upload>
-              <!-- <el-dialog :visible.sync="dialogVisible">
-                <img width="100%" :src="formOne.descriptionImageList" alt="">
-              </el-dialog> -->
-              <el-col :span="14">
-                <el-input type="textarea" v-model="formOne.description" placeholder="请输入详细问题描述"></el-input>
+            </div>
+            <el-form-item label="问题描述：">
+              <el-col :span="12">
+                <el-input 
+                  type="textarea" 
+                  :disabled="this.formOne.reportType == 2 ? true : false" 
+                  v-model="formOne.description" 
+                  placeholder="请输入详细问题描述">
+                </el-input>
               </el-col>
             </el-form-item>
-            <div v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
+            <div v-if="formOne.reportType == 2">
+              <el-divider></el-divider>
               <el-form-item label="进展情况：">
                 <el-radio-group v-model="formOne.progress">
-                  <el-radio label="1">等待维修</el-radio>
+                  <!-- <el-radio label="1">等待维修</el-radio> -->
                   <el-radio label="2">维修中</el-radio>
                   <el-radio label="3">维修完成</el-radio>
                 </el-radio-group>
               </el-form-item>
-              <el-form-item label="备注：">
+              <div class="reportImg">
+                <p>添加图片：</p>
                 <el-upload
                   action="http://112.125.88.230:8002/upload/uploadFileByDate"
                   list-type="picture-card"
@@ -74,7 +86,9 @@
                 <el-dialog :visible.sync="dialogVisible">
                   <img width="100%" :src="formOne.remarkImageList" alt="">
                 </el-dialog>
-                <el-col :span="14">
+              </div>
+              <el-form-item label="备注：">
+                <el-col :span="12">
                   <el-input type="textarea" v-model="formOne.remark" placeholder="请添加备注">
                   </el-input>
                 </el-col>
@@ -87,20 +101,20 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="6" v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
+      <el-col :span="6">
         <el-card shadow="always" class="el-card">
           <p class="record">巡检记录</p>
-          <div v-for="(item) in this.Xjresult" :key="item.progress">
+          <div v-for="(item,index) in this.Xjresult" :key="index">
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
                 <i class="el-icon-circle-check
 "></i>
                 平台预警
               </h5>
-              <h5 v-if="item.progress == 1">
+              <!-- <h5 v-if="item.progress == 1">
                 <i class="el-icon-circle-check"></i>
                 等待维修
-              </h5>
+              </h5> -->
               <h5 v-if="item.progress == 2">
                 <i class="el-icon-circle-check"></i>
                 维修中
@@ -131,8 +145,8 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="6" v-else>
-        <el-card shadow="always" class="el-card">
+      <el-col :span="6">
+        <!-- <el-card shadow="always" class="el-card">
           <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
@@ -140,9 +154,9 @@
                 <i class="el-icon-circle-check"></i>
                 平台预警
               </h5>
-              <!-- <h5 v-if="item.progress == 1">等待维修</h5>
+              <h5 v-if="item.progress == 1">等待维修</h5>
               <h5 v-if="item.progress == 2">维修中</h5>
-              <h5 v-if="item.progress == 3">维修完成</h5> -->
+              <h5 v-if="item.progress == 3">维修完成</h5>
               <h5 v-if="item.progress == 4">
                 <i class="el-icon-circle-check"></i>
                 已解决
@@ -158,13 +172,13 @@
                   </span>
                 </li>
               </div>
-              <!-- <div class="nulldata" v-if="item.reportRecordList == null">
+              <div class="nulldata" v-if="item.reportRecordList == null">
                 <span>暂无数据</span>
-              </div> -->
+              </div>
             </ul>
           </div>
           <span class="otherSpan">暂无数据</span>
-        </el-card>
+        </el-card> -->
       </el-col>
     </div>
     <!--end 设备异常所展示的部分 -->
@@ -195,6 +209,37 @@ export default {
         // 上传备注图片数据
         remarkImageList: [],
       },
+      // 存储巡检记录
+      Xjresult: [
+        {
+          progress: 0,
+          // reportRecordList:{
+          //   creatDate: '',
+          //   id: '',
+          //   progress: '',
+          //   recordId: '',
+          //   remark :'暂无数据',
+          //   imageList:[],
+          // },
+          reportRecordList: null,
+        },
+        {
+          progress: 1,
+          reportRecordList:null,
+        },
+        {
+          progress: 2,
+          reportRecordList:null,
+        },
+        {
+          progress: 3,
+          reportRecordList:null,
+        },
+        {
+          progress: 4,
+          reportRecordList:null,
+        }
+      ],
       options: [{
           value: '1',
           label: '流速、流量'
@@ -225,46 +270,18 @@ export default {
       showUserButton: true,
       listLoading: false,
       imgArr: [],
-      // 存储巡检记录
-      Xjresult: [
-        {
-          progress: 0,
-          reportRecordList:{
-            creatDate: '',
-            id: '',
-            progress: '',
-            recordId: '',
-            remark :'暂无数据',
-          }
-        },
-        {
-          progress: 1,
-          reportRecordList:null,
-        },
-        {
-          progress: 2,
-          reportRecordList:null,
-        },
-        {
-          progress: 3,
-          reportRecordList:null,
-        },
-        {
-          progress: 4,
-          reportRecordList:null,
-        }
-      ]
     }
   },
   created(){
     // 获取父级页面传来的参数
-    this.formOne.id = this.$route.query.id;
-    this.Echo()
+    this.formOne.id = this.$route.params.id;
+    this.formOne.reportType = this.$route.params.type;
+    this.Echo();
   },
   methods:{
     // 根据id获取左侧信息回显
     Echo(){
-      SelectReport(this.$route.query.id,window.sessionStorage.getItem("token")).then(res=>{
+      SelectReport(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           this.formOne.reportUserName = res.data.result.reportUserName;
           this.formOne.description = res.data.result.description;
@@ -278,15 +295,23 @@ export default {
         }
       }),
       // 根据id获取右侧信息回显
-      InspectionId(this.$route.query.id,window.sessionStorage.getItem("token")).then(res=>{
+      InspectionId(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           for(let i in res.data.result){
             for(let k in this.Xjresult){
-              if(res.data.result[i].progress == this.Xjresult[k].progress){
+              if(res.data.result[i].progress === this.Xjresult[k].progress){
+                console.log(123);
                 this.Xjresult[k] = res.data.result[i];
               }
             }
           }
+          // for(let i in this.Xjresult){
+          //   for(let k in res.data.result){
+          //     if(res.data.result[k].progress === this.Xjresult[i].progress){
+          //       this.Xjresult[i] = res.data.result[k];
+          //     }
+          //   }
+          // }
         }
       })
     },
@@ -297,6 +322,7 @@ export default {
     // 表单数据提交
     onSubmit() {
       this.listLoading = true;
+      this.formOne.reportType = 2;
       ReportErr(this.formOne,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           this.$message({
@@ -405,9 +431,8 @@ export default {
     font-size: 12px;
     margin-top: 10px;
   }
-  /deep/ .el-col-14{
+  /deep/ .el-col-12{
     padding-left: 0px !important;
-    margin-top: 20px;
   }
   /deep/::-webkit-scrollbar {
     display: none; /* Chrome Safari */
@@ -473,6 +498,28 @@ export default {
         margin-left: 40px;
         margin-top: 10px;
       }
+    }
+  }
+  .reportImg{
+    display: flex;
+    margin-bottom: 20px;
+    p{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      font-size: 14px;
+      color: #606266;
+    }
+  }
+  .remark{
+    margin-bottom: 20px;
+    /deep/ .el-form-item__label{
+      height: 100px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
   }
 </style>
