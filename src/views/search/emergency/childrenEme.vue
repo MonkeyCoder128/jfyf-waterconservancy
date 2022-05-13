@@ -87,7 +87,9 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="6" v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
+      <el-col 
+        :span="6" 
+        v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
         <el-card shadow="always" class="el-card">
           <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
@@ -96,10 +98,10 @@
                 <i class="el-icon-circle-check"></i>
                 平台预警
               </h5>
-              <h5 v-if="item.progress == 1">
+              <!-- <h5 v-if="item.progress == 1">
                 <i class="el-icon-circle-check"></i>
                 等待维修
-              </h5>
+              </h5> -->
               <h5 v-if="item.progress == 2">
                 <i class="el-icon-circle-check"></i>
                 维修中
@@ -114,11 +116,21 @@
               </h5>
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span>
-                    <i class="">*</i>
+                  <span class="spantime">
+                    <i class="" v-if="item.progress == 0">预警时间：</i>
+                    <i class="" v-else>上报时间：</i>
                     {{message.creatDate}}
                   </span>
-                  <span>
+                  <div class="spanImgBox" v-if="message.imageList.length>0">
+                    <span 
+                    v-for="(imgList,q) in message.imageList" :key="q">
+                      <i>上报图片：</i>
+                      <img :src="imgList" alt="">
+                    </span>
+                  </div>
+                  <span class="spancontent">
+                    <i class="" v-if="item.progress == 0">预警内容：</i>
+                    <i class="" v-else>上报内容：</i>
                     {{message.remark}}
                   </span>
                 </li>
@@ -130,7 +142,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="6" v-else>
         <el-card shadow="always" class="el-card">
           <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
@@ -139,23 +151,41 @@
                 <i class="el-icon-circle-check"></i>
                 平台预警
               </h5>
-              <!-- <h5 v-if="item.progress == 1">等待维修</h5>
-              <h5 v-if="item.progress == 2">维修中</h5>
-              <h5 v-if="item.progress == 3">维修完成</h5> -->
+              <!-- <h5 v-if="item.progress == 1">
+                <i class="el-icon-circle-check"></i>
+                等待维修
+              </h5> -->
+              <!-- <h5 v-if="item.progress == 2">
+                <i class="el-icon-circle-check"></i>
+                维修中
+              </h5>
+              <h5 v-if="item.progress == 3">
+                <i class="el-icon-circle-check"></i>
+                维修完成
+              </h5> -->
               <h5 v-if="item.progress == 4">
                 <i class="el-icon-circle-check"></i>
                 已解决
               </h5>
               <div v-if="item.reportRecordList !== null">
                 <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span>
-                    <i class="">*</i>
+                  <span class="spantime">
+                    <i class="" v-if="item.progress == 0">预警时间：</i>
+                    <i class="" v-else>上报时间：</i>
                     {{message.creatDate}}
                   </span>
-                  <span>
+                  <div class="spanImgBox" v-if="message.imageList.length>0">
+                    <span 
+                    v-for="(imgList,q) in message.imageList" :key="q">
+                      <i>上报图片：</i>
+                      <img :src="imgList" alt="">
+                    </span>
+                  </div>
+                  <span class="spancontent">
+                    <i class="" v-if="item.progress == 0">预警内容：</i>
+                    <i class="" v-else>上报内容：</i>
                     {{message.remark}}
                   </span>
-                  
                 </li>
               </div>
               <!-- <div class="nulldata" v-if="item.reportRecordList == null">
@@ -163,7 +193,7 @@
               </div> -->
             </ul>
           </div>
-          <span v-if="this.formOne.progress != 4" class="otherSpan">暂无数据</span>
+          <!-- <span v-if="this.formOne.progress != 4" class="otherSpan">暂无数据</span> -->
         </el-card>
       </el-col>
     </div>
@@ -229,13 +259,14 @@ export default {
       Xjresult: [
         {
           progress: 0,
-          reportRecordList:{
-            creatDate: '',
-            id: '',
-            progress: '',
-            recordId: '',
-            remark :'暂无数据',
-          }
+          // reportRecordList:{
+          //   creatDate: '',
+          //   id: '',
+          //   progress: '',
+          //   recordId: '',
+          //   remark :'暂无数据',
+          // }
+          reportRecordList: null,
         },
         {
           progress: 1,
@@ -274,18 +305,13 @@ export default {
           this.formOne.remark = res.data.result.remark;
           this.formOne.remarkImageList = res.data.result.remarkImageList;
           this.formOne.exceptionType = String(res.data.result.exceptionType);
-          console.log(this.formOne.progress);
         }
       }),
       // 根据id获取右侧信息回显
       InspectionId(this.$route.query.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
-          for(let i in res.data.result){
-            for(let k in this.Xjresult){
-              if(res.data.result[i].progress == this.Xjresult[k].progress){
-                this.Xjresult[k] = res.data.result[i];
-              }
-            }
+          if(res.data.result.length > 0){
+            this.Xjresult = res.data.result;
           }
         }
       })
@@ -448,16 +474,34 @@ export default {
         margin-left: 40px;
         display: flex;
         flex-direction: column;
-        span:nth-child(1){
+        background-color: #EEEEEE;
+        box-sizing: border-box;
+        padding: 5px 8px;
+        border-radius: 5px;
+        i{
+          font-style: normal;
+        }
+       .spanImgBox{
+          span{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            font-size: 14px;
+            img{
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+        .spantime{
           // color: #67c23a;
           margin-right: 5px;
           font-size: 14px;
         }
-        span:nth-child(2){
+        .spancontent{
           color: gray;
           font-size: 14px;
           margin-top: 5px;
-          margin-left: 10px;
         }
       }
     }
