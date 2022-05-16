@@ -403,13 +403,14 @@ export default {
   position: absolute;
   top: 18px;
   right: 30px;
-  font-size: 16px;
-  font-family: PingFang SC;
-  font-weight: bold;
-  color: #2e89e0;
   line-height: 22px;
   justify-content: center;
   align-items: center;
+
+  font-size: 17px;
+  font-family: PingFang SC;
+  font-weight: 380;
+  color: #4496e1;
 }
 .login :hover {
   cursor: pointer;
@@ -470,11 +471,11 @@ export default {
 }
 .box_cont2 {
   width: 100%;
-    height: 24%;
-    margin-top: 1.4%;
-    display: flex;
-    flex-direction: row;
-    padding-left: 2%;
+  height: 24%;
+  margin-top: 1.4%;
+  display: flex;
+  flex-direction: row;
+  padding-left: 2%;
 }
 .box_cont_top {
   height: 50.5%;
