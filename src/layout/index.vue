@@ -187,8 +187,7 @@ export default {
 }
 .el-menu-vertical-demo el-menu
 /*分页插件样式更改*/
-/deep/.el-pagination.is-background .el-pager li:not(.disabled).active{
-  
+/deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #ffffff;
 }
 /deep/.el-pagination.is-background .el-pager li:not(.disabled).active {
@@ -276,11 +275,9 @@ export default {
 
 .app {
   width: calc(100% - 220px);
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 ::v-deep .el-col-12,
 .el-menu {
