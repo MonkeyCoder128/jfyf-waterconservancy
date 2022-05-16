@@ -113,7 +113,7 @@
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
                 <i class="el-icon-circle-check"></i>
-                平台预警
+                巡检记录
               </h5>
               <!-- <h5 v-if="item.progress == 1">
                 <i class="el-icon-circle-check"></i>
@@ -168,7 +168,11 @@
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
                 <i class="el-icon-circle-check"></i>
-                平台预警
+                巡检记录
+              </h5>
+              <h5 v-if="item.progress == 3">
+                <i class="el-icon-circle-check"></i>
+                维修完成
               </h5>
               <h5 v-if="item.progress == 4">
                 <i class="el-icon-circle-check"></i>
@@ -514,6 +518,7 @@ export default {
             img{
               width: 50px;
               height: 50px;
+              border-radius: 5px;
             }
           }
         }
