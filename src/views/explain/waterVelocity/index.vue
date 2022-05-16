@@ -566,12 +566,12 @@ export default {
           data: ["A设备", "C设备", "B设备"],
           orient: "rect",
           left: "65%", //图例距离左的距离
+          top: "10%",
           itemGap: 30,
           itemHeight: 17,
           itemWidth: 17,
           textStyle: {
             fontSize: 14, //字体大小
-            // color: "inherit",
           },
           formatter: function (name) {
             let target, percentage;

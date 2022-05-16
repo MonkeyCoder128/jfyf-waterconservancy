@@ -4,6 +4,7 @@
     <div class="tac">
       <span class="mentTitle">智慧水坝管理平台</span>
       <el-menu
+        unique-opened
         style="width: 221px"
         text-color="#fff"
         active-text-color="#409EFF"
@@ -229,6 +230,7 @@ export default {
 /deep/.el-pagination__editor.el-input .el-input__inner {
   width: 40px;
   border: 1px solid #999999;
+  height: 26px;
 }
 /deep/.el-pagination .el-select .el-input .el-input__inner {
   width: 85px;
@@ -345,9 +347,10 @@ export default {
   position: absolute;
   right: 1vw;
   padding: 10px;
+  display: flex;
+  align-items: center;
 }
 .el-button--text {
-  margin-top: -12px;
   font-size: 19px;
   color: #989b9c;
 }

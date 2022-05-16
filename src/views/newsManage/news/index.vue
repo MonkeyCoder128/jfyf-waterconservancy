@@ -35,8 +35,12 @@
           </el-select>
         </div>
         <el-button
-          style="margin-left: 15px"
-          type="primary"
+          style="
+            margin-left: 15px;
+            border: 1px solid #1c48bf;
+            border-radius: 5px;
+            color: #1c48bf;
+          "
           @click="resetTab()"
           size="mini"
           >重置</el-button
@@ -168,6 +172,7 @@ export default {
       display: flex;
       align-items: center;
       span {
+        font-size: 14px;
         white-space: nowrap;
       }
     }

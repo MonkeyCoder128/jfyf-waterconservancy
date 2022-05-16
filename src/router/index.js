@@ -24,18 +24,6 @@ const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
-  // {
-  //   path: '/screen',
-  //   component: Layout,
-  //   children: [{
-  //     path: '/screen',
-  //     name: 'screen',
-  //     component: () => import('@/views/screen/index'),
-  //     meta: { title: '首页', icon: 'home' }
-  //   }]
-  // },
-
   {
     path: '/realtimeMnitor',
     component: Layout,

@@ -565,6 +565,7 @@ export default {
         legend: {
           orient: "rect",
           left: "50%", //图例距离左的距离
+          top: "10%",
           itemGap: 30,
           itemHeight: 17,
           itemWidth: 17,
