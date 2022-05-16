@@ -107,7 +107,7 @@ export default {
   width: 100%;
   line-height: 30px;
   overflow: hidden;
-  //height: calc(100% - 40px);
+  height: 100%;
   transition: all 0.5s;
   color: #e3e3e4;
   font-size: 14px;
@@ -117,7 +117,7 @@ export default {
   transition: all 0.5s;
 }
 /deep/#con1 {
-  height: 50%;
+  height: 100%;
   overflow: hidden !important;
 }
 #con1 li {

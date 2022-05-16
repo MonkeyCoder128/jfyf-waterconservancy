@@ -8,7 +8,6 @@
         text-color="#fff"
         active-text-color="#409EFF"
         border-bottom="none"
-        unique-opened="true"
         router
         :default-active="menuPath || path"
         class="el-menu-vertical-demo"
@@ -257,6 +256,7 @@ export default {
   display: flex;
   flex-direction: row;
   height: 100%;
+  overflow: hidden;
 }
 .tac {
   display: flex;
@@ -277,7 +277,8 @@ export default {
   width: calc(100% - 220px);
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
+  //overflow-y: scroll;
+  height: 100%;
 }
 ::v-deep .el-col-12,
 .el-menu {
@@ -290,11 +291,12 @@ export default {
   height: 60px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .app-main {
   position: relative;
-  min-height: calc(100vh - 60px);
-  overflow: hidden;
+  height: calc(100vh - 60px);
+  overflow: auto;
   margin: 10px;
 }
 .sidebar {
