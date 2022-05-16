@@ -96,7 +96,7 @@
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
                 <i class="el-icon-circle-check"></i>
-                平台预警
+                巡检记录
               </h5>
               <!-- <h5 v-if="item.progress == 1">
                 <i class="el-icon-circle-check"></i>
@@ -149,7 +149,7 @@
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
                 <i class="el-icon-circle-check"></i>
-                平台预警
+                巡检记录
               </h5>
               <!-- <h5 v-if="item.progress == 1">
                 <i class="el-icon-circle-check"></i>
