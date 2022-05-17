@@ -240,14 +240,6 @@ export default {
       Xjresult: [
         {
           progress: 0,
-          // reportRecordList:{
-          //   creatDate: '',
-          //   id: '',
-          //   progress: '',
-          //   recordId: '',
-          //   remark :'暂无数据',
-          //   imageList:[],
-          // },
           reportRecordList: null,
         },
         {

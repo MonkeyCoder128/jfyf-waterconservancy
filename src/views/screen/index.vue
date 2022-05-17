@@ -95,7 +95,7 @@
                 ></iframe>
               </div> -->
               <!-- <img src="../../assets/image/3d.png" class="threed" alt="" /> -->
-              <div style="height:390px;overflow-y:hidden;display:block;">
+              <div style="height:100%;overflow-y:hidden;display:block;">
                 <iframe
                 frameborder="0"
                 scrolling="no"
