@@ -1,128 +1,218 @@
 <template>
-  <el-row :gutter="12">
-    <el-col :span="24">
-      <el-card shadow="always" style="height: 95vh">
-        <el-col :span="6">
-          <el-card shadow="hover">
-            <el-input placeholder="输入关键字进行过滤" v-model="filterText">
+  <el-row class="h100" :gutter="12">
+    <el-col class="h100" :span="24">
+      <div class="h100">
+        <el-col class="h100" :span="6">
+          <img class="titimg" src="@/assets/image/huifang.jpg" alt="" />
+          <div class="card">
+            <el-input placeholder="请输入点位搜索" suffix-icon="el-icon-search" v-model="filterText">
             </el-input>
-
-            <el-tree
-              class="filter-tree"
-              :data="data"
-              :props="defaultProps"
-              default-expand-all
-              :filter-node-method="filterNode"
-              @node-click="handleNodeClick"
-              ref="tree"
-            >
-            </el-tree
-          ></el-card>
+            <el-tree class="filter-tree" :data="dataList" default-expand-all :filter-node-method="filterNode"
+              highlight-current @node-click="handleNodeClick" ref="tree">
+              <span slot-scope="{node,data}">
+                <span>
+                  <i :class="data.icon" class="mr5"></i>{{ data.label }}
+                </span>
+              </span>
+            </el-tree>
+          </div>
         </el-col>
-        <el-col :span="18">
-          <el-card shadow="hover">
-            <div class="time">
-              <h2>{{ p_video }}监控</h2>
-            <div class="block" style="margin-left:5vw;">
-              <span class="demonstration"></span>
-              <el-date-picker
-                v-model="value1"
-                type="date"
-                placeholder="选择日期"
-              >
-              </el-date-picker>
+        <el-col :span="18" class="h93">
+          <el-card shadow="always" class="el-card h93">
+            <div>
+              <div>
+                <el-form :inline="true" :model="formData" class="demo-form-inline" size="small" ref="ruleForm">
+                  <el-form-item label="时间" class="fontBold">
+                    <div class="block" :span='6'>
+                      <span class="demonstration"></span>
+                      <el-date-picker v-model="formData.reportDate" type="daterange" start-placeholder="开始时间"
+                        end-placeholder="结束时间" value-format="yyyy-MM-dd HH:mm:ss"
+                        :default-time="['00:00:00', '23:59:59']">
+                      </el-date-picker>
+                    </div>
+                  </el-form-item>
+                  <el-form-item>
+                    <el-button style="border-radius:5px;" type="primary" size="small" @click="serchData">查询</el-button>
+                  </el-form-item>
+                </el-form>
+              </div>
+              <div>
+                <el-table :data="tableData.list" :header-cell-style="{ background: '#EEEEEE', color: '#333333' }"
+                  style="width: 100%">
+                  <el-table-column prop="imgData" label="视频缩略图">
+                    <template slot-scope="scope">
+                      <img class="tableImg" :src="scope.row.imgData" alt="">
+                    </template>
+                  </el-table-column>
+                  <el-table-column prop="date" label="视频录制时间" width="180">
+                  </el-table-column>
+                  <el-table-column prop="address" label="视频信息">
+                    <template slot-scope="scope">
+                      <p>视频时长：{{ scope.row.videoTime }}</p>
+                      <p>视频大小：{{ scope.row.videoSize }}</p>
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="操作">
+                    <template slot-scope="scope">
+                      <span @click="handleClick(scope.row)" class="lookColr">查看</span>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </div>
+              <div class="con-page" v-if="tableData.list && tableData.list.length > 4">
+                <el-pagination background :page-size="tableData.pageSize" :page-count="tableData.totalPage"
+                  :page-sizes="[10, 20, 50, 100]" :total="tableData.totalCount" :current-page="tableData.currPage"
+                  layout="prev,pager,next,sizes,jumper" @current-change="changeCurrent" @size-change="handleSizeChange">
+                </el-pagination>
+              </div>
             </div>
-            </div>
-            
-            <video
-              id="video"
-              class="video-js vjs-default-skin vjs-big-play-centered"
-              muted
-              controls
-            >
-              <source
-                src="/PLTV/88888888/224/3221225611/index.m3u8"
-                type="application/x-mpegURL"
-              />
-            </video>
           </el-card>
         </el-col>
-      </el-card>
+      </div>
     </el-col>
+    <el-dialog title="" :visible.sync="dialogVisible" width="70%" :close-on-click-modal="false"
+      :close-on-press-escape="false">
+      <video id="video" class="h100 video-js vjs-default-skin vjs-big-play-centered" muted controls>
+        <source :src="nowPlayVideoUrl" type="application/x-mpegURL" />
+      </video>
+    </el-dialog>
   </el-row>
 </template>
 <script>
 import Videojs from "video.js";
 import "videojs-contrib-hls";
 export default {
-  data() {
+  data () {
     return {
-      value1: '',
-      p_video: "A区",
+      nowPlayVideoUrl: "http://112.125.88.230/jfyf/PLTV/88888888/224/3221225611/index.m3u8",
+      dialogVisible: false,// 查看视频
+      p_video: '',
       filterText: "",
-      data: [
-        {
+      formData: {
+        reportDate: [],
+        endDate: '',
+        startDate: '',
+      },
+      tableData: {
+        list: [
+          {
+            imgData: require('../../../assets/image/huifang.jpg'),
+            date: '2022-04-12  12:00:09',
+            videoTime: '24h',
+            videoSize: '10M'
+          },
+          {
+            imgData: require('../../../assets/image/huifang.jpg'),
+            date: '2012-05-02  12:00:09',
+            videoTime: '424h',
+            videoSize: '10M'
+          },
+          {
+            imgData: require('../../../assets/image/huifang.jpg'),
+            date: '2011-05-02  12:00:09',
+            videoTime: '324h',
+            videoSize: '10M'
+          },
+          {
+            imgData: require('../../../assets/image/huifang.jpg'),
+            date: '2011-04-02  12:00:09',
+            videoTime: '124h',
+            videoSize: '10M'
+          },
+          {
+            imgData: require('../../../assets/image/huifang.jpg'),
+            date: '2016-05-02  12:00:09',
+            videoTime: '242h',
+            videoSize: '103M'
+          },
+
+        ],
+        totalCount: 0,
+        pageSize: 10,
+        currPage: 1,
+        totalPage: 1
+      },
+      dataList: [{
+        id: 111,
+        label: "全部",
+        children: [{
           id: 1,
           label: "A区",
+          icon: 'el-icon-reading',
           children: [
             {
               id: 5,
               label: "A区 -1",
+              icon: 'el-icon-location-outline'
             },
             {
               id: 6,
               label: "A区 -2",
+              icon: 'el-icon-location-outline'
             },
           ],
         },
         {
           id: 2,
           label: "B区",
+          icon: 'el-icon-reading',
           children: [
             {
               id: 5,
               label: "B区 -1",
+              icon: 'el-icon-location-outline'
             },
             {
               id: 6,
               label: "B区 -2  ",
+              icon: 'el-icon-location-outline'
             },
           ],
         },
         {
           id: 3,
           label: "C区",
+          icon: 'el-icon-reading',
           children: [
             {
               id: 7,
               label: "C区 -1",
+              icon: 'el-icon-location-outline'
             },
             {
               id: 8,
               label: "C区 -2",
+              icon: 'el-icon-location-outline'
             },
           ],
-        },
-      ],
+        }],
+      }],
       defaultProps: {
         children: "children",
         label: "label",
       },
+      listLoading: false,
     };
   },
-  mounted() {
+  mounted () {
     setTimeout(() => {
       this.getVideo();
     });
   },
   watch: {
-    filterText(val) {
+    filterText (val) {
       this.$refs.tree.filter(val);
     },
   },
   methods: {
+    // 查看视频
+    handleClick (index) {
+      console.log(index);
+      this.dialogVisible = true;
+      // this.getVideo();
+    },
     //直播
-    getVideo() {
+    getVideo () {
       this.player = Videojs("video", {
         bigPlayButton: true,
         autoplay: false,
@@ -132,30 +222,145 @@ export default {
       });
     },
     //树
-    filterNode(value, data) {
+    filterNode (value, data) {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
     //点击事件
-    handleNodeClick(data) {
-      this.p_video = data.label;
+    handleNodeClick (data) {
+      this.p_video = data.label
+    },
+    // 改变页数
+    changeCurrent (val) {
+      this.tableData.currPage = val
+      // this.init();
+    },
+    handleSizeChange (val) {
+      this.tableData.pageSize = val
+      // this.init();
+    },
+    // 查询数据
+    serchData () {
+      this.listLoading = true;
+      this.formData.startDate = '';
+      this.formData.endDate = '';
+      if (this.formData.reportDate !== '' && this.formData.reportDate !== null) {
+        this.formData.startDate = this.formData.reportDate[0];
+        this.formData.endDate = this.formData.reportDate[1];
+      }
+
     },
   },
 };
 </script>
-<style scoped>
-.el-card {
-  height: 90vh;
+<style scoped lang="scss">
+/deep/.el-input--suffix .el-input__inner {
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
 }
+
+/deep/.el-dialog__body {
+  padding: 0;
+}
+
+/deep/.el-dialog__headerbtn {
+  z-index: 2;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+  height: 34px;
+  width: 34px;
+}
+
+/deep/.el-dialog__headerbtn .el-dialog__close {
+  color: #fff;
+}
+
+/deep/.el-dialog__header {
+  padding: 0;
+}
+
+/deep/.el-input__icon {
+  line-height: 30px;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.card {
+  padding: 20px;
+  box-sizing: border-box;
+  background: #fff;
+  height: calc(100% - 235px);
+}
+
 #video {
-  margin: 2vh auto 0;
-  width: 60vw;
-  height: 80vh;
+  width: 100%;
 }
-.time{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+
+.fontBold {
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  width: 100%;
+}
+
+.h93 {
+  height: 93vh;
+}
+
+.titimg {
+  width: 100%;
+  height: 220px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.mr5 {
+  margin-right: 5px;
+}
+
+.blue {
+  color: #1C48BF;
+}
+
+.tableImg {
+  width: 120px;
+  height: 80px;
+}
+
+.con-page {
+  margin-top: 15px;
+  float: right;
+}
+
+/deep/.el-tree-node:focus>.el-tree-node__content {
+  color: #1C48BF !important;
+}
+
+/*节点失焦时的背景颜色*/
+/deep/.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+  color: #1C48BF !important;
+}
+
+.filter-tree {
+  position: relative;
+  background: #FFFFFF;
+  color: #606266;
+  border: 1px solid #DCDFE6;
+  margin-top: 15px;
+  border-radius: 5px;
+  min-height: calc(100% - 45px);
+  overflow-y: auto;
+}
+
+.lookColr {
+  color: #1C48BF;
+  cursor: pointer;
 }
 </style>
