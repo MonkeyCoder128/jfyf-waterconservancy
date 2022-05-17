@@ -18,6 +18,7 @@ export default {
         { value: 10, name: "氦含量" },
       ];
       var option = {
+        //backgroundColor:"#0d1324",
         grid: {
           left: "0%",
           right: "0%",
@@ -112,6 +113,8 @@ export default {
             data: dataCake,
             itemStyle: {
               normal: {
+                shadowBlur: 10,
+                shadowColor: '#87888a',
                 color: function (params) {
                   //自定义颜色
                   var colorList = [
@@ -121,11 +124,12 @@ export default {
                     "#115cb9",
                     "#eb9a26",
                   ];
+
                   return colorList[params.dataIndex];
                 },
-                borderRadius: 0,
-                borderColor: "#0b111f",
-                borderWidth: 3,
+                borderRadius: 2,
+                borderColor: "transparent",
+                borderWidth: 2,
               },
             },
             labelLine: {
@@ -153,6 +157,9 @@ export default {
       };
 
       pie.setOption(option);
+      window.addEventListener("resize", function () {
+        pie.resize();
+      });
     },
   },
 };

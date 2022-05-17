@@ -72,11 +72,18 @@
           </el-col>
           <el-col class="screen_cont"
             ><div
+              ref="box"
               class="box_cont box_cont_top"
-              style="margin-top: 0 !important"
+              style="
+                margin-top: 0 !important;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 0 10px #213662 inset;
+              "
             >
+              <div class="mengban" @click="tothreed"></div>
               <!-- <div>
-                <iframe
+                <iframe"
                   name="iframeMap"
                   id="iframeMapViewComponent"
                   width="100%"
@@ -87,9 +94,20 @@
                   ref="iframeDom"
                 ></iframe>
               </div> -->
-              <img src="../../assets/image/3d.png" class="threed" alt="" />
+              <!-- <img src="../../assets/image/3d.png" class="threed" alt="" /> -->
+              <div style="height:390px;overflow-y:hidden;display:block;">
+                <iframe
+                frameborder="0"
+                scrolling="no"
+                src="http://112.125.88.230/webgl/index.html"
+                :style="{ width: width, height: height }"
+                class="ifremud"
+                style="position:static"
+              ></iframe>
+              </div>
+              
             </div>
-            <div class="box_cont" style="margin-top: 0 !important">
+            <div class="box_cont" style="margin-top: 1.4%">
               <div class="box_nav box_nav1">
                 <el-row :gutter="19">
                   <el-col :span="1" class="title1"
@@ -135,7 +153,7 @@
             </div>
             <div class="box_cont2">
               <div style="width: 50%; display: flex; flex-direction: row">
-                <div style="width: 50%">
+                <div style="width: 50%; position: relative">
                   <div class="box_nav box_nav2">
                     <el-row :gutter="19">
                       <el-col :span="1" class="title1"
@@ -145,11 +163,11 @@
                     </el-row>
                   </div>
                   <dam />
-                  <p class="p_xj">已巡检175</p>
+                  <dambg />
                 </div>
-                <div style="width: 50%">
+                <div style="width: 50%; position: relative">
                   <dam2 />
-                  <span class="p_xj2">已维修100</span>
+                  <dam2bg />
                 </div>
               </div>
               <div style="width: 50%">
@@ -249,7 +267,9 @@ import pressure from "./components/pressure.vue";
 import flow from "./components/flow.vue";
 import patrol from "./components/patrol.vue";
 import dam from "./components/dam.vue";
+import dambg from "./components/dambg.vue";
 import dam2 from "./components/dam2.vue";
+import dam2bg from "./components/dam2bg.vue";
 export default {
   components: {
     outbox,
@@ -261,22 +281,29 @@ export default {
     flow,
     patrol,
     dam,
+    dambg,
     dam2,
+    dam2bg,
   },
   data() {
     return {
       nowTime: "",
-      //smgHtmlPath:'www.cctv202.com'
+      //smgHtmlPath: "http://112.125.88.230/webgl/index.html",
+      height: 651 + "px", //自适应当前窗口高度//自适应当前窗口高度
+      width: "100%", //自适应当前窗口宽度
     };
   },
-  created() {},
-  // mounted() {
-  //   this.iframeWin = this.$refs.iframeDom.contentWindow;
-  // },
+  created() { 
+  },
   mounted() {
     this.nowTimes();
+    console.log("111");
+    console.log( this.$refs.box.offsetHeight);
   },
   methods: {
+    tothreed() {
+      window.location.href = "http://112.125.88.230/webgl/index.html";
+    },
     timeFormate(timeStamp) {
       let year = new Date(timeStamp).getFullYear();
       let month =
@@ -416,7 +443,7 @@ export default {
   font-weight: bold;
   color: rgba(255, 255, 255, 0.75);
   line-height: 81px;
-  text-shadow: 0px 10px 10px rgba(33, 38, 54, 0.75);
+  text-shadow: 0px 0px 12px #4464b5;
 }
 .screen_left,
 .screen_cont,
@@ -463,8 +490,10 @@ export default {
   padding-left: 2%;
 }
 .box_cont_top {
-  height: 50.5%;
+  height: 49%;
   background: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1%;
 }
 .box_content {
   height: 100%;
@@ -565,16 +594,19 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.p_xj,
-.p_xj2 {
-  width: 100%;
-  text-align: center;
+/deep/.ifremud {
   position: absolute;
-  color: #fff;
-  top: 71%;
-  left: -36%;
+  top: 2%;
+  left: 1%;
+  bottom: 2%;
 }
-.p_xj2 {
-  left: -11%;
+.mengban {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  //background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 }
 </style>

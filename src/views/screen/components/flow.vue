@@ -13,8 +13,8 @@ export default {
       var option = {
         grid: {
           top: "15%",
-          left: "8%",
-          right: "2%",
+          left: "12%",
+          right: "5%",
           bottom: "28%",
         },
         tooltip: {
@@ -174,8 +174,7 @@ export default {
 </script>
 <style  lang="scss" scoped>
 #flow {
-  width: 95%;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
 }
 </style>

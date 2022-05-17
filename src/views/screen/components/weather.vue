@@ -39,7 +39,7 @@ export default {
           opacity: 0.3,
           borderWidth: "0",
           top: "180",
-          bottom: "0",
+          bottom: "2",
         },
         tooltip: {
           trigger: "axis",
@@ -162,7 +162,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #weather {
-  width: 90%;
+  width: 100%;
   height: 140px;
   overflow: hidden;
 }

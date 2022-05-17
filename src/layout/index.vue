@@ -295,13 +295,16 @@ export default {
   height: 60px;
   display: flex;
   align-items: center;
-  position: relative;
+  position: fixed;
+  width: 89%;
+  z-index: 9999;
 }
 .app-main {
   position: relative;
-  height: calc(100vh - 60px);
+  height: 98%;
   overflow: auto;
   margin: 10px;
+  padding-top: 60px;
 }
 .sidebar {
   width: 200px;

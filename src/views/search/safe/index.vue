@@ -319,4 +319,9 @@ export default {
       width: 170px;
     }
   }
+  /deep/.el-table__header{
+     background: rgb(238, 238, 238);
+    color: rgb(51, 51, 51);
+  }  
+   
 </style>
