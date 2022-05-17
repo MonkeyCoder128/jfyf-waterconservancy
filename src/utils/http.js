@@ -18,6 +18,7 @@ http.interceptors.request.use((config) => {
 // 响应拦截器
 http.interceptors.response.use((response) => {
     var reg = /<[^>]+>/g;
+    console.log("%cresponse：", "color:blue;font-size:18px;font-weight:bold;", response,);
     if (reg.test(response.data) === true) {
         sessionStorage.clear();
         localStorage.clear();
@@ -33,7 +34,7 @@ http.interceptors.response.use((response) => {
             });
         } else if (code != 200) {
             Notification.error({
-                title: response.data.msg
+                title: response.data.message
             });
             return Promise.reject("error");
         } else {
