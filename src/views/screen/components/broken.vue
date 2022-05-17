@@ -13,10 +13,10 @@ export default {
       var fontColor = "#fff";
       var option = {
         grid: {
-          left: "5%",
-          right: "5%",
+          left: "7%",
+          right: "7%",
           top: "15%",
-          bottom: "15%",
+          bottom: "20%",
           containLabel: true,
         },
         tooltip: {
@@ -107,6 +107,7 @@ export default {
             stack: "总量",
             symbol: "circle",
             symbolSize: 8,
+            smooth:true,
             itemStyle: {
               normal: {
                 color: "#0092f6",
@@ -147,8 +148,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #broken {
-  width: 98%;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
 }
 </style>

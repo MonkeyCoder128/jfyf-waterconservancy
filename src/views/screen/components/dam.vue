@@ -10,204 +10,128 @@ export default {
     myecharts() {
       var echarts = require("echarts");
       var dam = this.$echarts.init(document.getElementById("dam"));
-      let datas = {
-        title: "上证指数",
-        value: "5.9",
-      };
-
-      let max = 10;
-      let value = datas.value;
-      let degrees = 180 - (180 * value) / max;
-
-      //图表配置
-      let centerArr = ["50%", "50%"];
-      let label = {
-        0: "0",
-        10: "100",
-      };
-      let colorList = ["#7f91fe", "#1d40d9"];
-      if (value < max / 3) {
-        colorList = ["#1d55e3", "#1d55e3"];
-      } else if (value < (max / 3) * 2) {
-        colorList = ["#1d55e3", "#1d55e3"];
-      }
-      let colorSet = new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-        {
-          offset: 0,
-          color: colorList[0],
-        },
-        {
-          offset: 1,
-          color: colorList[1],
-        },
-      ]);
-
-      //
-
+      var value = 40;
       var option = {
-        grid: {
-          left: "5%",
-          right: "5%",
-          top: "15%",
-          bottom: "15%",
-          containLabel: true,
+        //backgroundColor: '#010818',
+        title: [
+          {
+            text: "已巡检175",
+            y: "55%",
+            x: "center",
+            textStyle: {
+              //fontWeight: "bold",
+              fontSize: 15,
+              color: "#ffffff",
+            },
+          },
+        ],
+        angleAxis: {
+          show: false,
+          max: (100 * 360) / 180, //-45度到225度，二者偏移值是270度除360度
+          type: "value",
+          startAngle: 180, //极坐标初始角度
+          splitLine: {
+            show: false,
+          },
+        },
+        barMaxWidth: 30, //圆环宽度
+        radiusAxis: {
+          show: false,
+          type: "category",
+        },
+        //圆环位置和大小
+        polar: {
+          center: ["50%", "50%"],
+          radius: ["50%", "70%"],
         },
         series: [
-          // 进度条
           {
-            name: "仪表盘",
-            type: "gauge",
-            radius: "70%", // 半径
-            startAngle: 180, //开始角度 左侧角度
-            endAngle: 0, //结束角度 右侧
-            splitNumber: 10,
-
-            center: ["50%", "48%"],
-            axisLine: {
-              lineStyle: {
-                color: [
-                  [0.7, "#1d40dc"], //外环基础色
-                  [1, "transparent"], // 阴影色
-                ],
-                width: 15,
-              },
-            },
-            axisLabel: {
-              show: false,
-            },
-            axisTick: {
-              show: false,
-            },
-            splitLine: {
-              show: false,
-            },
-            itemStyle: {
-              show: false,
-            },
-            detail: {
-              formatter: function (value) {
-                return `${value * 100}%`;
-              },
-              offsetCenter: [0, "-20%"],
-              textStyle: {
-                fontSize: "18",
-                fontWeight: "600",
-                color: "#7f9ff7",
-              },
-            },
-            title: {
-              offsetCenter: [0, "100%"],
-            },
-            pointer: {
-              show: false,
-              length: "75%",
-              width: 20, //指针粗细
-            },
+            type: "bar",
             data: [
               {
-                name: "",
-                value: 0.7,
-              },
-            ],
-          },
-
-          {
-            name: "最外圈冷热标签",
-            type: "gauge",
-            z: 2,
-            radius: "25%",
-            splitNumber: 1,
-            startAngle: 180,
-            endAngle: 0,
-            min: 0,
-            max: max,
-            center: centerArr, //整体的位置设置
-
-            axisTick: {
-              show: false,
-            },
-            axisLine: {
-              show: false,
-            },
-            splitLine: {
-              show: false,
-            },
-            detail: {
-              show: false,
-            },
-            axisLabel: {
-              show: true,
-              textStyle: {
-                color: "#fff",
-                fontSize: 12,
-                padding: [10, -100],
-              },
-              formatter: function (val) {
-                return label[val];
-              },
-            },
-          },
-          {
-            type: "pie",
-            color: ["transparent", "transparent", "transparent"],
-            animationEasingUpdate: "cubicOut",
-            startAngle: 180,
-            center: centerArr,
-            radius: ["80.5%", "83%"],
-            hoverAnimation: false,
-            labelLine: {
-              show: false,
-            },
-            data: [
-              {
-                name: "",
+                //上层圆环，显示数据
                 value: value,
                 itemStyle: {
                   normal: {
-                    show: true,
-                    color: colorSet,
-                    shadowBlur: 8,
-                    shadowColor: colorList[0],
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 4,
-                    width: 6,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#1d43dd" },
+                      { offset: 1, color: "#7e90fd" },
+                    ]),
                   },
+                  // color: "#59c4cb",
                 },
               },
+            ],
+            barGap: "-100%", //柱间距离,上下两层圆环重合
+            coordinateSystem: "polar",
+            //roundCap: true, //顶端圆角
+            z: 3, //圆环层级，同zindex
+          },
+          {
+            //下层圆环，显示最大值
+            type: "bar",
+            data: [
               {
-                //画中间的图标
-                name: "",
-                value: 0,
-                label: {
-                  rotate: 90,
-                  position: "inside",
-                  width: 2,
-                  height: 2,
-                  padding: 2,
-                  verticalAlign: "bottom",
-                  backgroundColor: "#fff",
-                  borderRadius: 10,
-                  borderWidth: 1.5,
-                  borderColor: colorList[0],
-                  shadowColor: "#fff",
-                  shadowBlur: 10,
-                  shadowOffsetY: 1,
-                },
-                
-              },
-              {
-                //画剩余的刻度圆环
-                name: "",
-                value: 10 - value,
+                value: 100,
                 itemStyle: {
-                  color: "#33394c",
+                  color: "transparent",
+                  borderWidth: 0,
                 },
-                
               },
+            ],
+            barGap: "-100%",
+            coordinateSystem: "polar",
+            //roundCap: true,
+            z: 1,
+          },
+          //仪表盘
+          {
+            type: "gauge",
+            startAngle: 225, //起始角度，同极坐标
+            endAngle: -45, //终止角度，同极坐标
+            axisLine: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            splitLabel: {
+              show: false,
+            },
+            pointer: {
+              // 分隔线
+              show: false, //是否显示指针
+              shadowColor: "auto", //默认透明
+              shadowBlur: 5,
+              length: "50%",
+              width: "2",
+            },
+
+            itemStyle: {
+              color: "#6e8bd9",
+              borderColor: "#6e8bd9",
+              borderWidth: 3,
+            },
+            detail: {
+              formatter: function (params) {
+                return value + "%";
+              },
+              color: "#6e8bd9",
+              fontSize: 20,
+              offsetCenter: [0, -10],
+            },
+            title: {
+              show: false,
+            },
+            data: [
               {
-                //画剩余的刻度圆环
-                name: "",
-                value: 10,
+                value: value,
               },
             ],
           },
@@ -224,5 +148,7 @@ export default {
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  position: absolute;
+  z-index: 9999;
 }
 </style>
