@@ -1,5 +1,5 @@
 <template>
-    <div id="deformation"></div>
+  <div id="deformation"></div>
 </template>
 <script>
 export default {
@@ -17,15 +17,15 @@ export default {
       var wgx1 = ["100", "-100", "-200", "400", "-100"];
       var option = {
         grid: {
-          left: "1.2%",
-          right: "2%",
-          bottom: "10%",
+          left: "5%",
+          right: "5%",
+          bottom: "15%",
           top: "15%",
           containLabel: true,
         },
         legend: {
           data: ["垂直位移", "水平位移"],
-          right: 5,
+          right: 20,
           top: 1,
           textStyle: {
             color: "#fff",
@@ -39,16 +39,16 @@ export default {
           type: "category",
           data: ["2016", "2017", "2018", "2019", "2020"],
           axisLine: {
-              show: true,
-              lineStyle: {
-                color: "#193e69",
-              },
+            show: true,
+            lineStyle: {
+              color: "#193e69",
             },
-            axisTick: {
-              show: false,
-            },
+          },
+          axisTick: {
+            show: false,
+          },
           axisLabel: {
-            color: "#fff", 
+            color: "#fff",
           },
         },
 
@@ -57,8 +57,10 @@ export default {
           name: "(mm)",
           nameTextStyle: {
             color: "#ffffff",
-            padding: [0, 30, -7, 0]
+            padding: [0, 30, -7, 0],
           },
+          splitNumber: 5,
+          //boundaryGap: [0.2, 0.2],
           splitLine: {
             show: true,
             lineStyle: {
@@ -66,14 +68,14 @@ export default {
             },
           },
           axisLine: {
-              show: true,
-              lineStyle: {
-                color: "#193e69",
-              },
+            show: true,
+            lineStyle: {
+              color: "#193e69",
             },
-            axisTick: {
-              show: false,
-            },
+          },
+          axisTick: {
+            show: false,
+          },
           axisLabel: {
             formatter: "{value}",
             color: "#fff",
@@ -81,49 +83,54 @@ export default {
           },
         },
         series: [
+          //1头
           {
             type: "pictorialBar",
-            symbolSize: [25, 8],
-            symbolOffset: [-16, -4],
+            symbolSize: [20, 8],
+            symbolOffset: [-12, 0],
             symbolPosition: "end",
             z: 12,
             color: "#e7b20a",
-            data: zzx1,
+            data: zzx1.map((v) =>
+              Number(v) >= 0 ? Number(v) + 20 : Number(v) - 20
+            ),
           },
           //1底
           {
             type: "pictorialBar",
-            symbolSize: [25, 8],
-            symbolOffset: [-16, 4],
+            symbolSize: [20, 8],
+            symbolOffset: [-12, 4],
             z: 12,
             color: "#816819",
-            data: zzx1,
+            data: Array(zzx1.length).fill(0),
           },
           //2头部
           {
             type: "pictorialBar",
-            symbolSize: [25, 8],
-            symbolOffset: [15,0],
+            symbolSize: [20, 8],
+            symbolOffset: [12, 0],
             symbolPosition: "end",
             z: 12,
             color: "#1397a0",
-            data: wgx1,
+            data: wgx1.map((v) =>
+              Number(v) >= 0 ? Number(v) + 20 : Number(v) - 20
+            ),
           },
           //2底部
           {
             name: "",
             type: "pictorialBar",
-            symbolSize: [25, 8],
-            symbolOffset: [16, 4],
+            symbolSize: [20, 8],
+            symbolOffset: [12, 4],
             color: "#155c69",
             z: 12,
-            data: wgx1,
+            data: Array(wgx1.length).fill(0),
           },
           //2柱体
           {
             name: "垂直位移",
             type: "bar",
-            barWidth: "25",
+            barWidth: "20",
             itemStyle: {
               normal: {
                 opacity: 1,
@@ -133,6 +140,12 @@ export default {
             },
             label: {
               show: false,
+              position: "insideTop", //数值显示在柱子内
+              formatter: function (data) {
+                if (data.value < 0) {
+                  return Math.abs(data.value);
+                }
+              },
             },
             data: zzx1,
           },
@@ -140,7 +153,7 @@ export default {
           {
             name: "水平位移",
             type: "bar",
-            barWidth: "27",
+            barWidth: "20",
             itemStyle: {
               normal: {
                 color: "#155c69",
@@ -149,6 +162,12 @@ export default {
             },
             label: {
               show: false,
+              position: "insideTop", //数值显示在柱子内
+              formatter: function (data) {
+                if (data.value < 0) {
+                  return Math.abs(data.value);
+                }
+              },
             },
             data: wgx1,
           },
@@ -162,8 +181,7 @@ export default {
 </script>
 <style  lang="scss" scoped>
 #deformation {
-  width: 95%;
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
 }
 </style>
