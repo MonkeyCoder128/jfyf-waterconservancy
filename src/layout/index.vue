@@ -166,6 +166,8 @@ export default {
     },
     outLogin() {
       this.$router.push({ path: "/" });
+      sessionStorage.clear();
+      localStorage.clear();
       this.$message.success("已退出账号");
     },
   },

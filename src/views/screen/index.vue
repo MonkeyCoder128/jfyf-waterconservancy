@@ -14,21 +14,6 @@
             />
             <p style="padding-left: 10px">进入系统</p>
           </div>
-          <!-- <el-col :span="1"
-            ><el-dropdown trigger="click">
-              <el-button type="text"
-                ><i class="el-icon-s-custom"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native.prevent="Login"
-                  >进入系统</el-dropdown-item
-                >
-                <el-dropdown-item @click.native.prevent="outLogin"
-                  >退出登录</el-dropdown-item
-                >
-              </el-dropdown-menu>
-            </el-dropdown></el-col
-          > -->
         </el-row>
 
         <el-row type="flex" class="row-bg" justify="space-between">
