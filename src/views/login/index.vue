@@ -93,12 +93,12 @@ export default {
           Loginform(this.loginForm)
             .then((res) => {
               if (res.data.code === "200") {
+                window.sessionStorage.setItem("token", res.data.token);
                 this.$message({
                   showClose: true,
                   message: "登录成功",
                   type: "success",
                 });
-                window.sessionStorage.setItem("token", res.data.token);
                 this.$router.push({ path: "/screen" });
               } else if (res.data.code !== "200") {
                 this.$message({

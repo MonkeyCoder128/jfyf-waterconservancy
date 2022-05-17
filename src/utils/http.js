@@ -9,7 +9,6 @@ const http = axios.create({
 })
 // 请求拦截器
 http.interceptors.request.use((config) => {
-    console.log("%cwindow.sessionStorage.getItem：", "color:blue;font-size:18px;font-weight:bold;", sessionStorage.getItem("token"));
     if (sessionStorage.getItem("token")) {
         config.headers["Token"] = sessionStorage.getItem("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
     }
@@ -23,8 +22,7 @@ http.interceptors.response.use((response) => {
         sessionStorage.clear();
         localStorage.clear();
         router.replace({ name: 'login' })
-        return false;
-    } else {
+    } else if (reg.test(response.data) === false) {
         let code = response.data.code;
         if (code === 302) {
             router.replace({ name: 'login' })
@@ -33,9 +31,9 @@ http.interceptors.response.use((response) => {
             Notification.error({
                 title: '已过期 请重新登录！'
             });
-        } else if (code !== 200) {
+        } else if (code != 200) {
             Notification.error({
-                title: response.data.message
+                title: response.data.msg
             });
             return Promise.reject("error");
         } else {
