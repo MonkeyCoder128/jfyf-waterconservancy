@@ -51,8 +51,7 @@ a {
       margin-right: 15px;
     }
     &.active {
-      background-color: #1c48bf;
-      color: #fff;
+      color: #1c48bf;
       border-color: #1c48bf;
     }
   }

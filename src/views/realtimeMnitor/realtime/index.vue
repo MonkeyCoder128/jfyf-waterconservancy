@@ -241,7 +241,8 @@
         </el-table-column>
       </el-table>
       <el-pagination
-        style="margin-top: 25px; text-align: center"
+        background
+        style="margin-top: 25px; text-align: right"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryParams.currentPage"
@@ -1243,7 +1244,7 @@ export default {
               borderRadius: 4,
               rich: {
                 a: {
-                  color: "#37ABC1",
+                  color: "inherit",
                   lineHeight: 22,
                   align: "center",
                 },
@@ -1787,7 +1788,6 @@ export default {
             axisLabel: {
               formatter: function (params) {
                 let item = chartData[params];
-                console.log(item);
                 return (
                   "{line|}{circle|●}{name|" +
                   item.name +

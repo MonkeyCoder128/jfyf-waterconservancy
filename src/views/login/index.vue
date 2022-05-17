@@ -2,24 +2,19 @@
   <div class="loginPage">
     <div class="loginLeft"></div>
     <div class="loginRight">
-      <el-form
-        ref="loginForm"
-        :model="loginForm"
-        :rules="loginRules"
-        class="login-form"
-      >
-        <span class="title">水利水库管理系统</span>
-        <el-form-item prop="username">
+      <el-form ref="loginForm" :model="loginForm" class="loginformBox">
+        <span class="title">您好,欢迎登录！</span>
+        <el-form-item prop="username" label="账号">
           <el-input
             v-model.trim="loginForm.username"
             type="text"
             auto-complete="off"
             prefix-icon="el-icon-user"
-            placeholder="账号/工号/手机号"
+            placeholder="请输入账号"
           >
           </el-input>
         </el-form-item>
-        <el-form-item prop="password">
+        <el-form-item prop="password" label="密码">
           <el-input
             v-model.trim="loginForm.password"
             type="password"
@@ -30,24 +25,10 @@
           >
           </el-input>
         </el-form-item>
-        <!-- <el-form-item prop="code">
-          <el-input
-            v-model.trim="loginForm.code"
-            auto-complete="off"
-            placeholder="请输入验证码"
-            style="width: 63%; margin-right: 2%"
-            prefix-icon="el-icon-key"
-            @keyup.enter.native="handleLogin"
-          >
-          </el-input>
-          <div class="login-code">
-            <img src="../../assets/image/profile.jpeg" @click="getCode" />
-          </div>
-        </el-form-item> -->
         <el-checkbox
           v-model="loginForm.rememberMe"
           style="margin: 0px 0px 25px 2px; float: left"
-          >记住密码
+          >15天内自动登录
         </el-checkbox>
         <el-form-item style="width: 100%">
           <el-button
@@ -66,8 +47,7 @@
 <script>
 import { Loginform, menuList, getUserInfo } from "@/api/login";
 import Cookies from "js-cookie";
-import { decrypt, encrypt } from "@/utils/jsencrypt";
-import { Debounce, Throttle } from "@/utils/public.js"; //自己要注意自己的路径
+import { encrypt } from "@/utils/jsencrypt";
 export default {
   data() {
     return {
@@ -78,39 +58,23 @@ export default {
         code: "",
         uuid: "",
       },
-      loginRules: {
-        username: [
-          {
-            required: true,
-            trigger: "blur",
-            message: "用户名不能为空",
-          },
-        ],
-        password: [
-          {
-            required: true,
-            trigger: "blur",
-            message: "密码不能为空",
-          },
-        ],
-        // code: [
-        //   { required: true, trigger: "change", message: "验证码不能为空" },
-        // ],
-      },
     };
   },
   created() {},
   methods: {
-    getCode() {
-      console.log(
-        "%c更换验证码：",
-        "color:red;font-size:18px;font-weight:bold;"
-      );
-    },
-
     handleLogin: function () {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
+      if (!this.loginForm.username) {
+        this.$message({
+          message: "请输入账号",
+          type: "warning",
+        });
+      } else if (!this.loginForm.password) {
+        this.$message({
+          message: "请输入密码",
+          type: "warning",
+        });
+      } else {
+        if (this.loginForm.username && this.loginForm.password) {
           if (this.loginForm.rememberMe) {
             Cookies.set("username", this.loginForm.username, {
               expires: 30,
@@ -129,12 +93,12 @@ export default {
           Loginform(this.loginForm)
             .then((res) => {
               if (res.data.code === "200") {
+                window.sessionStorage.setItem("token", res.data.token);
                 this.$message({
                   showClose: true,
                   message: "登录成功",
                   type: "success",
                 });
-                window.sessionStorage.setItem("token", res.data.token);
                 this.$router.push({ path: "/screen" });
               } else if (res.data.code !== "200") {
                 this.$message({
@@ -190,7 +154,7 @@ export default {
               return false;
             });
         }
-      });
+      }
     },
   },
 };
@@ -204,12 +168,15 @@ export default {
   height: 100%;
   width: 100%;
   display: flex;
+  background-color: #ffffff;
   justify-content: space-between;
 
   .loginLeft {
     width: 60%;
-    background: url("../../assets/image/logo.jpeg");
-    background-size: cover;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("../../assets/image/logo.png");
   }
 
   .loginRight {
@@ -217,15 +184,16 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    .loginformBox {
+      width: 500px;
+    }
 
     .title {
-      display: block;
-      text-align: center;
-      font-size: 40px;
-      margin-top: 60px;
-      font-family: PingFangSC-Semibold, PingFang SC;
-      font-weight: 600;
-      margin-bottom: 50px;
+      font-size: 24px;
+      font-family: PingFang SC;
+      font-weight: bold;
+      color: #333333;
+      line-height: 120px;
     }
 
     .login-code {
