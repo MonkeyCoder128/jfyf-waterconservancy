@@ -76,14 +76,6 @@
 </template>
  
 <script>
-import { roleList } from "@/api/role";
-import {
-  addinsertUser,
-  deleteUserGet,
-  viewUserInfo,
-  updateUserInfo,
-  updatePassWd,
-} from "@/api/user";
 export default {
   name: "UserInfo",
   data() {
@@ -120,10 +112,7 @@ export default {
       this.$refs["user"].validate((valid) => {
         if (valid) {
           if (this.$route.query.type === "add") {
-            addinsertUser(
-              this.user,
-              window.sessionStorage.getItem("token")
-            ).then((res) => {
+            this.$api.USER.addinsertUser(this.user).then((res) => {
               if (res.data.code === 200) {
                 this.$message({
                   message: "用户新增成功！",
@@ -136,10 +125,7 @@ export default {
             });
           } else if (this.$route.query.type === "edit") {
             this.user.userId = this.$route.query.id;
-            updateUserInfo(
-              this.user,
-              window.sessionStorage.getItem("token")
-            ).then((res) => {
+            this.$api.USER.updateUserInfo(this.user).then((res) => {
               if (res.data.code === 200) {
                 this.$message({
                   message: "修改成功！",
@@ -226,10 +212,7 @@ export default {
           { required: true, validator: equalToPassword, trigger: "blur" },
         ],
       };
-      viewUserInfo(
-        this.$route.query.id,
-        window.sessionStorage.getItem("token")
-      ).then((res) => {
+      this.$api.USER.viewUserInfo(this.$route.query.id).then((res) => {
         if (res.data.code === 200) {
           this.user = res.data.result;
           this.user.password = "";
@@ -238,13 +221,11 @@ export default {
       });
       this.formDisable = true;
     }
-    roleList(this.queryParams, window.sessionStorage.getItem("token")).then(
-      (res) => {
-        if (res.data.code === 200) {
-          this.optionsRole = res.data.result.data;
-        }
+    this.$api.ROLE.roleList(this.queryParams).then((res) => {
+      if (res.data.code === 200) {
+        this.optionsRole = res.data.result.data;
       }
-    );
+    });
   },
 };
 </script>

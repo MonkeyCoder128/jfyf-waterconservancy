@@ -76,7 +76,6 @@
 </template>
  
 <script>
-import { newsList, newsType } from "@/api/news";
 export default {
   name: "alarmAnalysis",
   data() {
@@ -96,11 +95,13 @@ export default {
   },
   created() {
     this.getNewsList();
-    newsType(window.sessionStorage.getItem("token")).then((res) => {
-      if (res.data.code === 200) {
-        this.optionsType = res.data.result;
+    this.$api.NEWS.newsType(window.sessionStorage.getItem("token")).then(
+      (res) => {
+        if (res.data.code === 200) {
+          this.optionsType = res.data.result;
+        }
       }
-    });
+    );
   },
   methods: {
     /** 表格筛选 */
@@ -151,14 +152,15 @@ export default {
     },
     /** 获取消息列表 */
     getNewsList() {
-      newsList(this.queryParams, window.sessionStorage.getItem("token")).then(
-        (res) => {
-          if (res.data.code === 200) {
-            this.newsData = res.data.result.records;
-            this.total = res.data.result.total;
-          }
+      this.$api.NEWS.newsList(
+        this.queryParams,
+        window.sessionStorage.getItem("token")
+      ).then((res) => {
+        if (res.data.code === 200) {
+          this.newsData = res.data.result.records;
+          this.total = res.data.result.total;
         }
-      );
+      });
     },
   },
 };

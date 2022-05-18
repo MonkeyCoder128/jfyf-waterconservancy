@@ -73,7 +73,6 @@
 </template>
  
 <script>
-import { userList, deleteUserGet, updateUserState } from "@/api/user";
 export default {
   name: "UserManage",
   data() {
@@ -102,14 +101,12 @@ export default {
     },
     /** 获取用户列表 */
     getUserList() {
-      userList(this.queryParams, window.sessionStorage.getItem("token")).then(
-        (res) => {
-          if (res.data.code === 200) {
-            this.userData = res.data.result.data;
-            this.total = res.data.result.total;
-          }
+      this.$api.USER.userList(this.queryParams).then((res) => {
+        if (res.data.code === 200) {
+          this.userData = res.data.result.data;
+          this.total = res.data.result.total;
         }
-      );
+      });
     },
     /** 搜索 */
     searchEnterUser() {
@@ -142,10 +139,7 @@ export default {
         }
       )
         .then(() => {
-          deleteUserGet(
-            row.userId,
-            window.sessionStorage.getItem("token")
-          ).then((res) => {
+          this.$api.USER.deleteUserGet(row.userId).then((res) => {
             if (res.data.code === 200) {
               this.$message({
                 message: "已删除！",
@@ -174,10 +168,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          updateUserState(
-            userState,
-            window.sessionStorage.getItem("token")
-          ).then((res) => {
+          this.$api.USER.updateUserState(userState).then((res) => {
             if (res.data.code === 200) {
               this.$message({
                 message: "已启用！",
@@ -206,10 +197,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          updateUserState(
-            userState,
-            window.sessionStorage.getItem("token")
-          ).then((res) => {
+          this.$api.USER.updateUserState(userState).then((res) => {
             if (res.data.code === 200) {
               this.$message({
                 message: "已停用！",

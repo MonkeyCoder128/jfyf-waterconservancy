@@ -76,7 +76,6 @@
 </template>
  
 <script>
-import { newsList, newsType } from "@/api/news";
 export default {
   name: "MessageManage",
   data() {
@@ -96,7 +95,7 @@ export default {
   },
   created() {
     this.getNewsList();
-    newsType(window.sessionStorage.getItem("token")).then((res) => {
+    this.$api.NEWS.newsType().then((res) => {
       if (res.data.code === 200) {
         this.optionsType = res.data.result;
       }
@@ -107,11 +106,6 @@ export default {
     changeType(val) {
       this.queryParams.type = val;
       this.getNewsList();
-      console.log(
-        "%c返回消息类型：",
-        "color:red;font-size:18px;font-weight:bold;",
-        val
-      );
     },
     /** 重置 */
     resetTab() {
@@ -145,14 +139,12 @@ export default {
     },
     /** 获取消息列表 */
     getNewsList() {
-      newsList(this.queryParams, window.sessionStorage.getItem("token")).then(
-        (res) => {
-          if (res.data.code === 200) {
-            this.newsData = res.data.result.records;
-            this.total = res.data.result.total;
-          }
+      this.$api.NEWS.newsList(this.queryParams).then((res) => {
+        if (res.data.code === 200) {
+          this.newsData = res.data.result.records;
+          this.total = res.data.result.total;
         }
-      );
+      });
     },
   },
 };

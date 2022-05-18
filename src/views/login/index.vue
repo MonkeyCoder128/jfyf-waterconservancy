@@ -1,7 +1,10 @@
 <template>
   <div class="loginPage">
     <div class="loginBox">
-      <div class="loginLeft"></div>
+      <div class="loginLeft">
+        <h3>智慧水坝管理平台</h3>
+        <p>实时掌握大坝运行数据，全面赋能智慧水坝建设</p>
+      </div>
       <div class="loginRight">
         <el-form ref="loginForm" :model="loginForm" class="loginformBox">
           <span class="title">您好,欢迎登录！</span>
@@ -27,7 +30,7 @@
             </el-input>
           </el-form-item>
           <el-checkbox
-            v-model="loginForm.rememberMe"
+            v-model="loginForm.autoLogin"
             style="margin: 0px 0px 25px 2px; float: left"
             >15天内自动登录
           </el-checkbox>
@@ -55,9 +58,7 @@ export default {
       loginForm: {
         username: "",
         password: "",
-        rememberMe: false,
-        code: "",
-        uuid: "",
+        autoLogin: true,//是否15天自动登录
       },
     };
   },
@@ -75,6 +76,7 @@ export default {
         pwd,
         exdays
       );
+
       var exdate = new Date(); // 获取时间
       exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); // 保存的天数
       // 字符串拼接cookie
@@ -100,7 +102,7 @@ export default {
           // 判断查找相对应的值
           if (arr2[0] === "username") {
             this.loginForm.username = arr2[1]; // 保存到保存数据的地方即v-model
-          } else if (arr2[0] === "password ") {
+          } else if (arr2[0] === "password") {
             this.loginForm.password = arr2[1];
           }
         }
@@ -119,24 +121,24 @@ export default {
         });
       } else {
         if (this.loginForm.username && this.loginForm.password) {
-          if (this.loginForm.rememberMe) {
+          if (this.loginForm.autoLogin) {
             Cookies.set("username", this.loginForm.username, {
               expires: 30,
             });
             Cookies.set("password", encrypt(this.loginForm.password), {
               expires: 30,
             });
-            Cookies.set("rememberMe", this.loginForm.rememberMe, {
+            Cookies.set("autoLogin", this.loginForm.autoLogin, {
               expires: 30,
             });
           } else {
             Cookies.remove("username");
             Cookies.remove("password");
-            Cookies.remove("rememberMe");
+            Cookies.remove("autoLogin");
           }
-          let parmas = this.loginForm
-          console.log(parmas)
-          this.$api.LOGIN.Loginform(parmas) 
+          let parmas = this.loginForm;
+          console.log(parmas);
+          this.$api.LOGIN.Loginform(parmas)
             .then((res) => {
               if (res.data.code === "200") {
                 window.sessionStorage.setItem("token", res.data.token);
@@ -152,7 +154,7 @@ export default {
                 Cookies.set("password", encrypt(this.loginForm.password), {
                   expires: 30,
                 });
-                Cookies.set("rememberMe", this.loginForm.rememberMe, {
+                Cookies.set("autoLogin", this.loginForm.autoLogin, {
                   expires: 30,
                 });
                 this.$router.push({ path: "/screen" });
@@ -226,34 +228,63 @@ export default {
 }
 
 .loginPage {
-  background-size: contain;
-  background-repeat: no-repeat;
+  /* 加载背景图 */
   background-image: url("../../assets/image/loginBg.png");
+  /* 背景图垂直、水平均居中 */
+  background-position: center center;
+  /* 背景图不平铺 */
+  background-repeat: no-repeat;
+  /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+  background-attachment: fixed;
+  /* 让背景图基于容器大小伸缩 */
+  background-size: cover;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   .loginBox {
-    width: 60%;
+    width: 65%;
     height: 700px;
     display: flex;
     justify-content: space-between;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 10px 0px rgba(33, 38, 54, 0.19),
+      0px -10px 10px 0px rgba(33, 38, 54, 0.19);
+    border-radius: 5px;
     .loginLeft {
+      padding-left: 50px;
       width: 60%;
       height: 100%;
       background-size: contain;
       background-repeat: no-repeat;
       background-image: url("../../assets/image/logo.png");
+      h3 {
+        margin-top:60px;
+        white-space: nowrap;
+        font-size: 30px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #ffffff;
+        line-height: 80px;
+      }
+      p {
+        white-space: nowrap;
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #ffffff;
+      }
     }
 
     .loginRight {
-      width: 35%;
+      width: 46%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       .loginformBox {
-        width: 500px;
+        width: 400px;
       }
 
       .title {
