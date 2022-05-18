@@ -16,6 +16,11 @@ const USER = {
     viewUserInfo(userId,) {
         return getRequest(`${base}/user/selectUserById?userId=` + userId)
     },
+    
+    // 删除用户信息
+    deleteUserGet(userId,) {
+        return getRequest(`${base}/user/deleteUser?userId=` + userId)
+    },
     // 修改用户信息(表单方式提交用户信息)
     updateUserInfo(data) {
         return postJsonRequest(`${base}/user/updateUser`, data)
@@ -30,17 +35,6 @@ const USER = {
     },
 }
 export default USER
-// 删除用户信息
-// export function deleteUserGet(userId, token) {
-//     return request({
-//         method: 'GET',
-//         url: '/user/deleteUser?userId=' + userId,
-//         headers: {
-//             contentType: 'application/json',
-//             Authorization: token,
-//         },
-//     })
-// }
 
 
 

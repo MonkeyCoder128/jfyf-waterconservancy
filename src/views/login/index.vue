@@ -58,27 +58,33 @@ export default {
       loginForm: {
         username: "",
         password: "",
-        autoLogin: true,//是否15天自动登录
+        autoLogin: true, //是否15天自动登录
       },
     };
   },
-  created() {},
+  created() {
+    // 按 Enter 键登录系统
+    document.onkeydown = (e) => {
+      e = window.event || e;
+      if (this.$route.path === "/" && e.keyCode === 13)
+        this.handleLogin(); // submitLoginForm() 为登录函数
+    };
+  },
+
   mounted() {
     this.getCookie();
   },
   methods: {
     // 设置cookie,登录成功之后进行调用 传入账号名，密码，和保存天数3个参数
-    setCookie(name, pwd, exdays) {
+    setCookie(name, pwd) {
       console.log(
         "%c存储cookie：",
         "color:blue;font-size:18px;font-weight:bold;",
         name,
-        pwd,
-        exdays
+        pwd
       );
-
       var exdate = new Date(); // 获取时间
-      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); // 保存的天数
+      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * 15); // 保存的天数
       // 字符串拼接cookie
       window.document.cookie =
         "userName" + "=" + name + ";path=/;expires=" + exdate.toGMTString();
@@ -88,21 +94,12 @@ export default {
     // 读取cookie 将用户名和密码回显到input框中
     getCookie() {
       if (document.cookie.length > 0) {
-        var arr = document.cookie.split("; "); // 这里显示的格式需要切割一下自己可输出看下
+        var arr = document.cookie.split("; ");
         for (var i = 0; i < arr.length; i++) {
-          var arr2 = arr[i].split("="); // 再次切割
-
-          console.log(
-            "%c读取cookie：",
-            "color:red;font-size:18px;font-weight:bold;",
-            arr2[0],
-            arr2[1]
-          );
-
-          // 判断查找相对应的值
+          var arr2 = arr[i].split("=");
           if (arr2[0] === "username") {
-            this.loginForm.username = arr2[1]; // 保存到保存数据的地方即v-model
-          } else if (arr2[0] === "password") {
+            this.loginForm.username = arr2[1];
+          } else if (arr2[0] === "userPwd") {
             this.loginForm.password = arr2[1];
           }
         }
@@ -122,19 +119,9 @@ export default {
       } else {
         if (this.loginForm.username && this.loginForm.password) {
           if (this.loginForm.autoLogin) {
-            Cookies.set("username", this.loginForm.username, {
-              expires: 30,
-            });
-            Cookies.set("password", encrypt(this.loginForm.password), {
-              expires: 30,
-            });
-            Cookies.set("autoLogin", this.loginForm.autoLogin, {
-              expires: 30,
-            });
+            this.setCookie(this.loginForm.username, this.loginForm.password);
           } else {
-            Cookies.remove("username");
-            Cookies.remove("password");
-            Cookies.remove("autoLogin");
+            this.setCookie("", "", -1);
           }
           let parmas = this.loginForm;
           console.log(parmas);
@@ -256,11 +243,12 @@ export default {
       padding-left: 50px;
       width: 60%;
       height: 100%;
-      background-size: contain;
-      background-repeat: no-repeat;
       background-image: url("../../assets/image/logo.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
       h3 {
-        margin-top:60px;
+        margin-top: 60px;
         white-space: nowrap;
         font-size: 30px;
         font-family: PingFang SC;

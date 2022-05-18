@@ -17,6 +17,10 @@ const ROLE = {
         return postJsonRequest(`${base}/menu/insertSystemRole`, data)
     },
 
+    // 删除角色信息
+    deleteRoleGet(id) {
+        return getRequest(`${base}/role/deleteSystemRole?id=` + id)
+    },
     // 查看角色信息(具体Id)
     viewRoleInfo(roleId) {
         return getRequest(`${base}/menu/getSystemRole?roleId=` + roleId)
@@ -28,18 +32,5 @@ const ROLE = {
     },
 }
 export default ROLE
-
-// // 删除角色信息
-// export function deleteRoleGet(id, token) {
-//     return request({
-//         method: 'GET',
-//         url: '/role/deleteSystemRole?id=' + id,
-//         headers: {
-//             contentType: 'application/json',
-//             Authorization: token,
-//         },
-//     })
-// }
-
 
 
