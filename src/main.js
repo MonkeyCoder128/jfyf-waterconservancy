@@ -11,6 +11,8 @@ import * as echarts from 'echarts';
 import './assets/css/variable.scss'
 import './assets/xjicon/iconfont.css'
 
+import api from '@/api'
+Vue.prototype.$api = api;
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$echarts = echarts

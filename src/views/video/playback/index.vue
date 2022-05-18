@@ -84,7 +84,7 @@ import "videojs-contrib-hls";
 export default {
   data () {
     return {
-      nowPlayVideoUrl: "http://112.125.88.230/jfyf/PLTV/88888888/224/3221225611/index.m3u8",
+      nowPlayVideoUrl: "http://112.125.88.230/file/video/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4",
       dialogVisible: false,// 查看视频
       p_video: '',
       filterText: "",
@@ -195,9 +195,9 @@ export default {
     };
   },
   mounted () {
-    setTimeout(() => {
-      this.getVideo();
-    });
+    // setTimeout(() => {
+    //   this.getVideo();
+    // });
   },
   watch: {
     filterText (val) {
@@ -209,7 +209,7 @@ export default {
     handleClick (index) {
       console.log(index);
       this.dialogVisible = true;
-      // this.getVideo();
+      this.getVideo();
     },
     //直播
     getVideo () {

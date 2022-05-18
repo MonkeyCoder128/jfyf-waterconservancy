@@ -80,7 +80,7 @@
 
 <script>
 import Breadcrumb from "./components/Breadcrumb.vue";
-import { menuList } from "@/api/login";
+// import { menuList } from "@/api/login";
 
 export default {
   components: {
@@ -105,7 +105,7 @@ export default {
   },
   created() {
     this.onRouteChanged();
-    menuList(window.sessionStorage.getItem("token")).then((res) => {
+    this.$api.LOGIN.menuList().then((res) => {
       if (res.data.code === 200) {
         this.nav_menu_data = res.data.result;
         // console.log(
