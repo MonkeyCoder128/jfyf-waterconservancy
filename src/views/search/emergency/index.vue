@@ -99,7 +99,7 @@
                   size="small"
                   type="text"
                   style="color:#1C48BF;"
-                  @click="check(scope.row.id)"
+                  @click="check(scope.row)"
                   >查看
                 </el-button>
                 <el-button size="small" type="text" @click="deletedata(scope.row.id)">
@@ -230,8 +230,8 @@ export default {
       // console.log('解除异常' + id);
     },
     // 查看异常情况
-    check(id){
-      this.$router.push({name:'childrenEme',query: {id}})
+    check(row){
+      this.$router.push({name:'childrenEme',params: {id:row.id,type:row.reportType,exception:row.exceptionType}});
     },
     // 从后台查询数据
     getdata () {

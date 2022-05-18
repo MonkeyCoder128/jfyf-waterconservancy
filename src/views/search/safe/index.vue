@@ -249,7 +249,7 @@ export default {
     },
     // 异常上报
     check(row){
-      this.$router.push({name:'childrenSafe',params: {id:row.id,type:row.reportType}});
+      this.$router.push({name:'childrenSafe',params: {id:row.id,type:row.reportType,exception:row.exceptionType}});
     },
     // 从后台查询数据
     getdata () {
