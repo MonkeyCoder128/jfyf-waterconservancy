@@ -61,7 +61,7 @@ export default {
             let str = `{white|${param}}{t${index}|${
               dataCake[index].value + "%"
             }}`;
-
+            console.log(dataCake);
             return str;
           },
         },
@@ -114,7 +114,7 @@ export default {
             itemStyle: {
               normal: {
                 shadowBlur: 10,
-                shadowColor: '#87888a',
+                shadowColor: "#87888a",
                 color: function (params) {
                   //自定义颜色
                   var colorList = [
