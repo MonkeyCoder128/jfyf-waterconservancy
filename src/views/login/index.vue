@@ -132,7 +132,17 @@ export default {
                         //用户ID存储
                         window.sessionStorage.setItem(
                           "userId",
-                          response.data.userId
+                          response.data.data.userId
+                        );
+                        //用户名存储
+                        window.sessionStorage.setItem(
+                          "username",
+                          response.data.data.username
+                        );
+                        //用户类型存储
+                        window.sessionStorage.setItem(
+                          "authority",
+                          response.data.data.authorities[0].authority
                         );
                       }
                       return response;

@@ -164,9 +164,12 @@
         <!-- 当设备功能出现异常，并且用户 非第一次 提交时展示的部分 -->
         <el-card shadow="always" class="el-card" v-if="this.isFirst == false">
           <p class="record">巡检记录</p>
+          <div>
+            <el-divider direction="vertical"></el-divider>
+          </div>
           <div v-for="(item,index) in this.Xjresult" :key="index">
             <ul class="jindu">
-              <h5 v-if="item.progress == 0">
+              <h5 id="firstDom" v-if="item.progress == 0">
                 <!-- <i class="el-icon-circle-check"></i> -->
                 <i class="iconfont icon-tongzhi"></i>
                 巡检记录
@@ -195,8 +198,9 @@
                 <div v-if="item.reportRecordList !== null">
                   <li v-for="(message,j) in item.reportRecordList" :key="j">
                     <span class="spantime">
-                      <i class="" v-if="item.progress == 0">预警时间：</i>
-                      <i class="" v-else>上报时间：</i>
+                      <!-- <i class="" v-if="item.progress == 0">预警时间：</i>
+                      <i class="" v-else>上报时间：</i> -->
+                      <i class="">上报时间：</i>
                       {{message.creatDate}}
                     </span>
                     <div class="spanImgBox" v-if="message.imageList.length>0">
@@ -212,8 +216,9 @@
                       </span>
                     </div>
                     <span class="spancontent">
-                      <i class="" v-if="item.progress == 0">预警内容：</i>
-                      <i class="" v-else>上报内容：</i>
+                      <!-- <i class="" v-if="item.progress == 0">预警内容：</i>
+                      <i class="" v-else>上报内容：</i> -->
+                      <i class="">上报内容：</i>
                       {{message.remark}}
                     </span>
                   </li>
@@ -292,8 +297,9 @@
                 <div v-if="item.reportRecordList !== null">
                   <li v-for="(message,j) in item.reportRecordList" :key="j">
                     <span class="spantime">
-                      <i class="" v-if="item.progress == 0">预警时间：</i>
-                      <i class="" v-else>上报时间：</i>
+                      <!-- <i class="" v-if="item.progress == 0">预警时间：</i>
+                      <i class="" v-else>上报时间：</i> -->
+                      <i class="">上报时间：</i>
                       {{message.creatDate}}
                     </span>
                     <div class="spanImgBox" v-if="message.imageList.length>0">
@@ -310,8 +316,9 @@
                       </span>
                     </div>
                     <span class="spancontent">
-                      <i class="" v-if="item.progress == 0">预警内容：</i>
-                      <i class="" v-else>上报内容：</i>
+                      <!-- <i class="" v-if="item.progress == 0">预警内容：</i>
+                      <i class="" v-else>上报内容：</i> -->
+                       <i class="">上报内容：</i>
                       {{message.remark}}
                     </span>
                   </li>
@@ -473,7 +480,6 @@ export default {
         if(res.data.code == 200){
           if(res.data.result.length > 0){
             this.Xjresult = res.data.result;
-            console.log(this.Xjresult);
             for(let i in this.Xjresult){
               for(let c in this.Xjresult[i].reportRecordList){
                 for(let q in this.Xjresult[i].reportRecordList[c].imageList){
@@ -481,13 +487,16 @@ export default {
                 }
               }
             }
-            console.log(this.srcList);
             this.isFirst = false;
             if(this.Xjresult.length >= 2){
               this.solveShow = 2
             }else if(this.Xjresult.length ==1 ){
               this.solveShow = 1
             }
+            //动态添加dom元素
+            setTimeout(function(){
+              console.log(document.getElementById('firstDom').nextSibling);
+            },200)
           }
         }
       })
@@ -662,6 +671,9 @@ export default {
       }
     }
     div{
+      // li:nth-child(1){
+      //   margin-top: 120px;
+      // }
       li{
         list-style: none;
         margin-top: 10px;

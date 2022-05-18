@@ -93,12 +93,24 @@
                   <span style="color:#0269E9;" v-else>编辑</span>
                   </el-button
                 >
-                <el-button :disabled="scope.row.status == 1 ? true : false" size="small" type="text" @click="deletedata(scope.row.id)" style="color:#FF6579;">
-                  <span style="color:gray;" v-if="scope.row.status == 1">
-                    已解除异常
+                <el-button v-if="userType == 'ROLE_ADMIN' && scope.row.status == 1" :disabled="scope.row.reportType == 1 ? true : false" size="small" type="text" @click="deletedata(scope.row.id)">
+                  <span>
+                    解除异常
                   </span>
-                  <span style="color:#148F97;" v-if="scope.row.status == 3">
-                    申请解除异常
+                </el-button>
+                <el-button v-if="userType == 'ROLE_ADMIN' && scope.row.status == 3" :disabled="scope.row.reportType == 1 ? true : false" size="small" type="text" @click="deletedata(scope.row.id)">
+                  <span>
+                    解除异常
+                  </span>
+                </el-button>
+                <el-button v-if="userType == 'ROLE_USER' && scope.row.status == 1" :disabled="true" size="small" type="text" @click="deletedata(scope.row.id)">
+                  <span style="color:#148F97;">
+                    已申请解除
+                  </span>
+                </el-button>
+                <el-button v-if="userType == 'ROLE_USER' && scope.row.status == 3" :disabled="scope.row.reportType == 1 ? true : false" size="small" type="text" @click="deletedata(scope.row.id)">
+                  <span style="color:#148F97;">
+                    申请解除
                   </span>
                 </el-button>
               </template>
@@ -161,9 +173,13 @@ export default {
       listLoading: false,
       // 操作按钮文字显示
       controlScopeText:'异常上报',
+      // 存储用户类型
+      userType: '',
     };
   },
   created(){
+    // 获取用户类型
+    this.userType = window.sessionStorage.getItem("authority");
     this.init();
   },
   methods: {
