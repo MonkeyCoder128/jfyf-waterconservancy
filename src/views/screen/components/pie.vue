@@ -58,7 +58,7 @@ export default {
           },
           formatter: function (param) {
             let index = dataCake.findIndex((v) => v.name == param);
-            let str = `{white|${param}}{t${index}|${
+            let str = `{white|${param.padEnd(5, "　")}}{t${index}|${
               dataCake[index].value + "%"
             }}`;
             console.log(dataCake);
