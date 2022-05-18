@@ -95,17 +95,16 @@
                 ></iframe>
               </div> -->
               <!-- <img src="../../assets/image/3d.png" class="threed" alt="" /> -->
-              <div style="height:100%;overflow-y:hidden;display:block;">
+              <div style="height: 100%; overflow-y: hidden; display: block">
                 <iframe
-                frameborder="0"
-                scrolling="no"
-                src="http://112.125.88.230/webgl/index.html"
-                :style="{ width: width, height: height }"
-                class="ifremud"
-                style="position:static"
-              ></iframe>
+                  frameborder="0"
+                  scrolling="no"
+                  src="http://112.125.88.230/webgl/index.html"
+                  :style="{ width: width, height: height }"
+                  class="ifremud"
+                  style="position: static"
+                ></iframe>
               </div>
-              
             </div>
             <div class="box_cont" style="margin-top: 1.4%">
               <div class="box_nav box_nav1">
@@ -293,16 +292,17 @@ export default {
       width: "100%", //自适应当前窗口宽度
     };
   },
-  created() { 
-  },
+  created() {},
   mounted() {
     this.nowTimes();
     console.log("111");
-    console.log( this.$refs.box.offsetHeight);
+    console.log(this.$refs.box.offsetHeight);
   },
   methods: {
     tothreed() {
-      window.location.href = "http://112.125.88.230/webgl/index.html";
+      //window.location.href = "http://112.125.88.230/webgl/index.html";
+
+      this.$router.push("/threed");
     },
     timeFormate(timeStamp) {
       let year = new Date(timeStamp).getFullYear();

@@ -18,6 +18,12 @@ const constantRoutes = [
     component: () => import('@/views/screen/index'),
     hidden: true
   },
+  {
+    path: '/threed',
+    component: () => import('@/views/screen/threed'),
+    hidden: true
+  },
+  
 
   {
     path: '/404',
