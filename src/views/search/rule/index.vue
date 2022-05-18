@@ -4,7 +4,7 @@
       <el-card shadow="always" class="el-card">
         <div>
           <div>
-            <el-form :inline="true" :model="formData" class="demo-form-inline" size="small" ref="ruleForm">
+            <el-form :inline="true" :model="formData" class="demo-form-inline" size="mini" ref="ruleForm">
               <el-form-item label="" class="changeInputClass">
                 <el-input clearable v-model="formData.ruleName" placeholder="搜索条例" suffix-icon="el-icon-search">
                 </el-input>
@@ -22,18 +22,14 @@
                 </div>
               </el-form-item>
               <el-form-item>
-                <el-button style="
-                    background-color: #1c48bf;
+                <el-button style="background-color: #1c48bf;
                     border: 1px solid #1c48bf;
+                    border-radius: 5px;" type="primary" size="mini" @click="serchData">查询</el-button>
+                <el-button style="border: 1px solid #1c48bf;
                     border-radius: 5px;
-                  " type="primary" size="small" @click="serchData">查询</el-button>
-                <el-button style="
-                    border: 1px solid #1c48bf;
-                    border-radius: 5px;
-                    color: #1c48bf;
-                  " size="small" @click="resetForm('ruleForm')">重置</el-button>
+                    color: #1c48bf;" size="mini" @click="resetForm('ruleForm')">重置</el-button>
               </el-form-item>
-              <el-button class="addTerm" size="small" @click="dialogVisible = true">上传条例</el-button>
+              <el-button class="addTerm" size="mini" @click="dialogVisible = true">上传条例</el-button>
             </el-form>
           </div>
           <!-- 全选选中出现 -->

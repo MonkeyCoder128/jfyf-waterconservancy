@@ -10,6 +10,7 @@ import 'video.js/dist/video-js.css';
 Vue.prototype.$video = videojs;
 import * as echarts from 'echarts';
 import './assets/css/variable.scss'
+import './assets/xjicon/iconfont.css'
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false
