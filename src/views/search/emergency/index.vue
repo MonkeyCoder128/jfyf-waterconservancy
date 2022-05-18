@@ -130,8 +130,6 @@
 </el-row>
 </template>
 <script>
-import {InintData,ReportErr} from '@/api/safe'
-import { stringify } from 'querystring';
 export default {
   name:'',
   data () {
@@ -177,7 +175,7 @@ export default {
     init(){
       this.tableData.currPage = 1;
       this.listLoading = true;
-      InintData({},window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.InintData({}).then(res=>{
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
@@ -207,7 +205,7 @@ export default {
         this.formData.startDate = this.formData.reportDate[0];
         this.formData.endDate = this.formData.reportDate[1];
       }
-      InintData(this.formData, window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.InintData(this.formData).then(res=>{
         // 接口请求完成之后把 this.formData.status 改正字符串格式
         this.formData.status = String(this.formData.status);
         if(res.data.code == 200){
@@ -232,33 +230,6 @@ export default {
     // 查看异常情况
     check(row){
       this.$router.push({name:'childrenEme',params: {id:row.id,type:row.reportType,exception:row.exceptionType}});
-    },
-    // 从后台查询数据
-    getdata () {
-      this.listLoading = true
-      this.$http({
-        method: 'post',
-        url: this.$http.adornUrl('/base/basestudents/list'),
-        headers: { token: this.$cookie.get('token') },
-        data: this.$http.adornData({
-          name: this.formData.name,
-          size: this.formData.size,
-          type: this.formData.type,
-          currPage: this.tableData.currPage,
-          pageSize: this.tableData.pageSize,
-        })
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.tableData = res.data.page
-        } else {
-          this.$message({
-            message: res.data.msg,
-            type: 'error',
-            duration: 1000
-          })
-        }
-        this.listLoading = false
-      })
     },
     // 表单重置
     resetForm(formName) {

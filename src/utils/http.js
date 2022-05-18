@@ -48,7 +48,7 @@ axios.interceptors.response.use((response) => {
     return Promise.reject(error);
 })
 
-export const postJsonRequest = (url, params) => {
+    export const postJsonRequest = (url, params) => {
     // params.userViewId = ADMININFOs.viewId
     return axios({
       method: "post",
@@ -63,6 +63,16 @@ export const postJsonRequest = (url, params) => {
     return axios({
       method: "get",
       params: data,
+      url: url,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  };
+  export const deleteRequest = (url, params = {}) => {
+    return axios({
+      method: "DELETE",
+      data: params,
       url: url,
       headers: {
         "Content-Type": "application/json"
