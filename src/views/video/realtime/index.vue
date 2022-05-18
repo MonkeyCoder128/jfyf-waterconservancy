@@ -9,7 +9,7 @@
             </el-input>
             <el-tree class="filter-tree" :data="dataList" default-expand-all :filter-node-method="filterNode"
               highlight-current @node-click="handleNodeClick" ref="tree">
-              <span slot-scope="{node,data}">
+              <span slot-scope="{data}">
                 <span>
                   <i :class="data.icon" class="mr5"></i>{{ data.label }}
                 </span>
@@ -21,7 +21,7 @@
           <div class="posti">{{ nowDate }}</div>
           <div class="h100">
             <video id="video" class="h100 video-js vjs-default-skin vjs-big-play-centered" muted controls>
-              <source src="blob:https://www.pianshen.com/904969d3-010e-41a5-8874-66657ba30561" type="application/x-mpegURL" />
+              <source src="blob:http://112.125.88.230/file/video/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4" type="application/x-mpegURL" />
             </video>
           </div>
         </el-col>
