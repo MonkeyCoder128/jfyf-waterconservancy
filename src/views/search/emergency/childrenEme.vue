@@ -297,7 +297,6 @@
 </template>
 
 <script>
-import {ReportErr,SelectReport,InspectionId} from '@/api/safe'
 export default {
   data(){
     return{
@@ -408,7 +407,7 @@ export default {
   methods:{
     // 根据id获取左侧信息回显
     Echo(){
-      SelectReport(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.SelectReport({id:this.$route.params.id}).then(res=>{
         if(res.data.code == 200){
           this.formOne.reportUserName = res.data.result.reportUserName;
           this.formOne.description = res.data.result.description;
@@ -421,7 +420,7 @@ export default {
         }
       }),
       // 根据id获取右侧信息回显
-      InspectionId(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.InspectionId({inspectionId:this.$route.params.id}).then(res=>{
         if(res.data.code == 200){
           if(res.data.result.length > 0){
             this.Xjresult = res.data.result;
@@ -449,7 +448,7 @@ export default {
     // 表单数据提交
     onSubmit() {
       this.listLoading = true;
-      ReportErr(this.formOne,window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.ReportErr(this.formOne).then(res=>{
         if(res.data.code == 200){
           this.$message({
             showClose: true,

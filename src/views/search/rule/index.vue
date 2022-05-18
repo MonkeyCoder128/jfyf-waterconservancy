@@ -125,11 +125,6 @@
   </el-row>
 </template>
 <script>
-  import {
-    Regulations,
-    DeleteRule,
-    InsertRule
-  } from '@/api/safe'
   export default {
     name: '',
     data() {
@@ -230,10 +225,10 @@
       // 获取list
       initData() {
         this.listLoading = true;
-        Regulations({
+        this.$api.SAFE.Regulations({
           currentPage: this.tableData.pagination.current,
           pageSize: this.tableData.pagination.size
-        }, window.sessionStorage.getItem("token")).then(res => {
+        }).then(res => {
           if (res.data.code == 200) {
             this.tableData.list = res.data.result.records;
             this.tableData.pagination.current = res.data.result.current;
@@ -260,7 +255,7 @@
           this.formData.endDate = this.formData.uploadDate[1];
         }
         this.formData.uploadDate = '';
-        Regulations(this.formData, window.sessionStorage.getItem("token")).then(res => {
+        this.$api.SAFE.Regulations(this.formData).then(res => {
           if (res.data.code == 200) {
             this.tableData.list = res.data.result.records;
             this.listLoading = false;
@@ -299,7 +294,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          DeleteRule(arr, window.sessionStorage.getItem("token")).then(res => {
+          this.$api.SAFE.DeleteRule(arr).then(res => {
             if (res.data.code == 200) {
               this.$message({
                 type: 'success',
@@ -393,7 +388,7 @@
       },
       // 提交上传文件
       uploadFile() {
-        InsertRule(this.finallRuleDate, window.sessionStorage.getItem("token")).then(res => {
+        this.$api.SAFE.InsertRule(this.finallRuleDate).then(res => {
           console.log(res);
           this.finallRuleDate = [];
           this.$refs.upload.clearFiles();
