@@ -19,9 +19,9 @@
         </el-col>
         <el-col class="h100 relt" :span="18">
           <div class="posti">{{ nowDate }}</div>
-          <div class="h100">
-            <video id="video" class="h100 video-js vjs-default-skin vjs-big-play-centered" muted controls>
-              <source src="blob:http://112.125.88.230/file/video/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4" type="application/x-mpegURL" />
+          <div style="height: calc(100% - 50px);width: 100%;">
+            <video id="myvideo" class="h100 w100 video-js vjs-default-skin" preload="auto" controls width="100%">
+              <source src="http://ivi.bupt.edu.cn/hls/btv11hd.m3u8" type="application/x-mpegURL" />
             </video>
           </div>
         </el-col>
@@ -101,8 +101,9 @@ export default {
   },
   mounted () {
     this.currentTime();
+    let that = this
     setTimeout(() => {
-      this.getVideo();
+      that.getVideo();
     });
   },
   watch: {
@@ -118,13 +119,18 @@ export default {
   methods: {
     //直播
     getVideo () {
-      this.player = Videojs("video", {
-        bigPlayButton: true,
-        autoplay: false,
-        controls: true,
-        width: 300,
-        preload: "auto",
-      });
+      Videojs(
+        "myvideo",{
+          bigPlayButton: false,
+          textTrackDisplay: false,
+          posterImage: true,
+          errorDisplay: false,
+          controlBar: true
+        },
+        function() {
+          this.play
+        }
+      )
     },
     //树
     filterNode (value, data) {
@@ -133,7 +139,15 @@ export default {
     },
     //点击事件
     handleNodeClick (data) {
-      this.p_video = data.label
+      this.p_video = data.label;
+      var myPlayer = Videojs(myvideo)
+      myPlayer.src([
+        {
+          type:"application/x-mpegURL",
+          src:"rtmp://ns8.indexforce.com/home/mystream"
+        }
+      ]);
+      myPlayer.play()
     },
     currentTime() {
       setInterval(this.formatDate, 1000);
@@ -171,6 +185,9 @@ export default {
 .h100 {
   height: 100%;
 }
+.w100 {
+  width: 100%;
+}
 
 .relt {
   position: relative;
@@ -193,7 +210,7 @@ export default {
   padding: 20px;
   box-sizing: border-box;
   background: #fff;
-  height: calc(100% - 235px);
+  height: calc(100% - 287px);
 }
 
 #video {

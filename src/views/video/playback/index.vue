@@ -73,8 +73,14 @@
     <el-dialog title="" :visible.sync="dialogVisible" width="70%" :close-on-click-modal="false"
       :close-on-press-escape="false">
       <video id="video" class="h100 video-js vjs-default-skin vjs-big-play-centered" muted controls>
-        <source :src="nowPlayVideoUrl" type="application/x-mpegURL" />
+        <source :src="nowPlayVideoUrl" type="video/mp4" />
       </video>
+      <!-- <video src="http://112.125.88.230/file/video/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4" ></video> -->
+      <!-- <video width="100%" height="100%" controls>
+        <source :src="nowPlayVideoUrl" type="video/mp4">
+      
+        
+    </video> -->
     </el-dialog>
   </el-row>
 </template>
@@ -195,9 +201,7 @@ export default {
     };
   },
   mounted () {
-    // setTimeout(() => {
-    //   this.getVideo();
-    // });
+  
   },
   watch: {
     filterText (val) {
@@ -209,7 +213,6 @@ export default {
     handleClick (index) {
       console.log(index);
       this.dialogVisible = true;
-      this.getVideo();
     },
     //直播
     getVideo () {
