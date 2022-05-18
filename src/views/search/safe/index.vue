@@ -4,7 +4,7 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline" size="small" ref="ruleForm">
+          <el-form :inline="true" :model="formData" class="demo-form-inline" size="mini" ref="ruleForm">
             <el-form-item label="时间">
               <div class="block" :span='6'>
                 <span class="demonstration"></span>
@@ -34,8 +34,8 @@
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button style="border-radius:5px;" type="primary" size="small" @click="serchData">查询</el-button>
-              <el-button style="border: 1px solid #1c48bf;border-radius:5px; color:#1c48bf" size="small" @click="resetForm('ruleForm')" >重置</el-button>
+              <el-button style="border-radius:5px;" type="primary" size="mini" @click="serchData">查询</el-button>
+              <el-button style="border: 1px solid #1c48bf;border-radius:5px; color:#1c48bf" size="mini" @click="resetForm('ruleForm')" >重置</el-button>
             </el-form-item>
           </el-form>
 
