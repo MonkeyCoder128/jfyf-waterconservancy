@@ -144,10 +144,19 @@
                 <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div class="showInfoBox" v-if="item.reportRecordList !== null">
+                  <li v-if="item.progress == 0">
+                     <span class="spantime">
+                      <i class="">预警时间：</i>
+                      2022-05-18 22:00
+                    </span>
+                    <span class="spancontent">
+                      <i class="">预警内容：</i>
+                      {{earlyWarning}}
+                    </span>
+                  </li>
                   <li v-for="(message,j) in item.reportRecordList" :key="j">
                     <span class="spantime">
-                      <i class="" v-if="item.progress == 0">预警时间：</i>
-                      <i class="" v-else>上报时间：</i>
+                      <i class="">上报时间：</i>
                       {{message.creatDate}}
                     </span>
                     <div class="spanImgBox" v-if="message.imageList.length>0">
@@ -163,8 +172,7 @@
                       </span>
                     </div>
                     <span class="spancontent">
-                      <i class="" v-if="item.progress == 0">预警内容：</i>
-                      <i class="" v-else>上报内容：</i>
+                      <i class="">上报内容：</i>
                       {{message.remark}}
                     </span>
                   </li>
@@ -238,10 +246,19 @@
                 <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div class="showInfoBox" v-if="item.reportRecordList !== null">
+                  <li v-if="item.progress == 0">
+                     <span class="spantime">
+                      <i class="">预警时间：</i>
+                      2022-05-18 22:00
+                    </span>
+                    <span class="spancontent">
+                      <i class="">预警内容：</i>
+                      {{earlyWarning}}
+                    </span>
+                  </li>
                   <li v-for="(message,j) in item.reportRecordList" :key="j">
                     <span class="spantime">
-                      <i class="" v-if="item.progress == 0">预警时间：</i>
-                      <i class="" v-else>上报时间：</i>
+                      <i class="">上报时间：</i>
                       {{message.creatDate}}
                     </span>
                    <div class="spanImgBox" v-if="message.imageList.length>0">
@@ -257,8 +274,7 @@
                       </span>
                     </div>
                     <span class="spancontent">
-                      <i class="" v-if="item.progress == 0">预警内容：</i>
-                      <i class="" v-else>上报内容：</i>
+                      <i class="">上报内容：</i>
                       {{message.remark}}
                     </span>
                   </li>

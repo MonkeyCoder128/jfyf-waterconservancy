@@ -164,9 +164,6 @@
         <!-- 当设备功能出现异常，并且用户 非第一次 提交时展示的部分 -->
         <el-card shadow="always" class="el-card" v-if="this.isFirst == false">
           <p class="record">巡检记录</p>
-          <div>
-            <el-divider direction="vertical"></el-divider>
-          </div>
           <div v-for="(item,index) in this.Xjresult" :key="index">
             <ul class="jindu">
               <h5 id="firstDom" v-if="item.progress == 0">
@@ -196,10 +193,18 @@
                 <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div v-if="item.reportRecordList !== null">
+                  <li v-if="item.progress == 0">
+                     <span class="spantime">
+                      <i class="">预警时间：</i>
+                      2022-05-18 22:00
+                    </span>
+                    <span class="spancontent">
+                      <i class="">预警内容：</i>
+                      {{earlyWarning}}
+                    </span>
+                  </li>
                   <li v-for="(message,j) in item.reportRecordList" :key="j">
                     <span class="spantime">
-                      <!-- <i class="" v-if="item.progress == 0">预警时间：</i>
-                      <i class="" v-else>上报时间：</i> -->
                       <i class="">上报时间：</i>
                       {{message.creatDate}}
                     </span>
@@ -216,8 +221,6 @@
                       </span>
                     </div>
                     <span class="spancontent">
-                      <!-- <i class="" v-if="item.progress == 0">预警内容：</i>
-                      <i class="" v-else>上报内容：</i> -->
                       <i class="">上报内容：</i>
                       {{message.remark}}
                     </span>
@@ -295,17 +298,26 @@
                 <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div v-if="item.reportRecordList !== null">
+                  <li v-if="item.progress == 0">
+                     <span class="spantime">
+                      <i class="">预警时间：</i>
+                      2022-05-18 22:00
+                    </span>
+                    <span class="spancontent">
+                      <!-- <i class="" v-if="item.progress == 0">预警内容：</i>
+                      <i class="" v-else>上报内容：</i> -->
+                      <i class="">预警内容：</i>
+                      {{earlyWarning}}
+                    </span>
+                  </li>
                   <li v-for="(message,j) in item.reportRecordList" :key="j">
                     <span class="spantime">
-                      <!-- <i class="" v-if="item.progress == 0">预警时间：</i>
-                      <i class="" v-else>上报时间：</i> -->
                       <i class="">上报时间：</i>
                       {{message.creatDate}}
                     </span>
                     <div class="spanImgBox" v-if="message.imageList.length>0">
                       <span>
                         <i>上报图片：</i>
-                        <!-- <img :src="imgList" alt=""> -->
                         <div class="demo-image__preview" v-for="(imgList,q) in message.imageList" :key="q">
                           <el-image 
                             style="width: 50px; height: 50px"
@@ -316,8 +328,6 @@
                       </span>
                     </div>
                     <span class="spancontent">
-                      <!-- <i class="" v-if="item.progress == 0">预警内容：</i>
-                      <i class="" v-else>上报内容：</i> -->
                        <i class="">上报内容：</i>
                       {{message.remark}}
                     </span>
