@@ -303,7 +303,6 @@ export default {
   height: 98%;
   overflow: auto;
   margin: 10px;
-  padding-top: 60px;
 }
 .sidebar {
   width: 200px;
