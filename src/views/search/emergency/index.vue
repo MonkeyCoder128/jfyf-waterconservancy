@@ -4,7 +4,7 @@
     <el-card shadow="always" class="el-card">
       <div>
         <div>
-          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="" :label-position='labelPosition' size="small" ref="ruleForm">
+          <el-form :inline="true" :model="formData" class="demo-form-inline" label-width="" :label-position='labelPosition' size="mini" ref="ruleForm">
             <el-form-item label="时间">
               <div class="block">
                 <span class="demonstration"></span>
@@ -40,8 +40,8 @@
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button style="background-color:#1c48bf; border: 1px solid #1c48bf;border-radius:5px;" type="primary" size="small" @click="serchData">查询</el-button>
-              <el-button style="border: 1px solid #1c48bf;border-radius:5px; color:#1c48bf" size="small" @click="resetForm('ruleForm')" >重置</el-button>
+              <el-button style="background-color:#1c48bf; border: 1px solid #1c48bf;border-radius:5px;" type="primary" size="mini" @click="serchData">查询</el-button>
+              <el-button style="border: 1px solid #1c48bf;border-radius:5px; color:#1c48bf" size="mini" @click="resetForm('ruleForm')" >重置</el-button>
             </el-form-item>
           </el-form>
 
@@ -99,7 +99,7 @@
                   size="small"
                   type="text"
                   style="color:#1C48BF;"
-                  @click="check(scope.row.id)"
+                  @click="check(scope.row)"
                   >查看
                 </el-button>
                 <el-button size="small" type="text" @click="deletedata(scope.row.id)">
@@ -230,8 +230,8 @@ export default {
       // console.log('解除异常' + id);
     },
     // 查看异常情况
-    check(id){
-      this.$router.push({name:'childrenEme',query: {id}})
+    check(row){
+      this.$router.push({name:'childrenEme',params: {id:row.id,type:row.reportType,exception:row.exceptionType}});
     },
     // 从后台查询数据
     getdata () {

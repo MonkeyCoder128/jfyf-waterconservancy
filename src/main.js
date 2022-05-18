@@ -7,6 +7,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'video.js/dist/video-js.css'
 import * as echarts from 'echarts';
 import './assets/css/variable.scss'
+import './assets/xjicon/iconfont.css'
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false

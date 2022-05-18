@@ -297,7 +297,7 @@ export default {
   align-items: center;
   position: fixed;
   width: 89%;
-  z-index: 9999;
+  z-index: 1;
 }
 .app-main {
   position: relative;

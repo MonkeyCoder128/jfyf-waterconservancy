@@ -4,9 +4,8 @@
       <i class="el-icon-arrow-left"></i>
       <span>{{pageTitle}}</span>
     </div>
-    <!--begin 设备异常所展示的部分 -->
-    <div v-if="showInfo === true">
-      <el-col :span="18">
+    <div>
+      <!-- <el-col :span="18">
         <el-card shadow="always" class="el-card">
           <el-form v-loading="listLoading" :label-position="labelPosition" ref="form" :model="formOne" label-width="100px">
             <el-row>
@@ -31,7 +30,6 @@
               </el-col>
             </el-row>
             <el-form-item label="问题描述：">
-              <!-- 图片回显上来后的展示框 -->
               <div class="imgShowBox">
                 <img class="imgShow" v-for="(item,i) in this.imgArr" :key="i" :src="item" alt="">
               </div>
@@ -80,22 +78,50 @@
                 </el-col>
               </el-form-item>
             </div>
-            <!-- <el-form-item v-if="showUserButton">
-              <el-button>取消</el-button>
-              <el-button type="primary" @click="onSubmit">提交</el-button>
-            </el-form-item> -->
           </el-form>
         </el-card>
-      </el-col>
+      </el-col> -->
+      
+      <!-- 当设备功能出现异常时展示的部分 -->
       <el-col 
-        :span="6" 
+        :span="24" 
         v-if="formOne.exceptionType == 5 || formOne.exceptionType =='设备功能异常'">
-        <el-card shadow="always" class="el-card">
+        <!-- 当设备功能出现异常，并且用户 第一次 提交时展示的部分 -->
+        <el-card shadow="always" class="el-card" v-if="this.isFirst == true">
+          <p class="record">巡检记录</p>
+          <ul class="jindu" v-if="this.isFirst == true">
+            <h5>
+              <i class="iconfont icon-tongzhi"></i>
+              巡检记录
+            </h5>
+            <div class="reportRecordList">
+              <el-divider class="isFirstDivider" direction="vertical"></el-divider>
+              <div class="showInfoBox">
+                <li >
+                  <span class="spantime">
+                    <i class="">预警时间：</i>
+                    2022-05-16 18:00
+                  </span>
+                  <span class="spancontent">
+                    <i class="" >预警内容：</i>
+                    {{this.earlyWarning}}
+                  </span>
+                </li>
+              </div>
+            </div>
+            <h5>
+              <i style="color:#999999" class="el-icon-circle-check"></i>
+              维修完成
+            </h5>
+          </ul>
+        </el-card>
+         <!-- 当设备功能出现异常，并且用户 非第一次 提交时展示的部分 -->
+        <el-card shadow="always" class="el-card" v-if="this.isFirst == false">
           <p class="record">巡检记录</p>
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
-                <i class="el-icon-circle-check"></i>
+                <i class="iconfont icon-tongzhi"></i>
                 巡检记录
               </h5>
               <!-- <h5 v-if="item.progress == 1">
@@ -103,101 +129,154 @@
                 等待维修
               </h5> -->
               <h5 v-if="item.progress == 2">
-                <i class="el-icon-circle-check"></i>
+                <i class="iconfont icon-tongzhi"></i>
                 维修中
               </h5>
               <h5 v-if="item.progress == 3">
-                <i class="el-icon-circle-check"></i>
+                <i class="iconfont icon-tongzhi"></i>
                 维修完成
               </h5>
               <h5 v-if="item.progress == 4">
-                <i class="el-icon-circle-check"></i>
+                <i class="iconfont icon-tongzhi"></i>
                 已解决
               </h5>
-              <div v-if="item.reportRecordList !== null">
-                <li v-for="(message,j) in item.reportRecordList" :key="j">
-                  <span class="spantime">
-                    <i class="" v-if="item.progress == 0">预警时间：</i>
-                    <i class="" v-else>上报时间：</i>
-                    {{message.creatDate}}
-                  </span>
-                  <div class="spanImgBox" v-if="message.imageList.length>0">
-                    <span 
-                    v-for="(imgList,q) in message.imageList" :key="q">
-                      <i>上报图片：</i>
-                      <img :src="imgList" alt="">
+              <div class="reportRecordList">
+                <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
+                <el-divider v-else direction="vertical"></el-divider>
+                <div class="showInfoBox" v-if="item.reportRecordList !== null">
+                  <li v-for="(message,j) in item.reportRecordList" :key="j">
+                    <span class="spantime">
+                      <i class="" v-if="item.progress == 0">预警时间：</i>
+                      <i class="" v-else>上报时间：</i>
+                      {{message.creatDate}}
                     </span>
-                  </div>
-                  <span class="spancontent">
-                    <i class="" v-if="item.progress == 0">预警内容：</i>
-                    <i class="" v-else>上报内容：</i>
-                    {{message.remark}}
-                  </span>
-                </li>
-              </div>
-              <div class="nulldata" v-if="item.reportRecordList == null">
-                <span>暂无数据</span>
+                    <div class="spanImgBox" v-if="message.imageList.length>0">
+                      <span>
+                        <i>上报图片：</i>
+                        <div class="demo-image__preview" v-for="(imgList,q) in message.imageList" :key="q">
+                          <el-image 
+                            style="width: 50px; height: 50px"
+                            :src="imgList"
+                            :preview-src-list="srcList">
+                          </el-image>
+                        </div>
+                      </span>
+                    </div>
+                    <span class="spancontent">
+                      <i class="" v-if="item.progress == 0">预警内容：</i>
+                      <i class="" v-else>上报内容：</i>
+                      {{message.remark}}
+                    </span>
+                  </li>
+                </div>
+                <div class="nulldata" v-if="item.reportRecordList == null">
+                  <span>暂无数据</span>
+                </div>
               </div>
             </ul>
           </div>
+          <h5 class="solveShow" v-if="solveShow == 2">
+            <i style="color:gray" class="el-icon-circle-check"></i>
+            已解决
+          </h5>
+          <h5 class="solveShow" v-if="solveShow == 1">
+            <i style="color:gray" class="el-icon-circle-check"></i>
+            维修完成
+          </h5>
         </el-card>
       </el-col>
-      <el-col :span="6" v-else>
-        <el-card shadow="always" class="el-card">
+      <!-- 当非设备，其他功能出现异常时展示的部分 -->
+      <el-col :span="24" v-else>
+        <!-- 当非设备，其他功能出现异常，并且 第一次提交 展示的部分 -->
+        <el-card shadow="always" class="el-card" v-if="this.isFirst == true">
           <p class="record">巡检记录</p>
-          <div v-for="(item) in this.Xjresult" :key="item.progress">
-            <ul class="jindu">
-              <h5 v-if="item.progress == 0">
-                <i class="el-icon-circle-check"></i>
-                巡检记录
-              </h5>
-              <!-- <h5 v-if="item.progress == 1">
-                <i class="el-icon-circle-check"></i>
-                等待维修
-              </h5> -->
-              <!-- <h5 v-if="item.progress == 2">
-                <i class="el-icon-circle-check"></i>
-                维修中
-              </h5>
-              <h5 v-if="item.progress == 3">
-                <i class="el-icon-circle-check"></i>
-                维修完成
-              </h5> -->
-              <h5 v-if="item.progress == 4">
-                <i class="el-icon-circle-check"></i>
-                已解决
-              </h5>
-              <div v-if="item.reportRecordList !== null">
-                <li v-for="(message,j) in item.reportRecordList" :key="j">
+          <ul class="jindu">
+            <h5>
+              <i class="iconfont icon-tongzhi"></i>
+              巡检记录
+            </h5>
+            <div class="reportRecordList">
+              <el-divider class="isFirstDivider" direction="vertical"></el-divider>
+              <div class="showInfoBox">
+                <li >
                   <span class="spantime">
-                    <i class="" v-if="item.progress == 0">预警时间：</i>
-                    <i class="" v-else>上报时间：</i>
-                    {{message.creatDate}}
+                    <i class="">预警时间：</i>
+                    2022-05-16 18:00
                   </span>
-                  <div class="spanImgBox" v-if="message.imageList.length>0">
-                    <span 
-                    v-for="(imgList,q) in message.imageList" :key="q">
-                      <i>上报图片：</i>
-                      <img :src="imgList" alt="">
-                    </span>
-                  </div>
                   <span class="spancontent">
-                    <i class="" v-if="item.progress == 0">预警内容：</i>
-                    <i class="" v-else>上报内容：</i>
-                    {{message.remark}}
+                    <i class="" >预警内容：</i>
+                    {{this.earlyWarning}}
                   </span>
                 </li>
               </div>
-              <!-- <div class="nulldata" v-if="item.reportRecordList == null">
-                <span>暂无数据</span>
-              </div> -->
+            </div>
+            <h5>
+              <i style="color:#999999" class="el-icon-circle-check"></i>
+              维修完成
+            </h5>
+          </ul>
+        </el-card>
+        <!-- 当非设备，其他功能出现异常，并且 非第一次提交 展示的部分 -->
+        <el-card shadow="always" class="el-card" v-if="this.isFirst == false">
+          <p class="record">巡检记录</p>
+          <div v-for="(item) in this.Xjresult" :key="item.progress">
+            <!-- 如果后端传过来的数据为空（用户第一次申请的时候显示） -->
+            <ul class="jindu">
+              <h5 v-if="item.progress == 0">
+                <i class="iconfont icon-tongzhi"></i>
+                巡检记录
+              </h5>
+              <h5 v-if="item.progress == 3">
+                <i class="iconfont icon-tongzhi"></i>
+                维修完成
+              </h5>
+              <h5 v-if="item.progress == 4">
+                <i class="iconfont icon-tongzhi"></i>
+                已解决
+              </h5>
+              <div class="reportRecordList">
+                <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
+                <el-divider v-else direction="vertical"></el-divider>
+                <div class="showInfoBox" v-if="item.reportRecordList !== null">
+                  <li v-for="(message,j) in item.reportRecordList" :key="j">
+                    <span class="spantime">
+                      <i class="" v-if="item.progress == 0">预警时间：</i>
+                      <i class="" v-else>上报时间：</i>
+                      {{message.creatDate}}
+                    </span>
+                   <div class="spanImgBox" v-if="message.imageList.length>0">
+                      <span>
+                        <i>上报图片：</i>
+                        <div class="demo-image__preview" v-for="(imgList,q) in message.imageList" :key="q">
+                          <el-image 
+                            style="width: 50px; height: 50px"
+                            :src="imgList"
+                            :preview-src-list="srcList">
+                          </el-image>
+                        </div>
+                      </span>
+                    </div>
+                    <span class="spancontent">
+                      <i class="" v-if="item.progress == 0">预警内容：</i>
+                      <i class="" v-else>上报内容：</i>
+                      {{message.remark}}
+                    </span>
+                  </li>
+                </div>
+              </div>
             </ul>
           </div>
-          <!-- <span v-if="this.formOne.progress != 4" class="otherSpan">暂无数据</span> -->
+          <h5 class="solveShow" v-if="solveShow == 2">
+            <i style="color:gray" class="el-icon-circle-check"></i>
+            已解决
+          </h5>
+          <h5 class="solveShow" v-if="solveShow == 1">
+            <i style="color:gray" class="el-icon-circle-check"></i>
+            维修完成
+          </h5>
         </el-card>
       </el-col>
     </div>
-    <!--end 设备异常所展示的部分 -->
   </el-row>
 </template>
 
@@ -208,8 +287,6 @@ export default {
     return{
       // 页面title
       pageTitle: '巡检记录',
-      // 根据身份key值判断展示的内容
-      showInfo: true,
       // 表单1数据
       formOne: {
         id:'',
@@ -225,28 +302,22 @@ export default {
         // 上传备注图片数据
         remarkImageList: [],
       },
-      options: [{
-          value: '1',
-          label: '流速、流量'
-        }, {
-          value: '2',
-          label: '渗透压异常'
-        }, {
-          value: '3',
-          label: '位移'
-        }, {
-          value: '4',
-          label: '水质异常'
-        }, {
-          value: '5',
-          label: '设备功能异常'
-        }],
-      // 表单2数据
-      formTwo: {
-        name: '',
-        type: [],
-        descDescribe: '',
-      },
+      // options: [{
+      //     value: '1',
+      //     label: '流速、流量'
+      //   }, {
+      //     value: '2',
+      //     label: '渗透压异常'
+      //   }, {
+      //     value: '3',
+      //     label: '位移'
+      //   }, {
+      //     value: '4',
+      //     label: '水质异常'
+      //   }, {
+      //     value: '5',
+      //     label: '设备功能异常'
+      //   }],
       // 表单对齐方式
       labelPosition: 'right',
       // 控制图片是否放大展示
@@ -284,18 +355,44 @@ export default {
           progress: 4,
           reportRecordList:null,
         }
-      ]
+      ],
+      // 控制用户时候第一次提交，该显示的内容
+      isFirst:true,
+      solveShow: 0,
+      // 所有上报图片的列表集合
+      srcList: [],
+      // 预警信息存储
+      earlyWarning: '',
     }
   },
   created(){
     // 获取父级页面传来的参数
-    this.formOne.id = this.$route.query.id;
+    this.formOne.id = this.$route.params.id;
+    this.formOne.reportType = this.$route.params.type;
+    // 通过 index 传过来的值展示预警内容；
+    switch(this.$route.params.exception) {
+      case 1:
+        this.earlyWarning = '流速、流量异常';
+        break;
+      case 2:
+        this.earlyWarning = '渗透压异常';
+        break;
+      case 3:
+        this.earlyWarning = '位移异常';
+        break;
+      case 4:
+        this.earlyWarning = '水质异常';
+        break;
+      case 5:
+        this.earlyWarning = '设备功能异常';
+        break;
+    }
     this.Echo()
   },
   methods:{
     // 根据id获取左侧信息回显
     Echo(){
-      SelectReport(this.$route.query.id,window.sessionStorage.getItem("token")).then(res=>{
+      SelectReport(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           this.formOne.reportUserName = res.data.result.reportUserName;
           this.formOne.description = res.data.result.description;
@@ -308,10 +405,23 @@ export default {
         }
       }),
       // 根据id获取右侧信息回显
-      InspectionId(this.$route.query.id,window.sessionStorage.getItem("token")).then(res=>{
+      InspectionId(this.$route.params.id,window.sessionStorage.getItem("token")).then(res=>{
         if(res.data.code == 200){
           if(res.data.result.length > 0){
             this.Xjresult = res.data.result;
+            for(let i in this.Xjresult){
+              for(let c in this.Xjresult[i].reportRecordList){
+                for(let q in this.Xjresult[i].reportRecordList[c].imageList){
+                  this.srcList.push(this.Xjresult[i].reportRecordList[c].imageList[q]) 
+                }
+              }
+            }
+            this.isFirst = false;
+            if(this.Xjresult.length >= 2){
+              this.solveShow = 2
+            }else if(this.Xjresult.length ==1 ){
+              this.solveShow = 1
+            }
           }
         }
       })
@@ -403,7 +513,7 @@ export default {
 <style lang="scss" scoped>
   .goback{
     cursor: pointer;
-    margin: 10px auto;
+    margin: 0px auto 10px;
     i{
       margin-right: 10px;
       margin-left: 5px;
@@ -461,10 +571,10 @@ export default {
       display: flex;
       align-items: center;
       margin-top: 10px;
-      color: #1c48bf;
       i{
         font-size: 30px;
         margin-right: 10px;
+        color: #1c48bf;
       }
     }
     div{
@@ -490,6 +600,7 @@ export default {
             img{
               width: 50px;
               height: 50px;
+              border-radius: 5px;
             }
           }
         }
@@ -514,5 +625,32 @@ export default {
         margin-top: 10px;
       }
     }
+  }
+
+  .reportRecordList{
+    display: flex;
+    position: relative;
+    .el-divider--vertical{
+      height: 100%;
+      position: absolute;
+      top: 3px;
+      left: 7px;
+      background-color: #1c48bf;
+    }
+  }
+  .isFirstDivider{
+    background-color: #EEEEEE !important;
+  }
+  .solveShow{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    i{
+      font-size: 30px;
+      margin-right: 10px;
+    }
+  }
+  .showInfoBox{
+    width: 60%;
   }
 </style>
