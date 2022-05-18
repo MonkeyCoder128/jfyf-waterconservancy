@@ -214,7 +214,10 @@
                   /></el-col>
                 </el-row>
               </div>
-              <broken></broken>
+              <div class="box_jianrong">
+                <broken></broken>
+              </div>
+              
             </div>
             <div class="box_right">
               <div class="box_nav">
@@ -608,5 +611,11 @@ export default {
   height: 100%;
   //background-color: rgba(0, 0, 0, 0.3);
   z-index: 9999;
+}
+.box_jianrong{
+  width: 98%;
+  height: 100%;
+  padding: 5px;
+  position: relative;
 }
 </style>

@@ -13,10 +13,10 @@ export default {
       var fontColor = "#fff";
       var option = {
         grid: {
-          left: "7%",
-          right: "7%",
-          top: "15%",
-          bottom: "20%",
+          left: "25",
+          right: "20",
+          top: "25",
+          bottom: "25",
           containLabel: true,
         },
         tooltip: {
