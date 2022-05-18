@@ -66,8 +66,7 @@ export default {
     // 按 Enter 键登录系统
     document.onkeydown = (e) => {
       e = window.event || e;
-      if (this.$route.path === "/" && e.keyCode === 13)
-        this.handleLogin(); // submitLoginForm() 为登录函数
+      if (this.$route.path === "/" && e.keyCode === 13) this.handleLogin(); // submitLoginForm() 为登录函数
     };
   },
 
@@ -77,12 +76,6 @@ export default {
   methods: {
     // 设置cookie,登录成功之后进行调用 传入账号名，密码，和保存天数3个参数
     setCookie(name, pwd) {
-      console.log(
-        "%c存储cookie：",
-        "color:blue;font-size:18px;font-weight:bold;",
-        name,
-        pwd
-      );
       var exdate = new Date(); // 获取时间
       exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * 15); // 保存的天数
       // 字符串拼接cookie
