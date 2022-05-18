@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import {InintData,ReportErr} from '@/api/safe'
+// import {InintData,ReportErr} from '@/api/safe'
 export default {
   name:'',
   data () {
@@ -187,7 +187,7 @@ export default {
     init(){
       this.listLoading = true;
       this.tableData.currPage = 1;
-      InintData({status:[1,3]},window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.InintData({status:[1,3]}).then(res=>{
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
@@ -211,7 +211,7 @@ export default {
         this.formData.startDate = this.formData.reportDate[0];
         this.formData.endDate = this.formData.reportDate[1];
       }
-      InintData(this.formData, window.sessionStorage.getItem("token")).then(res=>{
+      this.$api.SAFE.InintData(this.formData).then(res=>{
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
@@ -240,7 +240,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        ReportErr({id,status:2,progress:4},window.sessionStorage.getItem("token")).then(res=>{
+        this.$api.SAFE.ReportErr({id,status:2,progress:4}).then(res=>{
           if(res.data.code == 200){
             this.$message({
               showClose: true,
@@ -266,33 +266,6 @@ export default {
     // 异常上报
     check(row){
       this.$router.push({name:'childrenSafe',params: {id:row.id,type:row.reportType,exception:row.exceptionType}});
-    },
-    // 从后台查询数据
-    getdata () {
-      this.listLoading = true
-      this.$http({
-        method: 'post',
-        url: this.$http.adornUrl('/base/basestudents/list'),
-        headers: { token: this.$cookie.get('token') },
-        data: this.$http.adornData({
-          name: this.formData.name,
-          size: this.formData.size,
-          type: this.formData.type,
-          currPage: this.tableData.currPage,
-          pageSize: this.tableData.pageSize,
-        })
-      }).then(res => {
-        if (res.data.code === 0) {
-          this.tableData = res.data.page
-        } else {
-          this.$message({
-            message: res.data.msg,
-            type: 'error',
-            duration: 1000
-          })
-        }
-        this.listLoading = false
-      })
     },
     // 表单重置
     resetForm(formName) {
