@@ -1,7 +1,10 @@
 <template>
   <div class="loginPage">
     <div class="loginBox">
-      <div class="loginLeft"></div>
+      <div class="loginLeft">
+        <h3>智慧水坝管理平台</h3>
+        <p>实时掌握大坝运行数据，全面赋能智慧水坝建设</p>
+      </div>
       <div class="loginRight">
         <el-form ref="loginForm" :model="loginForm" class="loginformBox">
           <span class="title">您好,欢迎登录！</span>
@@ -27,7 +30,7 @@
             </el-input>
           </el-form-item>
           <el-checkbox
-            v-model="loginForm.rememberMe"
+            v-model="loginForm.autoLogin"
             style="margin: 0px 0px 25px 2px; float: left"
             >15天内自动登录
           </el-checkbox>
@@ -55,28 +58,26 @@ export default {
       loginForm: {
         username: "",
         password: "",
-        rememberMe: false,
-        code: "",
-        uuid: "",
+        autoLogin: true, //是否15天自动登录
       },
     };
   },
-  created() {},
+  created() {
+    // 按 Enter 键登录系统
+    document.onkeydown = (e) => {
+      e = window.event || e;
+      if (this.$route.path === "/" && e.keyCode === 13) this.handleLogin(); // submitLoginForm() 为登录函数
+    };
+  },
+
   mounted() {
     this.getCookie();
   },
   methods: {
     // 设置cookie,登录成功之后进行调用 传入账号名，密码，和保存天数3个参数
-    setCookie(name, pwd, exdays) {
-      console.log(
-        "%c存储cookie：",
-        "color:blue;font-size:18px;font-weight:bold;",
-        name,
-        pwd,
-        exdays
-      );
+    setCookie(name, pwd) {
       var exdate = new Date(); // 获取时间
-      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays); // 保存的天数
+      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * 15); // 保存的天数
       // 字符串拼接cookie
       window.document.cookie =
         "userName" + "=" + name + ";path=/;expires=" + exdate.toGMTString();
@@ -86,21 +87,12 @@ export default {
     // 读取cookie 将用户名和密码回显到input框中
     getCookie() {
       if (document.cookie.length > 0) {
-        var arr = document.cookie.split("; "); // 这里显示的格式需要切割一下自己可输出看下
+        var arr = document.cookie.split("; ");
         for (var i = 0; i < arr.length; i++) {
-          var arr2 = arr[i].split("="); // 再次切割
-
-          console.log(
-            "%c读取cookie：",
-            "color:red;font-size:18px;font-weight:bold;",
-            arr2[0],
-            arr2[1]
-          );
-
-          // 判断查找相对应的值
+          var arr2 = arr[i].split("=");
           if (arr2[0] === "username") {
-            this.loginForm.username = arr2[1]; // 保存到保存数据的地方即v-model
-          } else if (arr2[0] === "password ") {
+            this.loginForm.username = arr2[1];
+          } else if (arr2[0] === "userPwd") {
             this.loginForm.password = arr2[1];
           }
         }
@@ -119,24 +111,14 @@ export default {
         });
       } else {
         if (this.loginForm.username && this.loginForm.password) {
-          if (this.loginForm.rememberMe) {
-            Cookies.set("username", this.loginForm.username, {
-              expires: 30,
-            });
-            Cookies.set("password", encrypt(this.loginForm.password), {
-              expires: 30,
-            });
-            Cookies.set("rememberMe", this.loginForm.rememberMe, {
-              expires: 30,
-            });
+          if (this.loginForm.autoLogin) {
+            this.setCookie(this.loginForm.username, this.loginForm.password);
           } else {
-            Cookies.remove("username");
-            Cookies.remove("password");
-            Cookies.remove("rememberMe");
+            this.setCookie("", "", -1);
           }
-          let parmas = this.loginForm
-          console.log(parmas)
-          this.$api.LOGIN.Loginform(parmas) 
+          let parmas = this.loginForm;
+          console.log(parmas);
+          this.$api.LOGIN.Loginform(parmas)
             .then((res) => {
               if (res.data.code === "200") {
                 window.sessionStorage.setItem("token", res.data.token);
@@ -152,7 +134,7 @@ export default {
                 Cookies.set("password", encrypt(this.loginForm.password), {
                   expires: 30,
                 });
-                Cookies.set("rememberMe", this.loginForm.rememberMe, {
+                Cookies.set("autoLogin", this.loginForm.autoLogin, {
                   expires: 30,
                 });
                 this.$router.push({ path: "/screen" });
@@ -226,34 +208,64 @@ export default {
 }
 
 .loginPage {
-  background-size: contain;
-  background-repeat: no-repeat;
+  /* 加载背景图 */
   background-image: url("../../assets/image/loginBg.png");
+  /* 背景图垂直、水平均居中 */
+  background-position: center center;
+  /* 背景图不平铺 */
+  background-repeat: no-repeat;
+  /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+  background-attachment: fixed;
+  /* 让背景图基于容器大小伸缩 */
+  background-size: cover;
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   .loginBox {
-    width: 60%;
+    width: 65%;
     height: 700px;
     display: flex;
     justify-content: space-between;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 10px 0px rgba(33, 38, 54, 0.19),
+      0px -10px 10px 0px rgba(33, 38, 54, 0.19);
+    border-radius: 5px;
     .loginLeft {
+      padding-left: 50px;
       width: 60%;
       height: 100%;
-      background-size: contain;
-      background-repeat: no-repeat;
       background-image: url("../../assets/image/logo.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      h3 {
+        margin-top: 60px;
+        white-space: nowrap;
+        font-size: 30px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #ffffff;
+        line-height: 80px;
+      }
+      p {
+        white-space: nowrap;
+        font-size: 16px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #ffffff;
+      }
     }
 
     .loginRight {
-      width: 35%;
+      width: 46%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       .loginformBox {
-        width: 500px;
+        width: 400px;
       }
 
       .title {

@@ -115,14 +115,6 @@
 </template>
  
 <script>
-import {
-  roleList,
-  deleteRoleGet,
-  roleMenu,
-  addRole,
-  updateRole,
-  viewRoleInfo,
-} from "@/api/role";
 export default {
   //checkstate  1选中 0不选
   name: "UserManage",
@@ -182,10 +174,7 @@ export default {
   methods: {
     /** 表格分页 */
     getTreeData() {
-      roleMenu(
-        this.roleForm.roleId,
-        window.sessionStorage.getItem("token")
-      ).then((res) => {
+      this.$api.ROLE.roleMenu(this.roleForm.roleId).then((res) => {
         if (res.data.code === 200) {
           this.treeData = res.data.result;
         }
@@ -202,14 +191,12 @@ export default {
     },
     /** 获取角色列表 */
     getRoleList() {
-      roleList(this.queryParams, window.sessionStorage.getItem("token")).then(
-        (res) => {
-          if (res.data.code === 200) {
-            this.roleData = res.data.result.data;
-            this.total = res.data.result.total;
-          }
+      this.$api.ROLE.roleList(this.queryParams).then((res) => {
+        if (res.data.code === 200) {
+          this.roleData = res.data.result.data;
+          this.total = res.data.result.total;
         }
-      );
+      });
     },
     /** 搜索 */
     searchEnterRole() {
@@ -233,9 +220,8 @@ export default {
         }
       )
         .then(() => {
-          deleteRoleGet(
+          this.$api.ROLE.deleteRoleGet(
             row.roleId,
-            window.sessionStorage.getItem("token")
           ).then((res) => {
             if (res.data.code === 200) {
               this.$message({
@@ -263,9 +249,8 @@ export default {
       this.roleForm.roleMsg = val.roleMsg;
       this.roleForm.roleId = val.roleId;
       //查看当前用户所拥有的菜单权限
-      viewRoleInfo(
+      this.$api.ROLE.viewRoleInfo(
         this.roleForm.roleId,
-        window.sessionStorage.getItem("token")
       ).then((res) => {
         if (res.data.code === 200) {
           const recursive = (data, callback) => {
@@ -293,9 +278,8 @@ export default {
       this.roleForm.name = val.roleName;
       this.roleForm.roleMsg = val.roleMsg;
       this.roleForm.roleId = val.roleId;
-      viewRoleInfo(
+      this.$api.ROLE.viewRoleInfo(
         this.roleForm.roleId,
-        window.sessionStorage.getItem("token")
       ).then((res) => {
         if (res.data.code === 200) {
           const recursiveLook = (data, callback) => {
@@ -359,22 +343,21 @@ export default {
         if (valid) {
           if (this.roleTitle === "新增角色") {
             this.roleForm.roleId = "";
-            addRole(this.roleForm, window.sessionStorage.getItem("token")).then(
-              (res) => {
-                if (res.data.code === 200) {
-                  this.$message({
-                    message: "角色新增成功！",
-                    type: "success",
-                  });
-                  this.dialogFormVisible = false;
-                  this.getRoleList();
-                }
-              }
-            );
-          } else if (this.roleTitle === "编辑角色") {
-            updateRole(
+            this.$api.ROLE.addRole(
               this.roleForm,
-              window.sessionStorage.getItem("token")
+            ).then((res) => {
+              if (res.data.code === 200) {
+                this.$message({
+                  message: "角色新增成功！",
+                  type: "success",
+                });
+                this.dialogFormVisible = false;
+                this.getRoleList();
+              }
+            });
+          } else if (this.roleTitle === "编辑角色") {
+            this.$api.ROLE.updateRole(
+              this.roleForm,
             ).then((res) => {
               if (res.data.code === 200) {
                 this.$message({

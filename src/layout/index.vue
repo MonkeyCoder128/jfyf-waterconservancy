@@ -80,8 +80,6 @@
 
 <script>
 import Breadcrumb from "./components/Breadcrumb.vue";
-// import { menuList } from "@/api/login";
-
 export default {
   components: {
     Breadcrumb,
@@ -302,7 +300,7 @@ export default {
   position: relative;
   height: 98%;
   overflow: auto;
-  margin: 10px;
+  margin: 5px 10px 10px 10px;
 }
 .sidebar {
   width: 200px;
