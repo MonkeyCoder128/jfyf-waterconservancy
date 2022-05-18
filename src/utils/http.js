@@ -3,24 +3,25 @@ import config from '@/config/index'
 import { Notification, } from "element-ui";
 import router from '../router'
 
-const http = axios.create({
-    baseURL: config.devServer.proxy['/api'].target, // api的base_url
+export const http = axios.create({
+    baseURL:  process.env.VUE_APP_BASE_API, // api的base_url
     timeout: 10000 // 请求超时时间
 })
+axios.defaults.timeout = 10000; // 请求超时5fen
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API; 
 // 请求拦截器
-http.interceptors.request.use((config) => {
-    
-    console.log("%c请求拦截器：", "color:orange;font-size:18px;font-weight:bold;", config,);
+axios.interceptors.request.use((config) => {
+    let token = "";
     if (sessionStorage.getItem("token")) {
-        config.headers["Token"] = sessionStorage.getItem("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
+        token = sessionStorage.getItem("token")
+        config.headers["Authorization"] = token; // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     return config;
-
 })
 // 响应拦截器
-http.interceptors.response.use((response) => {
+axios.interceptors.response.use((response) => {
     var reg = /<[^>]+>/g;
-    console.log("%cresponse：", "color:blue;font-size:18px;font-weight:bold;", response,);
+    // console.log("%cresponse：", "color:blue;font-size:18px;font-weight:bold;", response,);
     if (reg.test(response.data) === true) {
         sessionStorage.clear();
         localStorage.clear();
@@ -46,4 +47,25 @@ http.interceptors.response.use((response) => {
 }, error => {
     return Promise.reject(error);
 })
-export default http
+
+export const postJsonRequest = (url, params) => {
+    // params.userViewId = ADMININFOs.viewId
+    return axios({
+      method: "post",
+      url: url,
+      data: params,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  };
+  export const getRequest = (url, data = {}) => {
+    return axios({
+      method: "get",
+      params: data,
+      url: url,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  };
