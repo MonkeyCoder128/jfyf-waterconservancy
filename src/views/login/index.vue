@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import { Loginform, menuList, getUserInfo } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt } from "@/utils/jsencrypt";
 export default {
@@ -135,7 +134,9 @@ export default {
             Cookies.remove("password");
             Cookies.remove("rememberMe");
           }
-          Loginform(this.loginForm)
+          let parmas = this.loginForm
+          console.log(parmas)
+          this.$api.LOGIN.Loginform(parmas) 
             .then((res) => {
               if (res.data.code === "200") {
                 window.sessionStorage.setItem("token", res.data.token);
@@ -165,13 +166,13 @@ export default {
               return res.data.token;
             })
             .then((res) => {
-              menuList(window.sessionStorage.getItem("token"))
+              this.$api.LOGIN.menuList()
                 .then((res) => {
                   if (res.data.code === 200) {
                   }
                 })
                 .then(() => {
-                  getUserInfo(window.sessionStorage.getItem("token"))
+                  this.$api.LOGIN.getUserInfo()
                     .then((response) => {
                       if (response.data.code === 200) {
                         console.log(
