@@ -225,6 +225,9 @@ export default {
 }
 
 .loginPage {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/image/loginBg.png");
   height: 100%;
   width: 100%;
   display: flex;
@@ -238,7 +241,8 @@ export default {
     .loginLeft {
       width: 60%;
       height: 100%;
-      background-size: cover;
+      background-size: contain;
+      background-repeat: no-repeat;
       background-image: url("../../assets/image/logo.png");
     }
 
