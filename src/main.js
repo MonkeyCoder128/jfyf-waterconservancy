@@ -6,7 +6,6 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'video.js/dist/video-js.css'
 import videojs from 'video.js';
-import 'video.js/dist/video-js.css';
 Vue.prototype.$video = videojs;
 import * as echarts from 'echarts';
 import './assets/css/variable.scss'

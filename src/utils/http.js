@@ -9,6 +9,8 @@ const http = axios.create({
 })
 // 请求拦截器
 http.interceptors.request.use((config) => {
+    
+    console.log("%c请求拦截器：", "color:orange;font-size:18px;font-weight:bold;", config,);
     if (sessionStorage.getItem("token")) {
         config.headers["Token"] = sessionStorage.getItem("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
     }

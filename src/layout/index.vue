@@ -295,8 +295,7 @@ export default {
   height: 60px;
   display: flex;
   align-items: center;
-  position: fixed;
-  width: 89%;
+  width: 100%;
   z-index: 1;
 }
 .app-main {
