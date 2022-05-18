@@ -504,7 +504,6 @@ export default {
         this.formOne.remark = this.formOne.description;
         this.formOne.remarkImageList = this.formOne.descriptionImageList;
       }
-      console.log(this.formOne.remark);
       if(this.formOne.remark !== null){
         ReportErr(this.formOne,window.sessionStorage.getItem("token")).then(res=>{
           if(res.data.code == 200){
