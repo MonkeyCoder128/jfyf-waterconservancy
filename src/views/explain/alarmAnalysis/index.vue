@@ -179,6 +179,7 @@ export default {
       display: flex;
       align-items: center;
       span {
+        font-size: 14px;
         white-space: nowrap;
       }
     }

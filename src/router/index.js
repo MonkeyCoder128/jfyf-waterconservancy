@@ -18,24 +18,18 @@ const constantRoutes = [
     component: () => import('@/views/screen/index'),
     hidden: true
   },
+  {
+    path: '/threed',
+    component: () => import('@/views/screen/threed'),
+    hidden: true
+  },
+  
 
   {
     path: '/404',
-    component: () => import('@/views/404'),
+    component: () => import('@/views/error/404'),
     hidden: true
   },
-
-  // {
-  //   path: '/screen',
-  //   component: Layout,
-  //   children: [{
-  //     path: '/screen',
-  //     name: 'screen',
-  //     component: () => import('@/views/screen/index'),
-  //     meta: { title: '首页', icon: 'home' }
-  //   }]
-  // },
-
   {
     path: '/realtimeMnitor',
     component: Layout,
@@ -97,7 +91,7 @@ const constantRoutes = [
         component: () => import('@/views/explain/alarmAnalysis/index'),
         meta: { title: '预警分析', icon: 'user' }
       },
-      
+
     ]
   },
 
@@ -218,13 +212,9 @@ const constantRoutes = [
 
   { path: '*', redirect: '/404', hidden: true }
 ]
-
-// const createRouter = () => new Router({
-//   routes: constantRoutes
-// })
 const router = new VueRouter({
-  // mode: 'history',
-  base:process.env.BASE_URL,
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes: constantRoutes,
 })
 
