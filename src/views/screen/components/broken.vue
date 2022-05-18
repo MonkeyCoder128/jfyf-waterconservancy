@@ -16,7 +16,7 @@ export default {
           left: "25",
           right: "20",
           top: "25",
-          bottom: "25",
+          bottom: "27",
           containLabel: true,
         },
         tooltip: {

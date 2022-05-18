@@ -50,7 +50,10 @@
                   /></el-col>
                 </el-row>
               </div>
-              <deformation />
+              <div class="box_jianrong">
+                <deformation />
+              </div>
+              
             </div>
             <div class="box">
               <div class="box_nav">
@@ -67,7 +70,10 @@
                   /></el-col>
                 </el-row>
               </div>
-              <pie />
+              <div class="box_jianrong">
+                <pie />
+              </div>
+              
             </div>
           </el-col>
           <el-col class="screen_cont"
@@ -197,7 +203,10 @@
                   /></el-col>
                 </el-row>
               </div>
-              <weather></weather>
+              <div class="box_jianrong">
+                <weather></weather>
+              </div>
+              
             </div>
             <div class="box_right">
               <div class="box_nav">
@@ -234,7 +243,10 @@
                   /></el-col>
                 </el-row>
               </div>
-              <pressure></pressure>
+              <div class="box_jianrong">
+                <pressure></pressure>
+              </div>
+              
             </div>
             <div class="box_right">
               <div class="box_nav">
@@ -251,7 +263,10 @@
                   /></el-col>
                 </el-row>
               </div>
-              <flow />
+              <div class="box_jianrong">
+                <flow />
+              </div>
+              
             </div>
           </el-col>
         </el-row>

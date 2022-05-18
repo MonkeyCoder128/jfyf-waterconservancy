@@ -20,15 +20,15 @@ export default {
       var option = {
         //backgroundColor:"#0d1324",
         grid: {
-          left: "0%",
-          right: "0%",
-          bottom: "10%",
-          top: "10%",
+          left: "0",
+          right: "0",
+          bottom: "10",
+          top: "10",
           containLabel: true,
         },
         legend: {
           orient: "vertical",
-          right: "4%",
+          right: "10",
           top: "center",
           itemHeight: 20,
           itemWidth: 20,

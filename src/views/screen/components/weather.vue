@@ -35,7 +35,7 @@ export default {
       var option = {
         grid: {
           show: true,
-          backgroundColor: "transparent",
+          //backgroundColor: "transparent",
           opacity: 0.3,
           borderWidth: "0",
           top: "180",
@@ -172,7 +172,7 @@ export default {
   overflow: hidden;
 }
 .btn_title {
-  color: #4bc4f1;
+  color: #2e89e0;
   background-color: rgba(62, 160, 200, 0.3);
   padding: 5px;
   position: absolute;
