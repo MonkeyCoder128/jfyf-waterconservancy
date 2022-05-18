@@ -17,10 +17,10 @@ export default {
       var wgx1 = ["100", "-100", "-200", "400", "-100"];
       var option = {
         grid: {
-          left: "5%",
-          right: "5%",
-          bottom: "15%",
-          top: "15%",
+          left: "18",
+          right: "5",
+          bottom: "35",
+          top: "45",
           containLabel: true,
         },
         legend: {

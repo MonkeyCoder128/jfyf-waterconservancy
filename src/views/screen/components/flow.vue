@@ -12,10 +12,10 @@ export default {
       var flow = this.$echarts.init(document.getElementById("flow"));
       var option = {
         grid: {
-          top: "15%",
-          left: "12%",
-          right: "5%",
-          bottom: "28%",
+          top: "25",
+          left: "47",
+          right: "5",
+          bottom: "45",
         },
         tooltip: {
           show: false,

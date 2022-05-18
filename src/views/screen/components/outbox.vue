@@ -1,128 +1,185 @@
- 
 <template>
-  <!-- vue 实现无限向上滚动 -->
-  <div id="outbox">
-    <div class="outbox">
-      <div style="width: 56%">时间</div>
-      <div style="width: 26%">设备</div>
-      <div style="width: 18%">原因</div>
+  <div style="height: 88%; overflow: hidden;width:98%;margin:0 auto;">
+    <div class="table-header table-row">
+      <div class="table-cell" style="width: 68%">时间</div>
+      <div class="table-cell" style="width: 25%">设备</div>
+      <div class="table-cell" style="width: 12%">原因</div>
     </div>
-    <div id="box">
-      <div
-        style="z-index: 9999; position: relative"
-        id="con1"
-        ref="con1"
-        :class="{ anim: animate == true }"
-        @mouseenter="mEnter"
-        @mouseleave="mLeave"
-      >
+    <div class="table-body" style="width: 94%; margin: 0 auto">
+      <div :class="{ 'scroll-wrap': getPlayData.length > 0 }">
         <div
-          v-for="(item, index) in items"
+          class="table-row"
+          :class="{ hasBgc: index % 2 === 0 }"
+          v-for="(item, index) in getPlayData"
           :key="index"
-          style="
-            display: flex;
-            flex-direction: row;
-            border-bottom: solid 1px #132540;
-          "
+          :ref="'row_' + index"
         >
-          <div style="width: 56%">{{ item.time }}</div>
-          <div style="width: 23%">{{ item.name }}</div>
-          <div style="width: 21%;color: red">{{ item.shebei }}</div>
+          <div class="table-cell" style="width: 65%" :title="item.time">
+            {{ item.time }}
+          </div>
+          <div class="table-cell" style="width: 20%" :title="item.cont">
+            {{ item.cont }}
+          </div>
+          <div
+            class="table-cell"
+            style="width: 16%; color: red"
+            :title="item.publish"
+          >
+            {{ item.yy }}
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
- 
 <script>
 export default {
+  props: {
+    data: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+  },
   data() {
     return {
-      animate: false,
-      items: [
-        //消息列表对应的数组
-        { time: "2020-04-20 11:20:09", name: "A1区", shebei: "设备离线" },
-        { time: "2020-04-20 11:20:10", name: "A2区", shebei: "流速异常" },
-        { time: "2020-04-20 11:20:11", name: "B1区", shebei: "设备离线" },
-        { time: "2020-04-20 11:20:12", name: "B2区", shebei: "流量异常" },
-        { time: "2020-04-20 11:20:13", name: "A1区", shebei: "设备离线" },
-        { time: "2020-04-20 11:20:10", name: "A2区", shebei: "设备离线" },
-        { time: "2020-04-20 11:20:11", name: "B1区", shebei: "水位异常" },
-        { time: "2020-04-20 11:20:12", name: "B2区", shebei: "设备离线" },
-        { time: "2020-04-20 11:20:17", name: "A1区", shebei: "水质异常" },
-        { time: "2020-04-20 11:20:18", name: "A1区", shebei: "设备离线" },
+      initMt: 0, // getPlayData:[],
+      getPlayData: [
+        { time: "2022-04-20 11:20:09", cont: "A1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:10", cont: "A2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:11", cont: "B1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:12", cont: "B2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:13", cont: "B3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:14", cont: "B4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:15", cont: "C1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:16", cont: "C2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:17", cont: "C3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:18", cont: "C4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:19", cont: "D1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:20", cont: "D2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:09", cont: "A1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:10", cont: "A2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:11", cont: "B1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:12", cont: "B2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:13", cont: "B3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:14", cont: "B4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:15", cont: "C1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:16", cont: "C2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:17", cont: "C3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:18", cont: "C4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:19", cont: "D1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:20", cont: "D2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:09", cont: "A1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:10", cont: "A2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:11", cont: "B1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:12", cont: "B2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:13", cont: "B3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:14", cont: "B4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:15", cont: "C1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:16", cont: "C2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:17", cont: "C3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:18", cont: "C4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:19", cont: "D1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:20", cont: "D2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:09", cont: "A1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:10", cont: "A2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:11", cont: "B1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:12", cont: "B2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:13", cont: "B3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:14", cont: "B4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:15", cont: "C1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:16", cont: "C2区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:17", cont: "C3区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:18", cont: "C4区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:19", cont: "D1区", yy: "设备离线" },
+        { time: "2022-04-20 11:20:20", cont: "D2区", yy: "设备离线" },
       ],
+      item: {
+        productName: "1",
+      },
+      visible: true,
+      stop: false,
     };
   },
-  mounted() {
-    this.timer1 = setInterval(this.scroll, 2000); //setInterval定时器，当页面加载完执行定时器
-  },
-
   methods: {
-    scroll() {
-      //建一个方法
-      let con1 = this.$refs.con1;
-      //con1.style.marginTop = "-30px"; //设置style样式 向上移动30px
-      this.animate = !this.animate; //
-      var that = this; // 在异步函数中会出现this的偏移问题，此处一定要先保存好this的指向
-      setTimeout(function () {
-        that.items.push(that.items[0]); //尾部追加数组的第一个，放到数组最后
-        that.items.shift(); //删除第一个元素
-        //con1.style.marginTop = "0px"; //设置style样式 向上移动30px 再回到原位
-        that.animate = !that.animate; // 这个地方如果不把animate 取反会出现消息回滚的现象，此时把ul 元素的过渡属性取消掉就可以完美实现无缝滚动的效果了
-      }, 500);
+    play() {
+      const row = this.$refs["row_0"][0];
+
+      setTimeout(() => {
+        this.visible = false;
+
+        this.$nextTick(() => {
+          this.initMt++;
+          if (this.initMt === this.data.length) {
+            this.initMt = 0;
+          }
+          this.visible = true;
+        });
+        this.play();
+      }, 2000);
     },
-    mEnter() {
-      clearInterval(this.timer1); //鼠标移入清除定时器
-    },
-    mLeave() {
-      this.timer1 = setInterval(this.scroll, 2000);
-    },
+  },
+  watch: {},
+  computed: {
+    // getPlayData() {
+    //   return this.data.concat(this.data.slice(0, 4));
+    // },
+  },
+  mounted() {
+    // this.play();
   },
 };
 </script>
- 
- 
-<style lang="scss"  scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-#outbox {
-  width: 92%;
-  height:calc(100% - 43px);
-  margin: 2% auto 0;
-  color: #8b8b91;
-  overflow: hidden;
-}
-.outbox {
+<style lang="scss" scoped>
+$cellHeight: 35px;
+.table-row {
   display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid #142e4e;
-  font-size: 16px;
-  height: 30px !important;
+  line-height: 35px;
+  height: 35px;
+  transition: all 0.3s;
+  border-bottom: 1px solid #12213a;
 }
-#box {
+.table-header {
+  width: 94%;
   margin: 0 auto;
-  width: 100%;
-  line-height: 30px;
+  color: #686a72;
+  border-bottom: 1px solid #153052;
+}
+.table-cell {
+  text-align: left;
+  font-size: 12px;
+  text-overflow: ellipsis;
   overflow: hidden;
+}
+// .hasBgc {
+//   background: rgb(0, 59, 81);
+// }
+.hidden-row {
+  height: 0 !important;
+  line-height: 0 !important;
+  display: none !important;
+}
+.table-body {
   height: 100%;
-  transition: all 0.5s;
-  color: #e3e3e4;
-  font-size: 14px;
-  border-bottom: solid 1px #142e4e;
+  overflow-y: hidden;
+  .table-row {
+    color: #fff;
+  }
 }
-.anim {
-  transition: all 0.5s;
+.scroll-wrap {
+  animation: scroll 18s linear infinite;
+  position: relative;
 }
-/deep/#con1 {
-  height: 100%;
-  overflow: hidden !important;
+.scroll-wrap:hover {
+  animation-play-state: paused;
 }
-#con1 li {
-  list-style: none;
-  line-height: 30px;
-  height: 30px;
+@keyframes scroll {
+  from {
+    top: 0;
+  }
+  to {
+    top: -8 * $cellHeight;
+  }
 }
 </style>
