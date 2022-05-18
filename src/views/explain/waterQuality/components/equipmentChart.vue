@@ -58,23 +58,23 @@ export default {
           textStyle: {
             rich: {
               t0: {
-                fontSize: 14,
+                fontSize: 13,
                 color: colors[0],
               },
               t1: {
-                fontSize: 14,
+                fontSize: 13,
                 color: colors[1],
               },
               t2: {
-                fontSize: 14,
+                fontSize: 13,
                 color: colors[2],
               },
               t3: {
-                fontSize: 14,
+                fontSize: 13,
                 color: colors[3],
               },
               t4: {
-                fontSize: 14,
+                fontSize: 13,
                 color: colors[4],
               },
               white: {
@@ -93,7 +93,7 @@ export default {
             // let arr = [name + " ", " " + percentage];
             // return arr.join(" ");
             let index = dataCake.findIndex((v) => v.name == param);
-            let str = `    {white|${param}}     {t${index}|${
+            let str = `  {white|${param}}   {t${index}|${
               dataCake[index].value + "%"
             }}`;
 

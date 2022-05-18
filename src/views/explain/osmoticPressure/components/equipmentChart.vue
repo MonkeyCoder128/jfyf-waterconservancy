@@ -201,7 +201,11 @@
               //仪表盘刻度显示值
               axisLabel: {
                 show: true,
-                offsetCenter: [0, '70%'],
+                textStyle:{
+                  padding:[-10,-10],
+                  borderWidth:[-10,-10]
+                },
+                center:['10%','30%']
               },
               //刻度样式
               axisTick: {

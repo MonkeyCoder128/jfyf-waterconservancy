@@ -81,7 +81,7 @@ export default {
               show: false,
             },
             data: [
-              { value: 1000, name: "A设备" },
+              { value: 800, name: "A设备" },
               { value: 300, name: "B设备" },
               { value: 580, name: "C设备" },
             ],
