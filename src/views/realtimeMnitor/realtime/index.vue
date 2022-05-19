@@ -201,12 +201,12 @@
       </div>
     </div>
     <div
+      class="tableContent"
       style="
         border-radius: 5px;
         border-radius: 5px;
         background: #ffffff;
         padding: 21px;
-        margin-bottom: 40px;
       "
     >
       <div class="topMenu">
@@ -1874,10 +1874,9 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-.selectCharts {
-  /deep/.el-input__inner {
-    width: 90px;
-    height: 20px;
+@media screen and (min-width: 960px) and (max-width: 1920px) {
+  .tableContent {
+    margin-bottom: 40px;
   }
 }
 /deep/.el-select .el-input .el-select__caret {
