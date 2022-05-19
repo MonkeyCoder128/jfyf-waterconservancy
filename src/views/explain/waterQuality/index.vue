@@ -140,29 +140,31 @@ export default {
 
 <style lang="scss" scoped>
 @media screen and (min-width: 2000px) and (max-width: 3840px) {
-  .echartsBox {
-    height: 360px;
-  }
   .chartDataBox {
-    height: 360px;
+    height: 360px !important;
   }
-  .cardMenu {
-    min-height: 430px;
-    .echartsBoxContent {
-      height: 360px;
-    }
-    .echartsBox {
-      height: 360px;
+  .waterStagePage{
+    .cardMenu {
+      min-height: 430px !important;
+      .echartsBoxContent {
+        height: 360px !important;
+        .echartsBox {
+          height: 360px !important;
+        }
+      }
+      .echartsBox {
+        height: 360px !important;
+      }
     }
   }
   .bottomBox {
     min-height: calc(100% - 430px);
   }
   .cardBottom {
-    min-height: 870px;
-  }
-  .charts {
-    height: 730px;
+    min-height: 870px !important;
+    .brokenLineCharts {
+      height: 730px !important;
+    }
   }
 }
 

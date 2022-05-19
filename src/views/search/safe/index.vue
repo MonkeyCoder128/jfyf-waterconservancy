@@ -44,7 +44,8 @@
           <el-table
             :data="tableData.list"
             v-loading="listLoading"
-            :header-cell-style="{background:'#EEEEEE',color:'#333333'}"
+            :header-cell-style="{background:'#EEEEEE',color:'#333333',textAlign:'left'}"
+            :cell-style="{textAlign:'left'}"
             style="width: 100%"
             :key="tableData.list.id"
           >
