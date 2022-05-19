@@ -21,7 +21,7 @@
           <div class="posti">{{ nowDate }}</div>
           <div style="height: calc(100% - 50px);width: 100%;">
             <video id="myvideo" class="h100 w100 video-js vjs-default-skin" preload="auto" controls width="100%">
-              <source src="http://ivi.bupt.edu.cn/hls/btv11hd.m3u8" type="application/x-mpegURL" />
+              <source src="rtmp://ns8.indexforce.com/home/mystream" type="application/x-mpegURL" />
             </video>
           </div>
         </el-col>
@@ -102,9 +102,12 @@ export default {
   mounted () {
     this.currentTime();
     let that = this
-    setTimeout(() => {
-      that.getVideo();
-    });
+    this.$once('hook:deforeDestroy',()=>{
+      that.getVideo.dispose()
+    })
+    // setTimeout(() => {
+    //   that.getVideo();
+    // });
   },
   watch: {
     filterText (val) {
@@ -181,7 +184,12 @@ export default {
 /deep/.el-input__icon {
   line-height: 30px;
 }
-
+.el-col-6{
+  width: 18%;
+}
+.el-col-18{
+  width: 82%;
+}
 .h100 {
   height: 100%;
 }
