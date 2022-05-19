@@ -961,7 +961,7 @@ export default {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 10px 20px;
     span {
       font-size: 14px;
       color: #333333;
@@ -976,7 +976,7 @@ export default {
     width: 100%;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 0 8px;
+    padding: 5px 12px;
     .echartsBoxContent {
       width: 100%;
       display: flex;
@@ -997,7 +997,8 @@ export default {
       width: 49.6%;
       background-color: #ffffff;
       border-radius: 5px;
-      padding: 0 15px;
+      
+      padding: 5px 20px;
       .testStatus {
         display: flex;
         align-items: center;
