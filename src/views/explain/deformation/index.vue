@@ -994,7 +994,7 @@ export default {
     justify-content: space-between;
     margin-top: 13px;
     .cardBottom {
-      width: 49.6%;
+      width: 49.7%;
       background-color: #ffffff;
       border-radius: 5px;
       padding: 5px 20px;
