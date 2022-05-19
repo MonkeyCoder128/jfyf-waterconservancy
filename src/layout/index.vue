@@ -300,7 +300,6 @@ export default {
 .app-main {
   position: relative;
   height: 98%;
-  overflow: auto;
   margin: 5px 10px 10px 10px;
 }
 .sidebar {

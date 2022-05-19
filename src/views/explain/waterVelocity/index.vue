@@ -660,14 +660,14 @@ export default {
       let color = ["#148F97", "#115CB9", "rgba(17, 92, 185, 0.6)"];
       let data = {
         legend: {
-          bottom: 5,
+          bottom: 15,
           itemGap: 36,
         },
         grid: {
           left: "3%",
           right: "3%",
           top: "6%",
-          bottom: "6%",
+          bottom: "8%",
           containLabel: true,
         },
         tooltip: {
@@ -943,6 +943,7 @@ export default {
       height: 200px;
     }
   }
+
   .cardBottom {
     height: 600px;
   }
@@ -962,7 +963,7 @@ export default {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 10px 20px;
     span {
       font-size: 14px;
       color: #333333;
@@ -977,7 +978,7 @@ export default {
     width: 100%;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 0 8px;
+    padding: 5px 12px;
     .echartsBoxContent {
       width: 100%;
       display: flex;
@@ -999,6 +1000,8 @@ export default {
       background-color: #ffffff;
       border-radius: 5px;
       padding: 0 15px;
+      min-height: 600px;
+      padding: 5px 20px;
       .testStatus {
         display: flex;
         align-items: center;
