@@ -4,7 +4,7 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>流速、流量</span>
-          <div>
+          <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
@@ -32,7 +32,7 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>水位</span>
-          <div>
+          <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
@@ -59,7 +59,7 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>库压渗压</span>
-          <div>
+          <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
@@ -86,7 +86,7 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>水质分析</span>
-          <div>
+          <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
@@ -113,7 +113,7 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>形变位移</span>
-          <div>
+          <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
               style="margin: 0 12px"
@@ -201,6 +201,7 @@
       </div>
     </div>
     <div
+      class="tableContent"
       style="
         border-radius: 5px;
         border-radius: 5px;
@@ -1873,15 +1874,18 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-/deep/.el-input__inner {
-  width: 90px;
-  height: 20px;
+@media screen and (min-width: 960px) and (max-width: 1920px) {
+  .tableContent {
+    margin-bottom: 40px;
+  }
 }
 /deep/.el-select .el-input .el-select__caret {
   transform: rotateZ(90deg);
   margin-right: -10px;
 }
 .realtimePage {
+  height: 100%;
+  overflow-y: auto;
   .echartAllBox {
     width: 100%;
     display: flex;

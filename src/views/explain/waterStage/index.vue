@@ -286,7 +286,6 @@ export default {
     margin-top: 13px;
     .cardBottom {
       width: 49.6%;
-      height: auto;
       min-height: 600px;
       background-color: #ffffff;
       border-radius: 5px;
