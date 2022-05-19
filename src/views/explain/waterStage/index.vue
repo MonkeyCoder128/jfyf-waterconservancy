@@ -184,10 +184,6 @@ export default {
       height: 200px;
     }
   }
-  
-  .bottomBox {
-    min-height: calc(100% - 260px);
-  }
   .cardBottom {
     height: 600px;
   }
@@ -286,8 +282,7 @@ export default {
     justify-content: space-between;
     margin-top: 13px;
     .cardBottom {
-      width: 49.5%;
-      height: auto;
+      width: 49.6%;
       min-height: 600px;
       background-color: #ffffff;
       border-radius: 5px;
@@ -307,7 +302,7 @@ export default {
       }
       .brokenLineCharts {
         width: 100%;
-        height: 500px;
+        height: 550px;
       }
     }
   }

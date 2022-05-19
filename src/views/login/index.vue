@@ -50,8 +50,6 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import { encrypt } from "@/utils/jsencrypt";
 export default {
   data() {
     return {
@@ -117,7 +115,6 @@ export default {
             this.setCookie("", "", -1);
           }
           let parmas = this.loginForm;
-          console.log(parmas);
           this.$api.LOGIN.Loginform(parmas)
             .then((res) => {
               if (res.data.code === "200") {
@@ -126,16 +123,6 @@ export default {
                   showClose: true,
                   message: "登录成功",
                   type: "success",
-                });
-
-                Cookies.set("username", this.loginForm.username, {
-                  expires: 30,
-                });
-                Cookies.set("password", encrypt(this.loginForm.password), {
-                  expires: 30,
-                });
-                Cookies.set("autoLogin", this.loginForm.autoLogin, {
-                  expires: 30,
                 });
                 this.$router.push({ path: "/screen" });
               } else if (res.data.code !== "200") {
@@ -157,11 +144,6 @@ export default {
                   this.$api.LOGIN.getUserInfo()
                     .then((response) => {
                       if (response.data.code === 200) {
-                        console.log(
-                          "%c用户信息：",
-                          "color:blue;font-size:18px;font-weight:bold;",
-                          response.data
-                        );
                         //用户ID存储
                         window.sessionStorage.setItem(
                           "userId",
