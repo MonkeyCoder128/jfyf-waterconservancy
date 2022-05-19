@@ -517,7 +517,8 @@ export default {
         this.formOne.remark = this.formOne.description;
         this.formOne.remarkImageList = this.formOne.descriptionImageList;
       }
-      if(this.formOne.remark !== null){
+      console.log(this.formOne.remark);
+      if(this.formOne.remark !== null && this.formOne.remark !== ''){
         this.$api.SAFE.ReportErr(this.formOne).then(res=>{
           if(res.data.code == 200){
             this.$message({
@@ -538,11 +539,13 @@ export default {
           }
         })
       }else{
-        this.formOne.reportType = 1;
+        if(this.formOne.remark == null){
+          this.formOne.reportType = 1;
+        }
         this.listLoading = false;
         this.$message({
           showClose: true,
-          message: '请填写描述信息！',
+          message: '请完善信息！',
           type: 'error'
         });
       }
@@ -667,7 +670,7 @@ export default {
     h5{
       display: flex;
       align-items: center;
-      margin-top: 10px;
+      margin-top: 5px;
       i{
         font-size: 30px;
         margin-right: 10px;
