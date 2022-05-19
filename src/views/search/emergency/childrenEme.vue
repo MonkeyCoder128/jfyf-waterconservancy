@@ -91,7 +91,7 @@
           <p class="record">巡检记录</p>
           <ul class="jindu" v-if="this.isFirst == true">
             <h5>
-              <i class="iconfont icon-tongzhi"></i>
+              <p><span></span></p>
               巡检记录
             </h5>
             <div class="reportRecordList">
@@ -121,7 +121,7 @@
           <div v-for="(item) in this.Xjresult" :key="item.progress">
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 巡检记录
               </h5>
               <!-- <h5 v-if="item.progress == 1">
@@ -129,15 +129,15 @@
                 等待维修
               </h5> -->
               <h5 v-if="item.progress == 2">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 维修中
               </h5>
               <h5 v-if="item.progress == 3">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 维修完成
               </h5>
               <h5 v-if="item.progress == 4">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 已解决
               </h5>
               <div class="reportRecordList">
@@ -200,7 +200,7 @@
           <p class="record">巡检记录</p>
           <ul class="jindu">
             <h5>
-              <i class="iconfont icon-tongzhi"></i>
+              <p><span></span></p>
               巡检记录
             </h5>
             <div class="reportRecordList">
@@ -231,15 +231,15 @@
             <!-- 如果后端传过来的数据为空（用户第一次申请的时候显示） -->
             <ul class="jindu">
               <h5 v-if="item.progress == 0">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 巡检记录
               </h5>
               <h5 v-if="item.progress == 3">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 维修完成
               </h5>
               <h5 v-if="item.progress == 4">
-                <i class="iconfont icon-tongzhi"></i>
+                <p><span></span></p>
                 已解决
               </h5>
               <div class="reportRecordList">
@@ -591,6 +591,23 @@ export default {
         margin-right: 10px;
         color: #1c48bf;
       }
+      p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        border: 1px solid #1c48bf;
+        border-radius: 50%;
+        margin: 0 10px 0 3px;
+        span{
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          background-color: #1c48bf;
+          border-radius: 50%;
+        }
+      }
     }
     div{
       li{
@@ -612,20 +629,25 @@ export default {
             justify-content: flex-start;
             align-items: flex-start;
             font-size: 14px;
+            color: #666666;
             img{
               width: 50px;
               height: 50px;
               border-radius: 5px;
             }
+            .el-image{
+              border-radius: 5px;
+              margin-left: 5px;
+            }
           }
         }
         .spantime{
-          // color: #67c23a;
+          color: #666666;
           margin-right: 5px;
           font-size: 14px;
         }
         .spancontent{
-          color: gray;
+          color: #666666;
           font-size: 14px;
           margin-top: 5px;
         }
@@ -659,10 +681,11 @@ export default {
   .solveShow{
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 5px;
     i{
-      font-size: 30px;
+      font-size: 28px;
       margin-right: 10px;
+      margin-left: 2px;
     }
   }
   .showInfoBox{

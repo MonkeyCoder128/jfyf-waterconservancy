@@ -266,7 +266,12 @@ export default {
 /deep/.el-dialog__body {
   padding: 0;
 }
-
+.el-col-6{
+  width: 18%;
+}
+.el-col-18{
+  width: 82%;
+}
 /deep/.el-dialog__headerbtn {
   z-index: 2;
   border: 1px solid #fff;

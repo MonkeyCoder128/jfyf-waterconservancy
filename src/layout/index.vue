@@ -8,6 +8,7 @@
         style="width: 221px"
         text-color="#fff"
         active-text-color="#409EFF"
+        active-b
         border-bottom="none"
         router
         :default-active="menuPath || path"
@@ -21,7 +22,7 @@
             :key="index"
           >
             <template slot="title">
-              <i :class="item.menuIcon"></i>
+              <i :class="'iconfont ' + item.menuIcon"></i>
               <span>{{ item.name }}</span>
             </template>
             <el-menu-item-group
@@ -178,7 +179,7 @@ export default {
 <style lang="scss" scoped>
 /*左侧菜单样式更改*/
 /deep/.el-menu {
-  border-right: solid 1px #e6e6e6;
+  //border-right: solid 1px #e6e6e6;
   list-style: none;
   position: relative;
   margin: 0;
@@ -354,5 +355,31 @@ export default {
 .el-button--text {
   font-size: 19px;
   color: #989b9c;
+}
+.iconfont {
+  color: #fff;
+  padding-right: 4px;
+}
+/deep/.el-submenu__title i {
+  color: #fff;
+}
+::v-deep.el-submenu .el-menu-item {
+  &:hover {
+    background-color: #3553a6;
+    border-right: solid 6px #2de3e1;
+    color: #fff;
+  }
+}
+::v-deep.el-submenu .el-menu-item {
+  color: #fff;
+}
+/deep/.el-submenu__title:hover{
+  background: none !important;
+}
+// /deep/.is-active{
+//    background: none !important;
+// }
+/deep/.el-menu-item:hover, .el-menu-item:focus{
+  background: none;
 }
 </style>

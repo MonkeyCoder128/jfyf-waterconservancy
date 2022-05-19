@@ -184,6 +184,10 @@ export default {
       height: 200px;
     }
   }
+  
+  .bottomBox {
+    min-height: calc(100% - 260px);
+  }
   .cardBottom {
     height: 600px;
   }

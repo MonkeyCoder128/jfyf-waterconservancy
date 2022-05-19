@@ -1,0 +1,65 @@
+{
+  "id": "3412510",
+  "name": "水利后台管理",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1319969",
+      "name": "实时数据",
+      "font_class": "shishishuju",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "6204765",
+      "name": "系统维护",
+      "font_class": "xitongweihu",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "7964500",
+      "name": "数据分析",
+      "font_class": "shujufenxi",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "8084585",
+      "name": "清单/信息/设备基础信息/工单信息",
+      "font_class": "qingdan",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "8870953",
+      "name": "系统",
+      "font_class": "xitong",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "9111918",
+      "name": "系统",
+      "font_class": "xitong1",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "9954453",
+      "name": "巡检记录管理",
+      "font_class": "xunjianjiluguanli",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "17407736",
+      "name": "视频监控",
+      "font_class": "shipinjiankong",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    }
+  ]
+}
