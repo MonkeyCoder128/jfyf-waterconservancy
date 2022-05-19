@@ -57,8 +57,14 @@
             </el-button>
           </div>
           <div class="con-table">
-            <el-table :data="tableData.list" v-loading="listLoading" @selection-change="selectAll" ref="multipleTable"
-              :header-cell-style="{ background: '#EEEEEE', color: '#333333' }" style="width: 100%">
+            <el-table 
+              :data="tableData.list" 
+              v-loading="listLoading" 
+              @selection-change="selectAll" 
+              ref="multipleTable"
+              :header-cell-style="{background:'#EEEEEE',color:'#333333',textAlign:'left'}"
+              :cell-style="{textAlign:'left'}" 
+              style="width: 100%">
               <el-table-column type="selection" width="55"> </el-table-column>
               <el-table-column prop="ruleName" label="法律法规名称" align="center">
               </el-table-column>
