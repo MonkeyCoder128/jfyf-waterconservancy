@@ -220,14 +220,46 @@
               },
               //仪表盘刻度显示值
               axisLabel: {
+                min:0,
+                max:100,
                 show: true,
+                // inside: true,
                 textStyle:{
-                  padding:[-10,-10]
-                }
+                  padding:[10,10],
+                },
+                // 设置刻度值的距离位移
+                distance: -20,
+                // rotate: -90,
+                // align: 'bottom',
+                // verticalAlign: 'bottom',
+                // lineHeight: 56,
+                // backgroundColor: 'red',
+                // textShadowOffsetY: 20,
+                // formatter:[
+                //   '{b|0}'||'{a|100}'
+                // ],
+                // rich: {
+                //   a: {
+                //     color: 'black',
+                //     lineHeight: 40,
+                //     verticalAlign: 'bottom',
+                //   },
+                //   b: {
+                //     color: 'black',
+                //     lineHeight: 60,
+                //     verticalAlign: 'bottom',
+                //   },
+                // }
               },
               //刻度样式
               axisTick: {
                 show: false,
+                //刻度线向外或向里
+                inside: false,
+                //刻度线长度
+                length: 3,
+                //刻度线外边距离
+                margin: 10,
               },
               pointer: {
                 show: false,

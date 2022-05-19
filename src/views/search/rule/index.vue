@@ -117,14 +117,18 @@
                 " size="small" @click="uploadFile">上传</el-button>
             </span>
           </el-dialog>
-          <!-- <iframe src='http://127.0.0.1/file/2022-04-24/221807266527969280.jpg' width='100%' height='100%' frameborder='1'>
+          <!-- <iframe src='http://112.125.88.230/file/2022-05-12/228374625489256448.docx' width='100%' height='100%' frameborder='1'>
 			  </iframe> -->
+        <div ref="file"></div>
         </div>
       </el-card>
     </el-col>
   </el-row>
 </template>
+
 <script>
+  import axios from 'axios'
+  let docx = require('docx-preview')
   export default {
     name: '',
     data() {
@@ -338,7 +342,18 @@
       check(url) {
         console.log(url);
         // window.location.href = url;
-        this.wordPreview(url)
+        // this.wordPreview(url);
+        this.goPreview(url);
+      },
+      // 新预览方法
+      goPreview(url) {
+        axios({
+          method: 'get',
+          responseType: 'blob', // 因为是流文件，所以要指定blob类型
+          url: url, // 自己的服务器，提供的一个word下载文件接口
+        }).then(({ data }) => {
+          docx.renderAsync(data, this.$refs.file) // 渲染到页面
+        })
       },
       // 上传文件
       beforeAvatarUpload(file) {

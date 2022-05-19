@@ -202,10 +202,9 @@
               axisLabel: {
                 show: true,
                 textStyle:{
-                  padding:[-10,-10],
-                  borderWidth:[-10,-10]
+                  padding:[10,10],
                 },
-                center:['10%','30%']
+                distance: -20,
               },
               //刻度样式
               axisTick: {
