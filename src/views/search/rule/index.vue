@@ -348,8 +348,8 @@
       check(url) {
         console.log(url);
         // window.location.href = url;
-        // this.wordPreview(url);
-        this.goPreview(url);
+        this.wordPreview(url);
+        // this.goPreview(url);
       },
       // 新预览方法
       goPreview(url) {
