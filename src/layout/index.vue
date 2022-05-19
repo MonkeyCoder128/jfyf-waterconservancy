@@ -379,6 +379,7 @@ export default {
     background-color: #3553a6;
     border-right: solid 6px #2de3e1;
     color: #fff;
+    font-size: 16px;
   }
 }
 ::v-deep.el-submenu .el-menu-item {
