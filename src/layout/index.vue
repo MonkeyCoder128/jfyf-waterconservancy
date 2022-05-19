@@ -15,7 +15,7 @@
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
       >
-      <div class="el_menubg"></div>
+        <div class="el_menubg"></div>
         <template v-for="(item, index) in nav_menu_data">
           <el-submenu
             v-if="item.sonMenuList"
@@ -53,9 +53,6 @@
             content="进入系统"
             placement="bottom"
           >
-            <a href="javascript:;" @click="screen()"
-              ><i class="el-icon-full-screen"></i
-            ></a>
           </el-tooltip>
           <el-dropdown>
             <el-button type="text"><i class="el-icon-s-custom"></i> </el-button>
@@ -188,7 +185,7 @@ export default {
   // background-image: url("../assets/image/daohang.png");
   background: #283558;
 }
-.el_menubg{
+.el_menubg {
   position: absolute;
   bottom: 0;
   left: 0;

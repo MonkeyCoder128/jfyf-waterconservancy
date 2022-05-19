@@ -306,7 +306,7 @@ export default {
       }
       .brokenLineCharts {
         width: 100%;
-        height: 500px;
+        height: 550px;
       }
     }
   }
