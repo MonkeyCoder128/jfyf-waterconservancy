@@ -7,7 +7,7 @@
         unique-opened
         style="width: 221px"
         text-color="#fff"
-        active-text-color="#409EFF"
+        active-text-color="#fff"
         active-b
         border-bottom="none"
         router
@@ -15,6 +15,7 @@
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
       >
+      <div class="el_menubg"></div>
         <template v-for="(item, index) in nav_menu_data">
           <el-submenu
             v-if="item.sonMenuList"
@@ -184,7 +185,18 @@ export default {
   position: relative;
   margin: 0;
   padding-left: 0;
-  background-image: url("../assets/image/menuBar.jpg");
+  // background-image: url("../assets/image/daohang.png");
+  background: #283558;
+}
+.el_menubg{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-image: url("../assets/image/daohang.png");
+  background-size: 100% 100%;
+  height: 220px;
+  width: 220px;
+  z-index: 9999;
 }
 .el-menu-vertical-demo el-menu
 /*分页插件样式更改*/
@@ -372,13 +384,19 @@ export default {
 ::v-deep.el-submenu .el-menu-item {
   color: #fff;
 }
-/deep/.el-submenu__title:hover{
+/deep/.el-submenu__title:hover {
   background: none !important;
 }
 // /deep/.is-active{
 //    background: none !important;
 // }
-/deep/.el-menu-item:hover, .el-menu-item:focus{
+/deep/.el-menu-item:hover,
+.el-menu-item:focus {
   background: none;
+}
+/deep/ .el-menu-item.is-active {
+  background-color: #3553a6;
+  border-right: solid 6px #2de3e1;
+  color: #fff;
 }
 </style>
