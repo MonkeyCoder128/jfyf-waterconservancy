@@ -137,18 +137,18 @@ import brokenLineCharts from './components/brokenLineChart.vue';
 <style lang="scss" scoped>
   @media screen and (min-width: 2000px) and (max-width: 3840px) {
     .echartsBox {
-      height: 360px;
+      height: 360px !important;
     }
     .chartDataBox {
-      height: 360px;
+      height: 360px !important;
     }
     .cardMenu {
-      min-height: 430px;
+      min-height: 430px !important;
       .echartsBoxContent {
-        height: 360px;
+        height: 360px !important;
       }
       .echartsBox {
-        height: 360px;
+        height: 360px !important;
       }
     }
     .bottomBox {
@@ -157,7 +157,7 @@ import brokenLineCharts from './components/brokenLineChart.vue';
     .cardBottom {
       min-height: 870px !important;
     }
-    .charts {
+    .brokenLineCharts {
       height: 730px;
     }
   }
