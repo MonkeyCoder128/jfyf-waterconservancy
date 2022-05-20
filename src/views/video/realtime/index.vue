@@ -18,10 +18,9 @@
           </div>
         </el-col>
         <el-col class="h100 relt" :span="18">
-          <div class="posti">{{ nowDate }}</div>
-          <div style="height: calc(100% - 50px);width: 100%;">
-            <video id="myvideo" class="h100 w100 video-js vjs-default-skin" preload="auto" controls width="100%">
-              <source src="rtmp://ns8.indexforce.com/home/mystream" type="application/x-mpegURL" />
+          <!-- <div class="posti">{{ nowDate }}</div> -->
+          <div class="videoStyle" ref="init">
+           <video id="video-container">
             </video>
           </div>
         </el-col>
@@ -30,8 +29,7 @@
   </el-row>
 </template>
 <script>
-import Videojs from "video.js";
-import "videojs-contrib-hls";
+import  EZUIKit from 'ezuikit-js';
 export default {
   data () {
     return {
@@ -100,40 +98,52 @@ export default {
     };
   },
   mounted () {
-    this.currentTime();
+    let height= this.$refs.init.offsetHeight;
+    let width= this.$refs.init.offsetWidth;
+    // this.currentTime(); // 计时器
     let that = this
-    this.$once('hook:deforeDestroy',()=>{
-      that.getVideo.dispose()
-    })
-    // setTimeout(() => {
-    //   that.getVideo();
-    // });
+    fetch('https://open.ys7.com/jssdk/ezopen/demo/token')
+      .then(response => response.json())
+      .then(res => {
+        var accessToken = res.data.accessToken;
+        var player = new EZUIKit.EZUIKitPlayer({
+          id: 'video-container', // 视频容器ID
+          accessToken: accessToken,
+          poster:"",
+          url: 'ezopen://open.ys7.com/G39444019/1.live',
+          template: 'simple', // simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版; theme-可配置主题；
+          // plugin: ['talk'],                       // 加载插件，talk-对讲
+          height: height,
+          width: width,
+          // handleSuccess:function(ress){
+          //   console.log('0-0-0-',ress)
+          // }
+        });
+      });
   },
   watch: {
     filterText (val) {
       this.$refs.tree.filter(val);
     },
   },
-  beforeDestroy() {
-    if (this.formatDate) {
-      clearInterval(this.formatDate); // 在Vue实例销毁前，清除时间定时器
-    }
-  },
+  // beforeDestroy() {
+  //   if (this.formatDate) {
+  //     clearInterval(this.formatDate); // 在Vue实例销毁前，清除时间定时器
+  //   }
+  // },
+
   methods: {
-    //直播
-    getVideo () {
-      Videojs(
-        "myvideo",{
-          bigPlayButton: false,
-          textTrackDisplay: false,
-          posterImage: true,
-          errorDisplay: false,
-          controlBar: true
-        },
-        function() {
-          this.play
-        }
-      )
+    change() {
+      player.stop();
+      // 切换为直播
+      player.play({
+        url:"ezopen://open.ys7.com/244640009/1.live"
+      })
+      // setTimeout(()=>{
+      //   player.play({
+      //     url:"ezopen://open.ys7.com/244640009/1.live"
+      //   })      
+      // },1000)
     },
     //树
     filterNode (value, data) {
@@ -143,14 +153,7 @@ export default {
     //点击事件
     handleNodeClick (data) {
       this.p_video = data.label;
-      var myPlayer = Videojs(myvideo)
-      myPlayer.src([
-        {
-          type:"application/x-mpegURL",
-          src:"rtmp://ns8.indexforce.com/home/mystream"
-        }
-      ]);
-      myPlayer.play()
+      
     },
     currentTime() {
       setInterval(this.formatDate, 1000);
@@ -179,6 +182,10 @@ export default {
   padding: 0 10px;
   height: 30px;
   line-height: 30px;
+}
+.videoStyle{
+  height: calc(100% - 50px);
+  width: 100%;
 }
 
 /deep/.el-input__icon {

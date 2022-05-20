@@ -75,12 +75,6 @@
       <video id="video" class="h100 video-js vjs-default-skin vjs-big-play-centered" muted controls>
         <source :src="nowPlayVideoUrl" type="video/mp4" />
       </video>
-      <!-- <video src="http://112.125.88.230/file/video/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4" ></video> -->
-      <!-- <video width="100%" height="100%" controls>
-        <source :src="nowPlayVideoUrl" type="video/mp4">
-      
-        
-    </video> -->
     </el-dialog>
   </el-row>
 </template>
@@ -213,16 +207,6 @@ export default {
     handleClick (index) {
       console.log(index);
       this.dialogVisible = true;
-    },
-    //直播
-    getVideo () {
-      this.player = Videojs("video", {
-        bigPlayButton: true,
-        autoplay: false,
-        controls: true,
-        width: 300,
-        preload: "auto",
-      });
     },
     //树
     filterNode (value, data) {
