@@ -11,7 +11,6 @@
               @change="changeFlowRate"
               v-model="flowRateType"
               size="mini"
-              placeholder="请选择消息类型"
             >
               <el-option
                 v-for="item in optionsType"
@@ -39,7 +38,6 @@
               @change="changeWaterLevel"
               v-model="waterLevelType"
               size="mini"
-              placeholder="请选择消息类型"
             >
               <el-option
                 v-for="item in optionsType"
@@ -66,7 +64,6 @@
               @change="changeOsmometer"
               v-model="osmometerType"
               size="mini"
-              placeholder="请选择消息类型"
             >
               <el-option
                 v-for="item in optionsType"
@@ -93,7 +90,6 @@
               @change="changeWaterQuality"
               v-model="waterQualityType"
               size="mini"
-              placeholder="请选择消息类型"
             >
               <el-option
                 v-for="item in optionsType"
@@ -120,7 +116,6 @@
               @change="changeDeformation"
               v-model="deformationType"
               size="mini"
-              placeholder="请选择消息类型"
             >
               <el-option
                 v-for="item in optionsType"
@@ -201,12 +196,12 @@
       </div>
     </div>
     <div
-      class="tableContent"
       style="
         border-radius: 5px;
         border-radius: 5px;
         background: #ffffff;
         padding: 21px;
+        margin-bottom: 40px;
       "
     >
       <div class="topMenu">
@@ -230,7 +225,7 @@
       >
         <el-table-column prop="name" label="设备名称" />
         <el-table-column prop="address" label="位置" />
-        <el-table-column prop="type" label="设备状态" width="300px">
+        <el-table-column prop="type" label="设备状态" width="200px">
           <template slot-scope="scope">
             <span v-if="scope.row.type === '0'" style="color: #ea951c"
               >异常</span
@@ -272,11 +267,11 @@ export default {
       shiftData: {}, //形变
       offsetData: {}, //位移
       alarmStateData: {}, //预警状态
-      flowRateType: "",
-      waterLevelType: "",
-      osmometerType: "",
-      waterQualityType: "",
-      deformationType: "",
+      flowRateType: "黄金糕",
+      waterLevelType: "黄金糕",
+      osmometerType: "黄金糕",
+      waterQualityType: "黄金糕",
+      deformationType: "黄金糕",
       optionsType: [
         {
           value: "设备A",
@@ -301,44 +296,44 @@ export default {
       ],
       deviceData: [
         {
-          name: "2016-05-02",
+          name: "设备一",
           type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          address: "陕西省显示雁塔区",
         },
         {
-          name: "2016-05-02",
+          name: "设备二",
           type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          address: "陕西省显示高陵区",
         },
         {
-          name: "2016-05-02",
-          type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          name: "设备三",
+          type: "1",
+          address: "陕西省显示碑林区",
         },
         {
-          name: "2016-05-02",
+          name: "设备四",
           type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          address: "陕西省显示莲湖区",
         },
         {
-          name: "2016-05-02",
-          type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          name: "设备五",
+          type: "1",
+          address: "陕西省显示长安区",
         },
         {
-          name: "2016-05-02",
-          type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          name: "设备六",
+          type: "1",
+          address: "陕西省显示鄠邑区",
         },
         {
-          name: "2016-05-02",
+          name: "设备七",
           type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          address: "陕西省显示高新区",
         },
         {
-          name: "2016-05-02",
-          type: "0",
-          address: "上海市普陀区金沙江路 1518 弄",
+          name: "设备八",
+          type: "1",
+          address: "陕西省显示灞桥区",
         },
       ],
       total: 0,
@@ -1759,6 +1754,10 @@ export default {
           value: i,
           textStyle: {
             rich: {
+              name: {
+                color: color[i],
+                padding: [0, 5],
+              },
               circle: {
                 color: color[i],
                 padding: [0, 5],
@@ -1792,27 +1791,13 @@ export default {
                 return (
                   "{line|}{circle|●}{name|" +
                   item.name +
-                  "}：{percent|" +
+                  "：" +
                   item.percent +
                   "}"
                 );
               },
               interval: 0,
               inside: true,
-              textStyle: {
-                color: "#666",
-                fontSize: 14,
-                rich: {
-                  name: {
-                    color: "#666",
-                    fontSize: 12,
-                  },
-                  percent: {
-                    color: "#333",
-                    fontSize: 12,
-                  },
-                },
-              },
               show: true,
             },
             data: lineYAxis,
@@ -1825,6 +1810,7 @@ export default {
         ],
         series: pieSeries,
       };
+
       return data;
     },
     /** 表格分页 */
@@ -1874,9 +1860,10 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-@media screen and (min-width: 960px) and (max-width: 1920px) {
-  .tableContent {
-    margin-bottom: 40px;
+.selectCharts {
+  /deep/.el-input__inner {
+    width: 90px;
+    height: 20px;
   }
 }
 /deep/.el-select .el-input .el-select__caret {

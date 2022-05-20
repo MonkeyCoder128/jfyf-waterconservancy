@@ -166,12 +166,12 @@ const constantRoutes = [
     name: 'system',
     meta: { title: '系统管理', icon: 'el-icon-user' },
     children: [
-      {
-        path: '/system/deviceManage',
-        name: 'deviceManage',
-        component: () => import('@/views/system/deviceManage/index'),
-        meta: { title: '设备管理', icon: 'user' }
-      },
+      // {
+      //   path: '/system/deviceManage',
+      //   name: 'deviceManage',
+      //   component: () => import('@/views/system/deviceManage/index'),
+      //   meta: { title: '设备管理', icon: 'user' }
+      // },
       {
         path: '/system/roleManage',
         name: 'roleManage',

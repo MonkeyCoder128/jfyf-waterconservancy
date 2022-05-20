@@ -39,24 +39,30 @@
             <warningCharts />
             <ul>
               <li>
-                <span></span>
-                <span>A设备</span>
-                <span>53%</span>
+                <div class="iconLable">
+                  <span class="Icon"></span>
+                  <span>A设备</span>
+                </div>
+                <span class="percent">53%</span>
               </li>
               <li>
-                <span></span>
-                <span>B设备</span>
-                <span>30%</span>
+                <div class="iconLable">
+                  <span class="Icon"></span>
+                  <span>B设备</span>
+                </div>
+                <span class="percent">30%</span>
               </li>
               <li>
-                <span></span>
-                <span>C设备</span>
-                <span>17%</span>
+                <div class="iconLable">
+                  <span class="Icon"></span>
+                  <span>C设备</span>
+                </div>
+                <span class="percent">17%</span>
               </li>
             </ul>
           </div>
         </div>
-        <span class="cardTitle">预警分析</span>
+        <span class="cardTitle">设备检测</span>
         <el-table
           :data="tableData"
           :row-style="{ height: '0' }"
@@ -143,7 +149,7 @@ export default {
   .chartDataBox {
     height: 360px !important;
   }
-  .waterStagePage{
+  .waterStagePage {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
@@ -220,35 +226,44 @@ export default {
         justify-content: space-around;
         align-items: center;
         li {
-          width: 100%;
+          width: 60%;
           list-style: none;
           display: flex;
-          justify-content: space-around;
+          justify-content: space-between;
           align-items: center;
-          span:nth-child(1) {
-            display: inline-block;
-            width: 17px;
-            height: 17px;
-            background-color: #115cb9;
-          }
-          span:nth-child(3) {
-            color: #115cb9;
+          .iconLable {
+            display: flex;
+            align-items: center;
+            .Icon {
+              display: inline-block;
+              width: 17px;
+              height: 17px;
+              margin-right: 9px;
+            }
           }
         }
-        li:nth-child(2) {
-          span:nth-child(1) {
+        li:nth-child(1) {
+          .Icon {
             background-color: #148f97;
           }
-          span:nth-child(3) {
+          .percent {
             color: #148f97;
           }
         }
-        li:nth-child(3) {
-          span:nth-child(1) {
+        li:nth-child(2) {
+          .Icon {
             background-color: #1289ba;
           }
-          span:nth-child(3) {
+          .percent {
             color: #1289ba;
+          }
+        }
+        li:nth-child(3) {
+          .Icon {
+            background-color: #115cb9;
+          }
+          .percent {
+            color: #115cb9;
           }
         }
       }
