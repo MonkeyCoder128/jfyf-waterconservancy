@@ -104,10 +104,10 @@
                   @click="check(scope.row)"
                   >查看
                 </el-button>
-                <el-button size="small" type="text" @click="deletedata(scope.row.id)">
+                <!-- <el-button size="small" type="text" @click="deletedata(scope.row.id)">
                   <span style="color:#606266;" v-if="scope.row.status == 2">已处理</span>
                   <span style="color:#D72A13;" v-else>未处理</span>
-                </el-button>
+                </el-button> -->
               </template>
             </el-table-column>
           </el-table>
