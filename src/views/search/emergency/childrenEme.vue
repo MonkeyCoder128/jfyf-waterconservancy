@@ -434,6 +434,11 @@ export default {
             this.isFirst = false;
             if(this.Xjresult.length >= 2){
               this.solveShow = 2
+              for(let i in this.Xjresult){
+                if(this.Xjresult[i].progress == 4){
+                  this.solveShow = 0;
+                }
+              }
             }else if(this.Xjresult.length ==1 ){
               this.solveShow = 1
             }
