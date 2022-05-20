@@ -76,7 +76,7 @@
               </el-table-column>
               <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
-                  <el-button size="small" type="text" style="color: #1c48bf" @click="check(scope.row.filePreviewPath)">
+                  <el-button size="small" type="text" style="color: #1c48bf" @click="check(scope.row)">
                     查看</el-button>
                   <el-button size="small" type="text" style="color: #148f97"
                     @click="download(scope.row.filePreviewPath)">下载</el-button>
@@ -123,9 +123,13 @@
                 " size="small" @click="uploadFile">上传</el-button>
             </span>
           </el-dialog>
-          <!-- <iframe src='http://112.125.88.230/file/2022-05-12/228374625489256448.docx' width='100%' height='100%' frameborder='1'>
-			  </iframe> -->
-        <div ref="file"></div>
+          <el-dialog
+            width="60%"
+            title="文件预览"
+            :visible.sync="Visible">
+            <div v-html="wordText"></div>
+          </el-dialog>
+          <!-- <div ref="file"></div> -->
         </div>
       </el-card>
     </el-col>
@@ -135,6 +139,8 @@
 <script>
   import axios from 'axios'
   let docx = require('docx-preview')
+
+  import mammoth from "mammoth";
   export default {
     name: '',
     data() {
@@ -204,14 +210,32 @@
         // 存储全选数据的filePreviewPath
         arrDeletFilePreviewPath: [],
         count: 0,
+        wordText: "",
+        Visible: false
       };
     },
     created() {
       this.initData();
+      this.getWordText();
     },
     methods: {
-      // 预览
-      //url为word文件地址，可以是ip地址
+      // 预览 word 文件专属
+      getWordText(url) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("get", url, true);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = () => {
+          if (xhr.status == 200) {
+            mammoth.convertToHtml({ arrayBuffer: new Uint8Array(xhr.response) }).then((resultObject) => {
+              this.$nextTick(() => {
+                this.wordText = resultObject.value;
+              });
+            });
+          }
+        };
+        xhr.send();
+      },
+      //可以预览全部类型的文件，但是需要收费
       wordPreview(url) {
         var xurl = "https://view.xdocin.com/xdoc?_xdoc=";
         xurl += encodeURIComponent(url);
@@ -231,21 +255,6 @@
           xurl += "&" + encodeURIComponent(a) + "=" + encodeURIComponent(ops[a]);
         }
         window.open(xurl);
-      },
-      // officeapps
-      officeapps(url) {
-        console.log(url);
-        var xurl = "https://view.officeapps.live.com/op/view.aspx?src=";
-        xurl += encodeURIComponent(url);
-        console.log(xurl);
-        window.open(xurl);
-      },
-      getEncode64(str){
-        // 对字符串进行编码
-        var encode = encodeURI(str);
-        // 对编码的字符串转化base64
-        var base64 = btoa(encode);
-        return base64;
       },
       // 获取list
       initData() {
@@ -360,24 +369,15 @@
         iframe.src = url;
       },
       // 查看数据
-      check(url) {
-        // window.location.href = url;
+      check(row) {
+        // 判断类型是否为word
+        if(row.fileSuffix == ".docx"){
+          this.getWordText(row.filePreviewPath);
+          this.Visible = true;
+        }else{
+          window.open(row.filePreviewPath);
+        }
         // this.wordPreview(url);
-        this.goPreview(url);
-        // this.officeapps(url);
-      },
-      // 新预览方法
-      goPreview(url) {
-        axios({
-          method: 'get',
-          responseType: 'blob', // 因为是流文件，所以要指定blob类型
-          url: url, // 自己的服务器，提供的一个word下载文件接口
-        }).then(({ data }) => {
-          console.log(data);
-          docx.renderAsync(data, this.$refs.file) // 渲染到页面
-        }).catch(err=>{
-          console.log(err);
-        })
       },
       // 上传文件
       beforeAvatarUpload(file) {
