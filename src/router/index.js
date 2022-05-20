@@ -14,6 +14,11 @@ const constantRoutes = [
   },
 
   {
+    path: '/remote',
+    component: () => import('@/views/remote/index'),
+    hidden: true
+  },
+  {
     path: '/screen',
     component: () => import('@/views/screen/index'),
     hidden: true
