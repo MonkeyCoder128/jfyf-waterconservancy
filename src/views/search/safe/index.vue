@@ -53,8 +53,8 @@
             </el-table-column>
             <el-table-column prop="deviceStatus" label="设备状态" align="center">
               <template slot-scope="scope">
-                <span style="color:#ddb90a" v-if="scope.row.deviceStatus == 1">设备离线</span>  
-                <span v-else>设备在线</span>
+                <span style="color:#ddb90a" v-if="scope.row.deviceStatus == 1">离线</span>  
+                <span v-else>在线</span>
               </template>
             </el-table-column>
             <el-table-column prop="exceptionType" label="异常分类" align="center">
@@ -95,7 +95,7 @@
                   </el-button
                 >
                 <el-button v-if="userType == 'ROLE_ADMIN' && scope.row.status == 1" :disabled="scope.row.reportType == 1 ? true : false" size="small" type="text" @click="deletedata(scope.row.id)">
-                  <span>
+                  <span style="color:#148F97">
                     解除异常
                   </span>
                 </el-button>
