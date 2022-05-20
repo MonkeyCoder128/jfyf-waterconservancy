@@ -62,24 +62,25 @@
                 <span v-else>在线</span>
               </template>
             </el-table-column>
-            <el-table-column prop="exceptionType" label="异常分类" align="center">
+            <el-table-column prop="exceptionType" label="异常情况" align="center">
               <template slot-scope="scope">
-                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 1">流速流量异常</span>
-                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 2">渗透压异常</span>
-                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 3">位移</span>
-                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 4">水质异常</span>
-                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 5">设备功能异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 1 && scope.row.deviceStatus == 2">流速流量异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 2 && scope.row.deviceStatus == 2">渗透压异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 3 && scope.row.deviceStatus == 2">位移</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 4 && scope.row.deviceStatus == 2">水质异常</span>
+                <span style="color:#F8C202;" v-if="scope.row.exceptionType == 5 && scope.row.deviceStatus == 2">设备功能异常</span>
+                <span v-if="scope.row.deviceStatus == 1">/</span>
               </template>
             </el-table-column>
-            <el-table-column prop="reportDate" label="上报时间" align="center">
+            <el-table-column prop="reportDate" label="预警时间" align="center">
             </el-table-column>
-            <el-table-column prop="reportType" label="异常上报情况" align="center">
+            <el-table-column prop="reportType" label="上报情况" align="center">
               <template slot-scope="scope">
                 <span style="color:#D72A13" v-if="scope.row.reportType == 1">未上报</span>
                 <span v-else>已上报</span>
               </template>
             </el-table-column>
-            <el-table-column prop="progress" label="进展" align="center">
+            <el-table-column prop="progress" label="进展情况" align="center">
               <template slot-scope="scope">
                 <span v-if="scope.row.progress == 0">平台预警</span>
                 <span v-if="scope.row.progress == 1">等待维修</span>
@@ -88,7 +89,7 @@
                 <span v-if="scope.row.progress == 4">已解决</span>
               </template>
             </el-table-column>
-            <el-table-column prop="status" label="异常情况管理" align="center">
+            <el-table-column prop="status" label="巡检管理" align="center">
               <template slot-scope="scope">
                 <span v-if="scope.row.status == 2">已解除异常</span>
                 <span style="color:#D72A13;" v-else>未解除异常</span>

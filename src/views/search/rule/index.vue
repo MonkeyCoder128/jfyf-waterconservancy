@@ -233,25 +233,19 @@
         window.open(xurl);
       },
       // officeapps
-      wordPreview(url) {
+      officeapps(url) {
+        console.log(url);
         var xurl = "https://view.officeapps.live.com/op/view.aspx?src=";
         xurl += encodeURIComponent(url);
         console.log(xurl);
-        var ops = {
-          "_pdf": true, //word/excel文档尝试以pdf方式显示，默认false
-          // "_watermark": "XDOC文档预览", //水印文本，显示水印
-          // "_saveable": false, //是否允许保存PDF，默认true
-          // "_printable": false, //是否允许打印PDF，默认true
-          // "_copyable": false, //是否允许选择复制内容，默认true
-          // "_toolbar": false, //是否显示底部工具条，默认true
-          // "_title": "文档预览", //自定义标题
-          // "_expire": 30, //预览链接有效期，单位分钟，默认永久有效
-          // "_limit": "1,3", //限制页数，如：“5”表示只显示前5页，“2,5”表示从第2页开始的5页，对pdf/doc/docx/ppt/pptx有效
-        }; //传入预览参数
-        for (var a in ops) {
-          xurl += "&" + encodeURIComponent(a) + "=" + encodeURIComponent(ops[a]);
-        }
         window.open(xurl);
+      },
+      getEncode64(str){
+        // 对字符串进行编码
+        var encode = encodeURI(str);
+        // 对编码的字符串转化base64
+        var base64 = btoa(encode);
+        return base64;
       },
       // 获取list
       initData() {
@@ -367,10 +361,10 @@
       },
       // 查看数据
       check(url) {
-        console.log(url);
         // window.location.href = url;
         // this.wordPreview(url);
         this.goPreview(url);
+        // this.officeapps(url);
       },
       // 新预览方法
       goPreview(url) {
@@ -379,7 +373,10 @@
           responseType: 'blob', // 因为是流文件，所以要指定blob类型
           url: url, // 自己的服务器，提供的一个word下载文件接口
         }).then(({ data }) => {
+          console.log(data);
           docx.renderAsync(data, this.$refs.file) // 渲染到页面
+        }).catch(err=>{
+          console.log(err);
         })
       },
       // 上传文件
@@ -431,11 +428,21 @@
       // 提交上传文件
       uploadFile() {
         this.$api.SAFE.InsertRule(this.finallRuleDate).then(res => {
-          console.log(res);
-          this.finallRuleDate = [];
-          this.$refs.upload.clearFiles();
-          this.initData();
-          this.dialogVisible = false;
+          if(res.data.code == 200){
+            this.finallRuleDate = [];
+            this.$refs.upload.clearFiles();
+            this.initData();
+            this.dialogVisible = false;
+            this.$message({
+              message: '上传成功！',
+              type: 'success'
+            });
+          }else{
+            this.$message({
+              message: '文件上传失败,请重新上传！',
+              type: 'warning'
+            });
+          }
         });
       },
       // 上传文件的列表控制

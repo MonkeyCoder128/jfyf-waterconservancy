@@ -120,7 +120,7 @@
                 </el-col>
               </el-form-item>
             </div>
-            <el-form-item v-if="showUserButton">
+            <el-form-item style="display:flex;justify-content:flex-end;" v-if="showUserButton">
               <el-button @click="cancel">取消</el-button>
               <el-button type="primary" @click="onSubmit">提交</el-button>
             </el-form-item>
@@ -498,6 +498,11 @@ export default {
             this.isFirst = false;
             if(this.Xjresult.length >= 2){
               this.solveShow = 2
+              for(let i in this.Xjresult){
+                if(this.Xjresult[i].progress == 4){
+                  this.solveShow = 0;
+                }
+              }
             }else if(this.Xjresult.length ==1 ){
               this.solveShow = 1
             }
@@ -529,7 +534,7 @@ export default {
             this.listLoading = false;
             setTimeout(()=>{
               this.$router.go(-1);
-            },1100);
+            });
           }else{
             this.$message({
               showClose: true,
