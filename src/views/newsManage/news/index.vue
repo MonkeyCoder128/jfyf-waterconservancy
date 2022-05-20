@@ -57,7 +57,7 @@
             {{ scope.row.type === "0" ? "异常状态预警" : "申请解除异常状态" }}
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="消息时间" />
+        <el-table-column prop="createTime" label="消息时间" width="400" />
       </el-table>
       <el-pagination
         background

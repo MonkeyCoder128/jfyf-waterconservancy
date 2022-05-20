@@ -37,21 +37,21 @@
               编辑
             </el-button>
             <el-button @click="deleteUser(scope.row)" type="text">
-              删除
+             <span style="color: #D72A13">删除</span>
             </el-button>
             <el-button
               @click="enable(scope.row, 'NORMAL')"
               type="text"
               v-if="scope.row.status === 'PROHIBIT'"
             >
-              启用
+              <span style="color: #148f97">启用</span>
             </el-button>
             <el-button
               @click="deactivate(scope.row, 'PROHIBIT')"
               type="text"
               v-if="scope.row.status === 'NORMAL'"
             >
-              停用
+              <span style="color: #ed860c">停用</span>
             </el-button>
           </template>
         </el-table-column>

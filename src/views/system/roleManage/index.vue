@@ -30,16 +30,16 @@
         <el-table-column prop="roleName" label="角色名称" />
         <el-table-column prop="roleMsg" label="角色描述" />
         <el-table-column prop="createDate" label="注册时间" />
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="300">
           <template slot-scope="scope">
             <el-button @click="amendRole(scope.row)" type="text">
               编辑
             </el-button>
             <el-button @click="lookRole(scope.row)" type="text">
-              查看
+              <span style="color: #148f97"> 查看</span>
             </el-button>
             <el-button @click="deleteRole(scope.row)" type="text">
-              删除
+              <span style="color: #D72A13">删除</span>
             </el-button>
           </template>
         </el-table-column>
@@ -220,9 +220,7 @@ export default {
         }
       )
         .then(() => {
-          this.$api.ROLE.deleteRoleGet(
-            row.roleId,
-          ).then((res) => {
+          this.$api.ROLE.deleteRoleGet(row.roleId).then((res) => {
             if (res.data.code === 200) {
               this.$message({
                 message: "已删除！",
@@ -249,9 +247,7 @@ export default {
       this.roleForm.roleMsg = val.roleMsg;
       this.roleForm.roleId = val.roleId;
       //查看当前用户所拥有的菜单权限
-      this.$api.ROLE.viewRoleInfo(
-        this.roleForm.roleId,
-      ).then((res) => {
+      this.$api.ROLE.viewRoleInfo(this.roleForm.roleId).then((res) => {
         if (res.data.code === 200) {
           const recursive = (data, callback) => {
             data.forEach((v) => {
@@ -278,9 +274,7 @@ export default {
       this.roleForm.name = val.roleName;
       this.roleForm.roleMsg = val.roleMsg;
       this.roleForm.roleId = val.roleId;
-      this.$api.ROLE.viewRoleInfo(
-        this.roleForm.roleId,
-      ).then((res) => {
+      this.$api.ROLE.viewRoleInfo(this.roleForm.roleId).then((res) => {
         if (res.data.code === 200) {
           const recursiveLook = (data, callback) => {
             data.forEach((v) => {
@@ -343,9 +337,7 @@ export default {
         if (valid) {
           if (this.roleTitle === "新增角色") {
             this.roleForm.roleId = "";
-            this.$api.ROLE.addRole(
-              this.roleForm,
-            ).then((res) => {
+            this.$api.ROLE.addRole(this.roleForm).then((res) => {
               if (res.data.code === 200) {
                 this.$message({
                   message: "角色新增成功！",
@@ -356,9 +348,7 @@ export default {
               }
             });
           } else if (this.roleTitle === "编辑角色") {
-            this.$api.ROLE.updateRole(
-              this.roleForm,
-            ).then((res) => {
+            this.$api.ROLE.updateRole(this.roleForm).then((res) => {
               if (res.data.code === 200) {
                 this.$message({
                   message: "修改成功！",
