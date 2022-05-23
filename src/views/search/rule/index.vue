@@ -123,13 +123,6 @@
                 " size="small" @click="uploadFile">上传</el-button>
             </span>
           </el-dialog>
-          <el-dialog
-            width="60%"
-            title="文件预览"
-            :visible.sync="Visible">
-            <div v-html="wordText"></div>
-          </el-dialog>
-          <!-- <div ref="file"></div> -->
         </div>
       </el-card>
     </el-col>
@@ -137,8 +130,8 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  let docx = require('docx-preview')
+  // import axios from 'axios'
+  // let docx = require('docx-preview')
 
   import mammoth from "mammoth";
   export default {
@@ -210,31 +203,12 @@
         // 存储全选数据的filePreviewPath
         arrDeletFilePreviewPath: [],
         count: 0,
-        wordText: "",
-        Visible: false
       };
     },
     created() {
       this.initData();
-      this.getWordText();
     },
     methods: {
-      // 预览 word 文件专属
-      getWordText(url) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("get", url, true);
-        xhr.responseType = "arraybuffer";
-        xhr.onload = () => {
-          if (xhr.status == 200) {
-            mammoth.convertToHtml({ arrayBuffer: new Uint8Array(xhr.response) }).then((resultObject) => {
-              this.$nextTick(() => {
-                this.wordText = resultObject.value;
-              });
-            });
-          }
-        };
-        xhr.send();
-      },
       //可以预览全部类型的文件，但是需要收费
       wordPreview(url) {
         var xurl = "https://view.xdocin.com/xdoc?_xdoc=";
@@ -370,14 +344,20 @@
       },
       // 查看数据
       check(row) {
+        console.log(row.filePreviewPath);
         // 判断类型是否为word
         if(row.fileSuffix == ".docx"){
-          this.getWordText(row.filePreviewPath);
-          this.Visible = true;
+          // 跳转到新页面预览word
+          let pathinfo = this.$router.resolve({
+            path:'/search/rule/showFile',
+            query:{
+              url:row.filePreviewPath,
+            }
+          })
+          window.open(pathinfo.href, '_blank');
         }else{
           window.open(row.filePreviewPath);
         }
-        // this.wordPreview(url);
       },
       // 上传文件
       beforeAvatarUpload(file) {
