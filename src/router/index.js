@@ -201,6 +201,13 @@ const constantRoutes = [
         meta: { title: '用户管理', icon: 'user' }
       },
       {
+        path: '/system/ulog',
+        name: 'ulog',
+        hidden: true,
+        component: () => import('@/views/system/ulog/index'),
+        meta: { title: '操作日志', icon: 'user' }
+      },
+      {
         path: '/system/userInfo',
         name: 'userInfo',
         hidden: true,

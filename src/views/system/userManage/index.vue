@@ -3,7 +3,7 @@
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
         <el-input
-          style="width: 320px"
+          style="width: 180px"
           placeholder="搜索用户"
           suffix-icon="el-icon-search"
           v-model.trim="queryParams.message"

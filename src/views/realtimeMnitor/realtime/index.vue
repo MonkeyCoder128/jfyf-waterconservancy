@@ -1161,12 +1161,13 @@ export default {
     },
     /**水质分析 */
     getWaterQuality() {
+      let colors = ["#EA951C", "#3F85FF", "#F3B63E", "#37ABC1", "#32DFDF"];
       var dataCake = [
-        { name: "二氧化碳", percentage: "43.67%" },
-        { name: "氢含量", percentage: "29.26%" },
-        { name: "氧含量", percentage: "27.07%" },
-        { name: "氮含量", percentage: "29.26%" },
-        { name: "氦含量", percentage: "27.07%" },
+        { value: 50, name: "二氧化碳" },
+        { value: 40, name: "氢含量" },
+        { value: 30, name: "氧含量" },
+        { value: 20, name: "氮含量" },
+        { value: 10, name: "氦含量" },
       ];
       let data = {
         tooltip: {
@@ -1174,28 +1175,40 @@ export default {
           formatter: "{b}: {c} ({d}%)",
         },
         legend: {
-          orient: "vertical",
-          left: "50%", //图例距离左的距离
-          top: "15%",
+          icon: "rect",
+          left: "67%", //图例距离左的距离
+          bottom: "15%",
           itemGap: 15,
           itemHeight: 17,
           itemWidth: 17,
           textStyle: {
             fontSize: 14, //字体大小
+            rich: {
+              t0: {
+                color: colors[0],
+              },
+              t1: {
+                color: colors[1],
+              },
+              t2: {
+                color: colors[2],
+              },
+              t3: {
+                color: colors[3],
+              },
+              t4: {
+                color: colors[4],
+              },
+            },
           },
-          formatter: function (name) {
-            let target, percentage;
-            for (let i = 0; i < dataCake.length; i++) {
-              if (dataCake[i].name === name) {
-                target = dataCake[i].value;
-                percentage = dataCake[i].percentage;
-              }
-            }
-            let arr = [name + " ", " " + percentage];
-            return arr.join(" ");
+          formatter: function (param) {
+            let index = dataCake.findIndex((v) => v.name == param);
+            let str = `{white|${param.padEnd(5, "　")}}{t${index}|${
+              dataCake[index].value + "%"
+            }}`;
+            return str;
           },
         },
-        color: ["#EA951C", "#3F85FF", "#F3B63E", "#37ABC1", "#32DFDF"],
         series: [
           {
             name: "内置圆",
@@ -1253,13 +1266,23 @@ export default {
               },
             },
 
-            data: [
-              { value: 500, name: "二氧化碳" },
-              { value: 335, name: "氢含量" },
-              { value: 310, name: "氧含量" },
-              { value: 335, name: "氮含量" },
-              { value: 310, name: "氦含量" },
-            ],
+            data: dataCake,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  //自定义颜色
+                  var colorList = [
+                    "#EA951C",
+                    "#3F85FF",
+                    "#F3B63E",
+                    "#37ABC1",
+                    "#32DFDF",
+                  ];
+
+                  return colorList[params.dataIndex];
+                },
+              },
+            },
           },
         ],
       };

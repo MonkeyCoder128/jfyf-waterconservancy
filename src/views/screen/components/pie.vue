@@ -61,7 +61,6 @@ export default {
             let str = `{white|${param.padEnd(5, "　")}}{t${index}|${
               dataCake[index].value + "%"
             }}`;
-            console.log(dataCake);
             return str;
           },
         },

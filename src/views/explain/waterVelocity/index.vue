@@ -58,34 +58,9 @@
         </div>
         <div class="echartsBox" style="margin: 10px 0">
           <span>预警数据对比</span>
-          <div class="warningBox">
-            <Chart :chartData="warningData" :width="'100%'" :height="'100%'" />
-            <ul>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>A设备</span>
-                </div>
-                <span class="percent">53%</span>
-              </li>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>B设备</span>
-                </div>
-                <span class="percent">30%</span>
-              </li>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>C设备</span>
-                </div>
-                <span class="percent">17%</span>
-              </li>
-            </ul>
-          </div>
+          <Chart :chartData="warningData" :width="'100%'" :height="'100%'" />
         </div>
-        <span class="cardTitle">设备检测</span>
+        <span class="cardTitle">预警分析</span>
         <div style="height: calc(100% - 200px)">
           <el-table
             :data="tableData"
@@ -170,7 +145,7 @@ export default {
     this.statData = this.getStatData();
   },
   methods: {
-    /** 查看设备检测 */
+    /** 查看预警分析 */
     seeAnalyse(row) {
       this.$router.push({
         path: "/explain/alarmAnalysis",
@@ -179,7 +154,7 @@ export default {
         },
       });
       console.log(
-        "%c查看设备检测：",
+        "%c查看预警分析：",
         "color:red;font-size:18px;font-weight:bold;"
       );
     },
@@ -575,44 +550,50 @@ export default {
       };
       return data;
     },
-    /**设备检测图表 */
+    /**预警分析图表 */
     getWarningData() {
+      let colors = ["#148F97", "#1289BA", "#115CB9"];
       var dataCake = [
-        { name: "A设备", percentage: "43.67%" },
-        { name: "C设备", percentage: "29.26%" },
-        { name: "B设备", percentage: "27.07%" },
+        { name: "A设备", value: 50 },
+        { name: "C设备", value: 80 },
+        { name: "B设备", value: 70 },
       ];
       let data = {
         tooltip: {
           trigger: "item",
           formatter: "{b}: {c} ({d}%)",
         },
-        // legend: {
-        //   data: ["A设备", "C设备", "B设备"],
-        //   icon: "rect",
-        //   left: "65%", //图例距离左的距离
-        //   top: "5%",
-        //   itemGap: 35,
-        //   itemWidth: 19,
-        //   itemHeight: 19,
-        //   textStyle: {
-        //     // color: "inherit", //继承颜色，设置颜色一致对应
-        //     fontSize: 14, //字体大小
-        //   },
-        //   formatter: function (name) {
-        //     let target, percentage;
-        //     for (let i = 0; i < dataCake.length; i++) {
-        //       if (dataCake[i].name === name) {
-        //         target = dataCake[i].value;
-        //         percentage = dataCake[i].percentage;
-        //       }
-        //     }
-        //     let arr = [name + " ", " " + percentage];
-        //     return arr.join(" ");
-        //   },
-        // },
+        legend: {
+          data: ["A设备", "C设备", "B设备"],
+          icon: "rect",
+          left: "65%", //图例距离左的距离
+          top: "5%",
+          itemGap: 35,
+          itemWidth: 19,
+          itemHeight: 19,
+          textStyle: {
+            fontSize: 14, //字体大小
+            rich: {
+              t0: {
+                color: colors[0],
+              },
+              t1: {
+                color: colors[1],
+              },
+              t2: {
+                color: colors[2],
+              },
+            },
+          },
+          formatter: function (param) {
+            let index = dataCake.findIndex((v) => v.name == param);
+            let str = `{white|${param.padEnd(5, "　")}}    {t${index}|${
+              dataCake[index].value + "%"
+            }}`;
+            return str;
+          },
+        },
 
-        color: ["#148F97", "#1289BA", "#115CB9"],
         series: [
           {
             name: "内置圆",
@@ -671,11 +652,16 @@ export default {
                 },
               },
             },
-            data: [
-              { value: 500, name: "A设备" },
-              { value: 335, name: "B设备" },
-              { value: 310, name: "C设备" },
-            ],
+            data: dataCake,
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  //自定义颜色
+                  var colorList = ["#148F97", "#1289BA", "#115CB9"];
+                  return colorList[params.dataIndex];
+                },
+              },
+            },
           },
         ],
       };
@@ -998,62 +984,6 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-    .warningBox {
-      width: 80%;
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-content: center;
-      ul {
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        li {
-          width: 60%;
-          list-style: none;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          .iconLable {
-            display: flex;
-            align-items: center;
-            .Icon {
-              display: inline-block;
-              width: 17px;
-              height: 17px;
-              margin-right: 9px;
-            }
-          }
-        }
-        li:nth-child(1) {
-          .Icon {
-            background-color: #148f97;
-          }
-          .percent {
-            color: #148f97;
-          }
-        }
-        li:nth-child(2) {
-          .Icon {
-            background-color: #1289ba;
-          }
-          .percent {
-            color: #1289ba;
-          }
-        }
-        li:nth-child(3) {
-          .Icon {
-            background-color: #115cb9;
-          }
-          .percent {
-            color: #115cb9;
-          }
-        }
-      }
     }
   }
   .cardMenu {

@@ -3,11 +3,12 @@
     <el-card shadow="always" class="el-card">
       <div class="InfoBar">
         <div class="InfoTime">
-          <span style="margin-right: 10px">日期</span>
+          <span style="margin-right: 10px">时间</span>
           <el-date-picker
             size="mini"
             v-model="searchTime"
             type="daterange"
+            style="width: 200px"
             range-separator="-"
             start-placeholder="开始时间"
             end-placeholder="结束时间"
@@ -49,6 +50,8 @@
       <el-table
         :data="newsData"
         style="width: 100%"
+        :row-style="{ height: '59px' }"
+        :cell-style="{ padding: '0' }"
         :header-cell-style="{ background: '#EEEEEE' }"
       >
         <el-table-column prop="content" label="消息内容" />
