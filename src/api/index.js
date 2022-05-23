@@ -4,10 +4,12 @@ import NEWS from './modules/news'
 import USER from './modules/user'
 import ROLE from './modules/role'
 import SAFE from './modules/safe'
+import ULOG from './modules/ulog'
 export default {
   LOGIN,
   NEWS,
   USER,
   ROLE,
-  SAFE
+  SAFE,
+  ULOG
 }
