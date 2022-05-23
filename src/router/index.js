@@ -12,7 +12,12 @@ const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
+  {
+    path: '/search/rule/showFile',
+    name: 'showFile',
+    component: () => import('@/views/search/rule/showFile'),
+    meta: { title: '条例展示', icon: 'user' }
+  },
   {
     path: '/screen',
     component: () => import('@/views/screen/index'),
@@ -23,8 +28,6 @@ const constantRoutes = [
     component: () => import('@/views/screen/threed'),
     hidden: true
   },
-  
-
   {
     path: '/404',
     component: () => import('@/views/error/404'),
@@ -128,6 +131,12 @@ const constantRoutes = [
         name: 'rule',
         component: () => import('@/views/search/rule/index'),
         meta: { title: '管理条例', icon: 'user' }
+      },
+      {
+        path: '/search/rule/showFile',
+        name: 'showFile',
+        component: () => import('@/views/search/rule/showFile'),
+        meta: { title: '条例展示', icon: 'user' }
       },
       {
         path: '/search/safe',

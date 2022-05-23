@@ -523,38 +523,26 @@ export default {
         this.formOne.remarkImageList = this.formOne.descriptionImageList;
       }
       console.log(this.formOne);
-      if(this.formOne.progress !== '0'){
-        if(this.formOne.remark !== null && this.formOne.remark !== ''){
-          this.$api.SAFE.ReportErr(this.formOne).then(res=>{
-            if(res.data.code == 200){
-              this.$message({
-                showClose: true,
-                message: res.data.describe,
-                type: 'success'
-              });
-              this.listLoading = false;
-              setTimeout(()=>{
-                this.$router.go(-1);
-              });
-            }else{
-              this.$message({
-                showClose: true,
-                message: res.data.describe,
-                type: 'error'
-              });
-            }
-          })
-        }else{
-          if(this.formOne.remark == null){
-            this.formOne.reportType = 1;
+      if(this.formOne.remark !== null && this.formOne.remark !== ''){
+        this.$api.SAFE.ReportErr(this.formOne).then(res=>{
+          if(res.data.code == 200){
+            this.$message({
+              showClose: true,
+              message: res.data.describe,
+              type: 'success'
+            });
+            this.listLoading = false;
+            setTimeout(()=>{
+              this.$router.go(-1);
+            });
+          }else{
+            this.$message({
+              showClose: true,
+              message: res.data.describe,
+              type: 'error'
+            });
           }
-          this.listLoading = false;
-          this.$message({
-            showClose: true,
-            message: '请完善信息！',
-            type: 'error'
-          });
-        }
+        })
       }else{
         if(this.formOne.remark == null){
           this.formOne.reportType = 1;
@@ -562,7 +550,7 @@ export default {
         this.listLoading = false;
         this.$message({
           showClose: true,
-          message: '请选择进展情况！',
+          message: '请完善信息！',
           type: 'error'
         });
       }
