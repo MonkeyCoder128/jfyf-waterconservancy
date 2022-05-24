@@ -1240,10 +1240,6 @@ export default {
             center: ["30%", "50%"],
             radius: ["55%", "70%"],
             silent: true,
-            itemStyle: {
-              borderWidth: 3,
-              borderColor: "#fff",
-            },
             labelLine: {
               show: false,
             },
@@ -1281,6 +1277,10 @@ export default {
 
                   return colorList[params.dataIndex];
                 },
+
+                borderRadius: 0,
+                borderColor: "#fff",
+                borderWidth: 3,
               },
             },
           },
