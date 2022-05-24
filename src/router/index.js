@@ -189,12 +189,12 @@ const constantRoutes = [
     name: 'system',
     meta: { title: '系统管理', icon: 'el-icon-user', auth: true },
     children: [
-      // {
-      //   path: '/system/deviceManage',
-      //   name: 'deviceManage',
-      //   component: () => import('@/views/system/deviceManage/index'),
-      //   meta: { title: '设备管理', icon: 'user' }
-      // },
+      {
+        path: '/system/deviceManage',
+        name: 'deviceManage',
+        component: () => import('@/views/system/deviceManage/index'),
+        meta: { title: '设备管理', icon: 'user' }
+      },
       {
         path: '/system/roleManage',
         name: 'roleManage',
@@ -217,12 +217,19 @@ const constantRoutes = [
         meta: { title: '操作日志', icon: 'user' }
       },
       {
+        path: '/system/dataManage',
+        name: 'dataManage',
+        component: () => import('@/views/system/dataManage/index'),
+        meta: { title: '数据管理', icon: 'user' }
+      },
+      {
         path: '/system/userInfo',
         name: 'userInfo',
         hidden: true,
         component: () => import('@/views/system/userInfo/index'),
         meta: { title: '新增用户', icon: 'user', auth: true }
-      }
+      },
+
     ]
   },
   {
@@ -255,19 +262,19 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 router.beforeEach(function (to, from, next) {
-   // 判断是否需要登录权限
+  // 判断是否需要登录权限
   if (to.matched.some(res => res.meta.auth)) {
     // 判断是否登录
     if (VueCookies.isKey('token')) {
-        next()
+      next()
     } else {
-        next({
-          path: '/login',
-            
-        }) // 没登录则跳转到登录界面
+      next({
+        path: '/login',
+
+      }) // 没登录则跳转到登录界面
     }
   } else {
-      next()
+    next()
   }
 })
 

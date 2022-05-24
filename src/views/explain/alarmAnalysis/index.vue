@@ -8,7 +8,7 @@
             <el-select
               @change="changeType"
               v-model="queryParams.type"
-              size="small"
+              size="mini"
               placeholder="请选择消息类型"
             >
               <el-option
@@ -23,13 +23,15 @@
           <div class="InfoTime">
             <span style="margin: 0 10px 0 30px">时间</span>
             <el-date-picker
-              size="small"
+              size="mini"
               v-model="searchTime"
               type="daterange"
               range-separator="-"
+              style="width: 200px"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
-              value-format="yyyy-MM-dd 00:00:00"
+              value-format="yyyy-MM-dd HH:mm:ss"
+              :default-time="['00:00:00', '23:59:59']"
               @input="handleDate"
             >
             </el-date-picker>
@@ -37,15 +39,15 @@
           <el-button
             style="margin-left: 15px"
             @click="querySearch()"
-            size="small"
+            size="mini"
             type="primary"
             >查询</el-button
           >
-          <el-button style="margin-left: 15px" @click="resetTab()" size="small"
+          <el-button style="margin-left: 15px" @click="resetTab()" size="mini"
             >重置</el-button
           >
         </div>
-        <el-button style="float: right" @click="exportTable()" size="small"
+        <el-button style="float: right" @click="exportTable()" size="mini"
           >表格导出
         </el-button>
       </div>
