@@ -192,6 +192,7 @@ export default {
       this.formData.startDate = '';
       this.formData.endDate = '';
       // console.log(typeof this.formData.status);
+      console.log(this.formData.status);
       if(this.formData.status == ''){
         this.formData.status = [];
       }else{
@@ -199,6 +200,9 @@ export default {
         // 判断 this.formData.status 状态，如果为string，转成arr；
         if(typeof this.formData.status == 'string'){
           let arr = [];
+          if(this.formData.status == 1){
+            arr.push(3);
+          }
           arr.push(Number(this.formData.status));
           this.formData.status = arr;
         }
@@ -209,7 +213,11 @@ export default {
       }
       this.$api.SAFE.InintData(this.formData).then(res=>{
         // 接口请求完成之后把 this.formData.status 改正字符串格式
-        this.formData.status = String(this.formData.status);
+        if(this.formData.status.length == 2){
+          this.formData.status = '未解除';
+        }else{
+          this.formData.status = String(this.formData.status);
+        }
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
