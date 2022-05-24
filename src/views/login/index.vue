@@ -96,7 +96,7 @@ export default {
             .then((res) => {
               if (res.code === "200") {
                 if (this.loginForm.autoLogin) {
-                  this.$cookies.set("token", res.token, { expires: "15D" });
+                  this.$cookies.set("token", res.token, 15*60*1000);
                 } else {
                   this.$cookies.set("token", res.token);
                 }
