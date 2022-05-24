@@ -236,8 +236,6 @@
 </template>
 
 <script>
-import axios from "axios";
-let docx = require("docx-preview");
 
 import mammoth from "mammoth";
 export default {

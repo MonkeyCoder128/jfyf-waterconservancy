@@ -141,8 +141,15 @@ export default {
     };
   },
   methods: {
-    // 预警查看
-    seeAnalyse(attr) {},
+    // 查看预警分析
+    seeAnalyse(row) {
+      this.$router.push({
+        path: "/explain/alarmAnalysis",
+        query: {
+          id: row.id,
+        },
+      });
+    },
   },
 };
 </script>
