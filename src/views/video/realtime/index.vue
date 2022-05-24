@@ -5,11 +5,22 @@
         <el-col class="h100" :span="6">
           <img class="titimg" src="@/assets/image/huifang.jpg" alt="" />
           <div class="card">
-            <el-input placeholder="请输入点位搜索" suffix-icon="el-icon-search" v-model="filterText">
+            <el-input
+              placeholder="请输入点位搜索"
+              suffix-icon="el-icon-search"
+              v-model="filterText"
+            >
             </el-input>
-            <el-tree class="filter-tree" :data="dataList" default-expand-all :filter-node-method="filterNode"
-              highlight-current @node-click="handleNodeClick" ref="tree">
-              <span slot-scope="{data}">
+            <el-tree
+              class="filter-tree"
+              :data="dataList"
+              default-expand-all
+              :filter-node-method="filterNode"
+              highlight-current
+              @node-click="handleNodeClick"
+              ref="tree"
+            >
+              <span slot-scope="{ data }">
                 <span>
                   <i :class="data.icon" class="mr5"></i>{{ data.label }}
                 </span>
@@ -20,8 +31,7 @@
         <el-col class="h100 relt" :span="18">
           <!-- <div class="posti">{{ nowDate }}</div> -->
           <div class="videoStyle" ref="init">
-           <video id="video-container">
-            </video>
+            <video id="video-container"></video>
           </div>
         </el-col>
       </div>
@@ -29,100 +39,103 @@
   </el-row>
 </template>
 <script>
-import  EZUIKit from 'ezuikit-js';
+import EZUIKit from "ezuikit-js";
 export default {
-  data () {
+  data() {
     return {
-      nowDate:'',
-      p_video: '',
+      nowDate: "",
+      p_video: "",
       filterText: "",
-      dataList: [{
-        id: 111,
-        label: "全部",
-        children: [{
-          id: 1,
-          label: "A区",
-          icon: 'el-icon-reading',
+      dataList: [
+        {
+          id: 111,
+          label: "全部",
           children: [
             {
-              id: 5,
-              label: "A区 -1",
-              icon: 'el-icon-location-outline'
+              id: 1,
+              label: "A区",
+              icon: "el-icon-reading",
+              children: [
+                {
+                  id: 5,
+                  label: "A区 -1",
+                  icon: "el-icon-location-outline",
+                },
+                {
+                  id: 6,
+                  label: "A区 -2",
+                  icon: "el-icon-location-outline",
+                },
+              ],
             },
             {
-              id: 6,
-              label: "A区 -2",
-              icon: 'el-icon-location-outline'
+              id: 2,
+              label: "B区",
+              icon: "el-icon-reading",
+              children: [
+                {
+                  id: 5,
+                  label: "B区 -1",
+                  icon: "el-icon-location-outline",
+                },
+                {
+                  id: 6,
+                  label: "B区 -2  ",
+                  icon: "el-icon-location-outline",
+                },
+              ],
+            },
+            {
+              id: 3,
+              label: "C区",
+              icon: "el-icon-reading",
+              children: [
+                {
+                  id: 7,
+                  label: "C区 -1",
+                  icon: "el-icon-location-outline",
+                },
+                {
+                  id: 8,
+                  label: "C区 -2",
+                  icon: "el-icon-location-outline",
+                },
+              ],
             },
           ],
         },
-        {
-          id: 2,
-          label: "B区",
-          icon: 'el-icon-reading',
-          children: [
-            {
-              id: 5,
-              label: "B区 -1",
-              icon: 'el-icon-location-outline'
-            },
-            {
-              id: 6,
-              label: "B区 -2  ",
-              icon: 'el-icon-location-outline'
-            },
-          ],
-        },
-        {
-          id: 3,
-          label: "C区",
-          icon: 'el-icon-reading',
-          children: [
-            {
-              id: 7,
-              label: "C区 -1",
-              icon: 'el-icon-location-outline'
-            },
-            {
-              id: 8,
-              label: "C区 -2",
-              icon: 'el-icon-location-outline'
-            },
-          ],
-        }],
-      }],
+      ],
       defaultProps: {
         children: "children",
         label: "label",
       },
     };
   },
-  mounted () {
-    let height= this.$refs.init.offsetHeight;
-    let width= this.$refs.init.offsetWidth;
+  mounted() {
+    let height = this.$refs.init.offsetHeight;
+    let width = this.$refs.init.offsetWidth;
     // this.currentTime(); // 计时器
-    let that = this
-    fetch('https://open.ys7.com/jssdk/ezopen/demo/token')
-      .then(response => response.json())
-      .then(res => {
+    let that = this;
+    fetch("https://open.ys7.com/jssdk/ezopen/demo/token")
+      .then((response) => response.json())
+      .then((res) => {
         var accessToken = res.data.accessToken;
         var player = new EZUIKit.EZUIKitPlayer({
-          id: 'video-container', // 视频容器ID
+          id: "video-container", // 视频容器ID
           accessToken: accessToken,
-          poster:"",
-          url: 'ezopen://open.ys7.com/G39444019/1.live',
-          template: 'simple', // simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版; theme-可配置主题；
+          poster: "",
+          url: "ezopen://open.ys7.com/G39444019/1.live",
+          template: "simple", // simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版; theme-可配置主题；
           // plugin: ['talk'],                       // 加载插件，talk-对讲
           height: height,
           width: width,
           // handleSuccess:function(ress){
-          //   console.log('0-0-0-',ress)
           // }
         });
       });
   },
   watch: {
-    filterText (val) {
+    filterText(val) {
       this.$refs.tree.filter(val);
     },
   },
@@ -137,23 +150,22 @@ export default {
       player.stop();
       // 切换为直播
       player.play({
-        url:"ezopen://open.ys7.com/244640009/1.live"
-      })
+        url: "ezopen://open.ys7.com/244640009/1.live",
+      });
       // setTimeout(()=>{
       //   player.play({
       //     url:"ezopen://open.ys7.com/244640009/1.live"
-      //   })      
+      //   })
       // },1000)
     },
     //树
-    filterNode (value, data) {
+    filterNode(value, data) {
       if (!value) return true;
       return data.label.indexOf(value) !== -1;
     },
     //点击事件
-    handleNodeClick (data) {
+    handleNodeClick(data) {
       this.p_video = data.label;
-      
     },
     currentTime() {
       setInterval(this.formatDate, 1000);
@@ -165,7 +177,15 @@ export default {
       let month = date.getMonth() + 1; // 月
       let day = date.getDate(); // 日
       let week = date.getDay(); // 星期
-      let weekArr = [ "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ];
+      let weekArr = [
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六",
+      ];
       let hour = date.getHours(); // 时
       hour = hour < 10 ? "0" + hour : hour; // 如果只有一位，则前面补零
       let minute = date.getMinutes(); // 分
@@ -173,7 +193,7 @@ export default {
       let second = date.getSeconds(); // 秒
       second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
       this.nowDate = `${year}-${month}-${day}  ${weekArr[week]}  ${hour}:${minute}:${second} `;
-    }
+    },
   },
 };
 </script>
@@ -183,7 +203,7 @@ export default {
   height: 30px;
   line-height: 30px;
 }
-.videoStyle{
+.videoStyle {
   height: calc(100% - 50px);
   width: 100%;
 }
@@ -191,10 +211,10 @@ export default {
 /deep/.el-input__icon {
   line-height: 30px;
 }
-.el-col-6{
+.el-col-6 {
   width: 18%;
 }
-.el-col-18{
+.el-col-18 {
   width: 82%;
 }
 .h100 {
@@ -241,16 +261,16 @@ h2 {
 .titimg {
   width: 100%;
   height: 220px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 5px;
   margin-bottom: 15px;
 }
 
 .filter-tree {
   position: relative;
-  background: #FFFFFF;
+  background: #ffffff;
   color: #606266;
-  border: 1px solid #DCDFE6;
+  border: 1px solid #dcdfe6;
   margin-top: 15px;
   border-radius: 5px;
   min-height: calc(100% - 45px);
@@ -262,15 +282,17 @@ h2 {
 }
 
 .blue {
-  color: #1C48BF;
+  color: #1c48bf;
 }
 
-/deep/.el-tree-node:focus>.el-tree-node__content {
-  color: #1C48BF !important;
+/deep/.el-tree-node:focus > .el-tree-node__content {
+  color: #1c48bf !important;
 }
 
 /*节点失焦时的背景颜色*/
-/deep/.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-  color: #1C48BF !important;
+/deep/.el-tree--highlight-current
+  .el-tree-node.is-current
+  > .el-tree-node__content {
+  color: #1c48bf !important;
 }
 </style>

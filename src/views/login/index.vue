@@ -76,7 +76,6 @@ export default {
           let parmas = this.loginForm;
           this.$api.LOGIN.Loginform(parmas)
             .then((res) => {
-              console.log(res)
               if (res.code === "200") {
                 if (this.loginForm.autoLogin) {
                   this.$cookies.set("token", res.token, { expires: "15D" });
@@ -107,7 +106,6 @@ export default {
     },
     async getUser () {
       const { data } = await this.$api.LOGIN.getUserInfo()
-      console.log(data)
       const userInfo = {
         userId: data.userId,
         username: data.username,

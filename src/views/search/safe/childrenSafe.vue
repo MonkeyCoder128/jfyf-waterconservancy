@@ -476,7 +476,6 @@ export default {
           // this.formOne.reportUserName = res.result.reportUserName;
           this.formOne.description = res.result.description;
           this.formOne.descriptionImageList = res.result.descriptionImageList;
-          // console.log(res.result.descriptionImageList);
           this.formOne.progress = String(res.result.progress);
           this.formOne.remark = res.result.remark;
           this.formOne.remarkImageList = res.result.remarkImageList;
@@ -523,7 +522,6 @@ export default {
         this.formOne.remark = this.formOne.description;
         this.formOne.remarkImageList = this.formOne.descriptionImageList;
       }
-      console.log(this.formOne);
       if(this.formOne.remark !== null && this.formOne.remark !== ''){
         this.$api.SAFE.ReportErr(this.formOne).then(res=>{
           if(res.code == 200){
@@ -565,7 +563,6 @@ export default {
       this.formOne.descriptionImageList.pop();
     },
     handleRemove_(file, fileList) {
-      console.log(file, fileList);
     },
     // 图片上传前的钩子函数
     handleBeforeUpload(file){
@@ -590,7 +587,6 @@ export default {
     handlePictureSuccess(res, file){
       if(res.code == 200){
         this.formOne.descriptionImageList.push(res.result[0].filePathHttp);
-        console.log(this.srcList);
       }else{
         this.$message({
           message: '图片上传失败,请重新上传！',
@@ -601,7 +597,6 @@ export default {
     handlePictureSuccess_(res, file){
       if(res.code == 200){
         this.formOne.remarkImageList.push(res.result[0].filePathHttp);
-        console.log(this.srcList);
       }else{
         this.$message({
           message: '图片上传失败,请重新上传！',

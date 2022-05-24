@@ -340,7 +340,6 @@ export default {
     wordPreview(url) {
       var xurl = "https://view.xdocin.com/xdoc?_xdoc=";
       xurl += encodeURIComponent(url);
-      console.log(xurl);
       var ops = {
         _pdf: true, //word/excel文档尝试以pdf方式显示，默认false
         // "_watermark": "XDOC文档预览", //水印文本，显示水印
@@ -365,7 +364,6 @@ export default {
         pageSize: this.tableData.pagination.size,
       }).then((res) => {
         if (res.code == 200) {
-          console.log(res.result);
           this.tableData.list = res.result.records;
           this.tableData.pagination.current = res.result.current;
           this.tableData.pagination.pages = res.result.pages;
@@ -409,12 +407,10 @@ export default {
     },
     // 改变页数
     changeCurrent(val) {
-      console.log(val);
       this.tableData.pagination.current = val;
       this.initData();
     },
     handleSizeChange(val) {
-      console.log(val);
       this.tableData.pagination.size = val;
       this.initData();
     },
@@ -477,7 +473,6 @@ export default {
     },
     // 查看数据
     check(row) {
-      console.log(row.filePreviewPath);
       // 判断类型是否为word
       if(row.fileSuffix == ".docx"){
         // 跳转到新页面预览word
@@ -494,7 +489,6 @@ export default {
     },
     // 上传文件
     beforeAvatarUpload(file) {
-      // console.log(file);
       const isJPG =
         file.type === "application/pdf" || "application/vnd.ms-excel" || "docx";
       const isLt2M = file.size / 1024 / 1024 < 9;
@@ -561,8 +555,6 @@ export default {
     },
     // 上传文件的列表控制
     handleChange(file, fileList) {
-      // console.log(file);
-      // console.log(fileList);
     },
     // 删除全选的文件
     allSearch() {

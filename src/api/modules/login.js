@@ -17,7 +17,3 @@ const LOGIN = {
 	},
 }
 export default LOGIN
-// 使用
-// this.$api.LOGIN.menuList({id: id}).then(res => {
-//    console.log(res)
-// })

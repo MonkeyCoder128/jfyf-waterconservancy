@@ -30,9 +30,6 @@ export default {
           // plugin: ['talk'],                       // 加载插件，talk-对讲
           height: height,
           width: width,
-          // handleSuccess:function(ress){
-          //   console.log('0-0-0-',ress)
-          // }
         });
       });
   },

@@ -24,7 +24,6 @@ export default {
           mammoth.convertToHtml({ arrayBuffer: new Uint8Array(xhr.response) }).then((resultObject) => {
             this.$nextTick(() => {
               this.wordFile = resultObject.value;
-              console.log(this.wordFile);
             });
           });
         }

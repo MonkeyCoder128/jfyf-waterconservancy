@@ -153,10 +153,6 @@ export default {
           id: row.id,
         },
       });
-      console.log(
-        "%c查看设备检测：",
-        "color:red;font-size:18px;font-weight:bold;"
-      );
     },
     /**仪表盘蓝色渐变 */
     getBluegradient() {
