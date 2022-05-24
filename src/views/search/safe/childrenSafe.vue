@@ -473,7 +473,6 @@ export default {
     Echo(){
       this.$api.SAFE.SelectReport({id:this.$route.params.id}).then(res=>{
         if(res.code == 200){
-          // this.formOne.reportUserName = res.result.reportUserName;
           this.formOne.description = res.result.description;
           this.formOne.descriptionImageList = res.result.descriptionImageList;
           this.formOne.progress = String(res.result.progress);
