@@ -623,10 +623,6 @@ export default {
             radius: ["65%", "80%"],
             center: ["40%", "50%"],
             silent: true,
-            itemStyle: {
-              borderWidth: 3,
-              borderColor: "#fff",
-            },
             label: {
               show: false,
             },
@@ -659,6 +655,9 @@ export default {
                   var colorList = ["#148F97", "#1289BA", "#115CB9"];
                   return colorList[params.dataIndex];
                 },
+                borderRadius: 0,
+                borderColor: "#fff",
+                borderWidth: 3,
               },
             },
           },
