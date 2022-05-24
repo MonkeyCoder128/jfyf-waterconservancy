@@ -476,14 +476,20 @@ export default {
     },
     // 查看数据
     check(row) {
+      console.log(row.filePreviewPath);
       // 判断类型是否为word
-      if (row.fileSuffix == ".docx") {
-        this.getWordText(row.filePreviewPath);
-        this.Visible = true;
-      } else {
+      if(row.fileSuffix == ".docx"){
+        // 跳转到新页面预览word
+        let pathinfo = this.$router.resolve({
+          path:'/search/rule/showFile',
+          query:{
+            url:row.filePreviewPath,
+          }
+        })
+        window.open(pathinfo.href, '_blank');
+      }else{
         window.open(row.filePreviewPath);
       }
-      // this.wordPreview(url);
     },
     // 上传文件
     beforeAvatarUpload(file) {
