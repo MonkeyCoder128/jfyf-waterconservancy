@@ -303,7 +303,6 @@ export default {
       this.tableData.currPage = 1;
       this.$api.SAFE.InintData({ status: [1, 3] }).then((res) => {
         if (res.code == 200) {
-          console.log(res.result);
           this.tableData.list = res.result.data;
           this.listLoading = false;
           this.tableData.totalCount = res.result.total;
@@ -411,7 +410,6 @@ export default {
   //   'formData.reportDate'(oldval,newval){
   //     this.formData.startDate = oldval[0];
   //     this.formData.endDate = oldval[1];
-  //     console.log(this.formData.startDate);
   //   }
   // }
 };

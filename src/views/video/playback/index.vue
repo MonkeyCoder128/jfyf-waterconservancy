@@ -205,7 +205,6 @@ export default {
   methods: {
     // 查看视频
     handleClick (index) {
-      console.log(index);
       this.dialogVisible = true;
     },
     //树

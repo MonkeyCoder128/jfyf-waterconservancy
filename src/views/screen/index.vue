@@ -313,8 +313,6 @@ export default {
   created() {},
   mounted() {
     this.nowTimes();
-    console.log("111");
-    console.log(this.$refs.box.offsetHeight);
   },
   methods: {
     tothreed() {

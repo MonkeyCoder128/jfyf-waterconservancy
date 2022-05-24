@@ -297,12 +297,9 @@ export default {
       this.tableData.currPage = 1;
       this.formData.startDate = "";
       this.formData.endDate = "";
-      // console.log(typeof this.formData.status);
-      console.log(this.formData.status);
       if(this.formData.status == ''){
         this.formData.status = [];
       } else {
-        // console.log(typeof this.formData.status == 'string');
         // 判断 this.formData.status 状态，如果为string，转成arr；
         if (typeof this.formData.status == "string") {
           let arr = [];
@@ -345,7 +342,6 @@ export default {
     },
     // 解除异常
     deletedata(id) {
-      // console.log('解除异常' + id);
     },
     // 查看异常情况
     check(row) {

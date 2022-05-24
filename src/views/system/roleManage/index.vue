@@ -315,13 +315,11 @@ export default {
     /** 拿到所有复选框选中的值 */
     checkBpxFn(val, num) {
       let checkdata = this.$refs.asyncTree.getCheckedNodes();
-      console.log(checkdata);
       let arr = [];
       for (var i = 0; i < checkdata.length; i++) {
         arr.push(checkdata[i].id);
       }
       this.removeByValue(arr, undefined);
-      console.log(arr);
       this.roleForm.authList = arr;
     },
     removeByValue(arr, val) {

@@ -106,7 +106,6 @@ export default {
       this.$router.push({
         path: "/system/userManage",
       });
-      console.log("%c没有值：", "color:red;font-size:18px;font-weight:bold;");
     },
     submitForm() {
       this.$refs["user"].validate((valid) => {

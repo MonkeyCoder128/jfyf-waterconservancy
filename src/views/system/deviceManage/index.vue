@@ -9,7 +9,7 @@
         <el-table-column prop="title" label="标题" />
         <el-table-column prop="type" label="类型" />
         <el-table-column prop="details" label="详情" />
-        <el-table-column label="操作" width="300" >
+        <el-table-column label="操作" width="300">
           <template slot-scope="scope">
             <el-button @click="seeRow(scope.row)" type="text"> 查看 </el-button>
           </template>
@@ -51,12 +51,7 @@ export default {
   created() {},
   methods: {
     /** 查看详情 */
-    seeRow() {
-      console.log(
-        "%c查看消息详情：",
-        "color:red;font-size:18px;font-weight:bold;"
-      );
-    },
+    seeRow() {},
   },
 };
 </script>
