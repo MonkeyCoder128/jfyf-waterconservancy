@@ -479,10 +479,8 @@ export default {
     },
     // 删除上传好的图片时的钩子函数
     handleRemove(file, fileList) {
-      console.log(file, fileList);
     },
     handleRemove_(file, fileList) {
-      console.log(file, fileList);
     },
     // 图片上传前的钩子函数
     handleBeforeUpload(file){
@@ -507,7 +505,6 @@ export default {
     handlePictureSuccess(res, file){
       if(res.code == 200){
         this.formOne.descriptionImageList.push(res.result[0].filePathHttp);
-        console.log(this.formOne.descriptionImageList);
       }else{
         this.$message({
           message: '图片上传失败,请重新上传！',
@@ -518,7 +515,6 @@ export default {
     handlePictureSuccess_(res, file){
       if(res.code == 200){
         this.formOne.remarkImageList.push(res.result[0].filePathHttp);
-        console.log(this.formOne.remarkImageList);
       }else{
         this.$message({
           message: '图片上传失败,请重新上传！',

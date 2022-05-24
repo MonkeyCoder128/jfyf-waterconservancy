@@ -105,11 +105,6 @@ export default {
     this.$api.LOGIN.menuList().then((res) => {
       if (res.code === 200) {
         this.nav_menu_data = res.result;
-        // console.log(
-        //   "%c动态菜单：",
-        //   "color:blue;font-size:18px;font-weight:bold;",
-        //   res.data
-        // );
       }
     });
   },

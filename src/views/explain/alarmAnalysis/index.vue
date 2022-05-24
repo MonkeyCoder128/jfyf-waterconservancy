@@ -108,11 +108,6 @@ export default {
     changeType(val) {
       this.queryParams.type = val;
       this.getNewsList();
-      console.log(
-        "%c返回消息类型：",
-        "color:red;font-size:18px;font-weight:bold;",
-        val
-      );
     },
     querySearch() {
       console.log("%c查询：", "color:red;font-size:18px;font-weight:bold;");

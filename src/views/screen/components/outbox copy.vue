@@ -43,10 +43,8 @@ export default {
       //判断当前是向上or向下滚动
       if (scrollStep < 0) {
         //向上
-        console.log("正在向上滚动");
         this.scrollFlag = false;
       } else {
-        console.log("正在向下滚动");
         this.scrollFlag = true;
       }
     },

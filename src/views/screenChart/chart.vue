@@ -39,7 +39,6 @@ export default {
     chartData: {
       deep: true,
       handler(val) {
-        // console.log(val)
         if (this.chart) this.chart.clear();
         this.setOptions(val);
       },
@@ -65,7 +64,6 @@ export default {
       const that = this;
       this.chart.on("click", function (param) {
         that.$emit("clickNode", param);
-        // console.log(param)
         if (param.dataType == "node") {
         }
       });

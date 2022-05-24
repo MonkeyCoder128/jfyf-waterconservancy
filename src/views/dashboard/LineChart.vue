@@ -53,7 +53,6 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      console.log(this.chartData)
       this.initChart();
     });
   },
@@ -79,7 +78,6 @@ export default {
         tooltip: {
           trigger: "axis",
           formatter: value => {
-            console.log(value);
             return (
               '<div style="font-size: 13px;color: #fff;margin-bottom:5px;">' +
               value[0].value[0] +
