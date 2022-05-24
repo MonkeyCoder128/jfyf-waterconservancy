@@ -103,8 +103,8 @@ export default {
   created() {
     this.onRouteChanged();
     this.$api.LOGIN.menuList().then((res) => {
-      if (res.data.code === 200) {
-        this.nav_menu_data = res.data.result;
+      if (res.code === 200) {
+        this.nav_menu_data = res.result;
         // console.log(
         //   "%c动态菜单：",
         //   "color:blue;font-size:18px;font-weight:bold;",
@@ -159,12 +159,13 @@ export default {
       this.fullscreen = !this.fullscreen;
     },
     screen() {
-      this.$router.push({ path: "/screen" });
+      this.$router.push({ path: "/" });
     },
     outLogin() {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/login" });
       sessionStorage.clear();
       localStorage.clear();
+      this.$cookies.remove('token')
       this.$message.success("已退出账号");
     },
   },

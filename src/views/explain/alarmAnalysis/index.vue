@@ -95,10 +95,10 @@ export default {
   },
   created() {
     this.getNewsList();
-    this.$api.NEWS.newsType(window.sessionStorage.getItem("token")).then(
+    this.$api.NEWS.newsType(window.localStorage.getItem("token")).then(
       (res) => {
-        if (res.data.code === 200) {
-          this.optionsType = res.data.result;
+        if (res.code === 200) {
+          this.optionsType = res.result;
         }
       }
     );
@@ -154,11 +154,11 @@ export default {
     getNewsList() {
       this.$api.NEWS.newsList(
         this.queryParams,
-        window.sessionStorage.getItem("token")
+        window.localStorage.getItem("token")
       ).then((res) => {
-        if (res.data.code === 200) {
-          this.newsData = res.data.result.records;
-          this.total = res.data.result.total;
+        if (res.code === 200) {
+          this.newsData = res.result.records;
+          this.total = res.result.total;
         }
       });
     },

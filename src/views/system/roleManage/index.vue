@@ -175,8 +175,8 @@ export default {
     /** 表格分页 */
     getTreeData() {
       this.$api.ROLE.roleMenu(this.roleForm.roleId).then((res) => {
-        if (res.data.code === 200) {
-          this.treeData = res.data.result;
+        if (res.code === 200) {
+          this.treeData = res.result;
         }
       });
     },
@@ -192,9 +192,9 @@ export default {
     /** 获取角色列表 */
     getRoleList() {
       this.$api.ROLE.roleList(this.queryParams).then((res) => {
-        if (res.data.code === 200) {
-          this.roleData = res.data.result.data;
-          this.total = res.data.result.total;
+        if (res.code === 200) {
+          this.roleData = res.result.data;
+          this.total = res.result.total;
         }
       });
     },
@@ -221,7 +221,7 @@ export default {
       )
         .then(() => {
           this.$api.ROLE.deleteRoleGet(row.roleId).then((res) => {
-            if (res.data.code === 200) {
+            if (res.code === 200) {
               this.$message({
                 message: "已删除！",
                 type: "success",
@@ -248,7 +248,7 @@ export default {
       this.roleForm.roleId = val.roleId;
       //查看当前用户所拥有的菜单权限
       this.$api.ROLE.viewRoleInfo(this.roleForm.roleId).then((res) => {
-        if (res.data.code === 200) {
+        if (res.code === 200) {
           const recursive = (data, callback) => {
             data.forEach((v) => {
               callback(v);
@@ -257,11 +257,11 @@ export default {
             });
           };
           const idArr = [];
-          recursive(res.data.result, (d) => {
+          recursive(res.result, (d) => {
             if (d.checkstate == 1 && !idArr.includes(d.id)) idArr.push(d.id);
           });
 
-          this.treeData = res.data.result;
+          this.treeData = res.result;
           this.roleForm.authList = idArr;
         }
       });
@@ -275,7 +275,7 @@ export default {
       this.roleForm.roleMsg = val.roleMsg;
       this.roleForm.roleId = val.roleId;
       this.$api.ROLE.viewRoleInfo(this.roleForm.roleId).then((res) => {
-        if (res.data.code === 200) {
+        if (res.code === 200) {
           const recursiveLook = (data, callback) => {
             data.forEach((v) => {
               callback(v);
@@ -284,11 +284,11 @@ export default {
             });
           };
           const idArrLook = [];
-          recursiveLook(res.data.result, (d) => {
+          recursiveLook(res.result, (d) => {
             if (d.checkstate == 1 && !idArrLook.includes(d.id))
               idArrLook.push(d.id);
           });
-          this.treeData = res.data.result;
+          this.treeData = res.result;
           this.roleForm.authList = idArrLook;
         }
       });
@@ -338,7 +338,7 @@ export default {
           if (this.roleTitle === "新增角色") {
             this.roleForm.roleId = "";
             this.$api.ROLE.addRole(this.roleForm).then((res) => {
-              if (res.data.code === 200) {
+              if (res.code === 200) {
                 this.$message({
                   message: "角色新增成功！",
                   type: "success",
@@ -349,7 +349,7 @@ export default {
             });
           } else if (this.roleTitle === "编辑角色") {
             this.$api.ROLE.updateRole(this.roleForm).then((res) => {
-              if (res.data.code === 200) {
+              if (res.code === 200) {
                 this.$message({
                   message: "修改成功！",
                   type: "success",

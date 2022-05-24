@@ -11,7 +11,9 @@ export default new Vuex.Store({
       path: "/realtimeMnitor/realtime",
       meta: { keepAlive: false, title: '实时监测' },
       query: ''
-    }]
+    }],
+    username:'',
+    password:''
   },
   mutations: {
     addVisitedView(state, view) {
@@ -27,4 +29,8 @@ export default new Vuex.Store({
       }
     }
   },
+  getters: {
+    username: state => state.username,
+    password: state => state.password,
+  }
 })
