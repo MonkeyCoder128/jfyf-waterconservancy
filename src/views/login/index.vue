@@ -9,37 +9,19 @@
         <el-form ref="loginForm" :model="loginForm" class="loginformBox">
           <span class="title">您好,欢迎登录！</span>
           <el-form-item prop="username" label="账号">
-            <el-input
-              v-model.trim="loginForm.username"
-              type="text"
-              auto-complete="off"
-              prefix-icon="el-icon-user"
-              placeholder="请输入账号"
-            >
+            <el-input v-model.trim="loginForm.username" type="text" auto-complete="off" prefix-icon="el-icon-user"
+              placeholder="请输入账号">
             </el-input>
           </el-form-item>
           <el-form-item prop="password" label="密码">
-            <el-input
-              v-model.trim="loginForm.password"
-              type="password"
-              auto-complete="off"
-              placeholder="密码"
-              prefix-icon="el-icon-lock"
-              @keyup.enter.native="handleLogin"
-            >
+            <el-input v-model.trim="loginForm.password" type="password" auto-complete="off" placeholder="密码"
+              prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin">
             </el-input>
           </el-form-item>
-          <el-checkbox
-            v-model="loginForm.autoLogin"
-            style="margin: 0px 0px 25px 2px; float: left"
-            >15天内自动登录
+          <el-checkbox v-model="loginForm.autoLogin" style="margin: 0px 0px 25px 2px; float: left">15天内自动登录
           </el-checkbox>
           <el-form-item style="width: 100%">
-            <el-button
-              type="primary"
-              style="width: 100%; height: 50px"
-              @click.native.prevent="handleLogin"
-            >
+            <el-button type="primary" style="width: 100%; height: 50px" @click.native.prevent="handleLogin">
               <span>登 录</span>
             </el-button>
           </el-form-item>
@@ -50,8 +32,9 @@
 </template>
 
 <script>
+const Base64 = require('js-base64').Base64;
 export default {
-  data() {
+  data () {
     return {
       loginForm: {
         username: "",
@@ -60,43 +43,24 @@ export default {
       },
     };
   },
-  created() {
+  created () {
     // 按 Enter 键登录系统
     document.onkeydown = (e) => {
       e = window.event || e;
-      if (this.$route.path === "/" && e.keyCode === 13) this.handleLogin(); // submitLoginForm() 为登录函数
+      if (this.$route.path === "/login" && e.keyCode === 13) this.handleLogin(); // submitLoginForm() 为登录函数
     };
   },
 
-  mounted() {
-    this.getCookie();
+  mounted () {
+    if (this.$cookies.isKey('token') && localStorage.getItem('userInfo')) {
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      this.loginForm.password = Base64.decode(userInfo.password)
+      this.loginForm.username = userInfo.username
+    }
   },
   methods: {
-    // 设置cookie,登录成功之后进行调用 传入账号名，密码，和保存天数3个参数
-    setCookie(name, pwd) {
-      var exdate = new Date(); // 获取时间
-      exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * 15); // 保存的天数
-      // 字符串拼接cookie
-      window.document.cookie =
-        "userName" + "=" + name + ";path=/;expires=" + exdate.toGMTString();
-      window.document.cookie =
-        "userPwd" + "=" + pwd + ";path=/;expires=" + exdate.toGMTString();
-    },
-    // 读取cookie 将用户名和密码回显到input框中
-    getCookie() {
-      if (document.cookie.length > 0) {
-        var arr = document.cookie.split("; ");
-        for (var i = 0; i < arr.length; i++) {
-          var arr2 = arr[i].split("=");
-          if (arr2[0] === "username") {
-            this.loginForm.username = arr2[1];
-          } else if (arr2[0] === "userPwd") {
-            this.loginForm.password = arr2[1];
-          }
-        }
-      }
-    },
     handleLogin: function () {
+      let that = this
       if (!this.loginForm.username) {
         this.$message({
           message: "请输入账号",
@@ -109,71 +73,31 @@ export default {
         });
       } else {
         if (this.loginForm.username && this.loginForm.password) {
-          if (this.loginForm.autoLogin) {
-            this.setCookie(this.loginForm.username, this.loginForm.password);
-          } else {
-            this.setCookie("", "", -1);
-          }
           let parmas = this.loginForm;
           this.$api.LOGIN.Loginform(parmas)
             .then((res) => {
-              if (res.data.code === "200") {
-                window.sessionStorage.setItem("token", res.data.token);
+              console.log(res)
+              if (res.code === "200") {
+                if (this.loginForm.autoLogin) {
+                  this.$cookies.set("token", res.token, { expires: "15D" });
+                } else {
+                  this.$cookies.set("token", res.token);
+                }
                 this.$message({
                   showClose: true,
                   message: "登录成功",
                   type: "success",
                 });
-                this.$router.push({ path: "/screen" });
-              } else if (res.data.code !== "200") {
+                that.getUser()
+                this.$router.push({ path: "/" });
+              } else if (res.code !== "200") {
                 this.$message({
                   showClose: true,
-                  message: res.data.message,
+                  message: res.message,
                   type: "error",
                 });
               }
-              return res.data.token;
-            })
-            .then((res) => {
-              this.$api.LOGIN.menuList()
-                .then((res) => {
-                  if (res.data.code === 200) {
-                  }
-                })
-                .then(() => {
-                  this.$api.LOGIN.getUserInfo()
-                    .then((response) => {
-                      if (response.data.code === 200) {
-                        //用户ID存储
-                        window.sessionStorage.setItem(
-                          "userId",
-                          response.data.data.userId
-                        );
-                        //用户名存储
-                        window.sessionStorage.setItem(
-                          "username",
-                          response.data.data.username
-                        );
-                        //用户类型存储
-                        window.sessionStorage.setItem(
-                          "authority",
-                          response.data.data.authorities[0].authority
-                        );
-                      }
-                      return response;
-                    })
-                    .catch(() => {
-                      this.$message({
-                        showClose: true,
-                        message: "用户信息获取异常",
-                        type: "error",
-                      });
-                      return false;
-                    });
-                })
-                .catch(() => {
-                  return false;
-                });
+              return res.token;
             })
             .catch(() => {
               return false;
@@ -181,11 +105,25 @@ export default {
         }
       }
     },
+    async getUser () {
+      const { data } = await this.$api.LOGIN.getUserInfo()
+      console.log(data)
+      const userInfo = {
+        userId: data.userId,
+        username: data.username,
+        authority: data.authorities[0].authority,
+        password: Base64.encode(this.loginForm.password)
+      }
+      //存储用户信息
+      if (this.loginForm.autoLogin) {
+        window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      }
+    }
   },
 };
 </script>
 <style lang="scss" scoped>
->>> .el-input__inner {
+>>>.el-input__inner {
   margin-bottom: 10px;
 }
 
@@ -205,6 +143,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
   .loginBox {
     width: 65%;
     height: 700px;
@@ -214,6 +153,7 @@ export default {
     box-shadow: 0px 10px 10px 0px rgba(33, 38, 54, 0.19),
       0px -10px 10px 0px rgba(33, 38, 54, 0.19);
     border-radius: 5px;
+
     .loginLeft {
       padding-left: 50px;
       width: 60%;
@@ -222,6 +162,7 @@ export default {
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
+
       h3 {
         margin-top: 60px;
         white-space: nowrap;
@@ -231,6 +172,7 @@ export default {
         color: #ffffff;
         line-height: 80px;
       }
+
       p {
         white-space: nowrap;
         font-size: 16px;
@@ -246,6 +188,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+
       .loginformBox {
         width: 400px;
       }

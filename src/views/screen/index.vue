@@ -394,7 +394,7 @@ export default {
       this.$router.push({ path: "/realtimeMnitor/realtime" });
     },
     outLogin() {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/login" });
       this.$message.success("已退出账号");
     },
   },

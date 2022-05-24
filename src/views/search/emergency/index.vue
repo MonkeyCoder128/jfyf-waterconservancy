@@ -284,10 +284,10 @@ export default {
       this.tableData.currPage = 1;
       this.listLoading = true;
       this.$api.SAFE.InintData({}).then((res) => {
-        if (res.data.code == 200) {
-          this.tableData.list = res.data.result.data;
+        if (res.code == 200) {
+          this.tableData.list = res.result.data;
           this.listLoading = false;
-          this.tableData.totalCount = res.data.result.total;
+          this.tableData.totalCount = res.result.total;
         }
       });
     },
@@ -327,10 +327,10 @@ export default {
         }else{
           this.formData.status = String(this.formData.status);
         }
-        if(res.data.code == 200){
-          this.tableData.list = res.data.result.data;
+        if(res.code == 200){
+          this.tableData.list = res.result.data;
           this.listLoading = false;
-          this.tableData.totalCount = res.data.result.total;
+          this.tableData.totalCount = res.result.total;
         }
       });
     },

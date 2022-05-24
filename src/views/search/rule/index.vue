@@ -364,19 +364,19 @@ export default {
         currentPage: this.tableData.pagination.current,
         pageSize: this.tableData.pagination.size,
       }).then((res) => {
-        if (res.data.code == 200) {
-          console.log(res.data.result);
-          this.tableData.list = res.data.result.records;
-          this.tableData.pagination.current = res.data.result.current;
-          this.tableData.pagination.pages = res.data.result.pages;
-          this.tableData.pagination.size = res.data.result.size;
-          this.tableData.pagination.total = res.data.result.total;
+        if (res.code == 200) {
+          console.log(res.result);
+          this.tableData.list = res.result.records;
+          this.tableData.pagination.current = res.result.current;
+          this.tableData.pagination.pages = res.result.pages;
+          this.tableData.pagination.size = res.result.size;
+          this.tableData.pagination.total = res.result.total;
           this.listLoading = false;
         } else {
           this.$message({
             showClose: true,
             type: "error",
-            message: res.data.describe,
+            message: res.describe,
           });
         }
       });
@@ -395,14 +395,14 @@ export default {
       }
       this.formData.uploadDate = "";
       this.$api.SAFE.Regulations(this.formData).then((res) => {
-        if (res.data.code == 200) {
-          this.tableData.list = res.data.result.records;
+        if (res.code == 200) {
+          this.tableData.list = res.result.records;
           this.listLoading = false;
         } else {
           this.$message({
             showClose: true,
             type: "error",
-            message: res.data.describe,
+            message: res.describe,
           });
         }
       });
@@ -435,7 +435,7 @@ export default {
       })
         .then(() => {
           this.$api.SAFE.DeleteRule(arr).then((res) => {
-            if (res.data.code == 200) {
+            if (res.code == 200) {
               this.$message({
                 type: "success",
                 message: "删除成功!",
@@ -444,7 +444,7 @@ export default {
             } else {
               this.$message({
                 type: "error",
-                message: res.data.describe,
+                message: res.describe,
               });
             }
           });
@@ -542,7 +542,7 @@ export default {
     // 提交上传文件
     uploadFile() {
       this.$api.SAFE.InsertRule(this.finallRuleDate).then((res) => {
-        if (res.data.code == 200) {
+        if (res.code == 200) {
           this.finallRuleDate = [];
           this.$refs.upload.clearFiles();
           this.initData();

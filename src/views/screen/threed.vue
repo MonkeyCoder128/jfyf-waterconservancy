@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     huitui() {
-      this.$router.push({ path: "/screen" });
+      this.$router.push({ path: "/" });
     },
   },
 };

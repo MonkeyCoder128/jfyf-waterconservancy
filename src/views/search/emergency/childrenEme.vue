@@ -408,22 +408,22 @@ export default {
     // 根据id获取左侧信息回显
     Echo(){
       this.$api.SAFE.SelectReport({id:this.$route.params.id}).then(res=>{
-        if(res.data.code == 200){
-          this.formOne.reportUserName = res.data.result.reportUserName;
-          this.formOne.description = res.data.result.description;
-          this.formOne.descriptionImageList = res.data.result.descriptionImageList;
-          this.imgArr = res.data.result.descriptionImageList;
-          this.formOne.progress = String(res.data.result.progress);
-          this.formOne.remark = res.data.result.remark;
-          this.formOne.remarkImageList = res.data.result.remarkImageList;
-          this.formOne.exceptionType = String(res.data.result.exceptionType);
+        if(res.code == 200){
+          this.formOne.reportUserName = res.result.reportUserName;
+          this.formOne.description = res.result.description;
+          this.formOne.descriptionImageList = res.result.descriptionImageList;
+          this.imgArr = res.result.descriptionImageList;
+          this.formOne.progress = String(res.result.progress);
+          this.formOne.remark = res.result.remark;
+          this.formOne.remarkImageList = res.result.remarkImageList;
+          this.formOne.exceptionType = String(res.result.exceptionType);
         }
       }),
       // 根据id获取右侧信息回显
       this.$api.SAFE.InspectionId({inspectionId:this.$route.params.id}).then(res=>{
-        if(res.data.code == 200){
-          if(res.data.result.length > 0){
-            this.Xjresult = res.data.result;
+        if(res.code == 200){
+          if(res.result.length > 0){
+            this.Xjresult = res.result;
             for(let i in this.Xjresult){
               for(let c in this.Xjresult[i].reportRecordList){
                 for(let q in this.Xjresult[i].reportRecordList[c].imageList){
@@ -454,10 +454,10 @@ export default {
     onSubmit() {
       this.listLoading = true;
       this.$api.SAFE.ReportErr(this.formOne).then(res=>{
-        if(res.data.code == 200){
+        if(res.code == 200){
           this.$message({
             showClose: true,
-            message: res.data.describe,
+            message: res.describe,
             type: 'success'
           });
           this.listLoading = false;
@@ -467,7 +467,7 @@ export default {
         }else{
           this.$message({
             showClose: true,
-            message: res.data.describe,
+            message: res.describe,
             type: 'error'
           });
         }
