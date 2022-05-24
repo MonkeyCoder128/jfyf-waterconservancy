@@ -259,7 +259,6 @@ export default {
 /deep/.el-button--primary.is-plain {
   color: #1c48bf;
   background: #ffffff;
-  /* border-color: #a4b6e5; */
   border: 1px solid #319da4;
   color: #319da4;
 }

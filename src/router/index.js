@@ -19,6 +19,11 @@ const constantRoutes = [
     meta: { title: '条例展示', icon: 'user' }
   },
   {
+    path: '/remote',
+    component: () => import('@/views/remote/index'),
+    hidden: true
+  },
+  {
     path: '/screen',
     component: () => import('@/views/screen/index'),
     hidden: true
@@ -194,6 +199,13 @@ const constantRoutes = [
         hidden: true,
         component: () => import('@/views/system/userManage/index'),
         meta: { title: '用户管理', icon: 'user' }
+      },
+      {
+        path: '/system/ulog',
+        name: 'ulog',
+        hidden: true,
+        component: () => import('@/views/system/ulog/index'),
+        meta: { title: '操作日志', icon: 'user' }
       },
       {
         path: '/system/userInfo',

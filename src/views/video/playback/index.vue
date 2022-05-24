@@ -9,7 +9,7 @@
             </el-input>
             <el-tree class="filter-tree" :data="dataList" default-expand-all :filter-node-method="filterNode"
               highlight-current @node-click="handleNodeClick" ref="tree">
-              <span slot-scope="{node,data}">
+              <span slot-scope="{data}">
                 <span>
                   <i :class="data.icon" class="mr5"></i>{{ data.label }}
                 </span>

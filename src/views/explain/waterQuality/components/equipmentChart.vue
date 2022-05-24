@@ -6,10 +6,10 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       colorList: ["#ea951c", "#3f85ff", "#f3b63e", "#37abc1", "#32dfdf"],
-    }
+    };
   },
   mounted() {
     this.myecharts();
@@ -19,9 +19,7 @@ export default {
   },
   methods: {
     myecharts() {
-      var equipmentChart = this.$echarts.init(
-        this.$refs.equipmentChart
-      );
+      var equipmentChart = this.$echarts.init(this.$refs.equipmentChart);
       let colors = ["#1289ba", "#148f97", "#e7b20a", "#115cb9", "#eb9a26"];
       var dataCake = [
         { name: "二氧化碳", value: "43.67%" },
@@ -83,21 +81,10 @@ export default {
             },
           },
           formatter: function (param) {
-            // let target, percentage;
-            // for (let i = 0; i < dataCake.length; i++) {
-            //   if (dataCake[i].name === name) {
-            //     target = dataCake[i].value;
-            //     percentage = dataCake[i].percentage;
-            //   }
-            // }
-            // let arr = [name + " ", " " + percentage];
-            // return arr.join(" ");
             let index = dataCake.findIndex((v) => v.name == param);
             let str = `  {white|${param}}   {t${index}|${
               dataCake[index].value + "%"
             }}`;
-
-            console.log(param);
             return str;
           },
         },
@@ -175,7 +162,7 @@ export default {
 };
 </script>
 <style  lang="scss" scoped>
-.box{
+.box {
   width: 100% !important;
   height: 100%;
   #equipmentChart {
