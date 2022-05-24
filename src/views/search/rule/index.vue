@@ -340,7 +340,6 @@ export default {
     wordPreview(url) {
       var xurl = "https://view.xdocin.com/xdoc?_xdoc=";
       xurl += encodeURIComponent(url);
-      console.log(xurl);
       var ops = {
         _pdf: true, //word/excel文档尝试以pdf方式显示，默认false
         // "_watermark": "XDOC文档预览", //水印文本，显示水印
@@ -364,19 +363,18 @@ export default {
         currentPage: this.tableData.pagination.current,
         pageSize: this.tableData.pagination.size,
       }).then((res) => {
-        if (res.data.code == 200) {
-          console.log(res.data.result);
-          this.tableData.list = res.data.result.records;
-          this.tableData.pagination.current = res.data.result.current;
-          this.tableData.pagination.pages = res.data.result.pages;
-          this.tableData.pagination.size = res.data.result.size;
-          this.tableData.pagination.total = res.data.result.total;
+        if (res.code == 200) {
+          this.tableData.list = res.result.records;
+          this.tableData.pagination.current = res.result.current;
+          this.tableData.pagination.pages = res.result.pages;
+          this.tableData.pagination.size = res.result.size;
+          this.tableData.pagination.total = res.result.total;
           this.listLoading = false;
         } else {
           this.$message({
             showClose: true,
             type: "error",
-            message: res.data.describe,
+            message: res.describe,
           });
         }
       });
@@ -395,26 +393,24 @@ export default {
       }
       this.formData.uploadDate = "";
       this.$api.SAFE.Regulations(this.formData).then((res) => {
-        if (res.data.code == 200) {
-          this.tableData.list = res.data.result.records;
+        if (res.code == 200) {
+          this.tableData.list = res.result.records;
           this.listLoading = false;
         } else {
           this.$message({
             showClose: true,
             type: "error",
-            message: res.data.describe,
+            message: res.describe,
           });
         }
       });
     },
     // 改变页数
     changeCurrent(val) {
-      console.log(val);
       this.tableData.pagination.current = val;
       this.initData();
     },
     handleSizeChange(val) {
-      console.log(val);
       this.tableData.pagination.size = val;
       this.initData();
     },
@@ -435,7 +431,7 @@ export default {
       })
         .then(() => {
           this.$api.SAFE.DeleteRule(arr).then((res) => {
-            if (res.data.code == 200) {
+            if (res.code == 200) {
               this.$message({
                 type: "success",
                 message: "删除成功!",
@@ -444,7 +440,7 @@ export default {
             } else {
               this.$message({
                 type: "error",
-                message: res.data.describe,
+                message: res.describe,
               });
             }
           });
@@ -477,7 +473,6 @@ export default {
     },
     // 查看数据
     check(row) {
-      console.log(row.filePreviewPath);
       // 判断类型是否为word
       if(row.fileSuffix == ".docx"){
         // 跳转到新页面预览word
@@ -494,7 +489,6 @@ export default {
     },
     // 上传文件
     beforeAvatarUpload(file) {
-      // console.log(file);
       const isJPG =
         file.type === "application/pdf" || "application/vnd.ms-excel" || "docx";
       const isLt2M = file.size / 1024 / 1024 < 9;
@@ -542,7 +536,7 @@ export default {
     // 提交上传文件
     uploadFile() {
       this.$api.SAFE.InsertRule(this.finallRuleDate).then((res) => {
-        if (res.data.code == 200) {
+        if (res.code == 200) {
           this.finallRuleDate = [];
           this.$refs.upload.clearFiles();
           this.initData();
@@ -561,8 +555,6 @@ export default {
     },
     // 上传文件的列表控制
     handleChange(file, fileList) {
-      // console.log(file);
-      // console.log(fileList);
     },
     // 删除全选的文件
     allSearch() {

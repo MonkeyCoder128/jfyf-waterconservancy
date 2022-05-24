@@ -313,8 +313,6 @@ export default {
   created() {},
   mounted() {
     this.nowTimes();
-    console.log("111");
-    console.log(this.$refs.box.offsetHeight);
   },
   methods: {
     tothreed() {
@@ -394,7 +392,7 @@ export default {
       this.$router.push({ path: "/realtimeMnitor/realtime" });
     },
     outLogin() {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/login" });
       this.$message.success("已退出账号");
     },
   },

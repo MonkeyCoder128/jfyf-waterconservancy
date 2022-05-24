@@ -142,9 +142,7 @@ export default {
   },
   methods: {
     // 预警查看
-    seeAnalyse(attr) {
-      console.log(attr);
-    },
+    seeAnalyse(attr) {},
   },
 };
 </script>

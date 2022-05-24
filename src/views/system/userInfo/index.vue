@@ -106,14 +106,13 @@ export default {
       this.$router.push({
         path: "/system/userManage",
       });
-      console.log("%c没有值：", "color:red;font-size:18px;font-weight:bold;");
     },
     submitForm() {
       this.$refs["user"].validate((valid) => {
         if (valid) {
           if (this.$route.query.type === "add") {
             this.$api.USER.addinsertUser(this.user).then((res) => {
-              if (res.data.code === 200) {
+              if (res.code === 200) {
                 this.$message({
                   message: "用户新增成功！",
                   type: "success",
@@ -126,7 +125,7 @@ export default {
           } else if (this.$route.query.type === "edit") {
             this.user.userId = this.$route.query.id;
             this.$api.USER.updateUserInfo(this.user).then((res) => {
-              if (res.data.code === 200) {
+              if (res.code === 200) {
                 this.$message({
                   message: "修改成功！",
                   type: "success",
@@ -213,17 +212,17 @@ export default {
         ],
       };
       this.$api.USER.viewUserInfo(this.$route.query.id).then((res) => {
-        if (res.data.code === 200) {
-          this.user = res.data.result;
+        if (res.code === 200) {
+          this.user = res.result;
           this.user.password = "";
-          this.user.roleId = Number(res.data.result.roleId);
+          this.user.roleId = Number(res.result.roleId);
         }
       });
       this.formDisable = true;
     }
     this.$api.ROLE.roleList(this.queryParams).then((res) => {
-      if (res.data.code === 200) {
-        this.optionsRole = res.data.result.data;
+      if (res.code === 200) {
+        this.optionsRole = res.result.data;
       }
     });
   },

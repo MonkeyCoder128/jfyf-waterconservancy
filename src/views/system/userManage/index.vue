@@ -102,9 +102,9 @@ export default {
     /** 获取用户列表 */
     getUserList() {
       this.$api.USER.userList(this.queryParams).then((res) => {
-        if (res.data.code === 200) {
-          this.userData = res.data.result.data;
-          this.total = res.data.result.total;
+        if (res.code === 200) {
+          this.userData = res.result.data;
+          this.total = res.result.total;
         }
       });
     },
@@ -140,7 +140,7 @@ export default {
       )
         .then(() => {
           this.$api.USER.deleteUserGet(row.userId).then((res) => {
-            if (res.data.code === 200) {
+            if (res.code === 200) {
               this.$message({
                 message: "已删除！",
                 type: "success",
@@ -169,7 +169,7 @@ export default {
       })
         .then(() => {
           this.$api.USER.updateUserState(userState).then((res) => {
-            if (res.data.code === 200) {
+            if (res.code === 200) {
               this.$message({
                 message: "已启用！",
                 type: "success",
@@ -198,7 +198,7 @@ export default {
       })
         .then(() => {
           this.$api.USER.updateUserState(userState).then((res) => {
-            if (res.data.code === 200) {
+            if (res.code === 200) {
               this.$message({
                 message: "已停用！",
                 type: "success",

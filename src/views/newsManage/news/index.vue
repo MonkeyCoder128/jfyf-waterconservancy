@@ -99,8 +99,8 @@ export default {
   created() {
     this.getNewsList();
     this.$api.NEWS.newsType().then((res) => {
-      if (res.data.code === 200) {
-        this.optionsType = res.data.result;
+      if (res.code === 200) {
+        this.optionsType = res.result;
       }
     });
   },
@@ -143,9 +143,9 @@ export default {
     /** 获取消息列表 */
     getNewsList() {
       this.$api.NEWS.newsList(this.queryParams).then((res) => {
-        if (res.data.code === 200) {
-          this.newsData = res.data.result.records;
-          this.total = res.data.result.total;
+        if (res.code === 200) {
+          this.newsData = res.result.records;
+          this.total = res.result.total;
         }
       });
     },

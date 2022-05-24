@@ -292,7 +292,8 @@ export default {
   },
   created() {
     // 获取用户类型
-    this.userType = window.sessionStorage.getItem("authority");
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    this.userType = userInfo.authority;
     this.init();
   },
   methods: {
@@ -301,16 +302,15 @@ export default {
       this.listLoading = true;
       this.tableData.currPage = 1;
       this.$api.SAFE.InintData({ status: [1, 3] }).then((res) => {
-        if (res.data.code == 200) {
-          console.log(res.data.result);
-          this.tableData.list = res.data.result.data;
+        if (res.code == 200) {
+          this.tableData.list = res.result.data;
           this.listLoading = false;
-          this.tableData.totalCount = res.data.result.total;
+          this.tableData.totalCount = res.result.total;
         } else {
           this.$message({
             showClose: true,
             type: "error",
-            message: res.data.msg,
+            message: res.msg,
           });
         }
       });
@@ -329,15 +329,15 @@ export default {
         this.formData.endDate = this.formData.reportDate[1];
       }
       this.$api.SAFE.InintData(this.formData).then((res) => {
-        if (res.data.code == 200) {
-          this.tableData.list = res.data.result.data;
+        if (res.code == 200) {
+          this.tableData.list = res.result.data;
           this.listLoading = false;
-          this.tableData.totalCount = res.data.result.total;
+          this.tableData.totalCount = res.result.total;
         } else {
           this.$message({
             showClose: true,
             type: "error",
-            message: res.data.msg,
+            message: res.msg,
           });
         }
       });
@@ -361,7 +361,7 @@ export default {
         .then(() => {
           this.$api.SAFE.ReportErr({ id, status: 2, progress: 4 }).then(
             (res) => {
-              if (res.data.code == 200) {
+              if (res.code == 200) {
                 this.$message({
                   showClose: true,
                   type: "success",
@@ -410,7 +410,6 @@ export default {
   //   'formData.reportDate'(oldval,newval){
   //     this.formData.startDate = oldval[0];
   //     this.formData.endDate = oldval[1];
-  //     console.log(this.formData.startDate);
   //   }
   // }
 };

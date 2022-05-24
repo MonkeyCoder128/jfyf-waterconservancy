@@ -284,10 +284,10 @@ export default {
       this.tableData.currPage = 1;
       this.listLoading = true;
       this.$api.SAFE.InintData({}).then((res) => {
-        if (res.data.code == 200) {
-          this.tableData.list = res.data.result.data;
+        if (res.code == 200) {
+          this.tableData.list = res.result.data;
           this.listLoading = false;
-          this.tableData.totalCount = res.data.result.total;
+          this.tableData.totalCount = res.result.total;
         }
       });
     },
@@ -297,12 +297,9 @@ export default {
       this.tableData.currPage = 1;
       this.formData.startDate = "";
       this.formData.endDate = "";
-      // console.log(typeof this.formData.status);
-      console.log(this.formData.status);
       if(this.formData.status == ''){
         this.formData.status = [];
       } else {
-        // console.log(typeof this.formData.status == 'string');
         // 判断 this.formData.status 状态，如果为string，转成arr；
         if (typeof this.formData.status == "string") {
           let arr = [];
@@ -327,10 +324,10 @@ export default {
         }else{
           this.formData.status = String(this.formData.status);
         }
-        if(res.data.code == 200){
-          this.tableData.list = res.data.result.data;
+        if(res.code == 200){
+          this.tableData.list = res.result.data;
           this.listLoading = false;
-          this.tableData.totalCount = res.data.result.total;
+          this.tableData.totalCount = res.result.total;
         }
       });
     },
@@ -345,7 +342,6 @@ export default {
     },
     // 解除异常
     deletedata(id) {
-      // console.log('解除异常' + id);
     },
     // 查看异常情况
     check(row) {
