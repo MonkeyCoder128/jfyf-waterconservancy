@@ -45,6 +45,13 @@ export default {
       //
 
       var option = {
+        grid: {
+          left: "18",
+          right: "5",
+          bottom: "23",
+          top: "32",
+          containLabel: true,
+        },
         series: [
           {
             animation: false,
