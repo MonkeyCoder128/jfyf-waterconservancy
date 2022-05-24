@@ -14,19 +14,17 @@
               ref="ruleForm"
             >
               <el-form-item label="时间">
-                <div class="block">
-                  <span class="demonstration"></span>
-                  <el-date-picker
-                    v-model="formData.reportDate"
-                    type="daterange"
-                    style="width: 200px"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    :default-time="['00:00:00', '23:59:59']"
-                  >
-                  </el-date-picker>
-                </div>
+                <el-date-picker
+                  v-model="formData.reportDate"
+                  type="daterange"
+                  style="width: 200px"
+                  start-placeholder="开始时间"
+                  end-placeholder="结束时间"
+                  size="mini"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  :default-time="['00:00:00', '23:59:59']"
+                >
+                </el-date-picker>
               </el-form-item>
               <el-form-item label="异常情况" class="changeInputClass">
                 <el-select
@@ -297,13 +295,13 @@ export default {
       this.tableData.currPage = 1;
       this.formData.startDate = "";
       this.formData.endDate = "";
-      if(this.formData.status == ''){
+      if (this.formData.status == "") {
         this.formData.status = [];
       } else {
         // 判断 this.formData.status 状态，如果为string，转成arr；
         if (typeof this.formData.status == "string") {
           let arr = [];
-          if(this.formData.status == 1){
+          if (this.formData.status == 1) {
             arr.push(3);
           }
           arr.push(Number(this.formData.status));
@@ -319,12 +317,12 @@ export default {
       }
       this.$api.SAFE.InintData(this.formData).then((res) => {
         // 接口请求完成之后把 this.formData.status 改正字符串格式
-        if(this.formData.status.length == 2){
-          this.formData.status = '1';
-        }else{
+        if (this.formData.status.length == 2) {
+          this.formData.status = "1";
+        } else {
           this.formData.status = String(this.formData.status);
         }
-        if(res.code == 200){
+        if (res.code == 200) {
           this.tableData.list = res.result.data;
           this.listLoading = false;
           this.tableData.totalCount = res.result.total;
@@ -341,8 +339,7 @@ export default {
       this.init();
     },
     // 解除异常
-    deletedata(id) {
-    },
+    deletedata(id) {},
     // 查看异常情况
     check(row) {
       this.$router.push({

@@ -228,7 +228,6 @@
           <el-dialog width="60%" title="文件预览" :visible.sync="Visible">
             <div v-html="wordText"></div>
           </el-dialog>
-          <!-- <div ref="file"></div> -->
         </div>
       </el-card>
     </el-col>
@@ -236,8 +235,6 @@
 </template>
 
 <script>
-import axios from "axios";
-let docx = require("docx-preview");
 
 import mammoth from "mammoth";
 export default {
@@ -284,16 +281,6 @@ export default {
           total: null,
         },
       },
-      // 新上传的表格数据
-      // newRuleDate:{
-      //   fileId: "",
-      //   filePreviewPath: "",
-      //   fileSavePath: "",
-      //   fileSize: "",
-      //   fileSuffix: "",
-      //   ruleName: "",
-      //   uploadDate: ""
-      // },
       newRuleDate: [],
       // 最终生成的上传数据
       finallRuleDate: [],
