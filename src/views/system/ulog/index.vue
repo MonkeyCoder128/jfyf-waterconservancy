@@ -34,7 +34,7 @@
       </el-table>
       <el-pagination
         background
-        style="margin-top: 25px; text-align: right"
+        style="margin-top: 40px; text-align: right"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryParams.page"
@@ -93,9 +93,9 @@ export default {
     /** 获取操作日志列表 */
     getUlogList() {
       this.$api.ULOG.ulogData(this.queryParams).then((res) => {
-        if (res.data.code === 200) {
-          this.ulogData = res.data.result.data;
-          this.total = res.data.result.total;
+        if (res.code === 200) {
+          this.ulogData = res.result.data;
+          this.total = res.result.total;
         }
       });
     },
