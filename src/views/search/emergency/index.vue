@@ -323,13 +323,14 @@ export default {
       this.$api.SAFE.InintData(this.formData).then((res) => {
         // 接口请求完成之后把 this.formData.status 改正字符串格式
         if(this.formData.status.length == 2){
-          this.formData.status = '未解除';
+          this.formData.status = '1';
         }else{
           this.formData.status = String(this.formData.status);
         }
         if(res.data.code == 200){
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
+          this.tableData.totalCount = res.data.result.total;
         }
       });
     },
