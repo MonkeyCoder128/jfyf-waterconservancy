@@ -302,6 +302,7 @@ export default {
       this.tableData.currPage = 1;
       this.$api.SAFE.InintData({ status: [1, 3] }).then((res) => {
         if (res.data.code == 200) {
+          console.log(res.data.result);
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
           this.tableData.totalCount = res.data.result.total;
@@ -331,6 +332,7 @@ export default {
         if (res.data.code == 200) {
           this.tableData.list = res.data.result.data;
           this.listLoading = false;
+          this.tableData.totalCount = res.data.result.total;
         } else {
           this.$message({
             showClose: true,

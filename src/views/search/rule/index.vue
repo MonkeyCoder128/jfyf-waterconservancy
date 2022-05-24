@@ -365,6 +365,7 @@ export default {
         pageSize: this.tableData.pagination.size,
       }).then((res) => {
         if (res.data.code == 200) {
+          console.log(res.data.result);
           this.tableData.list = res.data.result.records;
           this.tableData.pagination.current = res.data.result.current;
           this.tableData.pagination.pages = res.data.result.pages;

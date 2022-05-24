@@ -52,4 +52,9 @@ export default {
       }
     }
   }
+  @media screen and (min-width: 2000px) and (max-width: 3840px) {
+    .box{
+      min-height: 1300px;
+    }
+  }
 </style>
