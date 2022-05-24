@@ -61,7 +61,7 @@
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
-                  <el-col :span="19">水质监测</el-col>
+                  <el-col :span="19">降雨量</el-col>
                   <el-col :span="1" class="icon_title2">
                     <img src="../../assets/image/dp_title2.png" alt=""
                   /></el-col>
