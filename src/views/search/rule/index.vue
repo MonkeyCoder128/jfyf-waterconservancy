@@ -235,7 +235,6 @@
 </template>
 
 <script>
-
 import mammoth from "mammoth";
 export default {
   name: "",

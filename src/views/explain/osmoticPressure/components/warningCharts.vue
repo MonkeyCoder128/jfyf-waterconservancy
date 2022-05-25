@@ -84,9 +84,9 @@ export default {
               show: false,
             },
             data: [
-              { value: 800, name: "A设备" },
-              { value: 300, name: "B设备" },
-              { value: 580, name: "C设备" },
+              { value: 630, name: "A设备" },
+              { value: 370, name: "B设备" },
+              { value: 480, name: "C设备" },
             ],
             itemStyle: {
               normal: {

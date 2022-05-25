@@ -5,15 +5,15 @@
       <div class="echartsBoxContent">
         <div class="echartsBox">
           <span>设备:流量计A</span>
-          <equipmentChart></equipmentChart>
+          <equipmentChart :parentData="this.childData.equipmentChartA"></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:流量计B</span>
-          <equipmentChart></equipmentChart>
+          <equipmentChart :parentData="this.childData.equipmentChartB"></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:流量计C</span>
-          <equipmentChart></equipmentChart>
+          <equipmentChart :parentData="this.childData.equipmentChartC"></equipmentChart>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >20次</span
+              >23次</span
             >
           </div>
         </div>
@@ -43,21 +43,21 @@
                   <span class="Icon"></span>
                   <span>A设备</span>
                 </div>
-                <span class="percent">53%</span>
+                <span class="percent">23%</span>
               </li>
               <li>
                 <div class="iconLable">
                   <span class="Icon"></span>
                   <span>B设备</span>
                 </div>
-                <span class="percent">30%</span>
+                <span class="percent">27%</span>
               </li>
               <li>
                 <div class="iconLable">
                   <span class="Icon"></span>
                   <span>C设备</span>
                 </div>
-                <span class="percent">17%</span>
+                <span class="percent">50%</span>
               </li>
             </ul>
           </div>
@@ -91,7 +91,7 @@
       <div class="cardBottom">
         <span class="cardTitle">预警统计</span>
         <div class="brokenLineCharts">
-          <brokenLineCharts />
+          <brokenLineCharts :parentData="this.childData.brokenLineChart" />
         </div>
       </div>
     </div>
@@ -110,30 +110,86 @@ export default {
   },
   data() {
     return {
+      // 子组件数据
+      childData:{
+        equipmentChartA:{
+          dataList:[
+            { value: 100, name: "二氧化碳" },
+            { value: 205, name: "氢含量" },
+            { value: 380, name: "氧含量" },
+            { value: 235, name: "氮含量" },
+            { value: 200, name: "氦含量" },
+          ],
+          dataCake:[
+            { name: "二氧化碳", value: "43.67%" },
+            { name: "氢含量", value: "29.26%" },
+            { name: "氧含量", value: "27.07%" },
+            { name: "氮含量", value: "29.26%" },
+            { name: "氦含量", value: "27.07%" },
+          ]
+        },
+        equipmentChartB:{
+          dataList:[
+            { value: 150, name: "二氧化碳" },
+            { value: 305, name: "氢含量" },
+            { value: 400, name: "氧含量" },
+            { value: 135, name: "氮含量" },
+            { value: 210, name: "氦含量" },
+          ],
+          dataCake:[
+            { name: "二氧化碳", value: "20.67%" },
+            { name: "氢含量", value: "27.26%" },
+            { name: "氧含量", value: "30.07%" },
+            { name: "氮含量", value: "25.26%" },
+            { name: "氦含量", value: "21.07%" },
+          ]
+        },
+        equipmentChartC:{
+          dataList:[
+            { value: 130, name: "二氧化碳" },
+            { value: 280, name: "氢含量" },
+            { value: 350, name: "氧含量" },
+            { value: 250, name: "氮含量" },
+            { value: 195, name: "氦含量" },
+          ],
+          dataCake:[
+            { name: "二氧化碳", value: "19.88%" },
+            { name: "氢含量", value: "29.56%" },
+            { name: "氧含量", value: "37.46%" },
+            { name: "氮含量", value: "28.88%" },
+            { name: "氦含量", value: "25.43%" },
+          ]
+        },
+        brokenLineChart:{
+          LineOne:[333, 300, 280, 100, 109, 37, 105, 160],
+          LineTwo:[100, 138, 350, 173, 180, 150, 180, 230],
+          LineThree:[233, 233, 200, 180, 199, 233, 210, 180],
+        }
+      },
       tableData: [
         {
-          date: "2016-05-02",
-          name: "10",
+          date: "渭南",
+          name: "30",
           type: "0",
         },
         {
-          date: "2016-05-02",
-          name: "20",
+          date: "西安",
+          name: "36",
           type: "1",
         },
         {
-          date: "2016-05-02",
-          name: "15",
+          date: "宝鸡",
+          name: "27",
           type: "1",
         },
         {
-          date: "2016-05-02",
-          name: "200",
+          date: "咸阳",
+          name: "19",
           type: "0",
         },
         {
-          date: "2016-05-02",
-          name: "180",
+          date: "汉中",
+          name: "22",
           type: "0",
         },
       ],
