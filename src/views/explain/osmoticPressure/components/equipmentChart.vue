@@ -5,11 +5,14 @@
 </template>
 <script>
   export default {
+    props:{
+      parentData:{
+        type:String,
+        default:""
+      }
+    },
     mounted() {
       this.getLoadEcharts();
-      // window.addEventListener("resize", function () {
-      //   getLoadEcharts.resize();
-      // });
     },
     methods: {
       // 获取echarts
@@ -241,7 +244,7 @@
               },
               data: [
                 {
-                  value: 60,
+                  value: this.parentData,
                   name: "库压渗压Mpa",
                 },
               ],

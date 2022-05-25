@@ -5,11 +5,22 @@
 </template>
 <script>
   export default {
+    data() {
+      return {
+        echartsData:''
+      }
+    },
+    props:{
+      parentData:{
+        type:String,
+        default:""
+      }
+    },
+    created() {
+      
+    },
     mounted() {
       this.getLoadEcharts();
-      // window.addEventListener("resize", function () {
-      //   getLoadEcharts.resize();
-      // });
     },
     methods: {
       // 获取echarts
@@ -279,7 +290,7 @@
               },
               data: [
                 {
-                  value: 80,
+                  value: this.parentData,
                   name: "水位mm",
                 },
               ],

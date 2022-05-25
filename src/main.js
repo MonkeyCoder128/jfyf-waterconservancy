@@ -14,6 +14,8 @@ import './assets/shu/iconfont.css'
 import VueCookies from 'vue-cookies'
 import Base64 from 'js-base64';
 
+// require('./mock'); //引入mock数据
+
 import api from '@/api'
 Vue.prototype.$api = api;
 Vue.use(ElementUI);

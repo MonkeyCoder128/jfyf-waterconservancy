@@ -11,23 +11,20 @@ export default {
       colorList: ["#ea951c", "#3f85ff", "#f3b63e", "#37abc1", "#32dfdf"],
     };
   },
+  props:{
+    parentData:{
+      type:Object,
+      default:""
+    }
+  },
   mounted() {
     this.myecharts();
-    // window.addEventListener("resize", function () {
-    //   myecharts.resize();
-    // });
   },
   methods: {
     myecharts() {
       var equipmentChart = this.$echarts.init(this.$refs.equipmentChart);
       let colors = ["#1289ba", "#148f97", "#e7b20a", "#115cb9", "#eb9a26"];
-      var dataCake = [
-        { name: "二氧化碳", value: "43.67%" },
-        { name: "氢含量", value: "29.26%" },
-        { name: "氧含量", value: "27.07%" },
-        { name: "氮含量", value: "29.26%" },
-        { name: "氦含量", value: "27.07%" },
-      ];
+      var dataCake = this.parentData.dataCake;
       var option = {
         tooltip: {
           trigger: "item",
@@ -146,13 +143,7 @@ export default {
                 },
               },
             },
-            data: [
-              { value: 500, name: "二氧化碳" },
-              { value: 335, name: "氢含量" },
-              { value: 310, name: "氧含量" },
-              { value: 335, name: "氮含量" },
-              { value: 310, name: "氦含量" },
-            ],
+            data: this.parentData.dataList,
           },
         ],
       };

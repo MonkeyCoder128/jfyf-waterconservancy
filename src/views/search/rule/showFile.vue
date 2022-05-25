@@ -16,6 +16,7 @@ export default {
   methods:{
     // 预览 word 文件专属
     getWordText(url) {
+      console.log(123);
       const xhr = new XMLHttpRequest();
       xhr.open("get", url, true);
       xhr.responseType = "arraybuffer";

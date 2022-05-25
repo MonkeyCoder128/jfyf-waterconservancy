@@ -5,15 +5,22 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   mounted() {
     this.myecharts();
+    //通过ajax访问url，由于我们这里配置了mock方式，所以相当于是mock返回给我们模拟的后端接口返回数据
+    // axios.get("/explain/waterStage")
+    // .then(function (res) {
+    //   console.log(res);
+    // })
+    // .catch(function (err) {
+    //   console.log(err);
+    // });
   },
   methods: {
     myecharts() {
-      var warningCharts = this.$echarts.init(
-        this.$refs.warningCharts
-      );
+      var warningCharts = this.$echarts.init(this.$refs.warningCharts);
       var option = {
         // tooltip: {
         //   trigger: "item",
@@ -84,7 +91,7 @@ export default {
               show: false,
             },
             data: [
-              { value: 800, name: "A设备" },
+              { value: 600, name: "A设备" },
               { value: 300, name: "B设备" },
               { value: 580, name: "C设备" },
             ],
@@ -109,11 +116,11 @@ export default {
 };
 </script>
 <style  lang="scss" scoped>
-.box{
+.box {
   width: 100% !important;
   height: 100%;
 }
-#warningCharts{
+#warningCharts {
   width: 100%;
   height: 100%;
   margin: 0 auto;

@@ -5,11 +5,14 @@
 </template>
 <script>
   export default {
+    props:{
+      parentData:{
+        type:Object,
+        default:""
+      }
+    },
     mounted() {
       this.myCharts();
-      // window.addEventListener("resize", function () {
-      //   myCharts.resize();
-      // });
     },
     methods: {
       myCharts() {
@@ -156,7 +159,7 @@
                   shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
                 },
               },
-              data: [333, 300, 280, 100, 109, 37, 105, 160],
+              data: this.parentData.LineOne,
             },
             {
               name: "B设备",
@@ -206,7 +209,7 @@
                   shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
                 },
               },
-              data: [100, 138, 350, 173, 180, 150, 180, 230],
+              data: this.parentData.LineTwo,
             },
             {
               name: "C设备",
@@ -256,7 +259,7 @@
                   shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
                 },
               },
-              data: [233, 233, 200, 180, 199, 233, 210, 180],
+              data: this.parentData.LineThree,
             },
           ],
         };
