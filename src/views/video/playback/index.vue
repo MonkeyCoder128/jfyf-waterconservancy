@@ -70,21 +70,19 @@
         </el-col>
       </div>
     </el-col>
-    <el-dialog title="" :visible.sync="dialogVisible" width="70%" :close-on-click-modal="false"
+    <el-dialog title="" :visible.sync="dialogVisible" width="70%" height="70%" :close-on-click-modal="false"
       :close-on-press-escape="false">
       <video id="video" class="h100 video-js vjs-default-skin vjs-big-play-centered" muted controls>
-        <source :src="nowPlayVideoUrl" type="video/mp4" />
+        <source :src="nowPlayVideoUrl" />
       </video>
     </el-dialog>
   </el-row>
 </template>
 <script>
-import Videojs from "video.js";
-import "videojs-contrib-hls";
 export default {
   data () {
     return {
-      nowPlayVideoUrl: "http://112.125.88.230/file/video/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4",
+      nowPlayVideoUrl: "http://112.125.88.230/file/video/%E7%9B%B4%E6%92%AD%E5%9B%9E%E6%94%BE.mp4",
       dialogVisible: false,// 查看视频
       p_video: '',
       filterText: "",
@@ -100,32 +98,7 @@ export default {
             date: '2022-04-12  12:00:09',
             videoTime: '24h',
             videoSize: '10M'
-          },
-          {
-            imgData: require('../../../assets/image/huifang.jpg'),
-            date: '2012-05-02  12:00:09',
-            videoTime: '424h',
-            videoSize: '10M'
-          },
-          {
-            imgData: require('../../../assets/image/huifang.jpg'),
-            date: '2011-05-02  12:00:09',
-            videoTime: '324h',
-            videoSize: '10M'
-          },
-          {
-            imgData: require('../../../assets/image/huifang.jpg'),
-            date: '2011-04-02  12:00:09',
-            videoTime: '124h',
-            videoSize: '10M'
-          },
-          {
-            imgData: require('../../../assets/image/huifang.jpg'),
-            date: '2016-05-02  12:00:09',
-            videoTime: '242h',
-            videoSize: '103M'
-          },
-
+          }
         ],
         totalCount: 0,
         pageSize: 10,
@@ -248,6 +221,7 @@ export default {
 
 /deep/.el-dialog__body {
   padding: 0;
+  height: 70vh;
 }
 .el-col-6{
   width: 18%;

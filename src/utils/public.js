@@ -47,3 +47,28 @@ export const Throttle = (fn, t) => {
     }
 }
 
+//设置cookie
+export const setCookie = (c_name, c_pwd, exdays) => {
+    var exdate = new Date(); //获取时间
+    exdate.setDate(exdate.getDate() + exdays); //保存的天数
+    //字符串拼接cookie
+    document.cookie = c_name + "=" + c_pwd + ((exdays == null) ? "" : ";expires=" + exdate.toGMTString())
+}
+
+//读取cookie
+export const getCookie = (name) => {
+    var arr,reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if(arr = document.cookie.match(reg))
+    return (arr[2]);
+    else
+    return null
+}
+//清除cookie
+export const clearCookie = (name) => {
+    var exp  = new Date()
+    exp.setTime(exp.getTime() - 1);
+    var cval = gatCookie(name);
+    if(cval != null)
+    document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+
+}

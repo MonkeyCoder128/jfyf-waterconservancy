@@ -9,37 +9,19 @@
         <el-form ref="loginForm" :model="loginForm" class="loginformBox">
           <span class="title">您好,欢迎登录！</span>
           <el-form-item prop="username" label="账号">
-            <el-input
-              v-model.trim="loginForm.username"
-              type="text"
-              auto-complete="off"
-              prefix-icon="el-icon-user"
-              placeholder="请输入账号"
-            >
+            <el-input v-model.trim="loginForm.username" type="text" auto-complete="off" prefix-icon="el-icon-user"
+              placeholder="请输入账号">
             </el-input>
           </el-form-item>
           <el-form-item prop="password" label="密码">
-            <el-input
-              v-model.trim="loginForm.password"
-              type="password"
-              auto-complete="off"
-              placeholder="密码"
-              prefix-icon="el-icon-lock"
-              @keyup.enter.native="handleLogin"
-            >
+            <el-input v-model.trim="loginForm.password" type="password" auto-complete="off" placeholder="密码"
+              prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin">
             </el-input>
           </el-form-item>
-          <el-checkbox
-            v-model="loginForm.autoLogin"
-            style="margin: 0px 0px 25px 2px; float: left"
-            >15天内自动登录
+          <el-checkbox v-model="loginForm.autoLogin" style="margin: 0px 0px 25px 2px; float: left">15天内自动登录
           </el-checkbox>
           <el-form-item style="width: 100%">
-            <el-button
-              type="primary"
-              style="width: 100%; height: 50px"
-              @click.native.prevent="handleLogin"
-            >
+            <el-button type="primary" style="width: 100%; height: 50px" @click.native.prevent="handleLogin">
               <span>登 录</span>
             </el-button>
           </el-form-item>
@@ -51,8 +33,9 @@
 
 <script>
 const Base64 = require("js-base64").Base64;
+const $utils = require("../../utils/public.js")
 export default {
-  data() {
+  data () {
     return {
       loginForm: {
         username: "",
@@ -61,7 +44,7 @@ export default {
       },
     };
   },
-  created() {
+  created () {
     // 按 Enter 键登录系统
     document.onkeydown = (e) => {
       e = window.event || e;
@@ -69,7 +52,7 @@ export default {
     };
   },
 
-  mounted() {
+  mounted () {
     if (this.$cookies.isKey("token") && localStorage.getItem("userInfo")) {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       this.loginForm.password = Base64.decode(userInfo.password);
@@ -77,7 +60,7 @@ export default {
     }
   },
   methods: {
-    handleLogin: function () {
+    handleLogin: $utils.Debounce(function () {
       let that = this;
       if (!this.loginForm.username) {
         this.$message({
@@ -96,9 +79,9 @@ export default {
             .then((res) => {
               if (res.code === "200") {
                 if (this.loginForm.autoLogin) {
-                  this.$cookies.set("token", res.token, 15*60*1000);
+                  $utils.setCookie('token', res.token, 15)
                 } else {
-                  this.$cookies.set("token", res.token);
+                  $utils.setCookie('token', res.token)
                 }
                 this.$message({
                   showClose: true,
@@ -126,8 +109,8 @@ export default {
             });
         }
       }
-    },
-    async getUser() {
+    }, 0),
+    async getUser () {
       const { data } = await this.$api.LOGIN.getUserInfo();
       const userInfo = {
         userId: data.userId,
@@ -144,7 +127,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
->>> .el-input__inner {
+>>>.el-input__inner {
   margin-bottom: 10px;
 }
 
