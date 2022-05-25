@@ -172,7 +172,6 @@ export default {
     },
   },
   methods: {
-    /** 表格分页 */
     getTreeData() {
       this.$api.ROLE.roleMenu(this.roleForm.roleId).then((res) => {
         if (res.code === 200) {

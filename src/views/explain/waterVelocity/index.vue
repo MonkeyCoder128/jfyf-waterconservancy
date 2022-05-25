@@ -112,27 +112,27 @@ export default {
       tableData: [
         {
           date: "2016-05-02",
-          name: "王小虎1",
+          name: "101",
           type: "0",
         },
         {
           date: "2016-05-02",
-          name: "王小虎1",
+          name: "101",
           type: "0",
         },
         {
           date: "2016-05-02",
-          name: "王小虎1",
+          name: "101",
           type: "0",
         },
         {
           date: "2016-05-02",
-          name: "王小虎1",
+          name: "101",
           type: "0",
         },
         {
           date: "2016-05-02",
-          name: "王小虎1",
+          name: "101",
           type: "0",
         },
       ],

@@ -12,6 +12,13 @@ export default {
       var dam2 = this.$echarts.init(document.getElementById("dam2"));
       var value = 60;
       var option = {
+        grid: {
+          left: "18",
+          right: "5",
+          bottom: "23",
+          top: "32",
+          containLabel: true,
+        },
         //backgroundColor: '#010818',
         title: [
           {

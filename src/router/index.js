@@ -270,7 +270,6 @@ router.beforeEach(function (to, from, next) {
     } else {
       next({
         path: '/login',
-
       }) // 没登录则跳转到登录界面
     }
   } else {

@@ -32,7 +32,8 @@
 </template>
 
 <script>
-const Base64 = require('js-base64').Base64;
+const Base64 = require("js-base64").Base64;
+const $utils = require("../../utils/public.js")
 export default {
   data () {
     return {
@@ -52,15 +53,15 @@ export default {
   },
 
   mounted () {
-    if (this.$cookies.isKey('token') && localStorage.getItem('userInfo')) {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-      this.loginForm.password = Base64.decode(userInfo.password)
-      this.loginForm.username = userInfo.username
+    if (this.$cookies.isKey("token") && localStorage.getItem("userInfo")) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      this.loginForm.password = Base64.decode(userInfo.password);
+      this.loginForm.username = userInfo.username;
     }
   },
   methods: {
-    handleLogin: function () {
-      let that = this
+    handleLogin: $utils.Debounce(function () {
+      let that = this;
       if (!this.loginForm.username) {
         this.$message({
           message: "请输入账号",
@@ -78,17 +79,22 @@ export default {
             .then((res) => {
               if (res.code === "200") {
                 if (this.loginForm.autoLogin) {
-                  this.$cookies.set("token", res.token, { expires: "15D" });
+                  $utils.setCookie('token', res.token, 15)
                 } else {
-                  this.$cookies.set("token", res.token);
+                  $utils.setCookie('token', res.token)
                 }
                 this.$message({
                   showClose: true,
                   message: "登录成功",
                   type: "success",
                 });
-                that.getUser()
-                this.$router.push({ path: "/" });
+                that.getUser();
+                this.$router.push({
+                  path: "/",
+                  query: {
+                    flag: 1,
+                  },
+                });
               } else if (res.code !== "200") {
                 this.$message({
                   showClose: true,
@@ -103,20 +109,20 @@ export default {
             });
         }
       }
-    },
+    }, 0),
     async getUser () {
-      const { data } = await this.$api.LOGIN.getUserInfo()
+      const { data } = await this.$api.LOGIN.getUserInfo();
       const userInfo = {
         userId: data.userId,
         username: data.username,
         authority: data.authorities[0].authority,
-        password: Base64.encode(this.loginForm.password)
-      }
+        password: Base64.encode(this.loginForm.password),
+      };
       //存储用户信息
       if (this.loginForm.autoLogin) {
         window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
       }
-    }
+    },
   },
 };
 </script>

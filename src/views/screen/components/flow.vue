@@ -1,5 +1,5 @@
 <template>
-    <div id="flow"></div>
+  <div id="flow"></div>
 </template>
 <script>
 export default {
@@ -10,159 +10,164 @@ export default {
     myecharts() {
       var echarts = require("echarts");
       var flow = this.$echarts.init(document.getElementById("flow"));
+
+      var zzx1 = ["6", "2", "1", "3", "4"];
+      var wgx1 = ["5", "3", "6", "5", "2"];
       var option = {
         grid: {
-          top: "25",
-          left: "47",
+          left: "18",
           right: "5",
-          bottom: "45",
+          bottom: "23",
+          top: "32",
+          containLabel: true,
         },
-        tooltip: {
-          show: false,
+        legend: {
+          data: ["流量", "流速"],
+          right: 20,
+          top: 1,
+          textStyle: {
+            color: "#fff",
+            fontSize: 14,
+          },
+          itemWidth: 12,
+          itemHeight: 12,
+          color: "#fff",
         },
         xAxis: {
-          data: ["11.50", "12.00", "12.10", "12.20", "12.30", "12.40", "12.50"],
+          type: "category",
+          data: ["2016", "2017", "2018", "2019", "2020"],
           axisLine: {
             show: true,
             lineStyle: {
-              color: "397cbc", //底部边框颜色
+              color: "#193e69",
             },
           },
           axisTick: {
             show: false,
           },
           axisLabel: {
-            textStyle: {
-              color: "#fff", //底部文字颜色
-              fontSize: 12,
-            },
+            color: "#fff",
           },
         },
-        yAxis: [
-          {
-            type: "value",
-            name: "(mm)",
-            nameTextStyle: {
-              color: "#ffffff",
-              padding: [0, 30, -7, 0]
-            },
-            min: 0,
-            max: 80,
-            axisLabel: {
-              formatter: "{value}",
-              textStyle: {
-                color: "#fff",
-              },
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: "#11223b", //网格线的颜色
-                width: 1,
-                type: "solid",
-              },
-            },
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: "#397cbc", //底部边框颜色
-              },
-            },
-            axisTick: {
-              show: false,
-            },
-            axisLabel: {
-              show: true,
-              fontSize: 12,
-              textStyle: {
-                color: "#fff", //左文字颜色
-              },
-            },
-          },
-        ],
-        series: [
-          {
-            type: "bar",
-            barWidth: 20,
-            showBackground: true,
-            backgroundStyle: {
-              color: "rgba(21,136,209,0.1)",
-            },
-            itemStyle: {
-              normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  {
-                    offset: 0,
-                    // color: '#00FFE3',//渐变1
-                    color: "rgba(21,136,209,1)", //渐变1
-                  },
-                  {
-                    offset: 1,
-                    // color: '#4693EC',//渐变2
-                    color: "rgba(21,136,209,1)", //渐变2
-                  },
-                ]),
-              },
-            },
-            data: [20, 80, 20, 40, 34, 30, 20],
-            z: 0,
-            zlevel: 0,
-            // label: {
-            //     show: true,
-            //     position: 'top',
-            //     fontSize: 14,
-            //     color: '#fff', //柱状顶部文字颜色
-            //     formatter: function (params) {
-            //         return '20%';
-            //     },
-            // },
-          },
-          //网格
-          {
-            type: "pictorialBar",
-            barWidth: 20,
-            itemStyle: {
-              normal: {
-                color: "#122540", //数据的间隔颜色
-              },
-            },
-            symbolRepeat: "fixed",
-            symbolMargin: 3,
-            symbol: "rect",
-            symbolSize: [20, 1],
-            symbolPosition: "end",
-            symbolOffset: [0, 0],
-            data: [20, 80, 20, 40, 34, 30, 20],
-            z: 1,
-            zlevel: 0,
-          },
-          {
-            type: "pictorialBar",
-            barWidth: 20,
-            itemStyle: {
-              normal: {
-                color: "transparent", //数据的间隔颜色
-              },
-            },
-            // symbolRepeat: 'fixed',
-            symbolMargin: 3,
-            symbol: "rect",
-            symbolSize: [20, 8],
 
-            // symbolPosition: 'start',
-            // symbolOffset: [0, 0],
-            data: [20, 80, 20, 40, 34, 30, 20],
-            z: 1,
-            zlevel: 0,
-            label: {
-              show: true,
-              position: "top",
-              fontSize: 12,
-              color: "#fff", //柱状顶部文字颜色
-              // formatter: function (params) {
-              //   return "20%";
-              // },
+        yAxis: {
+          type: "value",
+          name: "万立方米/秒",
+          nameTextStyle: {
+            color: "#ffffff",
+            padding: [0, 0, 0, 30], // 上右下左与原位置距离
+          },
+          splitNumber: 5,
+          //boundaryGap: [0.2, 0.2],
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "#112039", //左侧显示线
             },
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "#193e69",
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            formatter: "{value}",
+            color: "#fff",
+            fontSize: 14,
+          },
+        },
+        series: [
+          //1头
+          {
+            type: "pictorialBar",
+            symbolSize: [20, 8],
+            symbolOffset: [-12, 0],
+            symbolPosition: "end",
+            z: 12,
+            color: "#e7b20a",
+            data: zzx1.map((v) =>
+              Number(v) >= 0 ? Number(v) + 0.3 : Number(v) - 0.3
+            ),
+          },
+          //1底
+          {
+            type: "pictorialBar",
+            symbolSize: [20, 8],
+            symbolOffset: [-12, 4],
+            z: 12,
+            color: "#816819",
+            data: Array(zzx1.length).fill(0),
+          },
+          //2头部
+          {
+            type: "pictorialBar",
+            symbolSize: [20, 8],
+            symbolOffset: [12, 0],
+            symbolPosition: "end",
+            z: 12,
+            color: "#1397a0",
+            data: wgx1.map((v) =>
+              Number(v) >= 0 ? Number(v) + 0.3 : Number(v) - 0.3
+            ),
+          },
+          //2底部
+          {
+            name: "",
+            type: "pictorialBar",
+            symbolSize: [20, 8],
+            symbolOffset: [12, 4],
+            color: "#155c69",
+            z: 12,
+            data: Array(wgx1.length).fill(0),
+          },
+          //2柱体
+          {
+            name: "垂直位移",
+            type: "bar",
+            barWidth: "20",
+            itemStyle: {
+              normal: {
+                opacity: 1,
+                color: "#816819",
+                barBorderRadius: 0,
+              },
+            },
+            label: {
+              show: false,
+              position: "insideTop", //数值显示在柱子内
+              formatter: function (data) {
+                if (data.value < 0) {
+                  return Math.abs(data.value);
+                }
+              },
+            },
+            data: zzx1,
+          },
+          //2柱体
+          {
+            name: "水平位移",
+            type: "bar",
+            barWidth: "20",
+            itemStyle: {
+              normal: {
+                color: "#155c69",
+                barBorderRadius: 0,
+              },
+            },
+            label: {
+              show: false,
+              position: "insideTop", //数值显示在柱子内
+              formatter: function (data) {
+                if (data.value < 0) {
+                  return Math.abs(data.value);
+                }
+              },
+            },
+            data: wgx1,
           },
         ],
       };

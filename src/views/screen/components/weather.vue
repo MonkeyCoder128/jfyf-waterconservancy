@@ -1,162 +1,173 @@
 <template>
-  <div id="weather_box">
-    <el-row class="weater_p">
-      <el-col :span="3"
-        ><img
-          src="https://cctv202.com/img/rain.png"
-          width="30px"
-          height="30px"
+  <div id="weather">
+    <div></div>
+    <div id="weater_top">
+      <div>
+        <img
+          :src="list[0].url"
+          alt=""
+          style="width: 32px; height: 32px; display: block; margin-right: 5px"
         />
-      </el-col>
-      <el-col :span="15" class="rain" style="color: #fff"
-        ><div style="font-size: 32px">18</div>
-        <div class="rain_p">
-          <div>℃</div>
-          小雨
-        </div></el-col
-      >
-      <el-col :span="2"
-        ><el-button type="primary" class="btn_title"
-          >蓝色暴雨预警</el-button
-        ></el-col
-      >
-    </el-row>
-    <div id="weather"></div>
+      </div>
+      <div style="font-size: 30px">{{ week }}</div>
+      <div class="box_week">
+        <div>℃</div>
+        <div>{{ dayweather }}</div>
+      </div>
+    </div>
+    <div id="weater_box">
+      <div class="box" v-for="(item, index) in list" :key="index">
+        <p style="margin-bottom: 5%">
+          {{ index == 0 ? "今天" : "星期" + item.week }}
+        </p>
+        <img
+          :src="item.url"
+          alt=""
+          style="width: 20px; height: 20px; display: block; margin-bottom: 3%"
+        />
+        <p>{{ item.daytemp }}/{{ item.nighttemp }}℃</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
-  mounted() {
-    this.myecharts();
+  data() {
+    return {
+      week: "",
+      dayweather: "",
+      list: [],
+    };
   },
-  methods: {
-    myecharts() {
-      var weather = this.$echarts.init(document.getElementById("weather"));
-      var option = {
-        grid: {
-          show: true,
-          //backgroundColor: "transparent",
-          opacity: 0.3,
-          borderWidth: "0",
-          top: "180",
-          bottom: "2",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          show: false,
-        },
-        xAxis: [
-          // 星期
-          {
-            type: "category",
-            boundaryGap: false,
-            position: "top",
-            offset: 110,
-            zlevel: 100,
-            axisLine: {
-              show: false,
-            },
-            axisTick: {
-              show: false,
-            },
-            axisLabel: {
-              interval: 0,
-              formatter: ["{a|{value}}"].join("\n"),
-              rich: {
-                a: {
-                  color: "white",
-                  fontSize: 14,
-                },
-              },
-            },
-            nameTextStyle: {
-              fontWeight: "bold",
-              fontSize: 19,
-            },
-            data: ["今天", "明天", "周三", "周四"],
-          },
-          // 天气图标
-          {
-            type: "category",
-            boundaryGap: false,
-            position: "top",
-            offset: 50,
-            zlevel: 100,
-            axisLine: {
-              show: false,
-            },
-            axisTick: {
-              show: false,
-            },
-            axisLabel: {
-              interval: 0,
-              formatter: function (value, index) {
-                return "{" + index + "| }\n{b|" + value + "}";
-              },
-              rich: {
-                0: {
-                  backgroundColor: {
-                    // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[0]] + '.png')
-                    image: "https://cctv202.com/img/rain.png",
-                  },
-                  height: 20,
-                  width: 20,
-                },
-                1: {
-                  backgroundColor: {
-                    // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[1]] + '.png')
-                    image: "https://cctv202.com/img/sun.png",
-                  },
-                  height: 20,
-                  width: 20,
-                },
-                2: {
-                  backgroundColor: {
-                    // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[2]] + '.png')
-                    image: "https://cctv202.com/img/sun.png",
-                  },
-                  height: 20,
-                  width: 20,
-                },
-                3: {
-                  backgroundColor: {
-                    // image: require('@/assets/weather_icon/' + this.weatherIconDic[this.weatherdata.weather[3]] + '.png')
-                    image: "https://cctv202.com/img/sun.png",
-                  },
-                  height: 20,
-                  width: 20,
-                },
-                b: {
-                  color: "white",
-                  fontSize: 12,
-                  lineHeight: 30,
-                  width: 80,
-                  height: 20,
-                },
-              },
-            },
-            nameTextStyle: {
-              fontWeight: "bold",
-              fontSize: 14,
-            },
-            // data: this.weatherdata.weather
-            data: ["20/12℃", "27/14℃", "27/18℃", "27/22℃"],
-          },
-        ],
-        yAxis: {
-          type: "value",
-          show: false,
-          axisLabel: {
-            formatter: "{value} °C",
-            color: "white",
-          },
-        },
-      };
-
-      weather.setOption(option);
-    },
+  mounted() {
+    fetch(
+      "https://restapi.amap.com/v3/weather/weatherInfo?key=999596a030ca6b37f79322b8432c5e74&city=610103&extensions=all&output=json"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.list = data.forecasts[0].casts.filter((i) => {
+          i.url = "";
+          if (i.week == "1") {
+            i.week = "一";
+          } else if (i.week == "2") {
+            i.week = "二";
+          } else if (i.week == "3") {
+            i.week = "三";
+          } else if (i.week == "4") {
+            i.week = "四";
+          } else if (i.week == "5") {
+            i.week = "五";
+          } else if (i.week == "6") {
+            i.week = "六";
+          } else if (i.week == "7") {
+            i.week = "日";
+          }
+          if (i.dayweather == "晴") {
+            i.url = require("../../../assets/image/taiyang.png");
+          } else if (
+            i.dayweather == "少云" ||
+            i.dayweather == "晴间多云" ||
+            i.dayweather == "多云" ||
+            i.dayweather == "阴" ||
+            i.dayweather == "平静"
+          ) {
+            i.url = require("../../../assets/image/duoyun.png");
+          } else if (
+            i.dayweather == "有风" ||
+            i.dayweather == "微风" ||
+            i.dayweather == "和风" ||
+            i.dayweather == "清风" ||
+            i.dayweather == "强风/劲风" ||
+            i.dayweather == "疾风" ||
+            i.dayweather == "大风" ||
+            i.dayweather == "烈风" ||
+            i.dayweather == "风暴" ||
+            i.dayweather == "清风" ||
+            i.dayweather == "狂爆风" ||
+            i.dayweather == "飓风" ||
+            i.dayweather == "热带风暴"
+          ) {
+            i.url = require("../../../assets/image/guafeng.png");
+          } else if (
+            i.dayweather == "霾" ||
+            i.dayweather == "中度霾" ||
+            i.dayweather == "重度霾" ||
+            i.dayweather == "严重霾" ||
+            i.dayweather == "雾" ||
+            i.dayweather == "浓雾" ||
+            i.dayweather == "强浓雾" ||
+            i.dayweather == "轻雾" ||
+            i.dayweather == "大雾" ||
+            i.dayweather == "特强浓雾" ||
+            i.dayweather == "狂爆风"
+          ) {
+            i.url = require("../../../assets/image/wumai.png");
+          } else if (
+            i.dayweather == "阵雨" ||
+            i.dayweather == "雷阵雨" ||
+            i.dayweather == "雷阵雨并伴有冰雹" ||
+            i.dayweather == "小雨" ||
+            i.dayweather == "中雨" ||
+            i.dayweather == "冻雨" ||
+            i.dayweather == "大雨" ||
+            i.dayweather == "暴雨" ||
+            i.dayweather == "大暴雨" ||
+            i.dayweather == "特大暴雨" ||
+            i.dayweather == "强阵雨" ||
+            i.dayweather == "强雷阵雨" ||
+            i.dayweather == "极端降雨" ||
+            i.dayweather == "毛毛雨/细雨" ||
+            i.dayweather == "雨" ||
+            i.dayweather == "小雨-中雨" ||
+            i.dayweather == "中雨-大雨" ||
+            i.dayweather == "大雨-暴雨" ||
+            i.dayweather == "暴雨-大暴雨" ||
+            i.dayweather == "大暴雨-特大暴雨"
+          ) {
+            i.url = require("../../../assets/image/xiayu.png");
+          } else if (
+            i.dayweather == "阵雨夹雪" ||
+            i.dayweather == "雨雪天气" ||
+            i.dayweather == "雨夹雪" ||
+            i.dayweather == " 雪" ||
+            i.dayweather == "阵雪" ||
+            i.dayweather == "小雪" ||
+            i.dayweather == "中雪" ||
+            i.dayweather == "大雪" ||
+            i.dayweather == "暴雪" ||
+            i.dayweather == "小雪-中雪" ||
+            i.dayweather == "中雪-大雪" ||
+            i.dayweather == "大雪-暴雪"
+          ) {
+            i.url = require("../../../assets/image/xiaxue.png");
+          } else if (i.dayweather == "浮尘") {
+            i.url = require("../../../assets/image/fuchen.png");
+          } else if (i.dayweather == "扬沙") {
+            i.url = require("../../../assets/image/shazi.png");
+          } else if (
+            i.dayweather == "沙尘暴" ||
+            i.dayweather == "强沙尘暴 " ||
+            i.dayweather == "龙卷风"
+          ) {
+            i.url = require("../../../assets/image/fengbao.png");
+          } else if (
+            i.dayweather == "沙尘暴" ||
+            i.dayweather == "强沙尘暴 " ||
+            i.dayweather == "龙卷风"
+          ) {
+            i.url = require("../../../assets/image/fengbao.png");
+          } else if (i.dayweather == "冷") {
+            i.url = require("../../../assets/image/leng.png");
+          } else if (i.dayweather == "热") {
+            i.url = require("../../../assets/image/re.png");
+          }
+          return i;
+        });
+        this.week = data.forecasts[0].casts[0].daytemp;
+        this.dayweather = data.forecasts[0].casts[0].dayweather;
+      });
   },
 };
 </script>
@@ -165,30 +176,37 @@ export default {
   width: 100%;
   height: 140px;
   overflow: hidden;
+  position: relative;
 }
-#weather_box {
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.btn_title {
-  color: #2e89e0;
-  background-color: rgba(62, 160, 200, 0.3);
-  padding: 5px;
-  position: absolute;
-  right: 0;
-}
-.rain {
+#weater_top {
+  color: #fff;
+  width: 10%;
+  height: 35%;
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+  padding: 2% 0 5% 5%;
   flex-direction: row;
 }
-.rain_p {
+#weater_box {
+  color: #fff;
+  width: 100%;
+  height: 53%;
+  display: flex;
+  justify-content: space-between;
+  .box {
+    width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+.box_week {
   display: flex;
   flex-direction: column;
-  font-size: 10px;
-}
-.weater_p {
-  margin: 4% auto 1%;
-  width: calc(100% - 39px);
+  font-size: 15px;
+  line-height: 16px;
 }
 </style>

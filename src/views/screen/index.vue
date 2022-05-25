@@ -53,7 +53,6 @@
               <div class="box_jianrong">
                 <deformation />
               </div>
-              
             </div>
             <div class="box">
               <div class="box_nav">
@@ -61,7 +60,7 @@
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
-                  <el-col :span="19">水质监测</el-col>
+                  <el-col :span="19">降雨量</el-col>
                   <el-col :span="1" class="icon_title2">
                     <img src="../../assets/image/dp_title2.png" alt=""
                   /></el-col>
@@ -73,7 +72,6 @@
               <div class="box_jianrong">
                 <pie />
               </div>
-              
             </div>
           </el-col>
           <el-col class="screen_cont"
@@ -206,7 +204,6 @@
               <div class="box_jianrong">
                 <weather></weather>
               </div>
-              
             </div>
             <div class="box_right">
               <div class="box_nav">
@@ -226,7 +223,6 @@
               <div class="box_jianrong">
                 <broken></broken>
               </div>
-              
             </div>
             <div class="box_right">
               <div class="box_nav">
@@ -246,7 +242,6 @@
               <div class="box_jianrong">
                 <pressure></pressure>
               </div>
-              
             </div>
             <div class="box_right">
               <div class="box_nav">
@@ -266,7 +261,6 @@
               <div class="box_jianrong">
                 <flow />
               </div>
-              
             </div>
           </el-col>
         </el-row>
@@ -318,7 +312,12 @@ export default {
     tothreed() {
       //window.location.href = "http://112.125.88.230/webgl/index.html";
 
-      this.$router.push("/threed");
+      this.$router.push({
+        path: "/threed",
+        query: {
+          flag: 2,
+        },
+      });
     },
     timeFormate(timeStamp) {
       let year = new Date(timeStamp).getFullYear();
@@ -625,7 +624,7 @@ export default {
   //background-color: rgba(0, 0, 0, 0.3);
   z-index: 9999;
 }
-.box_jianrong{
+.box_jianrong {
   width: 98%;
   height: 100%;
   padding: 5px;

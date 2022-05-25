@@ -37,9 +37,9 @@ axios.interceptors.response.use((response) => {
         title: '已过期 请重新登录！'
       });
     } else if (code != 200) {
-      VueCookies.remove('token')
+      // VueCookies.remove('token')
       Notification.error({
-        title: response.data.message
+        title: response.data.result
       });
       return Promise.reject("error");
     } else {
