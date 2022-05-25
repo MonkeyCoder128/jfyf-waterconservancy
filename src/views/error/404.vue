@@ -26,16 +26,14 @@ export default ({
     display: flex;
     align-items: center;
     height: 100%;
+    justify-content: center;
   }
   .left{
     width: 630px;
     height: 527px;
-    margin-right: 108px;
-    margin-left: 10%;
-
   }
   .right{
-    width: 360px;
+    width: 530px;
     height: 527px;
     display: flex;
     flex-direction: column;
