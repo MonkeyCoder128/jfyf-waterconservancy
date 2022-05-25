@@ -32,13 +32,15 @@
           style="width: 45%"
         >
           <el-form-item label="水坝位置" prop="address">
+            <!--省市三级联动-->
             <el-cascader
               :disabled="efitDisable"
               size="small"
               style="width: 200px"
+              placeholder="请选择水坝位置"
+              v-model="location"
               :options="options"
-              v-model="configForm.address"
-              @change="addressChoose"
+              :props="{ value: 'label' }"
             ></el-cascader>
           </el-form-item>
           <el-form-item label="水坝名称" prop="name">
@@ -325,7 +327,6 @@
 </template>
  
 <script>
-import { regionDataPlus, CodeToText } from "element-china-area-data";
 import provinces from "./provinces.json";
 export default {
   name: "DataManage",
@@ -357,7 +358,8 @@ export default {
       toAdd: true, //是否为新添数据
       WhethertoAdd: true, //是否为数据页面
       efitDisable: false, //是否可编辑
-      options: regionDataPlus, // 省市区级联
+      options: provinces, // 省市区级联
+      location: [],
     };
   },
 
@@ -388,9 +390,6 @@ export default {
     addressChoose(value) {
       console.log(
         "省市区：",
-        CodeToText[value[0]],
-        CodeToText[value[1]],
-        CodeToText[value[2]]
       );
     },
 
