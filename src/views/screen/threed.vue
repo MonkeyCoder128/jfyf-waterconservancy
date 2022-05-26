@@ -45,9 +45,10 @@ export default {
       width: "100%", //自适应当前窗口宽度
     };
   },
-  created() {},
+  created() {
+    localStorage.setItem("isshow",0)
+  },
   mounted() {
-    this.nowTimes();
     this.iframe = document.getElementById("iframe");
     this.postMsg();
   },
