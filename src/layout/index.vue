@@ -2,7 +2,7 @@
   <div class="box">
     <!-- 菜单 -->
     <div class="tac">
-      <span class="mentTitle">智慧水坝管理平台</span>
+      <span class="mentTitle">XX水库智慧管理平台</span>
       <el-menu
         unique-opened
         style="width: 221px"
@@ -270,7 +270,7 @@ export default {
   flex-direction: column;
   width: 220px;
   .mentTitle {
-    font-size: 24px;
+    font-size: 21px;
     white-space: nowrap;
     color: #ffffff;
     background-color: #283558;
