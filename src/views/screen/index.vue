@@ -106,7 +106,7 @@
                   src="http://112.125.88.230/webgl/index.html"
                   :style="{ width: width, height: height }"
                   class="ifremud"
-                  id="iframe_demo"
+                  id="iframe"
                   style="position: static"
                 ></iframe>
               </div>
@@ -308,25 +308,17 @@ export default {
   created() {},
   mounted() {
     this.nowTimes();
-    this.sendBtn();
+    this.iframe = document.getElementById("iframe");
+    this.postMsg();
   },
   methods: {
-    sendBtn() {
-      let iframe = document.getElementById("iframe_demo");
-      let json = {
-        flag: "0",
+    postMsg() {
+      //将token传递给子页面
+      let token = 0;
+      let param = {
+        token,
       };
-      iframe.contentWindow.postMessage(json, "*");
-    },
-    tothreed() {
-      //window.location.href = "http://112.125.88.230/webgl/index.html";
-
-      this.$router.push({
-        path: "/threed",
-        query: {
-          flag: 2,
-        },
-      });
+      this.iframe.contentWindow.postMessage(param, "*");
     },
     timeFormate(timeStamp) {
       let year = new Date(timeStamp).getFullYear();
