@@ -1259,10 +1259,6 @@ export default {
         { value: 10, name: "氦含量" },
       ];
       let data = {
-        tooltip: {
-          trigger: "item",
-          formatter: "{b}: {c} ({d}%)",
-        },
         legend: {
           icon: "rect",
           left: "67%", //图例距离左的距离
@@ -1328,7 +1324,7 @@ export default {
             type: "pie",
             center: ["30%", "50%"],
             radius: ["55%", "70%"],
-            silent: true,
+            avoidLabelOverlap: false,
             labelLine: {
               show: false,
             },
@@ -1350,7 +1346,6 @@ export default {
                 },
               },
             },
-
             data: dataCake,
             itemStyle: {
               normal: {
