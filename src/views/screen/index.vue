@@ -5,7 +5,7 @@
         <el-row type="flex" class="nav" justify="end">
           <p class="time">{{ nowTime }}</p>
           <p class="p_nav">XX水库智慧管理平台</p>
-          <div class="login" @click="Login">
+          <div class="system" @click="goSystem">
             <img
               src="../../assets/image/xitong.png"
               alt=""
@@ -388,8 +388,13 @@ export default {
       clearInterval(this.nowTimes);
       this.nowTimes = null;
     },
-    Login() {
+    goSystem() {
       this.$router.push({ path: "/realtimeMnitor/realtime" });
+    },
+    tothreed() {
+      this.$router.push({
+        path: "/threed",
+      });
     },
     outLogin() {
       this.$router.push({ path: "/login" });
@@ -425,7 +430,7 @@ export default {
   color: #4496e1;
   line-height: 54px;
 }
-.login {
+.system {
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -440,7 +445,7 @@ export default {
   font-weight: 380;
   color: #4496e1;
 }
-.login :hover {
+.system :hover {
   cursor: pointer;
 }
 .el-icon-s-custom {
