@@ -106,6 +106,7 @@
                   src="http://112.125.88.230/webgl/index.html"
                   :style="{ width: width, height: height }"
                   class="ifremud"
+                  id="iframe_demo"
                   style="position: static"
                 ></iframe>
               </div>
@@ -307,8 +308,16 @@ export default {
   created() {},
   mounted() {
     this.nowTimes();
+    this.sendBtn();
   },
   methods: {
+    sendBtn() {
+      let iframe = document.getElementById("iframe_demo");
+      let json = {
+        flag: "0",
+      };
+      iframe.contentWindow.postMessage(json, "*");
+    },
     tothreed() {
       //window.location.href = "http://112.125.88.230/webgl/index.html";
 
@@ -522,7 +531,7 @@ export default {
   height: 35px;
   color: #2e89e0;
   line-height: 29px;
-  text-shadow: 0 0 10px #2e89e0, 0 0 2px #87e9eb;
+  text-shadow: 0 0 4px #2e89e0, 0 0 2px #87e9eb;
   border-top: solid 1px #111e38;
   border-bottom: solid 1px #111e38;
   margin: 0 auto;
