@@ -34,13 +34,15 @@
           <el-form-item label="水坝位置" prop="address">
             <!--省市三级联动-->
             <el-cascader
+              ref="cascaderArr"
               :disabled="efitDisable"
+              @change="handleChange($event)"
               size="small"
               style="width: 200px"
               placeholder="请选择水坝位置"
               v-model="location"
               :options="options"
-              :props="{ value: 'label' }"
+              :props="{ value: 'code' }"
             ></el-cascader>
           </el-form-item>
           <el-form-item label="水坝名称" prop="name">
@@ -332,9 +334,12 @@ export default {
   name: "DataManage",
   data() {
     return {
-      pid: "0",
       configForm: {
-        address: [], //水坝位置
+        id: null,
+        address: "", //水坝位置地址
+        province: "", //省级code
+        city: "", //市级code
+        district: "", //区级code
         name: "", //水坝名称
         shuiWei: "", //水位
         kuCun: "", //库存
@@ -374,57 +379,68 @@ export default {
     },
     /**取消事件 */
     closeForm() {
-      if (this.toAdd === true) {
-        this.WhethertoAdd = true;
-      } else if (this.toAdd === false) {
-        this.WhethertoAdd = false;
-        this.efitDisable = true;
-      }
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          if (this.toAdd === true) {
+            this.WhethertoAdd = true;
+          } else if (this.toAdd === false) {
+            this.WhethertoAdd = false;
+            this.efitDisable = true;
+            this.getConfigMessage();
+          }
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
     },
     /**保存事件 */
     submitForm() {
-      this.toAdd = false;
-      this.efitDisable = true;
+      this.$api.DATUM.updateConfig(this.configForm).then((res) => {
+        if (res.code === 200) {
+          this.$message({
+            message: "保存成功",
+            type: "success",
+          });
+          this.toAdd = false;
+          this.efitDisable = true;
+        }
+      });
     },
     /**省市区三级联动 */
-    addressChoose(value) {
-      console.log(
-        "省市区：",
-      );
+    handleChange(value) {
+      const checkedNode = this.$refs["cascaderArr"].getCheckedNodes(); //获取由label组成的数组
+      this.configForm.province = value[0];
+      this.configForm.city = value[1];
+      this.configForm.district = value[2];
+      this.configForm.address = checkedNode[0].pathLabels.join("-");
     },
 
-    /**配置管理添加修改接口 */
-    // this.$api.DATUM.updateConfig(this.pid).then((res) => {
-    //   if (res.code === 200) {
-    //     if(res.result===null){
-    //       this.efitDisable=false;
-    //     }else{
-    //       this.efitDisable=true;
-    //     }
-    //     console.log(
-    //       "%c获取配置管理信息：",
-    //       "color:red;font-size:18px;font-weight:bold;",
-    //       res
-    //     );
-    //   }
-    // });
+    /**获取配置管理信息 */
+    getConfigMessage() {
+      this.$api.DATUM.getDetail(this.configForm.pid).then((res) => {
+        if (res.code === 200) {
+          this.WhethertoAdd = Object.keys(res.result).length === 0;
+          this.toAdd = Object.keys(res.result).length === 0;
+          this.efitDisable = true;
+          this.configForm = res.result;
+          this.location.push(
+            res.result.province,
+            res.result.city,
+            res.result.district
+          );
+        }
+      });
+    },
   },
   created() {
-    console.log(
-      "%c获取省市json文件：",
-      "color:red;font-size:18px;font-weight:bold;",
-      provinces
-    );
-    /**获取配置管理信息 */
-    this.$api.DATUM.getDetail(this.pid).then((res) => {
-      if (res.code === 200) {
-        if (res.result === null) {
-          this.toAdd = true;
-        } else {
-          this.toAdd = false;
-        }
-      }
-    });
+    this.getConfigMessage();
   },
 };
 </script>

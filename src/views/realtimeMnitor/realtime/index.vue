@@ -3,33 +3,6 @@
     <div class="echartAllBox">
       <div class="echartBox">
         <div class="topMenu">
-          <span>流速、流量</span>
-          <div class="selectCharts">
-            <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeFlowRate"
-              v-model="flowRateType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in optionsType"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
-              </el-option>
-            </el-select>
-            <em @click="jumpWaterVelocity">更多></em>
-          </div>
-        </div>
-        <div class="chartDataBox">
-          <Chart :chartData="speedData" :width="'100%'" :height="'100%'" />
-          <Chart :chartData="fluxData" :width="'100%'" :height="'100%'" />
-        </div>
-      </div>
-      <div class="echartBox">
-        <div class="topMenu">
           <span>水位</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
@@ -52,6 +25,34 @@
         </div>
         <div class="chartDataBox">
           <Chart :chartData="waterLevelData" :width="'100%'" :height="'100%'" />
+        </div>
+      </div>
+      
+      <div class="echartBox">
+        <div class="topMenu">
+          <span>形变位移</span>
+          <div class="selectCharts">
+            <em style="color: #333333">设备</em>
+            <el-select
+              style="margin: 0 12px"
+              @change="changeDeformation"
+              v-model="deformationType"
+              size="mini"
+            >
+              <el-option
+                v-for="item in optionsType"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
+            <em @click="jumpDeformation">更多></em>
+          </div>
+        </div>
+        <div class="chartDataBox">
+          <Chart :chartData="shiftData" :width="'100%'" :height="'100%'" />
+          <Chart :chartData="offsetData" :width="'100%'" :height="'100%'" />
         </div>
       </div>
       <div class="echartBox">
@@ -82,6 +83,33 @@
       </div>
       <div class="echartBox">
         <div class="topMenu">
+          <span>流速、流量</span>
+          <div class="selectCharts">
+            <em style="color: #333333">设备</em>
+            <el-select
+              style="margin: 0 12px"
+              @change="changeFlowRate"
+              v-model="flowRateType"
+              size="mini"
+            >
+              <el-option
+                v-for="item in optionsType"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
+            <em @click="jumpWaterVelocity">更多></em>
+          </div>
+        </div>
+        <div class="chartDataBox">
+          <Chart :chartData="speedData" :width="'100%'" :height="'100%'" />
+          <Chart :chartData="fluxData" :width="'100%'" :height="'100%'" />
+        </div>
+      </div>
+      <div class="echartBox">
+        <div class="topMenu">
           <span>水质分析</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
@@ -104,33 +132,6 @@
         </div>
         <div class="chartDataBox">
           <Chart :chartData="waterQuality" :width="'100%'" :height="'100%'" />
-        </div>
-      </div>
-      <div class="echartBox">
-        <div class="topMenu">
-          <span>形变位移</span>
-          <div class="selectCharts">
-            <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeDeformation"
-              v-model="deformationType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in optionsType"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
-              </el-option>
-            </el-select>
-            <em @click="jumpDeformation">更多></em>
-          </div>
-        </div>
-        <div class="chartDataBox">
-          <Chart :chartData="shiftData" :width="'100%'" :height="'100%'" />
-          <Chart :chartData="offsetData" :width="'100%'" :height="'100%'" />
         </div>
       </div>
       <div class="echartBox">
