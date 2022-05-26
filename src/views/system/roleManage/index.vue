@@ -39,7 +39,7 @@
               <span style="color: #148f97"> 查看</span>
             </el-button>
             <el-button @click="deleteRole(scope.row)" type="text">
-              <span style="color: #D72A13">删除</span>
+              <span style="color: #d72a13">删除</span>
             </el-button>
           </template>
         </el-table-column>
@@ -210,8 +210,8 @@ export default {
     /** 删除角色操作 */
     deleteRole(row) {
       this.$confirm(
-        "此操作将永久删除名为" + row.roleName + " 的用户，是否继续?",
-        "提示",
+        "此操作将永久删除已创建角色，仍旧确定删除？",
+        "确定要删除该角色？",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",

@@ -151,6 +151,7 @@ export default {
       }
     };
     if (this.$route.query.type === "add") {
+      this.$route.meta.title = "新增用户";
       this.formDisable = false;
       this.userRules = {
         roleId: [
@@ -196,6 +197,7 @@ export default {
         ],
       };
     } else if (this.$route.query.type === "edit") {
+      this.$route.meta.title = "编辑用户";
       this.userRules = {
         password: [
           { required: true, message: "新密码不能为空", trigger: "blur" },

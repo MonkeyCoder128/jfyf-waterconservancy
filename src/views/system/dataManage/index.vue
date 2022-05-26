@@ -379,12 +379,16 @@ export default {
     },
     /**取消事件 */
     closeForm() {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+      this.$confirm("取消后，输入的数据将不被保存", "确定取消操作吗？", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
+          this.$message({
+            type: "info",
+            message: "已确定",
+          });
           if (this.toAdd === true) {
             this.WhethertoAdd = true;
           } else if (this.toAdd === false) {
@@ -396,7 +400,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除",
+            message: "已取消",
           });
         });
     },

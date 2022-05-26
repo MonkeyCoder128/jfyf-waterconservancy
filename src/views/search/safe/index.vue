@@ -292,7 +292,7 @@ export default {
   },
   created() {
     // 获取用户类型
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     this.userType = userInfo.authority;
     this.init();
   },
@@ -353,11 +353,15 @@ export default {
     },
     // 解除异常
     deletedata(id) {
-      this.$confirm("是否确定解除巡检异常情况?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
+      this.$confirm(
+        "解除异常后，可在巡检记录查看上报情况。",
+        "确定要解除该异常情况？",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      )
         .then(() => {
           this.$api.SAFE.ReportErr({ id, status: 2, progress: 4 }).then(
             (res) => {

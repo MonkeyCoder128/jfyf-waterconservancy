@@ -37,7 +37,7 @@
               编辑
             </el-button>
             <el-button @click="deleteUser(scope.row)" type="text">
-             <span style="color: #D72A13">删除</span>
+              <span style="color: #d72a13">删除</span>
             </el-button>
             <el-button
               @click="enable(scope.row, 'NORMAL')"
@@ -130,8 +130,8 @@ export default {
     /** 删除用户操作 */
     deleteUser(row) {
       this.$confirm(
-        "此操作将永久删除名为" + row.name + " 的用户，是否继续?",
-        "提示",
+        "删除后，该用户将无法登录。账号将无法找回。",
+        "确定删除该账号？",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
@@ -191,11 +191,15 @@ export default {
         userId: row.userId,
         status: sate.toString(),
       };
-      this.$confirm('确认停用"' + row.name + '"的用户账号?', "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
+      this.$confirm(
+        "账号停用后，该用户将无法登录。可重新启用",
+        "确定停用该账号？",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      )
         .then(() => {
           this.$api.USER.updateUserState(userState).then((res) => {
             if (res.code === 200) {

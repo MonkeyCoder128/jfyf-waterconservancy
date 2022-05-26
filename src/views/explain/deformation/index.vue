@@ -490,7 +490,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: 39,
                 name: "流量m/s",
               },
             ],

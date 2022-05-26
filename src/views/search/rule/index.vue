@@ -410,7 +410,7 @@ export default {
         a.push(id);
         arr = a;
       }
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+      this.$confirm("删除后，该条例将从列表中移除，同时不保留历史数据。", "确定要删除该条例吗？", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
