@@ -186,11 +186,7 @@
               </el-table-column>
               <el-table-column prop="progress" label="进展情况" align="center">
                 <template slot-scope="scope">
-                  <span v-if="scope.row.progress == 0">平台预警</span>
-                  <span v-if="scope.row.progress == 1">等待维修</span>
-                  <span v-if="scope.row.progress == 2">维修中</span>
-                  <span v-if="scope.row.progress == 3">维修完成</span>
-                  <span v-if="scope.row.progress == 4">已解决</span>
+                  <span>{{ progressStatus.get(scope.row.progress)}}</span>
                 </template>
               </el-table-column>
               <el-table-column prop="status" label="巡检管理" align="center">
@@ -236,6 +232,7 @@
   </el-row>
 </template>
 <script>
+import {progressStatus} from '@/utils/public.js'
 export default {
   name: "",
   data() {
@@ -271,6 +268,8 @@ export default {
       listLoading: false,
       // 表单对齐方式
       labelPosition: "right",
+      // 进展情况狂态码
+      progressStatus
     };
   },
   created() {

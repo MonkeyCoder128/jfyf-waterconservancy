@@ -106,7 +106,7 @@
           ],
           series: [
             {
-              name: "A设备",
+              name: "水质测定仪一",
               type: "line",
               smooth: true,
               symbolSize: 8,
@@ -162,7 +162,7 @@
               data: this.parentData.LineOne,
             },
             {
-              name: "B设备",
+              name: "水质测定仪二",
               type: "line",
               smooth: true,
               symbolSize: 8,
@@ -212,7 +212,7 @@
               data: this.parentData.LineTwo,
             },
             {
-              name: "C设备",
+              name: "水质测定仪三",
               type: "line",
               smooth: true,
               symbolSize: 8,

@@ -460,7 +460,7 @@ export default {
     // 查看数据
     check(row) {
       // 判断类型是否为word
-      if(row.fileSuffix == ".docx"){
+      if(row.fileSuffix == ".docx" || ".doc"){
         // 跳转到新页面预览word
         let pathinfo = this.$router.resolve({
           path:'/search/rule/showFile',

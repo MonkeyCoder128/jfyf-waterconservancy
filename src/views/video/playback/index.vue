@@ -7,8 +7,16 @@
           <div class="card">
             <el-input placeholder="请输入点位搜索" suffix-icon="el-icon-search" v-model="filterText">
             </el-input>
-            <el-tree class="filter-tree" :data="dataList" default-expand-all :filter-node-method="filterNode"
-              highlight-current @node-click="handleNodeClick" ref="tree">
+            <el-tree 
+              class="filter-tree" 
+              :data="dataList" 
+              default-expand-all 
+              :filter-node-method="filterNode"
+              highlight-current 
+              @node-click="handleNodeClick" 
+              ref="tree"
+              node-key="id"
+              :default-checked-keys="[5]">
               <span slot-scope="{data}">
                 <span>
                   <i :class="data.icon" class="mr5"></i>{{ data.label }}
@@ -116,7 +124,8 @@ export default {
             {
               id: 5,
               label: "A区 -1",
-              icon: 'el-icon-location-outline'
+              icon: 'el-icon-location-outline',
+              class:'is-current'
             },
             {
               id: 6,
@@ -131,12 +140,12 @@ export default {
           icon: 'el-icon-reading',
           children: [
             {
-              id: 5,
+              id: 9,
               label: "B区 -1",
               icon: 'el-icon-location-outline'
             },
             {
-              id: 6,
+              id: 10,
               label: "B区 -2  ",
               icon: 'el-icon-location-outline'
             },
@@ -167,8 +176,11 @@ export default {
       listLoading: false,
     };
   },
+  created(){
+    
+  },
   mounted () {
-  
+    this.$refs.tree.setCurrentKey(this.dataList[0].children[0].children[0].id);
   },
   watch: {
     filterText (val) {
