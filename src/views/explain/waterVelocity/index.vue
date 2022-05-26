@@ -4,7 +4,7 @@
       <span class="cardTitle">当前数据</span>
       <div class="echartsBoxContent">
         <div class="echartsBox">
-          <span>设备:流量计A</span>
+          <span>设备:流速流量仪一</span>
           <div class="chartDataBox">
             <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
             <Chart
@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="echartsBox">
-          <span>设备:流量计B</span>
+          <span>设备:流速流量仪二</span>
 
           <div class="chartDataBox">
             <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="echartsBox">
-          <span>设备:流量计C</span>
+          <span>设备:流速流量仪三</span>
 
           <div class="chartDataBox">
             <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
@@ -550,17 +550,13 @@ export default {
     getWarningData() {
       let colors = ["#148F97", "#1289BA", "#115CB9"];
       var dataCake = [
-        { name: "A设备", value: 50 },
-        { name: "C设备", value: 80 },
-        { name: "B设备", value: 70 },
+        { name: "流苏流量仪一", value: 50 },
+        { name: "流苏流量仪二", value: 80 },
+        { name: "流苏流量仪三", value: 70 },
       ];
       let data = {
-        tooltip: {
-          trigger: "item",
-          formatter: "{b}: {c} ({d}%)",
-        },
         legend: {
-          data: ["A设备", "C设备", "B设备"],
+          data: ["流苏流量仪一", "流苏流量仪二", "流苏流量仪三"],
           icon: "rect",
           left: "65%", //图例距离左的距离
           top: "5%",
@@ -619,10 +615,7 @@ export default {
             type: "pie",
             radius: ["65%", "80%"],
             center: ["40%", "50%"],
-            silent: true,
-            label: {
-              show: false,
-            },
+            avoidLabelOverlap: false,
             labelLine: {
               show: false,
             },
@@ -746,7 +739,7 @@ export default {
         ],
         series: [
           {
-            name: "A设备",
+            name: "流苏流量仪一",
             type: "line",
             smooth: true,
             symbolSize: 8,
@@ -802,7 +795,7 @@ export default {
             data: [333, 300, 280, 100, 109, 37, 105, 160],
           },
           {
-            name: "B设备",
+            name: "流苏流量仪二",
             type: "line",
             smooth: true,
             symbolSize: 8,
@@ -852,7 +845,7 @@ export default {
             data: [100, 138, 350, 173, 180, 150, 180, 230],
           },
           {
-            name: "C设备",
+            name: "流苏流量仪三",
             type: "line",
             smooth: true,
             symbolSize: 8,
