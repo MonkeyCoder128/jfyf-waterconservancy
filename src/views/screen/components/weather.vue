@@ -4,7 +4,7 @@
     <div id="weater_top">
       <div>
         <img
-          :src="list[0].url"
+          :src="url"
           alt=""
           style="width: 32px; height: 32px; display: block; margin-right: 5px"
         />
@@ -37,9 +37,10 @@ export default {
       week: "",
       dayweather: "",
       list: [],
+      url: "",
     };
   },
-  mounted() {
+  created() {
     fetch(
       "https://restapi.amap.com/v3/weather/weatherInfo?key=999596a030ca6b37f79322b8432c5e74&city=610103&extensions=all&output=json"
     )
@@ -48,7 +49,6 @@ export default {
       })
       .then((data) => {
         this.list = data.forecasts[0].casts.filter((i) => {
-          i.url = "";
           if (i.week == "1") {
             i.week = "一";
           } else if (i.week == "2") {
@@ -163,8 +163,10 @@ export default {
           } else if (i.dayweather == "热") {
             i.url = require("../../../assets/image/re.png");
           }
+
           return i;
         });
+        this.url = this.list[0].url;
         this.week = data.forecasts[0].casts[0].daytemp;
         this.dayweather = data.forecasts[0].casts[0].dayweather;
       });
@@ -180,7 +182,7 @@ export default {
 }
 #weater_top {
   color: #fff;
-  width: 10%;
+  width: 32%;
   height: 35%;
   display: flex;
   justify-content: space-between;

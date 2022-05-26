@@ -28,6 +28,7 @@
           src="http://112.125.88.230/webgl/index.html"
           :style="{ width: width, height: height }"
           class="ifremud"
+          id="iframe"
           style="position: static"
         ></iframe>
       </div>
@@ -44,11 +45,22 @@ export default {
       width: "100%", //自适应当前窗口宽度
     };
   },
-  created() {},
+  created() {
+    localStorage.setItem("isshow",0)
+  },
   mounted() {
-    this.nowTimes();
+    this.iframe = document.getElementById("iframe");
+    this.postMsg();
   },
   methods: {
+    postMsg() {
+      //将token传递给子页面
+      let token = 1;
+      let param = {
+        token,
+      };
+      this.iframe.contentWindow.postMessage(param, "*");
+    },
     huitui() {
       this.$router.push({ path: "/" });
     },

@@ -4,8 +4,8 @@
       <div class="home_bg">
         <el-row type="flex" class="nav" justify="end">
           <p class="time">{{ nowTime }}</p>
-          <p class="p_nav">智慧水坝管理平台</p>
-          <div class="login" @click="Login">
+          <p class="p_nav">XX水库智慧管理平台</p>
+          <div class="system" @click="goSystem">
             <img
               src="../../assets/image/xitong.png"
               alt=""
@@ -106,6 +106,7 @@
                   src="http://112.125.88.230/webgl/index.html"
                   :style="{ width: width, height: height }"
                   class="ifremud"
+                  id="iframe"
                   style="position: static"
                 ></iframe>
               </div>
@@ -304,20 +305,22 @@ export default {
       width: "100%", //自适应当前窗口宽度
     };
   },
-  created() {},
+  created() {
+    localStorage.setItem("isshow",1)
+  },
   mounted() {
     this.nowTimes();
+    this.iframe = document.getElementById("iframe");
+    this.postMsg();
   },
   methods: {
-    tothreed() {
-      //window.location.href = "http://112.125.88.230/webgl/index.html";
-
-      this.$router.push({
-        path: "/threed",
-        query: {
-          flag: 2,
-        },
-      });
+    postMsg() {
+      //将token传递给子页面
+      let token = 0;
+      let param = {
+        token,
+      };
+      this.iframe.contentWindow.postMessage(param, "*");
     },
     timeFormate(timeStamp) {
       let year = new Date(timeStamp).getFullYear();
@@ -387,8 +390,13 @@ export default {
       clearInterval(this.nowTimes);
       this.nowTimes = null;
     },
-    Login() {
+    goSystem() {
       this.$router.push({ path: "/realtimeMnitor/realtime" });
+    },
+    tothreed() {
+      this.$router.push({
+        path: "/threed",
+      });
     },
     outLogin() {
       this.$router.push({ path: "/login" });
@@ -424,7 +432,7 @@ export default {
   color: #4496e1;
   line-height: 54px;
 }
-.login {
+.system {
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -439,7 +447,7 @@ export default {
   font-weight: 380;
   color: #4496e1;
 }
-.login :hover {
+.system :hover {
   cursor: pointer;
 }
 .el-icon-s-custom {
@@ -522,7 +530,7 @@ export default {
   height: 35px;
   color: #2e89e0;
   line-height: 29px;
-  text-shadow: 0 0 10px #2e89e0, 0 0 2px #87e9eb;
+  text-shadow: 0 0 4px #2e89e0, 0 0 2px #87e9eb;
   border-top: solid 1px #111e38;
   border-bottom: solid 1px #111e38;
   margin: 0 auto;

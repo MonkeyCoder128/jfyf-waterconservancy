@@ -3,6 +3,86 @@
     <div class="echartAllBox">
       <div class="echartBox">
         <div class="topMenu">
+          <span>水位</span>
+          <div class="selectCharts">
+            <em style="color: #333333">设备</em>
+            <el-select
+              style="margin: 0 12px"
+              @change="changeWaterLevel"
+              v-model="waterLevelType"
+              size="mini"
+            >
+              <el-option
+                v-for="item in levelOption"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
+            <em @click="jumpWaterStage">更多></em>
+          </div>
+        </div>
+        <div class="chartDataBox">
+          <Chart :chartData="waterLevelData" :width="'100%'" :height="'100%'" />
+        </div>
+      </div>
+
+      <div class="echartBox">
+        <div class="topMenu">
+          <span>形变位移</span>
+          <div class="selectCharts">
+            <em style="color: #333333">设备</em>
+            <el-select
+              style="margin: 0 12px"
+              @change="changeDeformation"
+              v-model="deformationType"
+              size="mini"
+            >
+              <el-option
+                v-for="item in offsetOptions"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
+            <em @click="jumpDeformation">更多></em>
+          </div>
+        </div>
+        <div class="chartDataBox">
+          <Chart :chartData="shiftData" :width="'100%'" :height="'100%'" />
+          <Chart :chartData="offsetData" :width="'100%'" :height="'100%'" />
+        </div>
+      </div>
+      <div class="echartBox">
+        <div class="topMenu">
+          <span>库压渗压</span>
+          <div class="selectCharts">
+            <em style="color: #333333">设备</em>
+            <el-select
+              style="margin: 0 12px"
+              @change="changeOsmometer"
+              v-model="osmometerType"
+              size="mini"
+            >
+              <el-option
+                v-for="item in pressureOptions"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
+            <em @click="jumpOsmoticPressure">更多></em>
+          </div>
+        </div>
+        <div class="chartDataBox">
+          <Chart :chartData="pressureData" :width="'100%'" :height="'100%'" />
+        </div>
+      </div>
+      <div class="echartBox">
+        <div class="topMenu">
           <span>流速、流量</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
@@ -13,7 +93,7 @@
               size="mini"
             >
               <el-option
-                v-for="item in optionsType"
+                v-for="item in tachometerOptions"
                 :key="item.label"
                 :label="item.value"
                 :value="item.label"
@@ -30,58 +110,6 @@
       </div>
       <div class="echartBox">
         <div class="topMenu">
-          <span>水位</span>
-          <div class="selectCharts">
-            <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeWaterLevel"
-              v-model="waterLevelType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in optionsType"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
-              </el-option>
-            </el-select>
-            <em @click="jumpWaterStage">更多></em>
-          </div>
-        </div>
-        <div class="chartDataBox">
-          <Chart :chartData="waterLevelData" :width="'100%'" :height="'100%'" />
-        </div>
-      </div>
-      <div class="echartBox">
-        <div class="topMenu">
-          <span>库压渗压</span>
-          <div class="selectCharts">
-            <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeOsmometer"
-              v-model="osmometerType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in optionsType"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
-              </el-option>
-            </el-select>
-            <em @click="jumpOsmoticPressure">更多></em>
-          </div>
-        </div>
-        <div class="chartDataBox">
-          <Chart :chartData="pressureData" :width="'100%'" :height="'100%'" />
-        </div>
-      </div>
-      <div class="echartBox">
-        <div class="topMenu">
           <span>水质分析</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
@@ -92,7 +120,7 @@
               size="mini"
             >
               <el-option
-                v-for="item in optionsType"
+                v-for="item in analyseOptions"
                 :key="item.label"
                 :label="item.value"
                 :value="item.label"
@@ -104,33 +132,6 @@
         </div>
         <div class="chartDataBox">
           <Chart :chartData="waterQuality" :width="'100%'" :height="'100%'" />
-        </div>
-      </div>
-      <div class="echartBox">
-        <div class="topMenu">
-          <span>形变位移</span>
-          <div class="selectCharts">
-            <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeDeformation"
-              v-model="deformationType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in optionsType"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
-              </el-option>
-            </el-select>
-            <em @click="jumpDeformation">更多></em>
-          </div>
-        </div>
-        <div class="chartDataBox">
-          <Chart :chartData="shiftData" :width="'100%'" :height="'100%'" />
-          <Chart :chartData="offsetData" :width="'100%'" :height="'100%'" />
         </div>
       </div>
       <div class="echartBox">
@@ -267,31 +268,119 @@ export default {
       shiftData: {}, //形变
       offsetData: {}, //位移
       alarmStateData: {}, //预警状态
-      flowRateType: "黄金糕",
-      waterLevelType: "黄金糕",
-      osmometerType: "黄金糕",
-      waterQualityType: "黄金糕",
-      deformationType: "黄金糕",
-      optionsType: [
+      waterLevelType: "设备A",
+      deformationType: "设备A",
+      osmometerType: "设备A",
+      flowRateType: "设备A",
+      waterQualityType: "设备A",
+      levelOption: [
         {
-          value: "设备A",
-          label: "黄金糕",
+          value: "投入式水位计一",
+          label: "设备A",
         },
         {
-          value: "设备B",
-          label: "双皮奶",
+          value: "投入式水位计二",
+          label: "设备B",
         },
         {
-          value: "设备C",
-          label: "蚵仔煎",
+          value: "投入式水位计三",
+          label: "设备C",
         },
         {
-          value: "设备D",
-          label: "龙须面",
+          value: "投入式水位计四",
+          label: "设备D",
         },
         {
-          value: "设备E",
-          label: "北京烤鸭",
+          value: "投入式水位计五",
+          label: "设备E",
+        },
+      ],
+      offsetOptions: [
+        {
+          value: "GNSS接收机一",
+          label: "设备A",
+        },
+        {
+          value: "GNSS接收机二",
+          label: "设备B",
+        },
+        {
+          value: "GNSS接收机三",
+          label: "设备C",
+        },
+        {
+          value: "GNSS接收机四",
+          label: "设备D",
+        },
+        {
+          value: "GNSS接收机五",
+          label: "设备E",
+        },
+      ],
+      pressureOptions: [
+        {
+          value: "振弦式渗压计一",
+          label: "设备A",
+        },
+        {
+          value: "振弦式渗压计二",
+          label: "设备B",
+        },
+        {
+          value: "振弦式渗压计三",
+          label: "设备C",
+        },
+        {
+          value: "振弦式渗压计四",
+          label: "设备D",
+        },
+        {
+          value: "振弦式渗压计五",
+          label: "设备E",
+        },
+      ],
+      tachometerOptions: [
+        {
+          value: "流速流量仪一",
+          label: "设备A",
+        },
+        {
+          value: "流速流量仪二",
+          label: "设备B",
+        },
+        {
+          value: "流速流量仪三",
+          label: "设备C",
+        },
+        {
+          value: "流速流量仪四",
+          label: "设备D",
+        },
+        {
+          value: "流速流量仪五",
+          label: "设备E",
+        },
+      ],
+      analyseOptions: [
+        {
+          value: "水质测定仪一",
+          label: "设备A",
+        },
+        {
+          value: "水质测定仪二",
+          label: "设备B",
+        },
+        {
+          value: "水质测定仪三",
+          label: "设备C",
+        },
+        {
+          value: "水质测定仪四",
+          label: "设备D",
+        },
+        {
+          value: "水质测定仪五",
+          label: "设备E",
         },
       ],
       deviceData: [
@@ -1170,10 +1259,6 @@ export default {
         { value: 10, name: "氦含量" },
       ];
       let data = {
-        tooltip: {
-          trigger: "item",
-          formatter: "{b}: {c} ({d}%)",
-        },
         legend: {
           icon: "rect",
           left: "67%", //图例距离左的距离
@@ -1239,7 +1324,7 @@ export default {
             type: "pie",
             center: ["30%", "50%"],
             radius: ["55%", "70%"],
-            silent: true,
+            avoidLabelOverlap: false,
             labelLine: {
               show: false,
             },
@@ -1261,7 +1346,6 @@ export default {
                 },
               },
             },
-
             data: dataCake,
             itemStyle: {
               normal: {
@@ -1885,7 +1969,7 @@ export default {
 <style  lang="scss" scoped>
 .selectCharts {
   /deep/.el-input__inner {
-    width: 90px;
+    width: 133px;
     height: 20px;
   }
 }

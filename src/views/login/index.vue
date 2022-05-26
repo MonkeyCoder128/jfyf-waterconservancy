@@ -2,8 +2,8 @@
   <div class="loginPage">
     <div class="loginBox">
       <div class="loginLeft">
-        <h3>智慧水坝管理平台</h3>
-        <p>实时掌握大坝运行数据，全面赋能智慧水坝建设</p>
+        <h3>水库智慧管理平台</h3>
+        <p>实时掌握大坝运行数据，全面赋能智慧水库建设</p>
       </div>
       <div class="loginRight">
         <el-form ref="loginForm" :model="loginForm" class="loginformBox">

@@ -5,18 +5,9 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   mounted() {
     this.myecharts();
-    //通过ajax访问url，由于我们这里配置了mock方式，所以相当于是mock返回给我们模拟的后端接口返回数据
-    // axios.get("/explain/waterStage")
-    // .then(function (res) {
-    //   console.log(res);
-    // })
-    // .catch(function (err) {
-    //   console.log(err);
-    // });
   },
   methods: {
     myecharts() {
