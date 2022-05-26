@@ -4,15 +4,15 @@
       <span class="cardTitle">当前数据</span>
       <div class="echartsBoxContent">
         <div class="echartsBox">
-          <span>设备:流量计A</span>
+          <span>设备:振弦式渗压计一</span>
           <equipmentChart :parentData="this.childData.equipmentChartA"></equipmentChart>
         </div>
         <div class="echartsBox">
-          <span>设备:流量计B</span>
+          <span>设备:振弦式渗压计二</span>
           <equipmentChart :parentData="this.childData.equipmentChartB"></equipmentChart>
         </div>
         <div class="echartsBox">
-          <span>设备:流量计C</span>
+          <span>设备:振弦式渗压计三</span>
           <equipmentChart :parentData="this.childData.equipmentChartC"></equipmentChart>
         </div>
       </div>
@@ -41,21 +41,21 @@
               <li>
                 <div class="iconLable">
                   <span class="Icon"></span>
-                  <span>A设备</span>
+                  <span>振弦式渗压计一</span>
                 </div>
                 <span class="percent">28%</span>
               </li>
               <li>
                 <div class="iconLable">
                   <span class="Icon"></span>
-                  <span>B设备</span>
+                  <span>振弦式渗压计二</span>
                 </div>
                 <span class="percent">24%</span>
               </li>
               <li>
                 <div class="iconLable">
                   <span class="Icon"></span>
-                  <span>C设备</span>
+                  <span>振弦式渗压计三</span>
                 </div>
                 <span class="percent">48%</span>
               </li>
@@ -234,14 +234,16 @@ export default {
       color: #333333;
     }
     .warningBox {
-      width: 80%;
+      // width: 80%;
+      width: 100%;
       height: 100%;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-content: center;
       ul {
-        width: 60%;
+        // width: 60%;
+        width: 70%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;

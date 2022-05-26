@@ -72,3 +72,12 @@ export const clearCookie = (name) => {
     document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 
 }
+
+// 对返回的进展数据进行map遍历后渲染相应进展情况
+export const progressStatus = new Map([
+    [0, "平台预警"],
+    [1, "等待维修"],
+    [2, "维修中"],
+    [3, "维修完成"],
+    [4, "已解决"],
+]);

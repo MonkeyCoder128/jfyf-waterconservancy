@@ -19,7 +19,8 @@
               highlight-current
               @node-click="handleNodeClick"
               ref="tree"
-            >
+              node-key="id"
+              :default-checked-keys="[5]">
               <span slot-scope="{ data }">
                 <span>
                   <i :class="data.icon" class="mr5"></i>{{ data.label }}
@@ -74,12 +75,12 @@ export default {
               icon: "el-icon-reading",
               children: [
                 {
-                  id: 5,
+                  id: 9,
                   label: "B区 -1",
                   icon: "el-icon-location-outline",
                 },
                 {
-                  id: 6,
+                  id: 10,
                   label: "B区 -2  ",
                   icon: "el-icon-location-outline",
                 },
@@ -117,22 +118,23 @@ export default {
     // this.currentTime(); // 计时器
     let that = this;
     fetch("https://open.ys7.com/jssdk/ezopen/demo/token")
-      .then((response) => response.json())
-      .then((res) => {
-        var accessToken = res.data.accessToken;
-        var player = new EZUIKit.EZUIKitPlayer({
-          id: "video-container", // 视频容器ID
-          accessToken: accessToken,
-          poster: "",
-          url: "ezopen://open.ys7.com/G39444019/1.live",
-          template: "simple", // simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版; theme-可配置主题；
-          // plugin: ['talk'],                       // 加载插件，talk-对讲
-          height: height,
-          width: width,
-          // handleSuccess:function(ress){
-          // }
-        });
+    .then((response) => response.json())
+    .then((res) => {
+      var accessToken = res.data.accessToken;
+      var player = new EZUIKit.EZUIKitPlayer({
+        id: "video-container", // 视频容器ID
+        accessToken: accessToken,
+        poster: "",
+        url: "ezopen://open.ys7.com/G39444019/1.live",
+        template: "simple", // simple - 极简版;standard-标准版;security - 安防版(预览回放);voice-语音版; theme-可配置主题；
+        // plugin: ['talk'],                       // 加载插件，talk-对讲
+        height: height,
+        width: width,
+        // handleSuccess:function(ress){
+        // }
       });
+    });
+    this.$refs.tree.setCurrentKey(this.dataList[0].children[0].children[0].id);
   },
   watch: {
     filterText(val) {

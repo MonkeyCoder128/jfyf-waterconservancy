@@ -106,7 +106,7 @@
           ],
           series: [
             {
-              name: "A设备",
+              name: "振弦式渗压计一",
               type: "line",
               smooth: true,
               symbolSize: 8,
@@ -162,7 +162,7 @@
               data: this.parentData.LineOne,
             },
             {
-              name: "B设备",
+              name: "振弦式渗压计二",
               type: "line",
               smooth: true,
               symbolSize: 8,
@@ -212,7 +212,7 @@
               data: this.parentData.LineTwo,
             },
             {
-              name: "C设备",
+              name: "振弦式渗压计三",
               type: "line",
               smooth: true,
               symbolSize: 8,

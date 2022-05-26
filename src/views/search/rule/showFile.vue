@@ -26,6 +26,7 @@ export default {
               this.wordFile = resultObject.value;
             });
           });
+          console.log(this.wordFile);
         }
       };
       xhr.send();
