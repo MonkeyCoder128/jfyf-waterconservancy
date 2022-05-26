@@ -215,6 +215,8 @@
                   </el-button>
                   <el-button
                     v-if="userType == 'ROLE_USER' && scope.row.status == 3"
+
+                    
                     :disabled="scope.row.reportType == 1 ? true : false"
                     size="small"
                     type="text"
