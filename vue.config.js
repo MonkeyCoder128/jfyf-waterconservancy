@@ -14,5 +14,24 @@ module.exports = {
       performance: {}
     };
   },
-
+  // publicPath: "reservoir-web", // 公共路径 默认为"/"，建议使用"./"相对路径
+  devServer: {   // 本地服务器配置(npm run serve)
+    port: 8000, // 端口
+    host: "localhost", // 域名
+    https: false, // 是否开启https
+    open: true,	// 是否在开启服务器后自动打开浏览器访问该服务器 
+    proxy: {
+      '/api': {
+        target: 'http://112.125.88.230/jfyf', //测试服务器
+        // target: 'http://10.1.5.203:8000/jfyf', //杨磊
+        // target: 'http://10.1.5.156:8000/jfyf', //孙少鹏
+        //target: 'http://10.1.5.37/jfyf', //荆蔚杰
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        },
+        ws: false
+      }
+    },
+  },
 }
