@@ -212,11 +212,11 @@
         <div>
           正常运行设备：<span
             style="color: #1c48bf; margin-right: 20px; font-size: 18px"
-            >14台</span
+            >13台</span
           >
         </div>
         <div>
-          异常设备：<span style="color: #ea951c; font-size: 18px">2台</span>
+          异常设备：<span style="color: #ea951c; font-size: 18px">6台</span>
         </div>
       </div>
       <el-table
@@ -286,14 +286,6 @@ export default {
           value: "投入式水位计三",
           label: "设备C",
         },
-        {
-          value: "投入式水位计四",
-          label: "设备D",
-        },
-        {
-          value: "投入式水位计五",
-          label: "设备E",
-        },
       ],
       offsetOptions: [
         {
@@ -310,11 +302,11 @@ export default {
         },
         {
           value: "GNSS接收机四",
-          label: "设备D",
+          label: "设备B",
         },
         {
           value: "GNSS接收机五",
-          label: "设备E",
+          label: "设备C",
         },
       ],
       pressureOptions: [
@@ -329,14 +321,6 @@ export default {
         {
           value: "振弦式渗压计三",
           label: "设备C",
-        },
-        {
-          value: "振弦式渗压计四",
-          label: "设备D",
-        },
-        {
-          value: "振弦式渗压计五",
-          label: "设备E",
         },
       ],
       tachometerOptions: [
@@ -356,10 +340,6 @@ export default {
           value: "流速流量仪四",
           label: "设备D",
         },
-        {
-          value: "流速流量仪五",
-          label: "设备E",
-        },
       ],
       analyseOptions: [
         {
@@ -374,53 +354,100 @@ export default {
           value: "水质测定仪三",
           label: "设备C",
         },
-        {
-          value: "水质测定仪四",
-          label: "设备D",
-        },
-        {
-          value: "水质测定仪五",
-          label: "设备E",
-        },
       ],
       deviceData: [
         {
-          name: "设备一",
+          name: "投入式水位计一",
           type: "0",
           address: "陕西省西安市雁塔区",
         },
         {
-          name: "设备二",
+          name: "投入式水位计二",
           type: "0",
           address: "陕西省西安市高陵区",
         },
         {
-          name: "设备三",
+          name: "投入式水位计三",
           type: "1",
           address: "陕西省西安市碑林区",
         },
         {
-          name: "设备四",
+          name: "GNSS接收机一",
           type: "0",
           address: "陕西省西安市莲湖区",
         },
         {
-          name: "设备五",
+          name: "GNSS接收机二",
           type: "1",
           address: "陕西省西安市长安区",
         },
         {
-          name: "设备六",
+          name: "GNSS接收机三",
           type: "1",
           address: "陕西省西安市鄠邑区",
         },
         {
-          name: "设备七",
+          name: "GNSS接收机四",
+          type: "1",
+          address: "陕西省西安市长安区",
+        },
+        {
+          name: "GNSS接收机五",
+          type: "1",
+          address: "陕西省西安市鄠邑区",
+        },
+        {
+          name: "振弦式渗压计一",
           type: "0",
           address: "陕西省西安市高新区",
         },
         {
-          name: "设备八",
+          name: "振弦式渗压计二",
+          type: "1",
+          address: "陕西省西安市灞桥区",
+        },
+        {
+          name: "振弦式渗压计三",
+          type: "1",
+          address: "陕西省西安市灞桥区",
+        },
+        {
+          name: "流速流量仪一",
+          type: "1",
+          address: "陕西省西安市莲湖区",
+        },
+        {
+          name: "流速流量仪二",
+          type: "1",
+          address: "陕西省西安市长安区",
+        },
+        {
+          name: "流速流量仪三",
+          type: "0",
+          address: "陕西省西安市鄠邑区",
+        },
+        {
+          name: "流速流量仪四",
+          type: "0",
+          address: "陕西省西安市鄠邑区",
+        },
+        {
+          name: "流速流量仪四",
+          type: "1",
+          address: "陕西省西安市鄠邑区",
+        },
+        {
+          name: "水质测定仪一",
+          type: "0",
+          address: "陕西省西安市高新区",
+        },
+        {
+          name: "水质测定仪二",
+          type: "1",
+          address: "陕西省西安市灞桥区",
+        },
+        {
+          name: "水质测定仪三",
           type: "1",
           address: "陕西省西安市灞桥区",
         },
@@ -1260,9 +1287,10 @@ export default {
       ];
       let data = {
         legend: {
+          selectedMode:false,
           icon: "rect",
           left: "67%", //图例距离左的距离
-          bottom: "15%",
+          y: 'center',
           itemGap: 15,
           itemHeight: 17,
           itemWidth: 17,
@@ -1298,7 +1326,7 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["30%", "50%"],
+            center: ["32%", "50%"],
             radius: ["40%", "50%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
@@ -1322,7 +1350,7 @@ export default {
           {
             name: "饼图数据",
             type: "pie",
-            center: ["30%", "50%"],
+            center: ["32%", "50%"],
             radius: ["55%", "70%"],
             avoidLabelOverlap: false,
             labelLine: {

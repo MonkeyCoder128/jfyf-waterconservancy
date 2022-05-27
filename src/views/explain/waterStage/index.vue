@@ -123,29 +123,19 @@ export default {
       },
       tableData: [
         {
-          date: "渭南",
+          date: "投入式水位计一",
           name: "15",
           type: "0",
         },
         {
-          date: "西安",
+          date: "投入式水位计二",
           name: "13",
           type: "1",
         },
         {
-          date: "宝鸡",
+          date: "投入式水位计三",
           name: "19",
           type: "1",
-        },
-        {
-          date: "咸阳",
-          name: "13",
-          type: "0",
-        },
-        {
-          date: "汉中",
-          name: "11",
-          type: "0",
         },
       ],
       optionOne: "",

@@ -50,7 +50,7 @@
                   <span style="color:${color[v.componentIndex]};">${
                   v.value
                 }</span>
-                  万元`;
+                  次`;
               });
 
               return html;

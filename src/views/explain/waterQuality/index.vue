@@ -168,29 +168,19 @@ export default {
       },
       tableData: [
         {
-          date: "渭南",
+          date: "水质测定仪一",
           name: "30",
           type: "0",
         },
         {
-          date: "西安",
+          date: "水质测定仪二",
           name: "36",
           type: "1",
         },
         {
-          date: "宝鸡",
+          date: "水质测定仪三",
           name: "27",
           type: "1",
-        },
-        {
-          date: "咸阳",
-          name: "19",
-          type: "0",
-        },
-        {
-          date: "汉中",
-          name: "22",
-          type: "0",
         },
       ],
       optionOne: "",

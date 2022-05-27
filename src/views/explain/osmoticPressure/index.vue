@@ -5,15 +5,21 @@
       <div class="echartsBoxContent">
         <div class="echartsBox">
           <span>设备:振弦式渗压计一</span>
-          <equipmentChart :parentData="this.childData.equipmentChartA"></equipmentChart>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartA"
+          ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:振弦式渗压计二</span>
-          <equipmentChart :parentData="this.childData.equipmentChartB"></equipmentChart>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartB"
+          ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:振弦式渗压计三</span>
-          <equipmentChart :parentData="this.childData.equipmentChartC"></equipmentChart>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartC"
+          ></equipmentChart>
         </div>
       </div>
     </div>
@@ -111,41 +117,31 @@ export default {
   data() {
     return {
       // 子组件数据
-      childData:{
-        equipmentChartA:'35',
-        equipmentChartB:'58',
-        equipmentChartC:'88',
-        brokenLineChart:{
-          LineOne:[333, 300, 280, 100, 109, 37, 105, 160],
-          LineTwo:[100, 138, 350, 173, 180, 150, 180, 230],
-          LineThree:[233, 233, 200, 180, 199, 233, 210, 180],
-        }
+      childData: {
+        equipmentChartA: "35",
+        equipmentChartB: "58",
+        equipmentChartC: "88",
+        brokenLineChart: {
+          LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
+          LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
+          LineThree: [233, 233, 200, 180, 199, 233, 210, 180],
+        },
       },
       tableData: [
         {
-          date: "渭南",
+          date: "振弦式渗压计一",
           name: "19",
           type: "0",
         },
         {
-          date: "西安",
+          date: "振弦式渗压计二",
           name: "26",
           type: "1",
         },
         {
-          date: "宝鸡",
+          date: "振弦式渗压计三",
           name: "25",
           type: "1",
-        },
-        {
-          date: "咸阳",
-          name: "13",
-          type: "0",
-        },
-        {
-          date: "汉中",
-          name: "22",
-          type: "0",
         },
       ],
       optionOne: "",

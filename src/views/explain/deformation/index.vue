@@ -38,6 +38,30 @@
             />
           </div>
         </div>
+        <div class="echartsBox">
+          <span>设备:GNSS接收机四</span>
+
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
+          </div>
+        </div>
+        <div class="echartsBox">
+          <span>设备:GNSS接收机五</span>
+
+          <div class="chartDataBox">
+            <Chart :chartData="gaugeAllData" :width="'100%'" :height="'100%'" />
+            <Chart
+              :chartData="gaugeAllData2"
+              :width="'100%'"
+              :height="'100%'"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div class="bottomBox">
@@ -56,37 +80,35 @@
             >
           </div>
         </div>
-        <div class="echartsBox" style="margin: 10px 0">
+        <div class="echartsBox echartsBoxBottom" style="margin: 10px 0">
           <span>预警数据对比</span>
           <Chart :chartData="warningData" :width="'100%'" :height="'100%'" />
         </div>
         <span class="cardTitle">设备检测</span>
-        <div style="height: calc(100% - 200px)">
-          <el-table
-            :data="tableData"
-            :row-style="{ height: '0' }"
-            :cell-style="{ padding: '0' }"
-            :header-cell-style="{ background: '#EEEEEE' }"
-          >
-            <el-table-column prop="date" label="监测点" />
-            <el-table-column prop="name" label="预警次数" />
-            <el-table-column prop="type" label="设备状态">
-              <template slot-scope="scope">
-                <span v-if="scope.row.type === '1'">在线</span>
-                <span v-if="scope.row.type === '0'" style="color: #de1111"
-                  >离线</span
-                >
-              </template>
-            </el-table-column>
-            <el-table-column label="操作">
-              <template slot-scope="scope">
-                <el-button @click="seeAnalyse(scope.row)" type="text">
-                  查看
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
+        <el-table
+          :data="tableData"
+          :row-style="{ height: '0' }"
+          :cell-style="{ padding: '0' }"
+          :header-cell-style="{ background: '#EEEEEE' }"
+        >
+          <el-table-column prop="date" label="监测点" />
+          <el-table-column prop="name" label="预警次数" />
+          <el-table-column prop="type" label="设备状态">
+            <template slot-scope="scope">
+              <span v-if="scope.row.type === '1'">在线</span>
+              <span v-if="scope.row.type === '0'" style="color: #de1111"
+                >离线</span
+              >
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button @click="seeAnalyse(scope.row)" type="text">
+                查看
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
       <div class="cardBottom">
         <span class="cardTitle">预警统计</span>
@@ -111,27 +133,27 @@ export default {
       statData: {},
       tableData: [
         {
-          date: "2016-05-02",
+          date: "GNSS接收机一",
           name: "101",
           type: "0",
         },
         {
-          date: "2016-05-02",
+          date: "GNSS接收机二",
           name: "101",
           type: "0",
         },
         {
-          date: "2016-05-02",
+          date: "GNSS接收机三",
           name: "101",
           type: "0",
         },
         {
-          date: "2016-05-02",
+          date: "GNSS接收机四",
           name: "101",
           type: "0",
         },
         {
-          date: "2016-05-02",
+          date: "GNSS接收机五",
           name: "101",
           type: "0",
         },
@@ -548,19 +570,29 @@ export default {
     },
     /**设备检测图表 */
     getWarningData() {
-      let colors = ["#148F97", "#1289BA", "#115CB9"];
+      let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
       var dataCake = [
         { name: "GNSS接收机一", value: 50 },
         { name: "GNSS接收机二", value: 80 },
         { name: "GNSS接收机三", value: 70 },
+        { name: "GNSS接收机四", value: 90 },
+        { name: "GNSS接收机五", value: 30 },
       ];
       let data = {
         legend: {
-          data: ["GNSS接收机一", "GNSS接收机二", "GNSS接收机三"],
+          selectedMode: false,
+          data: [
+            "GNSS接收机一",
+            "GNSS接收机二",
+            "GNSS接收机三",
+            "GNSS接收机四",
+            "GNSS接收机五",
+          ],
           icon: "rect",
-          left: "65%", //图例距离左的距离
-          top: "7%",
-          itemGap: 35,
+          orient: "vertical",
+          left: "54%", //图例距离左的距离
+          y: "center",
+          itemGap: 20,
           itemWidth: 19,
           itemHeight: 19,
           textStyle: {
@@ -574,6 +606,12 @@ export default {
               },
               t2: {
                 color: colors[2],
+              },
+              t3: {
+                color: colors[3],
+              },
+              t4: {
+                color: colors[4],
               },
             },
           },
@@ -589,7 +627,7 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["40%", "50%"],
+            center: ["30%", "50%"],
             radius: ["50%", "60%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
@@ -613,13 +651,14 @@ export default {
           {
             type: "pie",
             radius: ["65%", "80%"],
-            center: ["40%", "50%"],
+            center: ["30%", "50%"],
             avoidLabelOverlap: false,
             labelLine: {
               show: false,
             },
             label: {
               formatter: "{a|{c}/次}{abg|}\n{hr|}\n ",
+              fontSize: 1,
               borderWidth: 1,
               borderRadius: 4,
               rich: {
@@ -641,7 +680,13 @@ export default {
               normal: {
                 color: function (params) {
                   //自定义颜色
-                  var colorList = ["#148F97", "#1289BA", "#115CB9"];
+                  var colorList = [
+                    "#148F97",
+                    "#1289BA",
+                    "#115CB9",
+                    "#37ABC1",
+                    "#EA951C",
+                  ];
                   return colorList[params.dataIndex];
                 },
                 borderRadius: 0,
@@ -656,10 +701,17 @@ export default {
     },
     /**预警统计图表 */
     getStatData() {
-      let color = ["#148F97", "#115CB9", "rgba(17, 92, 185, 0.6)"];
+      let color = [
+        "#148F97",
+        "#115CB9",
+        "rgba(17, 92, 185, 0.6)",
+        "#F3B63E",
+        "#3F85FF",
+      ];
       let data = {
         legend: {
-          bottom: 15,
+          selectedMode: false,
+          bottom: 3,
           itemGap: 36,
         },
         grid: {
@@ -682,7 +734,7 @@ export default {
                 <span style="color:${color[v.componentIndex]};">${
                 v.value
               }</span>
-                万元`;
+                次`;
             });
 
             return html;
@@ -743,16 +795,8 @@ export default {
             smooth: true,
             symbolSize: 8,
             zlevel: 3,
-            lineStyle: {
-              normal: {
-                color: color[0],
-              },
-              borderColor: "rgba(0,0,0,.4)",
-            },
             itemStyle: {
-              color: "rgba(25,163,223,1)",
-              borderColor: "#646ace",
-              borderWidth: 0,
+              color: color[0],
             },
             areaStyle: {
               //区域填充样式
@@ -799,10 +843,8 @@ export default {
             smooth: true,
             symbolSize: 8,
             zlevel: 3,
-            lineStyle: {
-              normal: {
-                color: color[1],
-              },
+            itemStyle: {
+              color: color[1],
             },
             areaStyle: {
               //区域填充样式
@@ -849,10 +891,8 @@ export default {
             smooth: true,
             symbolSize: 8,
             zlevel: 3,
-            lineStyle: {
-              normal: {
-                color: color[2],
-              },
+            itemStyle: {
+              color: color[2],
             },
             areaStyle: {
               //区域填充样式
@@ -893,6 +933,102 @@ export default {
             },
             data: [233, 233, 200, 180, 199, 233, 210, 180],
           },
+          {
+            name: "GNSS接收机四",
+            type: "line",
+            smooth: true,
+            symbolSize: 8,
+            zlevel: 3,
+            itemStyle: {
+              color: color[3],
+            },
+            areaStyle: {
+              //区域填充样式
+              normal: {
+                //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+                color: new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "#76bdc3",
+                    },
+                    {
+                      offset: 0.2,
+                      color: "#7fc0c9",
+                    },
+                    {
+                      offset: 0.65,
+                      color: "#f6f6f6",
+                    },
+                    {
+                      offset: 0.8,
+                      color: "#ffffff",
+                    },
+                    {
+                      offset: 1,
+                      color: "white",
+                    },
+                  ],
+                  false
+                ),
+                shadowColor: "rgba(10,219,250, 0.5)", //阴影颜色
+                shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+              },
+            },
+            data: [23, 63, 230, 280, 190, 293, 230, 180],
+          },
+          {
+            name: "GNSS接收机五",
+            type: "line",
+            smooth: true,
+            symbolSize: 8,
+            zlevel: 3,
+            itemStyle: {
+              color: color[4],
+            },
+            areaStyle: {
+              //区域填充样式
+              normal: {
+                //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+                color: new echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "#76bdc3",
+                    },
+                    {
+                      offset: 0.2,
+                      color: "#7fc0c9",
+                    },
+                    {
+                      offset: 0.65,
+                      color: "#f6f6f6",
+                    },
+                    {
+                      offset: 0.8,
+                      color: "#ffffff",
+                    },
+                    {
+                      offset: 1,
+                      color: "white",
+                    },
+                  ],
+                  false
+                ),
+                shadowColor: "rgba(10,219,250, 0.5)", //阴影颜色
+                shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+              },
+            },
+            data: [123, 73, 20, 210, 290, 93, 220, 120],
+          },
         ],
       };
       return data;
@@ -903,8 +1039,8 @@ export default {
  
 <style  lang="scss" scoped>
 @media screen and (min-width: 2000px) and (max-width: 3840px) {
-  .echartsBox {
-    height: 360px;
+  .echartsBoxBottom {
+    height: 380px;
   }
   .chartDataBox {
     height: 360px;
@@ -913,9 +1049,9 @@ export default {
     min-height: 430px;
     .echartsBoxContent {
       height: 360px;
-    }
-    .echartsBox {
-      height: 360px;
+      .echartsBox {
+        height: 360px;
+      }
     }
   }
   .bottomBox {
@@ -930,8 +1066,8 @@ export default {
 }
 
 @media screen and (min-width: 960px) and (max-width: 1920px) {
-  .echartsBox {
-    height: 200px;
+  .echartsBoxBottom {
+    height: 220px;
   }
   .chartDataBox {
     height: 200px;
@@ -940,10 +1076,16 @@ export default {
     min-height: 260px;
     .echartsBoxContent {
       height: 200px;
+      .echartsBox {
+        height: 200px;
+      }
     }
   }
+  .bottomBox {
+    margin-bottom: 60px;
+  }
   .cardBottom {
-    height: 600px;
+    height: 626px;
   }
   .charts {
     height: 560px;
@@ -951,6 +1093,7 @@ export default {
 }
 .deformationPage {
   height: 100%;
+  overflow: auto;
   .cardTitle {
     font-size: 16px;
     color: #333333;
@@ -976,14 +1119,16 @@ export default {
     width: 100%;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 5px 12px;
+    padding: 5px 20px;
     .echartsBoxContent {
       width: 100%;
+      height: auto;
       display: flex;
-      justify-content: space-around;
-      align-items: center;
+      flex-flow: wrap;
       .echartsBox {
-        width: 32.5%;
+        width: 32.1%;
+        margin-right: 20px;
+        margin-bottom: 20px;
       }
     }
   }

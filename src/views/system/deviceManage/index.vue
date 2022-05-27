@@ -96,30 +96,50 @@ export default {
       total: 0,
       tableData: [
         {
-          title: "设备A",
-          type: "告警消息",
-          address: "陕西省西安市",
+          title: "水质测定仪一",
+          address: "陕西省西安市雁塔水库",
           time:'2022-05-22  12:00:12',
           type: "0",
         },
         {
-          title: "设备B",
-          type: "提示消息",
-          address: "陕西省西安市",
+          title: "投入式水位计一",
+          address: "陕西省西安市高陵水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
-          title: "设备C",
-          type: "通知消息",
-          address: "陕西省西安市",
+          title: "GNSS接收机二",
+          address: "陕西省西安碑林水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
-          title: "设备D",
-          type: "展示消息",
-          address: "陕西省西安市",
+          title: "振弦式渗压计一",
+          address: "陕西省西安市莲湖水库",
+          time:'2022-05-22  12:00:12',
+          type: "0",
+        },
+        {
+          title: "GNSS接收机五",
+          address: "陕西省西安市鄠邑水库",
+          time:'2022-05-22  12:00:12',
+          type: "0",
+        },
+        {
+          title: "流速流量仪一",
+          address: "陕西省西安市莲湖水库",
+          time:'2022-05-22  12:00:12',
+          type: "1",
+        },
+        {
+          title: "水质测定仪一",
+          address: "陕西省西安高新水库",
+          time:'2022-05-22  12:00:12',
+          type: "1",
+        },
+        {
+          title: "水质测定仪三",
+          address: "陕西省西安市灞桥水库",
           time:'2022-05-22  12:00:12',
           type: "0",
         },
@@ -127,15 +147,31 @@ export default {
       optionsType: [
         {
           key: "01",
-          value: "位置一",
+          value: "陕西省西安市雁塔水库",
         },
         {
           key: "02",
-          value: "位置二",
+          value: "陕西省西安市高陵水库",
         },
         {
           key: "03",
-          value: "位置三",
+          value: "陕西省西安碑林水库",
+        },
+        {
+          key: "04",
+          value: "陕西省西安市莲湖水库",
+        },
+        {
+          key: "05",
+          value: "陕西省西安市鄠邑水库",
+        },
+        {
+          key: "06",
+          value: "陕西省西安高新水库",
+        },
+        {
+          key: "07",
+          value: "陕西省西安市灞桥水库",
         },
       ],
     };
