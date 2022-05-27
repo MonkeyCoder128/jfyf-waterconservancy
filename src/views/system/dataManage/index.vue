@@ -372,6 +372,17 @@ export default {
     /**编辑事件 */
     editForm() {
       this.efitDisable = false;
+      this.$api.DATUM.getDetail(this.configForm.pid).then((res) => {
+        if (res.code === 200) {
+          this.location = [];
+          this.configForm = res.result;
+          this.location.push(
+            res.result.province,
+            res.result.city,
+            res.result.district
+          );
+        }
+      });
     },
     /**添加事件 */
     addForm() {
@@ -385,16 +396,12 @@ export default {
         type: "warning",
       })
         .then(() => {
-          this.$message({
-            type: "info",
-            message: "已确定",
-          });
           if (this.toAdd === true) {
             this.WhethertoAdd = true;
           } else if (this.toAdd === false) {
+            this.getConfigMessage();
             this.WhethertoAdd = false;
             this.efitDisable = true;
-            this.getConfigMessage();
           }
         })
         .catch(() => {
@@ -430,6 +437,7 @@ export default {
     getConfigMessage() {
       this.$api.DATUM.getDetail(this.configForm.pid).then((res) => {
         if (res.code === 200) {
+          this.location = [];
           this.WhethertoAdd = Object.keys(res.result).length === 0;
           this.toAdd = Object.keys(res.result).length === 0;
           this.efitDisable = true;
@@ -450,14 +458,6 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-/deep/ .el-form-item__label {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333333;
-}
-/deep/.el-form-item__label {
-  margin-right: 10px;
-}
 .dataManagePage {
   font-family: PingFang SC;
   background: #ffffff;

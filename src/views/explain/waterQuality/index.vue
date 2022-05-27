@@ -1,19 +1,25 @@
 <template>
-  <div class="waterStagePage">
+  <div class="waterQualityPage">
     <div class="cardMenu">
       <span class="cardTitle">当前数据</span>
       <div class="echartsBoxContent">
         <div class="echartsBox">
           <span>设备:水质测定仪一</span>
-          <equipmentChart :parentData="this.childData.equipmentChartA"></equipmentChart>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartA"
+          ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:水质测定仪二</span>
-          <equipmentChart :parentData="this.childData.equipmentChartB"></equipmentChart>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartB"
+          ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:水质测定仪三</span>
-          <equipmentChart :parentData="this.childData.equipmentChartC"></equipmentChart>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartC"
+          ></equipmentChart>
         </div>
       </div>
     </div>
@@ -29,37 +35,14 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >23次</span
+              >93次</span
             >
           </div>
         </div>
-        <div class="echartsBox" style="margin: 10px 0">
+        <div class="echartsBox echartsBoxBottom" style="margin: 10px 0">
           <span>预警数据对比</span>
           <div class="warningBox">
             <warningCharts />
-            <ul>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>水质测定仪一</span>
-                </div>
-                <span class="percent">23%</span>
-              </li>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>水质测定仪二</span>
-                </div>
-                <span class="percent">27%</span>
-              </li>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>水质测定仪三</span>
-                </div>
-                <span class="percent">50%</span>
-              </li>
-            </ul>
           </div>
         </div>
         <span class="cardTitle">设备检测</span>
@@ -102,7 +85,7 @@ import equipmentChart from "./components/equipmentChart.vue";
 import warningCharts from "./components/warningCharts.vue";
 import brokenLineCharts from "./components/brokenLineChart.vue";
 export default {
-  name: "WaterVelocity",
+  name: "WaterQuality",
   components: {
     warningCharts,
     brokenLineCharts,
@@ -111,60 +94,60 @@ export default {
   data() {
     return {
       // 子组件数据
-      childData:{
-        equipmentChartA:{
-          dataList:[
+      childData: {
+        equipmentChartA: {
+          dataList: [
             { value: 100, name: "二氧化碳" },
             { value: 205, name: "氢含量" },
             { value: 380, name: "氧含量" },
             { value: 235, name: "氮含量" },
             { value: 200, name: "氦含量" },
           ],
-          dataCake:[
+          dataCake: [
             { name: "二氧化碳", value: "43.67%" },
             { name: "氢含量", value: "29.26%" },
             { name: "氧含量", value: "27.07%" },
             { name: "氮含量", value: "29.26%" },
             { name: "氦含量", value: "27.07%" },
-          ]
+          ],
         },
-        equipmentChartB:{
-          dataList:[
+        equipmentChartB: {
+          dataList: [
             { value: 150, name: "二氧化碳" },
             { value: 305, name: "氢含量" },
             { value: 400, name: "氧含量" },
             { value: 135, name: "氮含量" },
             { value: 210, name: "氦含量" },
           ],
-          dataCake:[
+          dataCake: [
             { name: "二氧化碳", value: "20.67%" },
             { name: "氢含量", value: "27.26%" },
             { name: "氧含量", value: "30.07%" },
             { name: "氮含量", value: "25.26%" },
             { name: "氦含量", value: "21.07%" },
-          ]
+          ],
         },
-        equipmentChartC:{
-          dataList:[
+        equipmentChartC: {
+          dataList: [
             { value: 130, name: "二氧化碳" },
             { value: 280, name: "氢含量" },
             { value: 350, name: "氧含量" },
             { value: 250, name: "氮含量" },
             { value: 195, name: "氦含量" },
           ],
-          dataCake:[
+          dataCake: [
             { name: "二氧化碳", value: "19.88%" },
             { name: "氢含量", value: "29.56%" },
             { name: "氧含量", value: "37.46%" },
             { name: "氮含量", value: "28.88%" },
             { name: "氦含量", value: "25.43%" },
-          ]
+          ],
         },
-        brokenLineChart:{
-          LineOne:[333, 300, 280, 100, 109, 37, 105, 160],
-          LineTwo:[100, 138, 350, 173, 180, 150, 180, 230],
-          LineThree:[233, 233, 200, 180, 199, 233, 210, 180],
-        }
+        brokenLineChart: {
+          LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
+          LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
+          LineThree: [233, 233, 200, 180, 199, 233, 210, 180],
+        },
       },
       tableData: [
         {
@@ -202,26 +185,20 @@ export default {
 
 <style lang="scss" scoped>
 @media screen and (min-width: 2000px) and (max-width: 3840px) {
+  .echartsBoxBottom {
+    height: 350px;
+  }
   .chartDataBox {
-    height: 360px !important;
+    height: 330px !important;
   }
-  .echartsBox {
-    height: 360px !important;
-    .warningBox{
-      height: 100% !important;
-    }
-  }
-  .waterStagePage {
+  .waterQualityPage {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
-        height: 360px !important;
+        height: 330px !important;
         .echartsBox {
-          height: 360px !important;
+          height: 330px !important;
         }
-      }
-      .echartsBox {
-        height: 360px !important;
       }
     }
   }
@@ -237,8 +214,8 @@ export default {
 }
 
 @media screen and (min-width: 960px) and (max-width: 1920px) {
-  .echartsBox {
-    height: 200px;
+  .echartsBoxBottom {
+    height: 220px !important;
   }
   .chartDataBox {
     height: 200px;
@@ -248,6 +225,13 @@ export default {
     .echartsBoxContent {
       height: 200px;
     }
+    .echartsBox {
+      height: 200px;
+    }
+  }
+
+  .bottomBox {
+    margin-bottom: 60px;
   }
   .cardBottom {
     height: 600px;
@@ -256,7 +240,7 @@ export default {
     height: 560px;
   }
 }
-.waterStagePage {
+.waterQualityPage {
   height: auto;
   overflow: auto;
   height: 100%;
@@ -272,66 +256,19 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px 20px;
-    height: 200px;
     span {
       font-size: 14px;
       color: #333333;
     }
+  }
+  .echartsBoxBottom {
     .warningBox {
       width: 100%;
+      height: 100%;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-content: center;
-      height: 200px;
-      ul {
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        li {
-          width: 60%;
-          list-style: none;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          .iconLable {
-            display: flex;
-            align-items: center;
-            .Icon {
-              display: inline-block;
-              width: 17px;
-              height: 17px;
-              margin-right: 9px;
-            }
-          }
-        }
-        li:nth-child(1) {
-          .Icon {
-            background-color: #148f97;
-          }
-          .percent {
-            color: #148f97;
-          }
-        }
-        li:nth-child(2) {
-          .Icon {
-            background-color: #1289ba;
-          }
-          .percent {
-            color: #1289ba;
-          }
-        }
-        li:nth-child(3) {
-          .Icon {
-            background-color: #115cb9;
-          }
-          .percent {
-            color: #115cb9;
-          }
-        }
-      }
     }
   }
 

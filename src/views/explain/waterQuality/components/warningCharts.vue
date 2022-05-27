@@ -1,7 +1,6 @@
 <template>
   <div style="position: relative" class="box">
     <div ref="warningCharts" id="warningCharts"></div>
-    <!-- <img src="../../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
 </template>
 <script>
@@ -11,33 +10,68 @@ export default {
   },
   methods: {
     myecharts() {
-      var warningCharts = this.$echarts.init(
-        this.$refs.warningCharts
-      );
+      var warningCharts = this.$echarts.init(this.$refs.warningCharts);
+      let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
+      var dataCake = [
+        { name: "水质测定仪一", value: 30 },
+        { name: "水质测定仪二", value: 36 },
+        { name: "水质测定仪三", value: 27 },
+      ];
       var option = {
-        // tooltip: {
-        //   trigger: "item",
-        // },
-        grid: {
-          top: "2%",
-          left: "3%",
-          right: "2%",
-          bottom: "3%",
-          containLabel: true,
+        legend: {
+          selectedMode: false,
+          data: ["水质测定仪一", "水质测定仪二", "水质测定仪三"],
+          icon: "rect",
+          orient: "vertical",
+          left: "52%", //图例距离左的距离
+          y: "center",
+          itemGap: 20,
+          itemWidth: 19,
+          itemHeight: 19,
+          textStyle: {
+            fontSize: 14, //字体大小
+            rich: {
+              t0: {
+                color: colors[0],
+              },
+              t1: {
+                color: colors[1],
+              },
+              t2: {
+                color: colors[2],
+              },
+              t3: {
+                color: colors[3],
+              },
+              t4: {
+                color: colors[4],
+              },
+            },
+          },
+          formatter: function (param) {
+            let index = dataCake.findIndex((v) => v.name == param);
+            let str = `{white|${param.padEnd(5, "　")}}    {t${index}|${
+              dataCake[index].value + "%"
+            }}`;
+            return str;
+          },
         },
         series: [
           {
             name: "内置圆",
             type: "pie",
-            center: ["50%", "50%"],
-            radius: ["50%", "59%"], // 这个属性修改圆环宽度
+            center: ["30%", "50%"],
+            radius: ["50%", "60%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
             },
+            label: {
+              show: false,
+            },
             itemStyle: {
               color: "#F8C202",
-              borderWidth: 4,
+              borderWidth: 3,
               borderColor: "#fff",
             },
             data: [
@@ -48,12 +82,16 @@ export default {
             ],
           },
           {
-            name: "外层圆",
             type: "pie",
             radius: ["65%", "80%"],
+            center: ["30%", "50%"],
             avoidLabelOverlap: false,
+            labelLine: {
+              show: false,
+            },
             label: {
               formatter: "{a|{c}/次}{abg|}\n{hr|}\n ",
+              fontSize: 1,
               borderWidth: 1,
               borderRadius: 4,
               rich: {
@@ -70,26 +108,18 @@ export default {
                 },
               },
             },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: "10",
-                fontWeight: "bold",
-              },
-            },
-            labelLine: {
-              show: false,
-            },
-            data: [
-              { value: 780, name: "A设备" },
-              { value: 400, name: "B设备" },
-              { value: 480, name: "C设备" },
-            ],
+            data: dataCake,
             itemStyle: {
               normal: {
                 color: function (params) {
                   //自定义颜色
-                  var colorList = ["#115cb9", "#1289ba", "#148f97"];
+                  var colorList = [
+                    "#148F97",
+                    "#1289BA",
+                    "#115CB9",
+                    "#37ABC1",
+                    "#EA951C",
+                  ];
                   return colorList[params.dataIndex];
                 },
                 borderRadius: 0,
@@ -106,20 +136,13 @@ export default {
 };
 </script>
 <style  lang="scss" scoped>
-.box{
+.box {
   width: 100% !important;
   height: 100%;
 }
-#warningCharts{
+#warningCharts {
   width: 100%;
   height: 100%;
   margin: 0 auto;
 }
-// .juxing {
-//   position: absolute;
-//   top: 35px;
-//   left: 36px;
-//   width: 99px;
-//   height: 99px;
-// }
 </style>

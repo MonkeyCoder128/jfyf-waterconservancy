@@ -380,9 +380,6 @@ export default {
 /deep/.el-submenu__title:hover {
   background: none !important;
 }
-// /deep/.is-active{
-//    background: none !important;
-// }
 /deep/.el-menu-item:hover,
 .el-menu-item:focus {
   background: none;
