@@ -87,14 +87,17 @@
               <el-table-column
                 prop="exceptionLocation"
                 label="异常位置"
-                align="center"
-              >
+                align="center">
+              </el-table-column>
+              <el-table-column
+                prop="deviceName"
+                label="设备名称"
+                align="center">
               </el-table-column>
               <el-table-column
                 prop="deviceStatus"
                 label="设备状态"
-                align="center"
-              >
+                align="center">
                 <template slot-scope="scope">
                   <span
                     style="color: #ddb90a"
@@ -187,16 +190,15 @@
                     <span style="color: #0269e9" v-else>编辑</span>
                   </el-button>
                   <el-button
-                    v-if="userType == 'ROLE_ADMIN' && scope.row.status == 1"
+                    v-if="userType == 'ROLE_水库管理员' && scope.row.status == 1"
                     :disabled="scope.row.reportType == 1 ? true : false"
                     size="small"
                     type="text"
-                    @click="deletedata(scope.row.id)"
-                  >
+                    @click="deletedata(scope.row.id)">
                     <span style="color: #148f97"> 解除异常 </span>
                   </el-button>
                   <el-button
-                    v-if="userType == 'ROLE_ADMIN' && scope.row.status == 3"
+                    v-if="userType == 'ROLE_水库管理员' && scope.row.status == 3"
                     :disabled="scope.row.reportType == 1 ? true : false"
                     size="small"
                     type="text"
@@ -205,7 +207,7 @@
                     <span> 解除异常 </span>
                   </el-button>
                   <el-button
-                    v-if="userType == 'ROLE_USER' && scope.row.status == 1"
+                    v-if="userType == 'ROLE_安全巡检员' && scope.row.status == 1"
                     :disabled="true"
                     size="small"
                     type="text"
@@ -214,9 +216,7 @@
                     <span style="color: #148f97"> 已申请解除 </span>
                   </el-button>
                   <el-button
-                    v-if="userType == 'ROLE_USER' && scope.row.status == 3"
-
-                    
+                    v-if="userType == 'ROLE_安全巡检员' && scope.row.status == 3"
                     :disabled="scope.row.reportType == 1 ? true : false"
                     size="small"
                     type="text"

@@ -118,11 +118,4 @@ export default {
   height: 100%;
   margin: 0 auto;
 }
-// .juxing {
-//   position: absolute;
-//   top: 35px;
-//   left: 36px;
-//   width: 99px;
-//   height: 99px;
-// }
 </style>

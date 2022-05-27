@@ -39,6 +39,7 @@ export default {
           containLabel: true,
         },
         legend: {
+          selectedMode:false,
           orient: "rect",
           right: "2%", //图例距离左的距离
           top: "2%",
@@ -158,8 +159,8 @@ export default {
   height: 100%;
   #equipmentChart {
     margin: 0 auto;
-    width: 95%;
-    height: 100%;
+    width: 100%;
+    height: 110%;
   }
 }
 </style>  
