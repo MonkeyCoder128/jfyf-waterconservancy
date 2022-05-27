@@ -100,8 +100,12 @@
               <el-table-column
                 prop="exceptionLocation"
                 label="异常位置"
-                align="center"
-              >
+                align="center">
+              </el-table-column>
+              <el-table-column
+                prop="deviceName"
+                label="设备名称"
+                align="center">
               </el-table-column>
               <el-table-column
                 prop="deviceStatus"

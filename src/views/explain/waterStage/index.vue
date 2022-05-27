@@ -160,6 +160,9 @@ export default {
   .chartDataBox {
     height: 360px !important;
   }
+  .echartsBox {
+    height: 360px !important;
+  }
   .waterStagePage {
     .cardMenu {
       min-height: 430px !important;
@@ -206,6 +209,9 @@ export default {
   }
 }
 .waterStagePage {
+  height: auto;
+  overflow: auto;
+  height: 100%;
   .cardTitle {
     font-size: 16px;
     color: #333333;
@@ -283,18 +289,21 @@ export default {
 
   .cardMenu {
     width: 100%;
-    height: 260px;
+    height: auto;
     background-color: #ffffff;
     border-radius: 5px;
     padding: 5px 12px;
 
     .echartsBoxContent {
       width: 100%;
+      height: auto;
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-start;
       align-items: center;
+      flex-wrap: wrap;
       div {
         width: 32.5%;
+        margin: 0 6px 5px;
       }
     }
   }
