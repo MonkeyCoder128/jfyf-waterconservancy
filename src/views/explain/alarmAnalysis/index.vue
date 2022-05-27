@@ -47,19 +47,22 @@
             >重置</el-button
           >
         </div>
-        <el-button style="float: right" @click="exportTable()" size="mini"
+        <el-button
+          style="float: right; border: 1px solid #319da4; color: #319da4"
+          @click="exportTable()"
+          size="mini"
           >表格导出
         </el-button>
       </div>
       <el-table
-        :data="newsData"
+        :data="warningData"
         style="width: 100%"
         :header-cell-style="{ background: '#EEEEEE' }"
       >
-        <el-table-column prop="content" label="序号" />
-        <el-table-column prop="createTime" label="监测点位" />
+        <el-table-column prop="sn" label="序号" />
+        <el-table-column prop="location" label="监测点位" />
         <el-table-column prop="createTime" label="上报时间" />
-        <el-table-column prop="type" label="上报数据" />
+        <el-table-column prop="address" label="上报数据" />
       </el-table>
       <el-pagination
         background
@@ -92,18 +95,122 @@ export default {
       searchTime: "",
       optionsType: [],
       total: 0,
-      newsData: [],
+      warningData: [
+        {
+          sn:'1',
+          location: "投入式水位计一",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'2',
+          location: "投入式水位计二",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'3',
+          location: "投入式水位计三",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'4',
+          location: "GNSS接收机一",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'5',
+          location: "GNSS接收机二",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'6',
+          location: "GNSS接收机三",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'5',
+          location: "GNSS接收机四",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'6',
+          location: "GNSS接收机五",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'7',
+          location: "振弦式渗压计一",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'8',
+          location: "振弦式渗压计二",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'9',
+          location: "振弦式渗压计三",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'10',
+          location: "流速流量仪一",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'11',
+          location: "流速流量仪二",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'12',
+          location: "流速流量仪三",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          
+          sn:'13',
+          location: "水质测定仪一",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'14',
+          location: "水质测定仪二",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+        {
+          sn:'15',
+          location: "水质测定仪三",
+          createTime:'2022-05-26',
+          address: "流量20，流速10",
+        },
+      ],
     };
   },
   created() {
-    this.getNewsList();
-    this.$api.NEWS.newsType(window.localStorage.getItem("token")).then(
-      (res) => {
-        if (res.code === 200) {
-          this.optionsType = res.result;
-        }
-      }
-    );
+    // this.getNewsList();
+    // this.$api.NEWS.newsType(window.localStorage.getItem("token")).then(
+    //   (res) => {
+    //     if (res.code === 200) {
+    //       this.optionsType = res.result;
+    //     }
+    //   }
+    // );
   },
   methods: {
     /** 表格筛选 */
@@ -154,7 +261,7 @@ export default {
         window.localStorage.getItem("token")
       ).then((res) => {
         if (res.code === 200) {
-          this.newsData = res.result.records;
+          this.warningData = res.result.records;
           this.total = res.result.total;
         }
       });
