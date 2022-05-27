@@ -1,5 +1,5 @@
 <template>
-  <div class="waterStagePage">
+  <div class="osmoticPressurePage">
     <div class="cardMenu">
       <span class="cardTitle">当前数据</span>
       <div class="echartsBoxContent">
@@ -21,6 +21,18 @@
             :parentData="this.childData.equipmentChartC"
           ></equipmentChart>
         </div>
+        <div class="echartsBox">
+          <span>设备:振弦式渗压计四</span>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartC"
+          ></equipmentChart>
+        </div>
+        <div class="echartsBox">
+          <span>设备:振弦式渗压计五</span>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartC"
+          ></equipmentChart>
+        </div>
       </div>
     </div>
     <div class="bottomBox">
@@ -35,37 +47,14 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >11次</span
+              >350次</span
             >
           </div>
         </div>
-        <div class="echartsBox" style="margin: 10px 0">
+        <div class="echartsBox echartsBoxBottom" style="margin: 10px 0">
           <span>预警数据对比</span>
           <div class="warningBox">
             <warningCharts />
-            <ul>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>振弦式渗压计一</span>
-                </div>
-                <span class="percent">28%</span>
-              </li>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>振弦式渗压计二</span>
-                </div>
-                <span class="percent">24%</span>
-              </li>
-              <li>
-                <div class="iconLable">
-                  <span class="Icon"></span>
-                  <span>振弦式渗压计三</span>
-                </div>
-                <span class="percent">48%</span>
-              </li>
-            </ul>
           </div>
         </div>
         <span class="cardTitle">设备检测</span>
@@ -108,7 +97,7 @@ import equipmentChart from "./components/equipmentChart.vue";
 import warningCharts from "./components/warningCharts.vue";
 import brokenLineCharts from "./components/brokenLineChart.vue";
 export default {
-  name: "WaterVelocity",
+  name: "OsmoticPressure",
   components: {
     warningCharts,
     brokenLineCharts,
@@ -125,22 +114,34 @@ export default {
           LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
           LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
           LineThree: [233, 233, 200, 180, 199, 233, 210, 180],
+          LineFour: [180, 130, 250, 103, 108, 150, 280, 290],
+          LineFive: [203, 200, 290, 180, 219, 263, 110, 280],
         },
       },
       tableData: [
         {
           date: "振弦式渗压计一",
-          name: "19",
+          name: "50",
           type: "0",
         },
         {
           date: "振弦式渗压计二",
-          name: "26",
+          name: "80",
           type: "1",
         },
         {
           date: "振弦式渗压计三",
-          name: "25",
+          name: "70",
+          type: "1",
+        },
+        {
+          date: "振弦式渗压计四",
+          name: "90",
+          type: "1",
+        },
+        {
+          date: "振弦式渗压计五",
+          name: "60",
           type: "1",
         },
       ],
@@ -163,23 +164,20 @@ export default {
 
 <style lang="scss" scoped>
 @media screen and (min-width: 2000px) and (max-width: 3840px) {
+  .echartsBoxBottom {
+    height: 350px;
+  }
   .chartDataBox {
-    height: 360px !important;
+    height: 330px !important;
   }
-  .echartsBox {
-    height: 360px !important;
-  }
-  .waterStagePage {
+  .osmoticPressurePage {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
-        height: 360px !important;
+        height: 330px !important;
         .echartsBox {
-          height: 360px !important;
+          height: 330px !important;
         }
-      }
-      .echartsBox {
-        height: 360px !important;
       }
     }
   }
@@ -195,8 +193,8 @@ export default {
 }
 
 @media screen and (min-width: 960px) and (max-width: 1920px) {
-  .echartsBox {
-    height: 200px;
+  .echartsBoxBottom {
+    height: 220px !important;
   }
   .chartDataBox {
     height: 200px;
@@ -206,15 +204,22 @@ export default {
     .echartsBoxContent {
       height: 200px;
     }
+    .echartsBox {
+      height: 200px;
+    }
+  }
+
+  .bottomBox {
+    margin-bottom: 60px;
   }
   .cardBottom {
-    height: 600px;
+    height: 626px;
   }
   .charts {
     height: 560px;
   }
 }
-.waterStagePage {
+.osmoticPressurePage {
   height: auto;
   overflow: auto;
   height: 100%;
@@ -230,88 +235,37 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px 20px;
-    height: 200px;
     span {
       font-size: 14px;
       color: #333333;
     }
+  }
+  .echartsBoxBottom {
     .warningBox {
-      // width: 80%;
       width: 100%;
       height: 100%;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-content: center;
-      ul {
-        // width: 60%;
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        li {
-          width: 60%;
-          list-style: none;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          .iconLable {
-            display: flex;
-            align-items: center;
-            .Icon {
-              display: inline-block;
-              width: 17px;
-              height: 17px;
-              margin-right: 9px;
-            }
-          }
-        }
-        li:nth-child(1) {
-          .Icon {
-            background-color: #148f97;
-          }
-          .percent {
-            color: #148f97;
-          }
-        }
-        li:nth-child(2) {
-          .Icon {
-            background-color: #1289ba;
-          }
-          .percent {
-            color: #1289ba;
-          }
-        }
-        li:nth-child(3) {
-          .Icon {
-            background-color: #115cb9;
-          }
-          .percent {
-            color: #115cb9;
-          }
-        }
-      }
     }
   }
-
   .cardMenu {
     width: 100%;
     height: auto;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 5px 12px;
+    padding: 5px 20px;
 
     .echartsBoxContent {
       width: 100%;
       height: auto;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
+      flex-flow: wrap;
       div {
-        width: 32.5%;
-        margin: 0 6px 5px;
+        width: 32.1%;
+        margin-right: 20px;
+        margin-bottom: 20px;
       }
     }
   }

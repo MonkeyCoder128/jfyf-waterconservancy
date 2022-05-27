@@ -180,25 +180,6 @@ export default {
           createTime:'2022-05-26',
           address: "流量20，流速10",
         },
-        {
-          
-          sn:'13',
-          location: "水质测定仪一",
-          createTime:'2022-05-26',
-          address: "流量20，流速10",
-        },
-        {
-          sn:'14',
-          location: "水质测定仪二",
-          createTime:'2022-05-26',
-          address: "流量20，流速10",
-        },
-        {
-          sn:'15',
-          location: "水质测定仪三",
-          createTime:'2022-05-26',
-          address: "流量20，流速10",
-        },
       ],
     };
   },

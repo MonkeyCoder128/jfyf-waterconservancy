@@ -1,7 +1,6 @@
 <template>
   <div class="box">
     <div ref="equipmentChart" id="equipmentChart"></div>
-    <!-- <img src="../../../../assets/image/juxing.png" alt="" class="juxing" /> -->
   </div>
 </template>
 <script>
@@ -47,10 +46,6 @@ export default {
           itemHeight: 16,
           itemWidth: 16,
           fontSize: 14,
-          // textStyle: {
-          //   fontSize: 14, //字体大小
-          //   color: "inherit", //设置dataCake中的文字颜色跟饼图一致
-          // },
           textStyle: {
             rich: {
               t0: {
@@ -81,7 +76,7 @@ export default {
           formatter: function (param) {
             let index = dataCake.findIndex((v) => v.name == param);
             let str = `  {white|${param}}   {t${index}|${
-              dataCake[index].value + "%"
+              dataCake[index].value
             }}`;
             return str;
           },
@@ -93,7 +88,6 @@ export default {
             type: "pie",
             center: ["30%", "50%"],
             radius: ["47%", "59%"], // 这个属性修改圆环宽度
-            // offsetCenter:[0,-10],
             silent: true,
             labelLine: {
               show: false,

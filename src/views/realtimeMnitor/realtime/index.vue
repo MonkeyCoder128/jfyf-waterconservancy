@@ -322,6 +322,14 @@ export default {
           value: "振弦式渗压计三",
           label: "设备C",
         },
+        {
+          value: "振弦式渗压计四",
+          label: "设备D",
+        },
+        {
+          value: "振弦式渗压计五",
+          label: "设备E",
+        },
       ],
       tachometerOptions: [
         {

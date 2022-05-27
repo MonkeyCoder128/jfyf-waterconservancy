@@ -22,21 +22,12 @@
           this.$refs.equipmentChart,
         );
         var option = {
-          backgroundColor: '',
-          // 给echarts设置百分比自适应
-          grid: {
-            left: "5%",
-            right: "5%",
-            top: "20%",
-            bottom: "20%",
-            containLabel: true,
-          },
           series: [
             {
               name: '刻度点',
               type: 'gauge',
               radius: '100%', //图表尺寸
-              center: ['50%', '55%'],
+              center: ['50%', '50%'],
               axisLine: {
                 show: true,
                 lineStyle: {
@@ -101,7 +92,7 @@
               name: "刻度",
               type: "gauge",
               radius: "101%", //图表尺寸
-              center: ["50%", "57.5%"],
+              center: ["50%", "52.5%"],
               min: 0,
               max: 100,
               axisLine: {
@@ -146,7 +137,7 @@
               radius: '80%',
               min: 0,
               max: 100,
-              center: ['50%', '55%'],
+              center: ['50%', '50%'],
               splitNumber: 1, //刻度数量
               startAngle: 225,
               endAngle: -45,
@@ -221,14 +212,6 @@
               pointer: {
                 show: false,
               },
-              // title: {
-              //   show: true,
-              //   offsetCenter: [0, '-30%'], // x, y，单位px
-              //   textStyle: {
-              //     color: '#000',
-              //     fontSize: 12
-              //   }
-              // },
               //仪表盘详情，用于显示数据。
               detail: {
                 width: "60%",
