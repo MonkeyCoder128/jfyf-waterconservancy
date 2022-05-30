@@ -3,10 +3,28 @@
     <div class="echartAllBox">
       <div class="echartBox">
         <div class="topMenu">
-          <span>水位</span>
+          <span>水雨情</span>
+          <div class="selectCharts">
+            <em style="color: #333333">类别</em>
+            <el-select
+              style="margin: 0 12px"
+              @change="changeRainWater"
+              v-model="rainWater"
+              size="mini"
+            >
+              <el-option
+                v-for="item in rainWaterOption"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
+          </div>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
+              v-if="rainWater === 'water'"
               style="margin: 0 12px"
               @change="changeWaterLevel"
               v-model="waterLevelType"
@@ -20,11 +38,29 @@
               >
               </el-option>
             </el-select>
+            <el-select
+              v-if="rainWater === 'rainfall'"
+              style="margin: 0 12px"
+              @change="changeRainfallType"
+              v-model="rainfallType"
+              size="mini"
+            >
+              <el-option
+                v-for="item in rainOption"
+                :key="item.label"
+                :label="item.value"
+                :value="item.label"
+              >
+              </el-option>
+            </el-select>
             <em @click="jumpWaterStage">更多></em>
           </div>
         </div>
-        <div class="chartDataBox">
+        <div class="chartDataBox" v-if="rainWater === 'water'">
           <Chart :chartData="waterLevelData" :width="'100%'" :height="'100%'" />
+        </div>
+        <div class="chartDataBox" v-if="rainWater === 'rainfall'">
+          <Chart :chartData="rainfallData" :width="'100%'" :height="'100%'" />
         </div>
       </div>
 
@@ -253,211 +289,238 @@
   </div>
 </template>
 <script>
-import * as echarts from "echarts";
 import Chart from "@/views/screenChart/chart";
+import * as echarts from "echarts";
 export default {
-  name: "MessageManage",
+  name: "Realtime",
   components: { Chart },
   data() {
     return {
       speedData: {}, //流速
       fluxData: {}, //流量
+      rainWater: "rainfall", //水雨情类型
       waterLevelData: {}, //水位
+      rainfallData: {}, //降雨量
       pressureData: {}, //库压渗压
       waterQuality: {}, //水质分析
       shiftData: {}, //形变
       offsetData: {}, //位移
       alarmStateData: {}, //预警状态
-      waterLevelType: "设备A",
-      deformationType: "设备A",
-      osmometerType: "设备A",
-      flowRateType: "设备A",
-      waterQualityType: "设备A",
+      waterLevelType: "1",
+      rainfallType: "2",
+      deformationType: "1",
+      osmometerType: "1",
+      flowRateType: "1",
+      waterQualityType: "1",
+      rainWaterOption: [
+        {
+          value: "水位",
+          label: "water",
+        },
+        {
+          value: "降雨量",
+          label: "rainfall",
+        },
+      ],
       levelOption: [
         {
           value: "投入式水位计一",
-          label: "设备A",
+          label: "1",
         },
         {
           value: "投入式水位计二",
-          label: "设备B",
+          label: "2",
         },
         {
           value: "投入式水位计三",
-          label: "设备C",
+          label: "3",
+        },
+      ],
+      rainOption: [
+        {
+          value: "翻斗式雨量计一",
+          label: "1",
+        },
+        {
+          value: "翻斗式雨量计二",
+          label: "2",
+        },
+        {
+          value: "翻斗式雨量计三",
+          label: "3",
         },
       ],
       offsetOptions: [
         {
           value: "GNSS接收机一",
-          label: "设备A",
+          label: "1",
         },
         {
           value: "GNSS接收机二",
-          label: "设备B",
+          label: "2",
         },
         {
           value: "GNSS接收机三",
-          label: "设备C",
+          label: "3",
         },
         {
           value: "GNSS接收机四",
-          label: "设备B",
+          label: "4",
         },
         {
           value: "GNSS接收机五",
-          label: "设备C",
+          label: "5",
         },
       ],
       pressureOptions: [
         {
           value: "振弦式渗压计一",
-          label: "设备A",
+          label: "1",
         },
         {
           value: "振弦式渗压计二",
-          label: "设备B",
+          label: "2",
         },
         {
           value: "振弦式渗压计三",
-          label: "设备C",
+          label: "3",
         },
         {
           value: "振弦式渗压计四",
-          label: "设备D",
+          label: "4",
         },
         {
           value: "振弦式渗压计五",
-          label: "设备E",
+          label: "5",
         },
       ],
       tachometerOptions: [
         {
           value: "流速流量仪一",
-          label: "设备A",
+          label: "1",
         },
         {
           value: "流速流量仪二",
-          label: "设备B",
+          label: "2",
         },
         {
           value: "流速流量仪三",
-          label: "设备C",
+          label: "3",
         },
         {
           value: "流速流量仪四",
-          label: "设备D",
+          label: "4",
         },
       ],
       analyseOptions: [
         {
           value: "水质测定仪一",
-          label: "设备A",
+          label: "1",
         },
         {
           value: "水质测定仪二",
-          label: "设备B",
+          label: "2",
         },
         {
           value: "水质测定仪三",
-          label: "设备C",
+          label: "3",
         },
       ],
       deviceData: [
         {
           name: "投入式水位计一",
-          type: "1",
-          address: "陕西省西安市雁塔区",
+          type: "0",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "投入式水位计二",
-          type: "1",
-          address: "陕西省西安市高陵区",
+          type: "0",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "投入式水位计三",
-          type: "0",
-          address: "陕西省西安市碑林区",
+          type: "1",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "GNSS接收机一",
-          type: "1",
-          address: "陕西省西安市莲湖区",
+          type: "0",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "GNSS接收机二",
           type: "1",
-          address: "陕西省西安市长安区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "GNSS接收机三",
           type: "1",
-          address: "陕西省西安市鄠邑区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "GNSS接收机四",
           type: "1",
-          address: "陕西省西安市长安区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "GNSS接收机五",
           type: "1",
-          address: "陕西省西安市鄠邑区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "振弦式渗压计一",
-          type: "1",
-          address: "陕西省西安市高新区",
+          type: "0",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "振弦式渗压计二",
           type: "1",
-          address: "陕西省西安市灞桥区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "振弦式渗压计三",
           type: "1",
-          address: "陕西省西安市灞桥区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "流速流量仪一",
           type: "1",
-          address: "陕西省西安市莲湖区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "流速流量仪二",
           type: "1",
-          address: "陕西省西安市长安区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "流速流量仪三",
-          type: "1",
-          address: "陕西省西安市鄠邑区",
+          type: "0",
+          address: "陕西省西安市XX水库",
+        },
+        {
+          name: "流速流量仪四",
+          type: "0",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "流速流量仪四",
           type: "1",
-          address: "陕西省西安市鄠邑区",
-        },
-        {
-          name: "流速流量仪四",
-          type: "1",
-          address: "陕西省西安市鄠邑区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "水质测定仪一",
-          type: "1",
-          address: "陕西省西安市高新区",
+          type: "0",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "水质测定仪二",
           type: "1",
-          address: "陕西省西安市灞桥区",
+          address: "陕西省西安市XX水库",
         },
         {
           name: "水质测定仪三",
           type: "1",
-          address: "陕西省西安市灞桥区",
+          address: "陕西省西安市XX水库",
         },
       ],
       total: 0,
@@ -473,6 +536,7 @@ export default {
     this.speedData = this.getSpeedData();
     this.fluxData = this.getFluxData();
     this.waterLevelData = this.getWaterLevelData();
+    this.rainfallData = this.getRainfallData();
     this.pressureData = this.getPressureData();
     this.waterQuality = this.getWaterQuality();
     this.shiftData = this.getShiftData();
@@ -487,10 +551,19 @@ export default {
       this.speedData = this.getSpeedData();
       this.fluxData = this.getFluxData();
     },
+    /** 水雨情---类型筛选 */
+    changeRainWater(val) {
+      this.rainWater = val;
+    },
     /** 水位---类型筛选 */
     changeWaterLevel(val) {
       this.waterLevelType = val;
       this.waterLevelData = this.getWaterLevelData();
+    },
+    /** 降雨量---类型筛选 */
+    changeRainfallType(val) {
+      this.rainfallType = val;
+      this.rainfallData = this.getRainfallData();
     },
     /** 库压渗压---类型筛选 */
     changeOsmometer(val) {
@@ -846,7 +919,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: 20,
                 name: "流量m/s",
               },
             ],
@@ -1099,7 +1172,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: 23,
                 name: "水位m",
               },
             ],
@@ -1107,6 +1180,110 @@ export default {
         ],
       };
       return data;
+    },
+    /**降雨量图表 */
+    getRainfallData() {
+      var max = 100; //满刻度大小
+      var scroe = 20,
+        scroePer = scroe / 50;
+      var data = max * scroePer;
+      let dataOption = {
+        title: {
+          top: "47%",
+          left: "center",
+          text: scroe + " mm",
+          textStyle: {
+            color: "#1C48BF",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            fontSize: 32,
+          },
+        },
+        series: [
+          {
+            type: "liquidFill",
+            itemStyle: {
+              opacity: 0.8, //波浪的透明度
+              shadowBlur: 10, //波浪的阴影范围
+              shadowColor: "#FFB931", //阴影颜色
+            },
+            radius: "80%",
+            //水波
+            color: [
+              new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#35EBFB",
+                },
+                {
+                  offset: 1,
+                  color: "#2876F7",
+                },
+              ]),
+            ],
+            data: [
+              {
+                value: scroePer,
+              },
+            ],
+            center: ["50%", "50%"],
+            backgroundStyle: {
+              color: "#fff",
+            },
+            label: {
+              normal: {
+                formatter: "",
+                textStyle: {
+                  fontSize: 12,
+                },
+              },
+            },
+            outline: {
+              itemStyle: {
+                borderColor: "transparent",
+                borderWidth: 5,
+              },
+              borderDistance: 0,
+            },
+          },
+          //外环线
+          {
+            color: ["#3192D8", "transparent"],
+            type: "pie",
+            center: ["50%", "50%"],
+            radius: ["80%", "82%"],
+            hoverAnimation: false,
+            data: [
+              {
+                name: "",
+                value: data,
+                label: {
+                  show: false,
+                  position: "center",
+                  color: "#fff",
+                  fontSize: 38,
+                  fontWeight: "bold",
+                  formatter: function (o) {
+                    return data;
+                  },
+                },
+              },
+              {
+                //画剩余的刻度圆环
+                name: "",
+                value: max - data,
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                },
+              },
+            ],
+          },
+        ],
+      };
+      return dataOption;
     },
     /**库压渗压 */
     getPressureData() {
@@ -1274,7 +1451,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: 23,
                 name: "库压渗压Mpa",
               },
             ],
@@ -1295,10 +1472,10 @@ export default {
       ];
       let data = {
         legend: {
-          selectedMode:false,
+          selectedMode: false,
           icon: "rect",
           left: "67%", //图例距离左的距离
-          y: 'center',
+          y: "center",
           itemGap: 15,
           itemHeight: 17,
           itemWidth: 17,
@@ -1548,7 +1725,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: 27,
                 name: "水平位移mm",
               },
             ],
@@ -1744,7 +1921,7 @@ export default {
             },
             data: [
               {
-                value: 60,
+                value: 34,
                 name: "高程位移mm",
               },
             ],

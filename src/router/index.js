@@ -79,7 +79,7 @@ const constantRoutes = [
         path: '/explain/waterStage',
         name: 'waterStage',
         component: () => import('@/views/explain/waterStage/index'),
-        meta: { title: '水位', icon: 'user', auth: true }
+        meta: { title: '水雨情', icon: 'user', auth: true }
       },
       {
         path: '/explain/osmoticPressure',

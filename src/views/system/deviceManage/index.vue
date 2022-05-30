@@ -82,7 +82,7 @@
  
 <script>
 export default {
-  name: "MessageManage",
+  name: "DeviceManage",
   data() {
     return {
       searchTime: "",

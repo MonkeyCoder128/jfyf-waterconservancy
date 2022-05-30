@@ -80,7 +80,7 @@
  
 <script>
 export default {
-  name: "MessageManage",
+  name: "News",
   data() {
     return {
       queryParams: {
