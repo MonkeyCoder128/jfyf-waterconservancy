@@ -47,7 +47,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >350次</span
+              >45次</span
             >
           </div>
         </div>
@@ -113,38 +113,38 @@ export default {
         equipmentChartD: "73",
         equipmentChartE: "69",
         brokenLineChart: {
-          LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
-          LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
-          LineThree: [233, 233, 200, 180, 199, 233, 210, 180],
-          LineFour: [180, 130, 250, 103, 108, 150, 280, 290],
-          LineFive: [203, 200, 290, 180, 219, 263, 110, 280],
+          LineOne: [3, 1, 0, 2, 1, 0, 0, 2],
+          LineTwo: [2, 1, 1, 3, 0, 1, 0, 0],
+          LineThree: [2, 1, 1, 2, 0, 0, 1, 2],
+          LineFour: [1, 2, 0, 1, 2, 1, 0, 1],
+          LineFive: [0, 0, 3, 1, 2, 1, 0, 2],
         },
       },
       tableData: [
         {
           date: "振弦式渗压计一",
-          name: "50",
+          name: "9",
           type: "0",
         },
         {
           date: "振弦式渗压计二",
-          name: "80",
-          type: "1",
+          name: "9",
+          type: "0",
         },
         {
           date: "振弦式渗压计三",
-          name: "70",
-          type: "1",
+          name: "10",
+          type: "0",
         },
         {
           date: "振弦式渗压计四",
-          name: "90",
-          type: "1",
+          name: "8",
+          type: "0",
         },
         {
           date: "振弦式渗压计五",
-          name: "60",
-          type: "1",
+          name: "9",
+          type: "0",
         },
       ],
       optionOne: "",

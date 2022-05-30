@@ -366,22 +366,22 @@ export default {
       deviceData: [
         {
           name: "投入式水位计一",
-          type: "0",
+          type: "1",
           address: "陕西省西安市雁塔区",
         },
         {
           name: "投入式水位计二",
-          type: "0",
+          type: "1",
           address: "陕西省西安市高陵区",
         },
         {
           name: "投入式水位计三",
-          type: "1",
+          type: "0",
           address: "陕西省西安市碑林区",
         },
         {
           name: "GNSS接收机一",
-          type: "0",
+          type: "1",
           address: "陕西省西安市莲湖区",
         },
         {
@@ -406,7 +406,7 @@ export default {
         },
         {
           name: "振弦式渗压计一",
-          type: "0",
+          type: "1",
           address: "陕西省西安市高新区",
         },
         {
@@ -431,12 +431,12 @@ export default {
         },
         {
           name: "流速流量仪三",
-          type: "0",
+          type: "1",
           address: "陕西省西安市鄠邑区",
         },
         {
           name: "流速流量仪四",
-          type: "0",
+          type: "1",
           address: "陕西省西安市鄠邑区",
         },
         {
@@ -446,7 +446,7 @@ export default {
         },
         {
           name: "水质测定仪一",
-          type: "0",
+          type: "1",
           address: "陕西省西安市高新区",
         },
         {
@@ -651,7 +651,7 @@ export default {
             data: [
               {
                 value: 60,
-                name: "流速m/s",
+                name: "水平位移m/s",
               },
             ],
           },
