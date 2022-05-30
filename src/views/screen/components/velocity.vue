@@ -1,5 +1,5 @@
 <template>
-  <div id="flow"></div>
+    <div id="velocity"></div>
 </template>
 <script>
 export default {
@@ -9,20 +9,20 @@ export default {
   methods: {
     myecharts() {
       var echarts = require("echarts");
-      var flow = this.$echarts.init(document.getElementById("flow"));
+      var velocity = this.$echarts.init(document.getElementById("velocity"));
       let centerArr = ["50%", "70%"];
       var option = {
         grid: {
           top: "15%",
           left: "10%",
           right: "2%",
-          bottom: "20%",
+          bottom: "28%",
         },
         tooltip: {
           show: false,
         },
         xAxis: {
-          data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
+          data: ["11.50", "12.00", "12.10", "12.20", "12.30", "12.40", "12.50"],
           axisLine: {
             show: true,
             lineStyle: {
@@ -42,10 +42,10 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "(mm/min)",
+            name: "(m/s)",
             nameTextStyle: {
               color: "#ffffff",
-              padding: [0, 0, -7, 0],
+              padding: [0, 30, -7, 0]
             },
             min: 0,
             max: 80,
@@ -105,7 +105,7 @@ export default {
                 ]),
               },
             },
-            data: [2, 10, 11, 6, 15, 30, 26],
+            data: [20, 30, 25, 40, 20, 30, 26],
             z: 0,
             zlevel: 0,
             // label: {
@@ -133,7 +133,7 @@ export default {
             symbolSize: [20, 1],
             symbolPosition: "end",
             symbolOffset: [0, 0],
-            data: [2, 10, 11, 6, 15, 30, 26],
+            data: [20, 30, 25, 40, 20, 30, 26],
             z: 1,
             zlevel: 0,
           },
@@ -152,7 +152,7 @@ export default {
 
             // symbolPosition: 'start',
             // symbolOffset: [0, 0],
-            data: [2, 10, 11, 6, 15, 30, 26],
+            data: [20, 30, 25, 40, 20, 30, 26],
             z: 1,
             zlevel: 0,
             label: {
@@ -167,13 +167,13 @@ export default {
           },
         ],
       };
-      flow.setOption(option);
+      velocity.setOption(option);
     },
   },
 };
 </script>
 <style  lang="scss" scoped>
-#flow {
+#velocity {
   width: 100%;
   height: 100%;
 }
