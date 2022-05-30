@@ -5,20 +5,35 @@
       <div class="echartsBoxContent">
         <div class="echartsBox">
           <span>设备:投入式水位计一</span>
+          <waterPolo 
+            :parentData="this.childData.waterPoloA"
+            v-if="this.category == 'rainfall'">
+          </waterPolo>
           <equipmentChart
             :parentData="this.childData.equipmentChartA"
+            v-else
           ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:投入式水位计二</span>
+          <waterPolo 
+            :parentData="this.childData.waterPoloB"
+            v-if="this.category == 'rainfall'">
+          </waterPolo>
           <equipmentChart
             :parentData="this.childData.equipmentChartB"
+            v-else
           ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:投入式水位计三</span>
+          <waterPolo 
+            :parentData="this.childData.waterPoloC"
+            v-if="this.category == 'rainfall'">
+          </waterPolo>
           <equipmentChart
             :parentData="this.childData.equipmentChartC"
+            v-else
           ></equipmentChart>
         </div>
       </div>
@@ -84,12 +99,14 @@
 import equipmentChart from "./components/equipmentChart.vue";
 import warningCharts from "./components/warningCharts.vue";
 import brokenLineCharts from "./components/brokenLineChart.vue";
+import waterPolo from "./components/waterPolo.vue";
 export default {
   name: "WaterStage",
   components: {
     warningCharts,
     brokenLineCharts,
     equipmentChart,
+    waterPolo,
   },
   data() {
     return {
@@ -98,6 +115,9 @@ export default {
         equipmentChartA: "27",
         equipmentChartB: "27",
         equipmentChartC: "27",
+        waterPoloA: '18',
+        waterPoloB: '16',
+        waterPoloC: '13',
         brokenLineChart: {
           LineOne: [1, 2, 2, 3, 2, 1, 3, 1],
           LineTwo: [1, 0, 2, 1, 2, 1, 2, 3],
@@ -121,8 +141,13 @@ export default {
           type: "1",
         },
       ],
-      optionOne: "",
+      // 存储当前类别
+      category: "default",
     };
+  },
+  created(){
+    // 获取父级页面传来的参数
+    this.category = this.$route.query.type;
   },
   methods: {
     // 查看预警分析
