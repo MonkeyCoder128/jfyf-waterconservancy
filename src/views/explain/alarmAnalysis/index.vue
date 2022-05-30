@@ -211,16 +211,16 @@ export default {
       this.queryParams.type = "";
       this.queryParams.startDate = "";
       this.queryParams.endDate = "";
-      this.getNewsList();
+      // this.getNewsList();
     },
     /** 表格分页 */
     handleSizeChange(val) {
       this.queryParams.size = val;
-      this.getNewsList();
+      // this.getNewsList();
     },
     handleCurrentChange(val) {
       this.queryParams.page = val;
-      this.getNewsList();
+      // this.getNewsList();
     },
     /** 时间筛选 */
     handleDate(e) {
@@ -232,21 +232,21 @@ export default {
           this.queryParams.startDate = "";
           this.queryParams.endDate = "";
         }
-        this.getNewsList();
+        // this.getNewsList();
       });
     },
     /** 获取消息列表 */
-    getNewsList() {
-      this.$api.NEWS.newsList(
-        this.queryParams,
-        window.localStorage.getItem("token")
-      ).then((res) => {
-        if (res.code === 200) {
-          this.warningData = res.result.records;
-          this.total = res.result.total;
-        }
-      });
-    },
+    // getNewsList() {
+    //   this.$api.NEWS.newsList(
+    //     this.queryParams,
+    //     window.localStorage.getItem("token")
+    //   ).then((res) => {
+    //     if (res.code === 200) {
+    //       this.warningData = res.result.records;
+    //       this.total = res.result.total;
+    //     }
+    //   });
+    // },
   },
 };
 </script>
