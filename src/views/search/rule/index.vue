@@ -441,7 +441,11 @@ export default {
     // 下载数据
     download(url) {
       if (typeof url == "string") {
-        window.location.href = url;
+        let target = document.createElement("a");
+        target.setAttribute('download','download');
+        target.setAttribute('href',url);
+        target.click();
+        target.parentNode.removeChild(target);
       } else if (typeof url == "object") {
         for (var k in url) {
           this.downloadURL(url[k]);
@@ -625,6 +629,7 @@ export default {
 }
 
 .el-upload__tip {
+  font-size: 14px;
   position: absolute;
   top: 60px;
 }

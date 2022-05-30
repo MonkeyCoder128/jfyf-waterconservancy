@@ -13,9 +13,9 @@ export default {
       var warningCharts = this.$echarts.init(this.$refs.warningCharts);
       let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
       var dataCake = [
-        { name: "水质测定仪一", value: 30 },
-        { name: "水质测定仪二", value: 36 },
-        { name: "水质测定仪三", value: 27 },
+        { name: "水质测定仪一", value: 10 },
+        { name: "水质测定仪二", value: 15 },
+        { name: "水质测定仪三", value: 12 },
       ];
       var option = {
         legend: {

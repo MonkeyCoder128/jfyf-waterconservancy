@@ -76,7 +76,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >320次</span
+              >35</span
             >
           </div>
         </div>
@@ -134,28 +134,28 @@ export default {
       tableData: [
         {
           date: "GNSS接收机一",
-          name: "50",
-          type: "0",
+          name: "5",
+          type: "1",
         },
         {
           date: "GNSS接收机二",
-          name: "80",
-          type: "0",
+          name: "8",
+          type: "1",
         },
         {
           date: "GNSS接收机三",
-          name: "70",
-          type: "0",
+          name: "7",
+          type: "1",
         },
         {
           date: "GNSS接收机四",
-          name: "90",
-          type: "0",
+          name: "9",
+          type: "1",
         },
         {
           date: "GNSS接收机五",
-          name: "30",
-          type: "0",
+          name: "6",
+          type: "1",
         },
       ],
     };
@@ -307,7 +307,7 @@ export default {
               borderRadius: 8,
               offsetCenter: [0, -10],
               fontSize: 18,
-              formatter: "{value} m/s",
+              formatter: "{value} mm",
               color: "#3672E9",
             },
             title: {
@@ -316,8 +316,8 @@ export default {
             },
             data: [
               {
-                value: 60,
-                name: "流速m/s",
+                value: 2,
+                name: "水平位移mm",
               },
             ],
           },
@@ -503,7 +503,7 @@ export default {
               borderRadius: 8,
               offsetCenter: [0, -10],
               fontSize: 18,
-              formatter: "{value} m/s",
+              formatter: "{value} mm",
               color: "#40C3D9",
             },
             title: {
@@ -512,8 +512,8 @@ export default {
             },
             data: [
               {
-                value: 39,
-                name: "流量m/s",
+                value: 3,
+                name: "高程位移mm",
               },
             ],
           },
@@ -572,11 +572,11 @@ export default {
     getWarningData() {
       let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
       var dataCake = [
-        { name: "GNSS接收机一", value: 50 },
-        { name: "GNSS接收机二", value: 80 },
-        { name: "GNSS接收机三", value: 70 },
-        { name: "GNSS接收机四", value: 90 },
-        { name: "GNSS接收机五", value: 30 },
+        { name: "GNSS接收机一", value: 5 },
+        { name: "GNSS接收机二", value: 8 },
+        { name: "GNSS接收机三", value: 7 },
+        { name: "GNSS接收机四", value: 9 },
+        { name: "GNSS接收机五", value: 6 },
       ];
       let data = {
         legend: {
@@ -763,7 +763,9 @@ export default {
         yAxis: [
           {
             type: "value",
-            splitNumber: 8, // 配置 Y 轴数值间隔
+            splitNumber: 5, // 配置 Y 轴数值间隔
+            max:10,
+            min:0,
             axisLabel: {
               textStyle: {
                 color: "#666",
@@ -835,7 +837,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [333, 300, 280, 100, 109, 37, 105, 160],
+            data: [1, 0, 1, 0, 0, 2, 0, 1],
           },
           {
             name: "GNSS接收机二",
@@ -883,7 +885,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [100, 138, 350, 173, 180, 150, 180, 230],
+            data: [2, 1, 0, 2, 0, 0, 2, 1],
           },
           {
             name: "GNSS接收机三",
@@ -931,7 +933,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [233, 233, 200, 180, 199, 233, 210, 180],
+            data: [1, 3, 0, 1, 0, 0, 2, 0],
           },
           {
             name: "GNSS接收机四",
@@ -979,7 +981,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [23, 63, 230, 280, 190, 293, 230, 180],
+            data: [1, 1, 2, 0, 2, 3, 0, 0],
           },
           {
             name: "GNSS接收机五",
@@ -1027,7 +1029,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [123, 73, 20, 210, 290, 93, 220, 120],
+            data: [0, 2, 1, 0, 0, 0, 1, 3],
           },
         ],
       };
@@ -1048,7 +1050,6 @@ export default {
   .cardMenu {
     min-height: 430px;
     .echartsBoxContent {
-      height: 330px;
       .echartsBox {
         height: 330px;
       }
@@ -1075,7 +1076,6 @@ export default {
   .cardMenu {
     min-height: 260px;
     .echartsBoxContent {
-      height: 200px;
       .echartsBox {
         height: 200px;
       }

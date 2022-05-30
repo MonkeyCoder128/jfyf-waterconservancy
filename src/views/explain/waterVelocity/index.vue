@@ -64,7 +64,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >290次</span
+              >48次</span
             >
           </div>
         </div>
@@ -122,23 +122,23 @@ export default {
       tableData: [
         {
           date: "流速流量仪一",
-          name: "50",
-          type: "0",
+          name: "10",
+          type: "1",
         },
         {
           date: "流速流量仪二",
-          name: "80",
-          type: "0",
+          name: "12",
+          type: "1",
         },
         {
           date: "流速流量仪三",
-          name: "70",
-          type: "0",
+          name: "11",
+          type: "1",
         },
         {
           date: "流速流量仪四",
-          name: "90",
-          type: "0",
+          name: "15",
+          type: "1",
         },
       ],
     };
@@ -555,10 +555,10 @@ export default {
     getWarningData() {
       let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
       var dataCake = [
-        { name: "流速流量仪一", value: 50 },
-        { name: "流速流量仪二", value: 80 },
-        { name: "流速流量仪三", value: 70 },
-        { name: "流速流量仪四", value: 90 },
+        { name: "流速流量仪一", value: 10 },
+        { name: "流速流量仪二", value: 12 },
+        { name: "流速流量仪三", value: 11 },
+        { name: "流速流量仪四", value: 15 },
       ];
       let data = {
         legend: {
@@ -744,7 +744,9 @@ export default {
         yAxis: [
           {
             type: "value",
-            splitNumber: 8, // 配置 Y 轴数值间隔
+            splitNumber: 5, // 配置 Y 轴数值间隔
+            max:10,
+            min:0,
             axisLabel: {
               textStyle: {
                 color: "#666",
@@ -816,7 +818,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [333, 300, 280, 100, 109, 37, 105, 160],
+            data: [1, 0, 2, 1, 2, 0, 2, 1],
           },
           {
             name: "流速流量仪二",
@@ -864,7 +866,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [100, 138, 350, 173, 180, 150, 180, 230],
+            data: [1, 2, 1, 1, 2, 3, 1, 1],
           },
           {
             name: "流速流量仪三",
@@ -912,7 +914,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [233, 233, 200, 180, 199, 233, 210, 180],
+            data: [2, 1, 0, 2, 1, 2, 1, 2],
           },
           {
             name: "流速流量仪四",
@@ -960,7 +962,7 @@ export default {
                 shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
               },
             },
-            data: [23, 63, 230, 280, 190, 293, 230, 180],
+            data: [3, 2, 3, 2, 1, 1, 2, 1],
           },
         ],
       };
@@ -981,7 +983,6 @@ export default {
   .cardMenu {
     min-height: 430px;
     .echartsBoxContent {
-      height: 330px;
       .echartsBox {
         height: 330px;
       }
@@ -1008,7 +1009,6 @@ export default {
   .cardMenu {
     min-height: 260px;
     .echartsBoxContent {
-      height: 200px;
       .echartsBox {
         height: 200px;
       }

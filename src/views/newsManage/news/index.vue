@@ -80,7 +80,7 @@
  
 <script>
 export default {
-  name: "MessageManage",
+  name: "News",
   data() {
     return {
       queryParams: {
@@ -144,6 +144,7 @@ export default {
     getNewsList() {
       this.$api.NEWS.newsList(this.queryParams).then((res) => {
         if (res.code === 200) {
+          console.log(res)
           this.newsData = res.result.records;
           this.total = res.result.total;
         }

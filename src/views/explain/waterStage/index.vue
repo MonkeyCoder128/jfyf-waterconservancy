@@ -95,13 +95,13 @@ export default {
     return {
       // 子组件数据
       childData: {
-        equipmentChartA: "50",
-        equipmentChartB: "68",
-        equipmentChartC: "80",
+        equipmentChartA: "27",
+        equipmentChartB: "27",
+        equipmentChartC: "27",
         brokenLineChart: {
-          LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
-          LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
-          LineThree: [233, 233, 200, 180, 199, 233, 210, 180],
+          LineOne: [1, 2, 2, 3, 2, 1, 3, 1],
+          LineTwo: [1, 0, 2, 1, 2, 1, 2, 3],
+          LineThree: [2, 3, 1, 4, 4, 2, 1, 2],
         },
       },
       tableData: [
@@ -113,7 +113,7 @@ export default {
         {
           date: "投入式水位计二",
           name: "13",
-          type: "1",
+          type: "0",
         },
         {
           date: "投入式水位计三",
@@ -150,7 +150,6 @@ export default {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
-        height: 330px !important;
         .echartsBox {
           height: 330px !important;
         }
@@ -178,10 +177,9 @@ export default {
   .cardMenu {
     min-height: 260px;
     .echartsBoxContent {
-      height: 200px;
-    }
-    .echartsBox {
-      height: 200px;
+      .echartsBox {
+        height: 200px;
+      }
     }
   }
   .bottomBox {
@@ -236,12 +234,11 @@ export default {
       width: 100%;
       height: auto;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
+      flex-flow: wrap;
       div {
-        width: 32.5%;
-        margin: 0 6px 5px;
+        width: 32.1%;
+        margin-right: 20px;
+        margin-bottom: 20px;
       }
     }
   }

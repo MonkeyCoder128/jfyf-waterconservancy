@@ -18,7 +18,6 @@ export default {
         { value: 10, name: "氦含量" },
       ];
       var option = {
-        //backgroundColor:"#0d1324",
         grid: {
           left: "0",
           right: "0",

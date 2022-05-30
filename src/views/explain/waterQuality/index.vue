@@ -35,7 +35,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >93次</span
+              >38次</span
             >
           </div>
         </div>
@@ -97,11 +97,11 @@ export default {
       childData: {
         equipmentChartA: {
           dataList: [
-            { value: 100, name: "二氧化碳" },
-            { value: 205, name: "氢含量" },
-            { value: 380, name: "氧含量" },
-            { value: 235, name: "氮含量" },
-            { value: 200, name: "氦含量" },
+            { value: 45, name: "二氧化碳" },
+            { value: 46, name: "氢含量" },
+            { value: 44, name: "氧含量" },
+            { value: 48, name: "氮含量" },
+            { value: 40, name: "氦含量" },
           ],
           dataCake: [
             { name: "二氧化碳", value: "43.67%" },
@@ -113,11 +113,11 @@ export default {
         },
         equipmentChartB: {
           dataList: [
-            { value: 150, name: "二氧化碳" },
-            { value: 305, name: "氢含量" },
-            { value: 400, name: "氧含量" },
-            { value: 135, name: "氮含量" },
-            { value: 210, name: "氦含量" },
+            { value: 32, name: "二氧化碳" },
+            { value: 30, name: "氢含量" },
+            { value: 40, name: "氧含量" },
+            { value: 35, name: "氮含量" },
+            { value: 41, name: "氦含量" },
           ],
           dataCake: [
             { name: "二氧化碳", value: "20.67%" },
@@ -129,11 +129,11 @@ export default {
         },
         equipmentChartC: {
           dataList: [
-            { value: 130, name: "二氧化碳" },
-            { value: 280, name: "氢含量" },
-            { value: 350, name: "氧含量" },
-            { value: 250, name: "氮含量" },
-            { value: 195, name: "氦含量" },
+            { value: 30, name: "二氧化碳" },
+            { value: 28, name: "氢含量" },
+            { value: 35, name: "氧含量" },
+            { value: 25, name: "氮含量" },
+            { value: 35, name: "氦含量" },
           ],
           dataCake: [
             { name: "二氧化碳", value: "19.88%" },
@@ -144,26 +144,26 @@ export default {
           ],
         },
         brokenLineChart: {
-          LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
-          LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
-          LineThree: [233, 233, 200, 180, 199, 233, 210, 180],
+          LineOne: [1, 2, 0, 1, 2, 1, 2, 1],
+          LineTwo: [1, 3, 3, 2, 1, 2, 1, 2],
+          LineThree: [2, 3, 1, 2, 1, 0, 2, 1],
         },
       },
       tableData: [
         {
           date: "水质测定仪一",
-          name: "30",
+          name: "10",
           type: "0",
         },
         {
           date: "水质测定仪二",
-          name: "36",
-          type: "1",
+          name: "15",
+          type: "0",
         },
         {
           date: "水质测定仪三",
-          name: "27",
-          type: "1",
+          name: "12",
+          type: "0",
         },
       ],
       optionOne: "",
@@ -195,7 +195,6 @@ export default {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
-        height: 330px !important;
         .echartsBox {
           height: 330px !important;
         }
@@ -223,10 +222,9 @@ export default {
   .cardMenu {
     min-height: 260px;
     .echartsBoxContent {
-      height: 200px;
-    }
-    .echartsBox {
-      height: 200px;
+      .echartsBox {
+        height: 200px;
+      }
     }
   }
 
