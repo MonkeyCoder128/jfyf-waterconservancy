@@ -698,7 +698,7 @@ export default {
         grid: {
           left: "3%",
           right: "3%",
-          top: "6%",
+          top: "10%",
           bottom: "8%",
           containLabel: true,
         },
@@ -744,9 +744,10 @@ export default {
         yAxis: [
           {
             type: "value",
+            name: "次",
             splitNumber: 5, // 配置 Y 轴数值间隔
-            max:10,
-            min:0,
+            max: 10,
+            min: 0,
             axisLabel: {
               textStyle: {
                 color: "#666",

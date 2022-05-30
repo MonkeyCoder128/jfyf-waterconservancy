@@ -116,13 +116,13 @@
                     <el-col :span="12" style="height: 100%"
                       ><div class="bg-purple">
                         库前水位
-                        <div class="num">27m</div>
+                        <div class="num">27.00m</div>
                       </div></el-col
                     >
                     <el-col :span="12" style="height: 100%"
                       ><div class="bg-purple">
                         库存
-                        <div class="num">310Wm³</div>
+                        <div class="num">3100000m³</div>
                       </div></el-col
                     >
                   </el-row>
@@ -134,7 +134,7 @@
                     <el-col :span="1" class="title1"
                       ><img src="../../assets/image/dp_title1.png" alt=""
                     /></el-col>
-                    <el-col :span="19">数据概况</el-col>
+                    <el-col :span="19">水库信息</el-col>
                   </el-row>
                 </div>
                 <div class="box_content">
