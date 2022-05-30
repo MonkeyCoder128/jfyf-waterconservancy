@@ -75,9 +75,7 @@
             >
           </div>
           <div>
-            预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >35</span
-            >
+            预警总次数：<span style="color: #ea951c; font-size: 14px">35</span>
           </div>
         </div>
         <div class="echartsBox echartsBoxBottom" style="margin: 10px 0">
@@ -717,7 +715,7 @@ export default {
         grid: {
           left: "3%",
           right: "3%",
-          top: "6%",
+          top: "10%",
           bottom: "8%",
           containLabel: true,
         },
@@ -763,6 +761,7 @@ export default {
         yAxis: [
           {
             type: "value",
+            name:'次',
             splitNumber: 5, // 配置 Y 轴数值间隔
             max:10,
             min:0,
