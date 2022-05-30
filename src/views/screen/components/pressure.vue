@@ -71,7 +71,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "(㎡/s)",
+            name: "(Mpa)",
             nameTextStyle: {
               color: "#ffffff",
               padding: [0, 30, -7, 0]

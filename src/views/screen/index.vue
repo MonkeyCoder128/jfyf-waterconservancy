@@ -24,13 +24,7 @@
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
-                  <el-col :span="19">安全监测</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
+                  <el-col :span="19">预警信息</el-col>
                 </el-row>
               </div>
               <outbox />
@@ -42,12 +36,6 @@
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">坝基变形监测</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
                 </el-row>
               </div>
               <div class="box_jianrong">
@@ -61,16 +49,10 @@
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">降雨量</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
                 </el-row>
               </div>
               <div class="box_jianrong">
-                <pie />
+                <flow />
               </div>
             </div>
           </el-col>
@@ -111,81 +93,93 @@
                 ></iframe>
               </div>
             </div>
-            <div class="box_cont" style="margin-top: 1.4%">
-              <div class="box_nav box_nav1">
-                <el-row :gutter="19">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
-                  <el-col :span="19">水库概况</el-col>
-                  <el-col :span="1" class="icon_title2 icon_title4">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3 icon_title5">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
-                </el-row>
-              </div>
-              <div class="box_content">
-                <el-row :gutter="20" class="shuiwei">
-                  <el-col :span="6" style="height: 100%"
-                    ><div class="bg-purple">
-                      库前水位
-                      <div class="num">1344m³</div>
-                    </div></el-col
-                  >
-                  <el-col :span="6" style="height: 100%"
-                    ><div class="bg-purple">
-                      库存
-                      <div class="num">1256m³</div>
-                    </div></el-col
-                  >
-                  <el-col :span="6" style="height: 100%"
-                    ><div class="bg-purple">
-                      出库
-                      <div class="num">6587m³</div>
-                    </div></el-col
-                  >
-                  <el-col :span="6" style="height: 100%"
-                    ><div class="bg-purple">
-                      入库
-                      <div class="num">5687m³</div>
-                    </div></el-col
-                  >
-                </el-row>
-              </div>
-            </div>
-            <div class="box_cont2">
-              <div style="width: 50%; display: flex; flex-direction: row">
-                <div style="width: 50%; position: relative">
-                  <div class="box_nav box_nav2">
-                    <el-row :gutter="19">
-                      <el-col :span="1" class="title1"
-                        ><img src="../../assets/image/dp_title1.png" alt=""
-                      /></el-col>
-                      <el-col :span="19">大坝巡查</el-col>
-                    </el-row>
-                  </div>
-                  <dam />
-                  <dambg />
-                </div>
-                <div style="width: 50%; position: relative">
-                  <dam2 />
-                  <dam2bg />
-                </div>
-              </div>
-              <div style="width: 50%">
-                <div class="box_nav box_nav2">
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                height: 24%;
+                overflow: hidden;
+                margin-top: 1.3%;
+              "
+            >
+              <div class="box_cont box_cont_content">
+                <div class="box_nav box_nav1">
                   <el-row :gutter="19">
                     <el-col :span="1" class="title1"
                       ><img src="../../assets/image/dp_title1.png" alt=""
                     /></el-col>
-                    <el-col :span="19">设备巡检统计</el-col>
+                    <el-col :span="19">水库概况</el-col>
                   </el-row>
                 </div>
-                <patrol />
-              </div></div
-          ></el-col>
+                <div class="box_content">
+                  <el-row :gutter="20" class="shuiwei">
+                    <el-col :span="12" style="height: 100%"
+                      ><div class="bg-purple">
+                        库前水位
+                        <div class="num">27m</div>
+                      </div></el-col
+                    >
+                    <el-col :span="12" style="height: 100%"
+                      ><div class="bg-purple">
+                        库存
+                        <div class="num">310Wm³</div>
+                      </div></el-col
+                    >
+                  </el-row>
+                </div>
+              </div>
+              <div class="box_cont box_cont_content box_cont_content2">
+                <div class="box_nav box_nav1">
+                  <el-row :gutter="19">
+                    <el-col :span="1" class="title1"
+                      ><img src="../../assets/image/dp_title1.png" alt=""
+                    /></el-col>
+                    <el-col :span="19">数据概况</el-col>
+                  </el-row>
+                </div>
+                <div class="box_content">
+                  <tabledata />
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                height: 24%;
+                overflow: hidden;
+                margin-top: 1.3%;
+              "
+            >
+              <div class="box_cont box_cont_content">
+                <div class="box_nav box_nav1">
+                  <el-row :gutter="19">
+                    <el-col :span="1" class="title1"
+                      ><img src="../../assets/image/dp_title1.png" alt=""
+                    /></el-col>
+                    <el-col :span="19">大坝巡查</el-col>
+                  </el-row>
+                </div>
+                <div class="box_content">
+                  <inspection />
+                </div>
+              </div>
+              <div class="box_cont box_cont_content box_cont_content2">
+                <div class="box_nav box_nav1">
+                  <el-row :gutter="19">
+                    <el-col :span="1" class="title1"
+                      ><img src="../../assets/image/dp_title1.png" alt=""
+                    /></el-col>
+                    <el-col :span="19">天气</el-col>
+                  </el-row>
+                </div>
+                <div class="box_content">
+                  <weather></weather>
+                </div>
+              </div>
+            </div>
+          
+          </el-col>
           <el-col class="screen_right">
             <div class="box_right" style="margin-top: 0 !important">
               <div class="box_nav">
@@ -193,17 +187,11 @@
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
-                  <el-col :span="19">天气</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
+                  <el-col :span="19">流量、流速监测</el-col>
                 </el-row>
               </div>
               <div class="box_jianrong">
-                <weather></weather>
+                <velocity />
               </div>
             </div>
             <div class="box_right">
@@ -213,12 +201,6 @@
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">渗透压监测</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
                 </el-row>
               </div>
               <div class="box_jianrong">
@@ -232,12 +214,6 @@
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
                   <el-col :span="19">压力/应力监测</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
                 </el-row>
               </div>
               <div class="box_jianrong">
@@ -250,17 +226,11 @@
                   <el-col :span="1" class="title1"
                     ><img src="../../assets/image/dp_title1.png" alt=""
                   /></el-col>
-                  <el-col :span="19">流速、流量监测</el-col>
-                  <el-col :span="1" class="icon_title2">
-                    <img src="../../assets/image/dp_title2.png" alt=""
-                  /></el-col>
-                  <el-col :span="1" class="icon_title3">
-                    <img src="../../assets/image/dp_title3.png" alt=""
-                  /></el-col>
+                  <el-col :span="19">水质</el-col>
                 </el-row>
               </div>
               <div class="box_jianrong">
-                <flow />
+                <pie />
               </div>
             </div>
           </el-col>
@@ -282,6 +252,9 @@ import dam from "./components/dam.vue";
 import dambg from "./components/dambg.vue";
 import dam2 from "./components/dam2.vue";
 import dam2bg from "./components/dam2bg.vue";
+import velocity from "./components/velocity.vue";
+import tabledata from "./components/tabledata.vue";
+import inspection from "./components/inspection.vue";
 export default {
   components: {
     outbox,
@@ -296,6 +269,9 @@ export default {
     dambg,
     dam2,
     dam2bg,
+    velocity,
+    tabledata,
+    inspection
   },
   data() {
     return {
@@ -306,7 +282,7 @@ export default {
     };
   },
   created() {
-    localStorage.setItem("isshow",1)
+    localStorage.setItem("isshow", 1);
   },
   mounted() {
     this.nowTimes();
@@ -523,7 +499,15 @@ export default {
   width: 95%;
   margin: 0 auto;
 }
-
+.box_cont_content {
+  width: 49%;
+  height: 100%;
+  margin-top: 0 !important;
+  margin-right: 2%;
+}
+.box_cont_content2 {
+  margin-right: 0 !important;
+}
 .box_nav,
 .box_nav1 {
   width: calc(100% - 40px);
@@ -588,10 +572,9 @@ export default {
   height: 66%;
 }
 .bg-purple {
-  height: 100%;
+  width: 85%;
+  height: 90%;
   background: #0e1629;
-  //border: 1px solid #3885e5;
-  // opacity: 0.36;
   color: #2268c7;
   border-radius: 5px;
   display: flex;
@@ -600,7 +583,7 @@ export default {
   align-items: center;
   font-size: 16px;
   box-shadow: 0px 0px 20px #3885e5 inset;
-  margin: 0 auto;
+  margin: 5% auto;
 }
 .num {
   color: #fff;
