@@ -10,6 +10,18 @@
           ></equipmentChart>
         </div>
         <div class="echartsBox">
+          <span>设备:投入式水位计一</span>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartA"
+          ></equipmentChart>
+        </div>
+        <div class="echartsBox">
+          <span>设备:投入式水位计一</span>
+          <equipmentChart
+            :parentData="this.childData.equipmentChartA"
+          ></equipmentChart>
+        </div>
+        <div class="echartsBox">
           <span>设备:投入式水位计二</span>
           <equipmentChart
             :parentData="this.childData.equipmentChartB"
@@ -151,9 +163,6 @@ export default {
       min-height: 430px !important;
       .echartsBoxContent {
         height: 330px !important;
-        .echartsBox {
-          height: 330px !important;
-        }
       }
     }
   }
@@ -236,12 +245,11 @@ export default {
       width: 100%;
       height: auto;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
+      flex-flow: wrap;
       div {
-        width: 32.5%;
-        margin: 0 6px 5px;
+        width: 32.1%;
+        margin-right: 20px;
+        margin-bottom: 20px;
       }
     }
   }

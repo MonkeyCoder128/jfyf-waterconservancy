@@ -196,9 +196,6 @@ export default {
       min-height: 430px !important;
       .echartsBoxContent {
         height: 330px !important;
-        .echartsBox {
-          height: 330px !important;
-        }
       }
     }
   }

@@ -167,14 +167,14 @@ export default {
   .echartsBoxBottom {
     height: 350px;
   }
+  .chartDataBox {
+    height: 330px !important;
+  }
   .osmoticPressurePage {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
         height: 330px !important;
-        .echartsBox {
-          height: 330px !important;
-        }
       }
     }
   }
