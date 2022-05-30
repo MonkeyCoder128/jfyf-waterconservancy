@@ -115,6 +115,7 @@ export default {
       const userInfo = {
         userId: data.userId,
         username: data.username,
+        name:data.name,
         authority: data.authorities[0].authority,
         password: Base64.encode(this.loginForm.password),
       };

@@ -253,7 +253,7 @@ export default {
               borderRadius: 8,
               offsetCenter: [0, 0],
               fontSize: 18,
-              formatter: "{value} mm",
+              formatter: "{value} m",
               color: "#EA951C",
             },
             title: {
@@ -263,7 +263,7 @@ export default {
             data: [
               {
                 value: this.parentData,
-                name: "水位mm",
+                name: "水位m",
               },
             ],
           },
