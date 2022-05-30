@@ -629,6 +629,7 @@ export default {
 }
 
 .el-upload__tip {
+  font-size: 14px;
   position: absolute;
   top: 60px;
 }
