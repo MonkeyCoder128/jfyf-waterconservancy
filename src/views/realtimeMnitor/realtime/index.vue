@@ -1709,7 +1709,7 @@ export default {
         series: [
           //外层光晕渐变
           {
-            type: "gauge",
+            type: "dashed",
             radius: "90%",
             center: ["50%", "60%"],
             startAngle: 180,

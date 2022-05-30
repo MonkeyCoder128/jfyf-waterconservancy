@@ -18,11 +18,11 @@ export default {
     return {
       getPlayData: [
         { time: "名称", cont: "数据",fixed:true },
-        { time: "总容量", cont: "410万立方米" ,fixed:false},
-        { time: "性质", cont: "粘土心墙砂砾石坝",fixed:true },
-        { time: "坝长", cont: "400米",fixed:false },
-        { time: "坝高", cont: "30米",fixed:true },
-        { time: "流域面积", cont: "29.8平方公里",fixed:false },
+        { time: "总容量：", cont: "410.50万立方米" ,fixed:false},
+        { time: "性质：", cont: "粘土心墙砂砾石坝",fixed:true },
+        { time: "坝长：", cont: "405.67米",fixed:false },
+        { time: "坝高：", cont: "30.26米",fixed:true },
+        { time: "流域面积：", cont: "29.84平方公里",fixed:false },
       ],
     };
   },
@@ -40,7 +40,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 23px;
+    height: 24px;
   }
 }
 .red{
