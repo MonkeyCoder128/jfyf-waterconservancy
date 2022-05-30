@@ -24,13 +24,13 @@
         <div class="echartsBox">
           <span>设备:振弦式渗压计四</span>
           <equipmentChart
-            :parentData="this.childData.equipmentChartC"
+            :parentData="this.childData.equipmentChartD"
           ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:振弦式渗压计五</span>
           <equipmentChart
-            :parentData="this.childData.equipmentChartC"
+            :parentData="this.childData.equipmentChartE"
           ></equipmentChart>
         </div>
       </div>
@@ -110,6 +110,8 @@ export default {
         equipmentChartA: "35",
         equipmentChartB: "58",
         equipmentChartC: "88",
+        equipmentChartD: "73",
+        equipmentChartE: "69",
         brokenLineChart: {
           LineOne: [333, 300, 280, 100, 109, 37, 105, 160],
           LineTwo: [100, 138, 350, 173, 180, 150, 180, 230],
@@ -174,7 +176,7 @@ export default {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
-        height: 330px !important;
+        // height: 330px !important;
         .echartsBox {
           height: 330px !important;
         }

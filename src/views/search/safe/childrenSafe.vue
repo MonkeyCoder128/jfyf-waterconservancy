@@ -463,8 +463,8 @@ export default {
         break;
     }
     // 获取用户名
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    this.formOne.reportUserName = userInfo.username
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    this.formOne.reportUserName = userInfo.name;
     // 获取表格内容
     this.Echo();
   },
