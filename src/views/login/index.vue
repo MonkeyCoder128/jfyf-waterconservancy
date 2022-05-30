@@ -112,7 +112,6 @@ export default {
     }, 0),
     async getUser () {
       const { data } = await this.$api.LOGIN.getUserInfo();
-      console.log(data);
       const userInfo = {
         userId: data.userId,
         username: data.username,
