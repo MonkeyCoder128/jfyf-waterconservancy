@@ -69,18 +69,8 @@
           <span>形变位移</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeDeformation"
-              v-model="deformationType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in offsetOptions"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
+            <el-select style="margin: 0 12px" @change="changeDeformation" v-model="deformationType" size="mini">
+              <el-option v-for="item in offsetOptions" :key="item.label" :label="item.value" :value="item.label">
               </el-option>
             </el-select>
             <em @click="jumpDeformation">更多></em>
@@ -96,18 +86,8 @@
           <span>库压渗压</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeOsmometer"
-              v-model="osmometerType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in pressureOptions"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
+            <el-select style="margin: 0 12px" @change="changeOsmometer" v-model="osmometerType" size="mini">
+              <el-option v-for="item in pressureOptions" :key="item.label" :label="item.value" :value="item.label">
               </el-option>
             </el-select>
             <em @click="jumpOsmoticPressure">更多></em>
@@ -122,18 +102,8 @@
           <span>流速、流量</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeFlowRate"
-              v-model="flowRateType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in tachometerOptions"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
+            <el-select style="margin: 0 12px" @change="changeFlowRate" v-model="flowRateType" size="mini">
+              <el-option v-for="item in tachometerOptions" :key="item.label" :label="item.value" :value="item.label">
               </el-option>
             </el-select>
             <em @click="jumpWaterVelocity">更多></em>
@@ -149,18 +119,8 @@
           <span>水质分析</span>
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
-            <el-select
-              style="margin: 0 12px"
-              @change="changeWaterQuality"
-              v-model="waterQualityType"
-              size="mini"
-            >
-              <el-option
-                v-for="item in analyseOptions"
-                :key="item.label"
-                :label="item.value"
-                :value="item.label"
-              >
+            <el-select style="margin: 0 12px" @change="changeWaterQuality" v-model="waterQualityType" size="mini">
+              <el-option v-for="item in analyseOptions" :key="item.label" :label="item.value" :value="item.label">
               </el-option>
             </el-select>
             <em @click="jumpWaterQuality">更多></em>
@@ -176,28 +136,11 @@
         </div>
         <div class="bottomMenu">
           <div class="chartDataBox" style="width: 60%">
-            <Chart
-              :chartData="alarmStateData"
-              :width="'100%'"
-              :height="'100%'"
-            />
+            <Chart :chartData="alarmStateData" :width="'100%'" :height="'100%'" />
           </div>
-          <marquee
-            id="affiche"
-            align="left"
-            behavior="scroll"
-            direction="up"
-            height="300"
-            width="200"
-            hspace="50"
-            vspace="20"
-            loop="-1"
-            scrollamount="4"
-            scrolldelay="10"
-            onMouseOut="this.start()"
-            onMouseOver="this.stop()"
-            class="scrollContent"
-          >
+          <marquee id="affiche" align="left" behavior="scroll" direction="up" height="300" width="200" hspace="50"
+            vspace="20" loop="-1" scrollamount="4" scrolldelay="10" onMouseOut="this.start()" onMouseOver="this.stop()"
+            class="scrollContent">
             <div class="warningStage">
               <i class="el-icon-warning-outline"></i><span>A1区水位过高</span>
             </div>
@@ -232,58 +175,37 @@
         </div>
       </div>
     </div>
-    <div
-      style="
+    <div style="
         border-radius: 5px;
         border-radius: 5px;
         background: #ffffff;
         padding: 21px;
         margin-bottom: 40px;
-      "
-    >
+      ">
       <div class="topMenu">
         <span>设备状态监测</span>
       </div>
       <div class="deviceMenu">
         <div>
-          正常运行设备：<span
-            style="color: #1c48bf; margin-right: 20px; font-size: 18px"
-            >13台</span
-          >
+          正常运行设备：<span style="color: #1c48bf; margin-right: 20px; font-size: 18px">13台</span>
         </div>
         <div>
           异常设备：<span style="color: #ea951c; font-size: 18px">6台</span>
         </div>
       </div>
-      <el-table
-        :data="deviceData"
-        style="width: 100%"
-        :header-cell-style="{ background: '#EEEEEE' }"
-      >
+      <el-table :data="deviceData" style="width: 100%" :header-cell-style="{ background: '#EEEEEE' }">
         <el-table-column prop="name" label="设备名称" />
         <el-table-column prop="address" label="位置" />
         <el-table-column prop="type" label="设备状态" width="200px">
           <template slot-scope="scope">
-            <span v-if="scope.row.type === '0'" style="color: #ea951c"
-              >异常</span
-            >
-            <span v-if="scope.row.type === '1'" style="color: #1c48bf"
-              >正常</span
-            >
+            <span v-if="scope.row.type === '0'" style="color: #ea951c">异常</span>
+            <span v-if="scope.row.type === '1'" style="color: #1c48bf">正常</span>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        background
-        style="margin-top: 25px; text-align: right"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="queryParams.currentPage"
-        :page-sizes="[5, 10, 15, 20]"
-        :page-size="queryParams.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
+      <el-pagination background style="margin-top: 25px; text-align: right" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :current-page="queryParams.currentPage" :page-sizes="[5, 10, 15, 20]"
+        :page-size="queryParams.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
   </div>
@@ -291,14 +213,15 @@
 <script>
 import Chart from "@/views/screenChart/chart";
 import * as echarts from "echarts";
+import "echarts-liquidfill"; //在这里引入水球图
 export default {
   name: "Realtime",
   components: { Chart },
-  data() {
+  data () {
     return {
       speedData: {}, //流速
       fluxData: {}, //流量
-      rainWater: "rainfall", //水雨情类型
+      rainWater: "water", //水雨情类型
       waterLevelData: {}, //水位
       rainfallData: {}, //降雨量
       pressureData: {}, //库压渗压
@@ -429,22 +352,22 @@ export default {
       deviceData: [
         {
           name: "投入式水位计一",
-          type: "0",
-          address: "陕西省西安市XX水库",
-        },
-        {
-          name: "投入式水位计二",
-          type: "0",
-          address: "陕西省西安市XX水库",
-        },
-        {
-          name: "投入式水位计三",
           type: "1",
           address: "陕西省西安市XX水库",
         },
         {
-          name: "GNSS接收机一",
+          name: "投入式水位计二",
+          type: "1",
+          address: "陕西省西安市XX水库",
+        },
+        {
+          name: "投入式水位计三",
           type: "0",
+          address: "陕西省西安市XX水库",
+        },
+        {
+          name: "GNSS接收机一",
+          type: "1",
           address: "陕西省西安市XX水库",
         },
         {
@@ -469,7 +392,7 @@ export default {
         },
         {
           name: "振弦式渗压计一",
-          type: "0",
+          type: "1",
           address: "陕西省西安市XX水库",
         },
         {
@@ -494,12 +417,12 @@ export default {
         },
         {
           name: "流速流量仪三",
-          type: "0",
+          type: "1",
           address: "陕西省西安市XX水库",
         },
         {
           name: "流速流量仪四",
-          type: "0",
+          type: "1",
           address: "陕西省西安市XX水库",
         },
         {
@@ -509,7 +432,7 @@ export default {
         },
         {
           name: "水质测定仪一",
-          type: "0",
+          type: "1",
           address: "陕西省西安市XX水库",
         },
         {
@@ -532,7 +455,7 @@ export default {
       laneChart_bar: {},
     };
   },
-  created() {
+  created () {
     this.speedData = this.getSpeedData();
     this.fluxData = this.getFluxData();
     this.waterLevelData = this.getWaterLevelData();
@@ -546,7 +469,7 @@ export default {
 
   methods: {
     /** 流速流量---类型筛选 */
-    changeFlowRate(val) {
+    changeFlowRate (val) {
       this.flowRateType = val;
       this.speedData = this.getSpeedData();
       this.fluxData = this.getFluxData();
@@ -556,7 +479,7 @@ export default {
       this.rainWater = val;
     },
     /** 水位---类型筛选 */
-    changeWaterLevel(val) {
+    changeWaterLevel (val) {
       this.waterLevelType = val;
       this.waterLevelData = this.getWaterLevelData();
     },
@@ -566,25 +489,25 @@ export default {
       this.rainfallData = this.getRainfallData();
     },
     /** 库压渗压---类型筛选 */
-    changeOsmometer(val) {
+    changeOsmometer (val) {
       this.osmometerType = val;
       this.pressureData = this.getPressureData();
     },
 
     /** 水质分析---类型筛选 */
-    changeWaterQuality(val) {
+    changeWaterQuality (val) {
       this.waterQualityType = val;
       this.waterQuality = this.getWaterQuality();
     },
     /** 形变位移---类型筛选 */
-    changeDeformation(val) {
+    changeDeformation (val) {
       this.deformationType = val;
       this.shiftData = this.getShiftData();
       this.offsetData = this.getOffsetData();
     },
 
     /**仪表盘蓝色渐变------流速 */
-    getSpeedData() {
+    getSpeedData () {
       let data = {
         series: [
           //外层光晕渐变
@@ -780,7 +703,7 @@ export default {
       return data;
     },
     /**仪表盘黄色渐变------流量 */
-    getFluxData() {
+    getFluxData () {
       let data = {
         series: [
           //外层光晕渐变
@@ -1172,7 +1095,7 @@ export default {
             },
             data: [
               {
-                value: 23,
+                value: 27,
                 name: "水位m",
               },
             ],
@@ -1286,7 +1209,7 @@ export default {
       return dataOption;
     },
     /**库压渗压 */
-    getPressureData() {
+    getPressureData () {
       let data = {
         series: [
           {
@@ -1461,7 +1384,7 @@ export default {
       return data;
     },
     /**水质分析 */
-    getWaterQuality() {
+    getWaterQuality () {
       let colors = ["#EA951C", "#3F85FF", "#F3B63E", "#37ABC1", "#32DFDF"];
       var dataCake = [
         { value: 50, name: "二氧化碳" },
@@ -1501,9 +1424,8 @@ export default {
           },
           formatter: function (param) {
             let index = dataCake.findIndex((v) => v.name == param);
-            let str = `{white|${param.padEnd(5, "　")}}{t${index}|${
-              dataCake[index].value + "%"
-            }}`;
+            let str = `{white|${param.padEnd(5, "　")}}{t${index}|${dataCake[index].value + "%"
+              }}`;
             return str;
           },
         },
@@ -1586,7 +1508,7 @@ export default {
       return data;
     },
     /**仪表盘蓝色渐变------形变 */
-    getShiftData() {
+    getShiftData () {
       let data = {
         series: [
           //外层光晕渐变
@@ -1725,7 +1647,7 @@ export default {
             },
             data: [
               {
-                value: 27,
+                value: 2,
                 name: "水平位移mm",
               },
             ],
@@ -1782,7 +1704,7 @@ export default {
       return data;
     },
     /**仪表盘黄色渐变------位移 */
-    getOffsetData() {
+    getOffsetData () {
       let data = {
         series: [
           //外层光晕渐变
@@ -1921,7 +1843,7 @@ export default {
             },
             data: [
               {
-                value: 34,
+                value: 3,
                 name: "高程位移mm",
               },
             ],
@@ -1978,7 +1900,7 @@ export default {
       return data;
     },
     /**预警状态 */
-    getalarmStateData() {
+    getalarmStateData () {
       let color = ["#37ABC1", "#3F85FF", "#EA951C", "#27C4C4", "#F3B63E"];
       let chartData = [
         {
@@ -2134,42 +2056,42 @@ export default {
       return data;
     },
     /** 表格分页 */
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       this.queryParams.size = val;
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.queryParams.page = val;
     },
     /** 流速流量跳转 */
-    jumpWaterVelocity() {
+    jumpWaterVelocity () {
       this.$router.push({
         name: "waterVelocity",
         params: { deviceId: "david" },
       });
     },
     /** 水位跳转 */
-    jumpWaterStage() {
+    jumpWaterStage () {
       this.$router.push({
         name: "waterStage",
         params: { deviceId: "david" },
       });
     },
     /** 库压渗压 */
-    jumpOsmoticPressure() {
+    jumpOsmoticPressure () {
       this.$router.push({
         name: "osmoticPressure",
         params: { deviceId: "david" },
       });
     },
     /** 水质分析 */
-    jumpWaterQuality() {
+    jumpWaterQuality () {
       this.$router.push({
         name: "waterQuality",
         params: { deviceId: "david" },
       });
     },
     /** 形变位移 */
-    jumpDeformation() {
+    jumpDeformation () {
       this.$router.push({
         name: "deformation",
         params: { deviceId: "david" },
@@ -2186,18 +2108,22 @@ export default {
     height: 20px;
   }
 }
+
 /deep/.el-select .el-input .el-select__caret {
   transform: rotateZ(90deg);
   margin-right: -10px;
 }
+
 .realtimePage {
   height: 100%;
   overflow-y: auto;
+
   .echartAllBox {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     .echartBox {
       padding: 10px;
       width: 33%;
@@ -2207,19 +2133,23 @@ export default {
       display: flex;
       flex-direction: column;
       border-radius: 5px;
+
       .bottomMenu {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .scrollContent::-webkit-scrollbar {
           display: none;
         }
+
         .scrollContent {
           width: 35%;
           margin-right: 15px;
           max-height: 200px;
           overflow-y: auto;
           cursor: pointer;
+
           div {
             width: 100%;
             padding: 0 10px;
@@ -2228,44 +2158,56 @@ export default {
             display: flex;
             align-items: center;
             margin-bottom: 9px;
+
             span {
               font-size: 12px;
             }
+
             i {
               margin-right: 10px;
             }
           }
+
           .warningStage {
             background-color: rgba(55, 171, 193, 0.2);
+
             span,
             i {
               color: #37abc1;
               z-index: 99999;
             }
           }
+
           .bodyDam {
             background-color: rgba(63, 133, 255, 0.2);
+
             span,
             i {
               color: #3f85ff;
             }
           }
+
           .osmometer {
             background-color: rgba(234, 149, 28, 0.2);
+
             span,
             i {
               color: #ea951c;
             }
           }
+
           .lakeQuality {
             background-color: rgba(55, 171, 193, 0.2);
+
             span,
             i {
               color: #27c4c4;
             }
           }
+
           .earlyWarning {
             background-color: rgba(243, 182, 62, 0.2);
+
             span,
             i {
               color: #f3b63e;
@@ -2273,6 +2215,7 @@ export default {
           }
         }
       }
+
       .chartDataBox {
         height: 100%;
         display: flex;
@@ -2287,10 +2230,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 0 5px;
+
     span {
       font-size: 16px;
       color: #333333;
     }
+
     em {
       width: 31px;
       font-size: 12px;
@@ -2299,11 +2244,13 @@ export default {
       cursor: pointer;
     }
   }
+
   .deviceMenu {
     display: flex;
     align-items: center;
     margin: 15px 0;
     font-size: 14px;
+
     div {
       display: flex;
       align-items: center;
