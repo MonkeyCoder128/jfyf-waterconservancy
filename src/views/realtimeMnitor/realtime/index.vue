@@ -246,13 +246,17 @@
       </div>
       <div class="deviceMenu">
         <div>
+<<<<<<< HEAD
           正常运行设备：<span
             style="color: #1c48bf; margin-right: 20px; font-size: 18px"
             >13台</span
           >
+=======
+          正常运行设备：<span style="color: #1c48bf; margin-right: 20px; font-size: 18px">18台</span>
+>>>>>>> fcc71bba71226c524756d042eea9550eb2aa78da
         </div>
         <div>
-          异常设备：<span style="color: #ea951c; font-size: 18px">6台</span>
+          异常设备：<span style="color: #ea951c; font-size: 18px">1台</span>
         </div>
       </div>
       <el-table

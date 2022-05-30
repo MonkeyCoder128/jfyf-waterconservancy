@@ -28,12 +28,12 @@ export default {
         legend: {
           selectedMode:false,
           orient: "vertical",
-          right: "10",
+          right: "50",
           top: "center",
-          itemHeight: 20,
-          itemWidth: 20,
+          itemHeight: 15,
+          itemWidth: 15,
           padding: [10, 10],
-          fontSize: 20,
+          fontSize: 12,
           textStyle: {
             rich: {
               t0: {
@@ -68,7 +68,7 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["35%", "55%"],
+            center: ["30%", "55%"],
             radius: ["35%", "42%"],
             silent: true,
             labelLine: {
@@ -92,7 +92,7 @@ export default {
           {
             name: "外层圆",
             type: "pie",
-            center: ["35%", "55%"],
+            center: ["30%", "55%"],
             radius: ["45%", "55%"],
             avoidLabelOverlap: false,
             label: {
@@ -147,7 +147,7 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: "20",
+                fontSize: "10",
                 fontWeight: "bold",
               },
             },

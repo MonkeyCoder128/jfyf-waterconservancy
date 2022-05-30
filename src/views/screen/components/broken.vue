@@ -71,7 +71,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "(㎡/s)",
+            name: "(Mpa)",
             nameTextStyle: {
               color: "#ffffff",
               padding: [0, 30, -7, 0],
@@ -120,7 +120,7 @@ export default {
                   color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
                     {
                       offset: 0,
-                      color: "rgba(7,44,90,0.3)",
+                      color: "rgba(7,44,90,0.3)", 
                     },
                     {
                       offset: 1,

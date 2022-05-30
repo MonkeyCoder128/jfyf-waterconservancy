@@ -12,20 +12,23 @@ export default {
       var deformation = this.$echarts.init(
         document.getElementById("deformation")
       );
-
-      var zzx1 = ["300", "100", "100", "300", "200"];
-      var wgx1 = ["100", "-100", "-200", "400", "-100"];
+      var fontColor = "#fff";
       var option = {
         grid: {
-          left: "18",
-          right: "5",
-          bottom: "35",
-          top: "45",
+          left: "25",
+          right: "0",
+          top: "40",
+          bottom: "27",
           containLabel: true,
         },
+        tooltip: {
+          show: true,
+          trigger: "item",
+        },
         legend: {
-          data: ["垂直位移", "水平位移"],
-          right: 20,
+          selectedMode:false,
+          data: ["水平位移", "高程位移"],
+          right: 8,
           top: 1,
           textStyle: {
             color: "#fff",
@@ -35,141 +38,175 @@ export default {
           itemHeight: 12,
           color: "#fff",
         },
-        xAxis: {
-          type: "category",
-          data: ["2016", "2017", "2018", "2019", "2020"],
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: "#193e69",
+        xAxis: [
+          {
+            type: "category",
+            boundaryGap: false,
+            axisLabel: {
+              color: fontColor,
             },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            color: "#fff",
-          },
-        },
-
-        yAxis: {
-          type: "value",
-          name: "(mm)",
-          nameTextStyle: {
-            color: "#ffffff",
-            padding: [0, 30, -7, 0],
-          },
-          splitNumber: 5,
-          //boundaryGap: [0.2, 0.2],
-          splitLine: {
-            show: true,
-            lineStyle: {
-              color: "#112039", //左侧显示线
-            },
-          },
-          axisLine: {
-            show: true,
-            lineStyle: {
-              color: "#193e69",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLabel: {
-            formatter: "{value}",
-            color: "#fff",
-            fontSize: 14,
-          },
-        },
-        series: [
-          //1头
-          {
-            type: "pictorialBar",
-            symbolSize: [20, 8],
-            symbolOffset: [-12, 0],
-            symbolPosition: "end",
-            z: 12,
-            color: "#e7b20a",
-            data: zzx1.map((v) =>
-              Number(v) >= 0 ? Number(v) + 20 : Number(v) - 20
-            ),
-          },
-          //1底
-          {
-            type: "pictorialBar",
-            symbolSize: [20, 8],
-            symbolOffset: [-12, 4],
-            z: 12,
-            color: "#816819",
-            data: Array(zzx1.length).fill(0),
-          },
-          //2头部
-          {
-            type: "pictorialBar",
-            symbolSize: [20, 8],
-            symbolOffset: [12, 0],
-            symbolPosition: "end",
-            z: 12,
-            color: "#1397a0",
-            data: wgx1.map((v) =>
-              Number(v) >= 0 ? Number(v) + 20 : Number(v) - 20
-            ),
-          },
-          //2底部
-          {
-            name: "",
-            type: "pictorialBar",
-            symbolSize: [20, 8],
-            symbolOffset: [12, 4],
-            color: "#155c69",
-            z: 12,
-            data: Array(wgx1.length).fill(0),
-          },
-          //2柱体
-          {
-            name: "垂直位移",
-            type: "bar",
-            barWidth: "20",
-            itemStyle: {
-              normal: {
-                opacity: 1,
-                color: "#816819",
-                barBorderRadius: 0,
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: "#397cbc",
               },
             },
-            label: {
+            axisTick: {
               show: false,
-              position: "insideTop", //数值显示在柱子内
-              formatter: function (data) {
-                if (data.value < 0) {
-                  return Math.abs(data.value);
-                }
+            },
+            splitLine: {
+              show: false,
+              lineStyle: {
+                color: "#195384",
               },
             },
-            data: zzx1,
+            data: [
+              "11.50",
+              "12.00",
+              "12.10",
+              "12.20",
+              "12.30",
+              "12.40",
+              "12.50",
+            ],
           },
-          //2柱体
+        ],
+        yAxis: [
           {
-            name: "水平位移",
-            type: "bar",
-            barWidth: "20",
+            type: "value",
+            name: "(mm)",
+            nameTextStyle: {
+              color: "#ffffff",
+              padding: [0, 30, -7, 0],
+            },
+            min: -4,
+            max: 4,
+            axisLabel: {
+              formatter: "{value}",
+              textStyle: {
+                color: "#fff",
+              },
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: "#397cbc",
+              },
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: "#11366e",
+              },
+            },
+          },
+          {
+            type: "value",
+            show: false,
+            name: "(㎡/s)",
+            nameTextStyle: {
+              color: "#ffffff",
+              padding: [0, 30, -7, 0],
+            },
+            min: 0,
+            max: 8,
+          },
+        ],
+        series: [
+          {
+            type: "line",
+            yAxisIndex: 1,
+            name: "高程位移",
             itemStyle: {
               normal: {
                 color: "#155c69",
                 barBorderRadius: 0,
               },
             },
-            label: {
-              show: false,
-              position: "insideTop", //数值显示在柱子内
-              formatter: function (data) {
-                if (data.value < 0) {
-                  return Math.abs(data.value);
-                }
+            symbol: "circle",
+            symbolSize: 8,
+            smooth: true,
+            itemStyle: {
+              normal: {
+                color: "#0092f6",
+                lineStyle: {
+                  color: "#0092f6",
+                  width: 1,
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(7,44,90,0.3)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(0,146,246,0.9)",
+                    },
+                  ]),
+                },
               },
             },
-            data: wgx1,
+            markPoint: {
+              itemStyle: {
+                normal: {
+                  color: "red",
+                },
+              },
+            },
+            data: [2, -1, -1, 1, -1, 1.2, -1].map(
+              (v) => v + 4
+            ),
+          },
+          {
+            type: "line",
+            yAxisIndex: 1,
+            name: "水平位移",
+            itemStyle: {
+              normal: {
+                color: "#155c69",
+                barBorderRadius: 0,
+              },
+            },
+            symbol: "circle",
+            symbolSize: 8,
+            smooth: true,
+            itemStyle: {
+              normal: {
+                color: "#E7B20AFF",
+                lineStyle: {
+                  color: "#E7B20AFF",
+                  width: 1,
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "#2e89e085",
+                    },
+                    {
+                      offset: 1,
+                      color: "#E7B20AFF",
+                    },
+                  ]),
+                },
+              },
+            },
+            markPoint: {
+              itemStyle: {
+                normal: {
+                  color: "red",
+                },
+              },
+            },
+            data: [1, -2, -1.5, -1.5, 1, 0.2, -1].map(
+              (v) => v + 4
+            ),
           },
         ],
       };
@@ -179,7 +216,7 @@ export default {
   },
 };
 </script>
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 #deformation {
   width: 100%;
   height: 100%;
