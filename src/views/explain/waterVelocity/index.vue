@@ -64,7 +64,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >20次</span
+              >290次</span
             >
           </div>
         </div>
@@ -122,22 +122,22 @@ export default {
       tableData: [
         {
           date: "流速流量仪一",
-          name: "101",
+          name: "50",
           type: "0",
         },
         {
           date: "流速流量仪二",
-          name: "101",
+          name: "80",
           type: "0",
         },
         {
           date: "流速流量仪三",
-          name: "101",
+          name: "70",
           type: "0",
         },
         {
           date: "流速流量仪四",
-          name: "101",
+          name: "90",
           type: "0",
         },
       ],
@@ -692,7 +692,7 @@ export default {
       let data = {
         legend: {
           selectedMode: false,
-          bottom: 3,
+          bottom: 0,
           itemGap: 36,
         },
         grid: {
@@ -973,17 +973,17 @@ export default {
 <style  lang="scss" scoped>
 @media screen and (min-width: 2000px) and (max-width: 3840px) {
   .echartsBoxBottom {
-    height: 380px;
+    height: 350px;
   }
   .chartDataBox {
-    height: 360px;
+    height: 330px;
   }
   .cardMenu {
     min-height: 430px;
     .echartsBoxContent {
-      height: 360px;
+      height: 330px;
       .echartsBox {
-        height: 360px;
+        height: 330px;
       }
     }
   }
