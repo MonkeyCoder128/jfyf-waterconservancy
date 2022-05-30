@@ -187,10 +187,10 @@
       </div>
       <div class="deviceMenu">
         <div>
-          正常运行设备：<span style="color: #1c48bf; margin-right: 20px; font-size: 18px">13台</span>
+          正常运行设备：<span style="color: #1c48bf; margin-right: 20px; font-size: 18px">18台</span>
         </div>
         <div>
-          异常设备：<span style="color: #ea951c; font-size: 18px">6台</span>
+          异常设备：<span style="color: #ea951c; font-size: 18px">1台</span>
         </div>
       </div>
       <el-table :data="deviceData" style="width: 100%" :header-cell-style="{ background: '#EEEEEE' }">
