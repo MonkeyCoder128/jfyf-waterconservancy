@@ -257,7 +257,7 @@ export default {
               color: "#EA951C",
             },
             title: {
-              offsetCenter: [0, 60],
+              offsetCenter: [0, 55],
               fontSize: 14,
             },
             data: [
