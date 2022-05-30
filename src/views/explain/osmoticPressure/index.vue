@@ -176,7 +176,9 @@ export default {
     .cardMenu {
       min-height: 430px !important;
       .echartsBoxContent {
-        height: 330px !important;
+        .echartsBox {
+          height: 330px !important;
+        }
       }
     }
   }
@@ -201,10 +203,9 @@ export default {
   .cardMenu {
     min-height: 260px;
     .echartsBoxContent {
-      height: 200px;
-    }
-    .echartsBox {
-      height: 200px;
+      .echartsBox {
+        height: 200px;
+      }
     }
   }
 
