@@ -38,7 +38,7 @@ export default {
           containLabel: true,
         },
         legend: {
-          selectedMode:false,
+          // selectedMode:false,
           orient: "rect",
           right: "2%", //图例距离左的距离
           top: "2%",
