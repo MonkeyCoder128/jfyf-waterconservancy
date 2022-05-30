@@ -79,7 +79,7 @@ const constantRoutes = [
         path: '/explain/waterStage',
         name: 'waterStage',
         component: () => import('@/views/explain/waterStage/index'),
-        meta: { title: '水位', icon: 'user', auth: true }
+        meta: { title: '水雨情', icon: 'user', auth: true }
       },
       {
         path: '/explain/osmoticPressure',
@@ -251,7 +251,7 @@ const constantRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes: constantRoutes,
 })

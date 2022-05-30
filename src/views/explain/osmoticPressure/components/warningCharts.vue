@@ -14,11 +14,11 @@ export default {
       var warningCharts = this.$echarts.init(this.$refs.warningCharts);
       let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
       var dataCake = [
-        { name: "振弦式渗压计一", value: 50 },
-        { name: "振弦式渗压计二", value: 80 },
-        { name: "振弦式渗压计三", value: 70 },
-        { name: "振弦式渗压计四", value: 90 },
-        { name: "振弦式渗压计五", value: 60 },
+        { name: "振弦式渗压计一", value: 9 },
+        { name: "振弦式渗压计二", value: 9 },
+        { name: "振弦式渗压计三", value: 10 },
+        { name: "振弦式渗压计四", value: 9 },
+        { name: "振弦式渗压计五", value: 9 },
       ];
       var option = {
         legend: {
