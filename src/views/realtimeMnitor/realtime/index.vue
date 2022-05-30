@@ -723,8 +723,8 @@ export default {
             },
             data: [
               {
-                value: 20,
-                name: "流速m/s",
+                value: 60,
+                name: "水平位移m/s",
               },
             ],
           },

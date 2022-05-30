@@ -118,56 +118,35 @@ export default {
         label: "全部",
         children: [{
           id: 1,
-          label: "A区",
+          label: "水库库区",
           icon: 'el-icon-reading',
           children: [
             {
               id: 5,
-              label: "A区 -1",
+              label: "水库库区 -1",
               icon: 'el-icon-location-outline',
               class:'is-current'
             },
             {
               id: 6,
-              label: "A区 -2",
+              label: "水库库区 -2",
               icon: 'el-icon-location-outline'
             },
           ],
         },
         {
           id: 2,
-          label: "B区",
+          label: "水库水坝区",
           icon: 'el-icon-reading',
           children: [
             {
               id: 9,
-              label: "B区 -1",
+              label: "水库水坝区 -1",
               icon: 'el-icon-location-outline'
-            },
-            {
-              id: 10,
-              label: "B区 -2  ",
-              icon: 'el-icon-location-outline'
-            },
+            }
           ],
-        },
-        {
-          id: 3,
-          label: "C区",
-          icon: 'el-icon-reading',
-          children: [
-            {
-              id: 7,
-              label: "C区 -1",
-              icon: 'el-icon-location-outline'
-            },
-            {
-              id: 8,
-              label: "C区 -2",
-              icon: 'el-icon-location-outline'
-            },
-          ],
-        }],
+        }
+        ],
       }],
       defaultProps: {
         children: "children",

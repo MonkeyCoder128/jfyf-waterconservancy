@@ -80,7 +80,9 @@ export default {
         yAxis: [
           {
             type: "value",
-            splitNumber: 8, // 配置 Y 轴数值间隔
+            splitNumber: 5, // 配置 Y 轴数值间隔
+            max:10,
+            min:0,
             axisLabel: {
               textStyle: {
                 color: "#666",
