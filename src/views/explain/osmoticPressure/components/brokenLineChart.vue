@@ -34,7 +34,7 @@ export default {
         grid: {
           left: "3%",
           right: "3%",
-          top: "6%",
+          top: "10%",
           bottom: "6%",
           containLabel: true,
         },
@@ -80,6 +80,7 @@ export default {
         yAxis: [
           {
             type: "value",
+            name:'次',
             splitNumber: 5, // 配置 Y 轴数值间隔
             max:10,
             min:0,
