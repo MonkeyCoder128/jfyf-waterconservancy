@@ -35,7 +35,7 @@
           </div>
           <div>
             预警总次数：<span style="color: #ea951c; font-size: 14px"
-              >38次</span
+              >37次</span
             >
           </div>
         </div>
