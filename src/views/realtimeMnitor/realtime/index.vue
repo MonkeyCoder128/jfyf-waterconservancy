@@ -246,14 +246,10 @@
       </div>
       <div class="deviceMenu">
         <div>
-<<<<<<< HEAD
           正常运行设备：<span
             style="color: #1c48bf; margin-right: 20px; font-size: 18px"
-            >13台</span
+            >18台</span
           >
-=======
-          正常运行设备：<span style="color: #1c48bf; margin-right: 20px; font-size: 18px">18台</span>
->>>>>>> fcc71bba71226c524756d042eea9550eb2aa78da
         </div>
         <div>
           异常设备：<span style="color: #ea951c; font-size: 18px">1台</span>
@@ -303,7 +299,7 @@ export default {
     return {
       speedData: {}, //流速
       fluxData: {}, //流量
-      rainWater: "water", //水雨情类型
+      rainWater: "rainfall", //水雨情类型
       waterLevelData: {}, //水位
       rainfallData: {}, //降雨量
       pressureData: {}, //库压渗压
@@ -733,7 +729,6 @@ export default {
               },
             ],
           },
-
           //内层刻度线渐变
           {
             type: "gauge",
@@ -1196,95 +1191,167 @@ export default {
         title: {
           top: "47%",
           left: "center",
-          text: scroe + " mm",
+          text: scroe + " mm/min",
           textStyle: {
             color: "#1C48BF",
             fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: 32,
+            fontWeight: "bold",
+            fontSize: 18,
           },
         },
         series: [
-          {
-            type: "liquidFill",
-            itemStyle: {
-              opacity: 0.8, //波浪的透明度
-              shadowBlur: 10, //波浪的阴影范围
-              shadowColor: "#FFB931", //阴影颜色
-            },
-            radius: "80%",
-            //水波
-            color: [
-              new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#35EBFB",
-                },
-                {
-                  offset: 1,
-                  color: "#2876F7",
-                },
-              ]),
-            ],
-            data: [
-              {
-                value: scroePer,
-              },
-            ],
-            center: ["50%", "50%"],
-            backgroundStyle: {
-              color: "#fff",
-            },
-            label: {
-              normal: {
-                formatter: "",
-                textStyle: {
-                  fontSize: 12,
-                },
-              },
-            },
-            outline: {
+          //data数值
+            {
+              type: "liquidFill",
               itemStyle: {
-                borderColor: "transparent",
-                borderWidth: 5,
+                opacity: 0.8, //波浪的透明度
+                shadowBlur: 10, //波浪的阴影范围
+                shadowColor: "#FFB931", //阴影颜色
               },
-              borderDistance: 0,
-            },
+              radius: "73%",
+              //水波
+              color: [
+                new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "#35EBFB",
+                  },
+                  {
+                    offset: 1,
+                    color: "#2876F7",
+                  },
+                ]),
+              ],
+              outline: {
+            borderDistance: 0,
+            itemStyle: {
+              borderWidth: 0,
+              borderColor: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                  offset: 0,
+                  color: 'rgba(50,115,256, 1)'
+                }, {
+                  offset: 0.5,
+                  color: 'rgba(50,115,233, .75)'
+                }, {
+                  offset: 1,
+                  color: 'rgba(50,115,233, 1)'
+                }],
+                globalCoord: false
+              },
+            }
           },
-          //外环线
-          {
-            color: ["#3192D8", "transparent"],
-            type: "pie",
-            center: ["50%", "50%"],
-            radius: ["80%", "82%"],
-            hoverAnimation: false,
-            data: [
-              {
-                name: "",
-                value: data,
-                label: {
-                  show: false,
-                  position: "center",
-                  color: "#fff",
-                  fontSize: 38,
-                  fontWeight: "bold",
-                  formatter: function (o) {
-                    return data;
+              data: [
+                {
+                  value: scroePer,
+                },
+              ],
+              center: ["50%", "50%"],
+              backgroundStyle: {
+                color: "#fff",
+              },
+              label: {
+                normal: {
+                  formatter: "",
+                  textStyle: {
+                    fontSize: 12,
                   },
                 },
               },
-              {
-                //画剩余的刻度圆环
-                name: "",
-                value: max - data,
-                label: {
-                  show: false,
+              outline: {
+                itemStyle: {
+                  borderColor: "transparent",
+                  borderWidth: 5,
                 },
-                labelLine: {
-                  show: false,
-                },
+                borderDistance: 0,
               },
-            ],
+            },
+     
+          //内层刻度线渐变
+          {
+            type: "gauge",
+            splitNumber: 4, //刻度数量
+            radius: "86%", //图表尺寸
+            startAngle: 200,
+            endAngle: -20,
+            center: ["50%", "51%"],
+            axisLine: {
+              show: true,
+              lineStyle: {
+                width: 0,
+                shadowBlur: 0,
+                color: [
+                  [0.1, "#71C5FF"],
+
+                  [1, "#71C5FF"],
+                ],
+              },
+            },
+            axisTick: {
+              show: true,
+              lineStyle: {
+                color: "auto",
+                width: 10,
+              },
+              length: 2,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            pointer: {
+              show: false,
+            },
+          },
+          {
+            type: "gauge",
+            radius: "80%",
+            startAngle: -25,
+            endAngle: -154,
+            show: false,
+            center: ["50%", "52%"],
+            progress: {
+              width: 16,
+              roundCap: true,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              roundCap: true,
+              lineStyle: {
+                width: 8,
+                color: [[1, "#3192D8"]], //刻度线背景色
+              },
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            anchor: {
+              show: false,
+            },
+            title: {
+              show: false,
+            },
+            detail: {
+              width: "85%",
+              borderRadius: 8,
+              fontSize: 18,
+            },
+            data: [],
           },
         ],
       };
