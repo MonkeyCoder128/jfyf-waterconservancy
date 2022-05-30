@@ -461,9 +461,7 @@ export default {
             type: 'success'
           });
           this.listLoading = false;
-          setTimeout(()=>{
-            this.$router.go(-1);
-          },1100);
+          this.$router.go(-1);
         }else{
           this.$message({
             showClose: true,
