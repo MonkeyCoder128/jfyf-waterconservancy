@@ -13,6 +13,8 @@ import './assets/xjicon/iconfont.css'
 import './assets/shu/iconfont.css'
 import VueCookies from 'vue-cookies'
 import Base64 from 'js-base64';
+import scroll from 'vue-seamless-scroll'
+
 
 // require('./mock'); //引入mock数据
 
@@ -22,6 +24,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.prototype.$echarts = echarts;
 Vue.use(VueCookies);
+Vue.use(scroll);
 
 new Vue({
   router,
