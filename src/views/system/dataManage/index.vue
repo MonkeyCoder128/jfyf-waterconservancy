@@ -1,6 +1,6 @@
 <template>
   <div class="dataManagePage">
-    <div v-if="WhethertoAdd === false">
+    <div v-if="WhethertoAdd">
       <div style="padding: 20px 20px 0 20px">
         <div class="editBtn">
           <div class="boxTitle">
@@ -317,7 +317,7 @@
       </div>
     </div>
 
-    <div v-if="WhethertoAdd === true" class="noDataBox">
+    <div v-else class="noDataBox">
       <img src="../../../assets/image/nulldata.png" alt="" />
       <div>
         <span>当前页面暂无数据，去</span>
@@ -361,7 +361,7 @@ export default {
         liuLiang: "", //流量
       },
       toAdd: true, //是否为新添数据
-      WhethertoAdd: true, //是否为数据页面
+      WhethertoAdd: false, //是否为数据页面
       efitDisable: false, //是否可编辑
       options: provinces, // 省市区级联
       location: [],
@@ -371,6 +371,7 @@ export default {
   methods: {
     /**编辑事件 */
     editForm() {
+      this.toAdd = false
       this.efitDisable = false;
       this.$api.DATUM.getDetail(this.configForm.pid).then((res) => {
         if (res.code === 200) {
@@ -386,22 +387,23 @@ export default {
     },
     /**添加事件 */
     addForm() {
-      this.WhethertoAdd = false;
+      this.WhethertoAdd = true;
     },
     /**取消事件 */
     closeForm() {
+      let that = this
       this.$confirm("取消后，输入的数据将不被保存", "确定取消操作吗？", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
-          if (this.toAdd === true) {
-            this.WhethertoAdd = true;
-          } else if (this.toAdd === false) {
-            this.getConfigMessage();
-            this.WhethertoAdd = false;
-            this.efitDisable = true;
+          if (that.toAdd === true) {
+            that.WhethertoAdd = false;
+          } else if (that.toAdd === false) {
+            that.getConfigMessage();
+            that.WhethertoAdd = true;
+            that.efitDisable = true;
           }
         })
         .catch(() => {
@@ -438,15 +440,23 @@ export default {
       this.$api.DATUM.getDetail(this.configForm.pid).then((res) => {
         if (res.code === 200) {
           this.location = [];
-          this.WhethertoAdd = Object.keys(res.result).length === 0;
-          this.toAdd = Object.keys(res.result).length === 0;
-          this.efitDisable = true;
-          this.configForm = res.result;
-          this.location.push(
-            res.result.province,
-            res.result.city,
-            res.result.district
-          );
+          if(res.result){
+            this.WhethertoAdd = true
+            this.toAdd = true
+            // this.WhethertoAdd = Object.keys(res.result).length === 0;
+            // this.toAdd = Object.keys(res.result).length === 0;
+            this.efitDisable = true;
+            this.configForm = res.result;
+            this.location.push(
+              res.result.province,
+              res.result.city,
+              res.result.district
+            );
+          }else{
+            this.$nextTick(() => {
+              this.WhethertoAdd = false
+            })
+          }
         }
       });
     },

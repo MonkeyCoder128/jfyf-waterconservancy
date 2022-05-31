@@ -73,7 +73,7 @@
               //     fontSize: 12,
               //   },
               //   // formatter: '水位mm：{value}'
-              //   formatter: '库压渗压Mpa'
+              //   formatter: '库压渗压MPa'
               // },
               // title: {
               //   show: true,
@@ -94,7 +94,7 @@
               radius: "101%", //图表尺寸
               center: ["50%", "52.5%"],
               min: 0,
-              max: 100,
+              max: 10,
               axisLine: {
                 show: true,
                 lineStyle: {
@@ -136,7 +136,7 @@
               type: 'gauge',
               radius: '80%',
               min: 0,
-              max: 100,
+              max: 10,
               center: ['50%', '50%'],
               splitNumber: 1, //刻度数量
               startAngle: 225,
@@ -218,7 +218,7 @@
                 borderRadius: 8,
                 offsetCenter: [0, 0],
                 fontSize: 18,
-                formatter: "{value} Mpa",
+                formatter: "{value} MPa",
                 color: "#49a5ff",
               },
               title: {
@@ -228,7 +228,7 @@
               data: [
                 {
                   value: this.parentData,
-                  name: "库压渗压Mpa",
+                  name: "库压渗压MPa",
                 },
               ],
             }

@@ -1462,7 +1462,7 @@ export default {
             startAngle: 200,
             endAngle: -20,
             min: 0,
-            max: 100,
+            max: 10,
             splitNumber: 1,
             center: ["50%", "60%"],
             progress: {
@@ -1527,7 +1527,7 @@ export default {
               borderRadius: 8,
               offsetCenter: [0, -10],
               fontSize: 18,
-              formatter: "{value} Mpa",
+              formatter: "{value} MPa",
               color: "#3672E9",
             },
             title: {
@@ -1536,8 +1536,8 @@ export default {
             },
             data: [
               {
-                value: 23,
-                name: "库压渗压Mpa",
+                value: 1.4,
+                name: "库压渗压MPa",
               },
             ],
           },
