@@ -13,7 +13,8 @@
       </el-select>
       <div class="echartsBoxContent">
         <div class="echartsBox">
-          <span>设备:投入式水位计一</span>
+          <span v-if="category === 'rainfall'">设备:翻斗式雨量计一</span>
+          <span v-else>设备:投入式水位计一</span>
           <waterPolo 
             :parentData="childData.waterPoloA"
             v-if="category == 'rainfall'">
@@ -24,7 +25,8 @@
           ></equipmentChart>
         </div>
         <div class="echartsBox">
-          <span>设备:投入式水位计二</span>
+          <span v-if="category === 'water'">设备:投入式水位计二</span>
+          <span v-else>设备:投入式水位计二</span>
           <waterPolo 
             :parentData="childData.waterPoloB"
             v-if="category == 'rainfall'">
@@ -35,7 +37,8 @@
           ></equipmentChart>
         </div>
         <div class="echartsBox">
-          <span>设备:投入式水位计三</span>
+          <span v-if="category == 'water'">设备:投入式水位计三</span>
+          <span v-else>设备:投入式水位计三</span>
           <waterPolo 
             :parentData="childData.waterPoloC"
             v-if="category == 'rainfall'">
@@ -66,7 +69,7 @@
         <div class="echartsBox echartsBoxBottom" style="margin: 10px 0">
           <span>预警数据对比</span>
           <div class="warningBox">
-            <warningCharts />
+            <warningCharts :parentData="this.childData.warningChartsWater" />
           </div>
         </div>
         <span class="cardTitle">设备检测</span>
@@ -76,7 +79,7 @@
           :cell-style="{ padding: '0' }"
           :header-cell-style="{ background: '#EEEEEE', color: '#333333' }"
         >
-          <el-table-column prop="date" label="监测点" />
+          <el-table-column prop="data" label="监测点" />
           <el-table-column prop="name" label="预警次数" />
           <el-table-column prop="type" label="设备状态">
             <template slot-scope="scope">
@@ -131,32 +134,43 @@ export default {
           LineOne: [1, 2, 2, 3, 2, 1, 3, 1],
           LineTwo: [1, 0, 2, 1, 2, 1, 2, 3],
           LineThree: [2, 3, 1, 4, 4, 2, 1, 2],
+          name:['投入式水位计一','投入式水位计二','投入式水位计三']
         },
+        warningChartsWater:[
+          { name: "投入式水位计一", value: 15 },
+          { name: "投入式水位计二", value: 13 },
+          { name: "投入式水位计三", value: 19 },
+        ]
       },
       tableData: [
         {
-          date: "投入式水位计一",
+          data: "投入式水位计一",
           name: "15",
           type: "0",
         },
         {
-          date: "投入式水位计二",
+          data: "投入式水位计二",
           name: "13",
           type: "0",
         },
         {
-          date: "投入式水位计三",
+          data: "投入式水位计三",
           name: "19",
           type: "1",
         },
       ],
       // 存储当前水雨情类别
-      category: "water",
+      category: '',
     };
   },
   created(){
-    // 获取父级页面传来的参数
-    this.category = this.$route.query.type;
+    // 获取父级页面传来的参数,没有参数则设置默认
+    if(this.$route.query.type){
+      this.category = this.$route.query.type;
+      this.changeType(this.category);
+    }else{
+      this.category = 'water';
+    };
   },
   methods: {
     // 查看预警分析
@@ -171,6 +185,45 @@ export default {
     // 水雨情类型改变
     changeType(option){
       this.category = option;
+      // 根据水雨情类型改变table的值
+      if(this.category == 'rainfall'){
+        // 修改table值
+        this.tableData = [
+          {data: "翻斗式雨量计一",name: "12",type: "0",},
+          {data: "翻斗式雨量计二",name: "11",type: "0",},
+          {data: "翻斗式雨量计三",name: "14",type: "0",},
+        ];
+        // 修改warningCharts值
+        this.childData.warningChartsWater = [
+          { name: "翻斗式雨量计一", value: 12 },
+          { name: "翻斗式雨量计二", value: 11 },
+          { name: "翻斗式雨量计三", value: 14 },
+        ];
+        // 修改warningCharts值
+        this.childData.brokenLineChart = {
+          LineOne: [1, 0, 2, 1, 2, 3, 2, 3],
+          LineTwo: [2, 2, 3, 1, 2, 2, 0, 2],
+          LineThree: [1, 2, 4, 2, 2, 4, 3, 1],
+          name:['翻斗式雨量计一','翻斗式雨量计二','翻斗式雨量计三']
+        };
+      }else{
+        this.tableData = [
+          {data: "投入式水位计一",name: "15",type: "0",},
+          {data: "投入式水位计二",name: "13",type: "0",},
+          {data: "投入式水位计三",name: "19",type: "1",}
+        ];
+        this.childData.warningChartsWater = [
+          { name: "投入式水位计一", value: 15 },
+          { name: "投入式水位计二", value: 13 },
+          { name: "投入式水位计三", value: 19 },
+        ];
+        this.childData.brokenLineChart = {
+          LineOne: [1, 2, 2, 3, 2, 1, 3, 1],
+          LineTwo: [1, 0, 2, 1, 2, 1, 2, 3],
+          LineThree: [2, 3, 1, 4, 4, 2, 1, 2],
+          name:['投入式水位计一','投入式水位计二','投入式水位计三']
+        };
+      }
     }
   },
 };
