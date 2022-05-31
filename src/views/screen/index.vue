@@ -506,7 +506,7 @@ export default {
   height: 35px;
   color: #2e89e0;
   line-height: 29px;
-  text-shadow: 0 0 4px #2e89e0, 0 0 2px #87e9eb;
+  //text-shadow: 0 0 4px #2e89e0, 0 0 2px #87e9eb;
   border-top: solid 1px #111e38;
   border-bottom: solid 1px #111e38;
   margin: 0 auto;
