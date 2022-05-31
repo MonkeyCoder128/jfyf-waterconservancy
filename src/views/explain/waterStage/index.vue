@@ -3,11 +3,12 @@
     <div class="cardMenu">
       <span class="cardTitle">当前数据</span>
       <i>数据类别</i>
-      <el-select 
+      <el-select
         size="mini"
         @change="changeType"
         placeholder="水位"
-        v-model="category">
+        v-model="category"
+      >
         <el-option label="水位" value="water"></el-option>
         <el-option label="降雨量" value="rainfall"></el-option>
       </el-select>
@@ -15,9 +16,10 @@
         <div class="echartsBox">
           <span v-if="category === 'rainfall'">设备:翻斗式雨量计一</span>
           <span v-else>设备:投入式水位计一</span>
-          <waterPolo 
+          <waterPolo
             :parentData="childData.waterPoloA"
-            v-if="category == 'rainfall'">
+            v-if="category == 'rainfall'"
+          >
           </waterPolo>
           <equipmentChart
             :parentData="childData.equipmentChartA"
@@ -27,9 +29,10 @@
         <div class="echartsBox">
           <span v-if="category === 'rainfall'">设备:翻斗式雨量计二</span>
           <span v-else>设备:投入式水位计二</span>
-          <waterPolo 
+          <waterPolo
             :parentData="childData.waterPoloB"
-            v-if="category == 'rainfall'">
+            v-if="category == 'rainfall'"
+          >
           </waterPolo>
           <equipmentChart
             :parentData="childData.equipmentChartB"
@@ -39,9 +42,10 @@
         <div class="echartsBox">
           <span v-if="category == 'rainfall'">设备:翻斗式雨量计三</span>
           <span v-else>设备:投入式水位计三</span>
-          <waterPolo 
+          <waterPolo
             :parentData="childData.waterPoloC"
-            v-if="category == 'rainfall'">
+            v-if="category == 'rainfall'"
+          >
           </waterPolo>
           <equipmentChart
             :parentData="childData.equipmentChartC"
@@ -127,20 +131,20 @@ export default {
         equipmentChartA: "27",
         equipmentChartB: "27",
         equipmentChartC: "27",
-        waterPoloA: '18',
-        waterPoloB: '16',
-        waterPoloC: '13',
+        waterPoloA: "18",
+        waterPoloB: "16",
+        waterPoloC: "13",
         brokenLineChart: {
           LineOne: [1, 2, 2, 3, 2, 1, 3, 1],
           LineTwo: [1, 0, 2, 1, 2, 1, 2, 3],
           LineThree: [2, 3, 1, 4, 4, 2, 1, 2],
-          name:['投入式水位计一','投入式水位计二','投入式水位计三']
+          name: ["投入式水位计一", "投入式水位计二", "投入式水位计三"],
         },
-        warningChartsWater:[
+        warningChartsWater: [
           { name: "投入式水位计一", value: 15 },
           { name: "投入式水位计二", value: 13 },
           { name: "投入式水位计三", value: 19 },
-        ]
+        ],
       },
       tableData: [
         {
@@ -160,17 +164,17 @@ export default {
         },
       ],
       // 存储当前水雨情类别
-      category: '',
+      category: "",
     };
   },
-  created(){
+  created() {
     // 获取父级页面传来的参数,没有参数则设置默认
-    if(this.$route.query.type){
+    if (this.$route.query.type) {
       this.category = this.$route.query.type;
       this.changeType(this.category);
-    }else{
-      this.category = 'water';
-    };
+    } else {
+      this.category = "water";
+    }
   },
   methods: {
     // 查看预警分析
@@ -183,15 +187,15 @@ export default {
       });
     },
     // 水雨情类型改变
-    changeType(option){
+    changeType(option) {
       this.category = option;
       // 根据水雨情类型改变table的值
-      if(this.category == 'rainfall'){
+      if (this.category == "rainfall") {
         // 修改table值
         this.tableData = [
-          {data: "翻斗式雨量计一",name: "12",type: "0",},
-          {data: "翻斗式雨量计二",name: "11",type: "0",},
-          {data: "翻斗式雨量计三",name: "14",type: "0",},
+          { data: "翻斗式雨量计一", name: "12", type: "0" },
+          { data: "翻斗式雨量计二", name: "11", type: "0" },
+          { data: "翻斗式雨量计三", name: "14", type: "0" },
         ];
         // 修改warningCharts值
         this.childData.warningChartsWater = [
@@ -204,13 +208,13 @@ export default {
           LineOne: [1, 0, 2, 1, 2, 3, 2, 3],
           LineTwo: [2, 2, 3, 1, 2, 2, 0, 2],
           LineThree: [1, 2, 4, 2, 2, 4, 3, 1],
-          name:['翻斗式雨量计一','翻斗式雨量计二','翻斗式雨量计三']
+          name: ["翻斗式雨量计一", "翻斗式雨量计二", "翻斗式雨量计三"],
         };
-      }else{
+      } else {
         this.tableData = [
-          {data: "投入式水位计一",name: "15",type: "0",},
-          {data: "投入式水位计二",name: "13",type: "0",},
-          {data: "投入式水位计三",name: "19",type: "1",}
+          { data: "投入式水位计一", name: "15", type: "0" },
+          { data: "投入式水位计二", name: "13", type: "0" },
+          { data: "投入式水位计三", name: "19", type: "1" },
         ];
         this.childData.warningChartsWater = [
           { name: "投入式水位计一", value: 15 },
@@ -221,10 +225,10 @@ export default {
           LineOne: [1, 2, 2, 3, 2, 1, 3, 1],
           LineTwo: [1, 0, 2, 1, 2, 1, 2, 3],
           LineThree: [2, 3, 1, 4, 4, 2, 1, 2],
-          name:['投入式水位计一','投入式水位计二','投入式水位计三']
+          name: ["投入式水位计一", "投入式水位计二", "投入式水位计三"],
         };
       }
-    }
+    },
   },
 };
 </script>
@@ -327,7 +331,7 @@ export default {
       display: flex;
       flex-flow: wrap;
       div {
-        width: 32.1%;
+        width: 31%;
         margin-right: 20px;
         margin-bottom: 20px;
       }
@@ -367,23 +371,24 @@ export default {
   }
 }
 // 设置水雨情select选择器的样式
-/deep/ .el-input--mini .el-input__inner{
+/deep/ .el-input--mini .el-input__inner {
   width: 90px;
   height: 20px;
+  line-height: 20px;
   color: #333333;
 }
 /deep/ .el-input--mini .el-input__inner::-webkit-input-placeholder {
   color: #333333;
   font-size: 12px;
 }
-/deep/ .el-input--mini .el-input__icon{
+/deep/ .el-input--mini .el-input__icon {
   line-height: 12px;
 }
-.cardMenu{
-  i{
+.cardMenu {
+  i {
     font-size: 12px !important;
     font-style: normal;
-    margin:0 10px 0 20px;
+    margin: 0 10px 0 20px;
   }
 }
 </style>

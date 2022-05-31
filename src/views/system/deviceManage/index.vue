@@ -97,49 +97,49 @@ export default {
       tableData: [
         {
           title: "水质测定仪一",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
           title: "投入式水位计三",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "0",
         },
         {
           title: "GNSS接收机二",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
           title: "振弦式渗压计一",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
           title: "GNSS接收机五",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
           title: "流速流量仪一",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
           title: "水质测定仪一",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
         {
           title: "水质测定仪三",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
           time:'2022-05-22  12:00:12',
           type: "1",
         },
@@ -147,31 +147,31 @@ export default {
       optionsType: [
         {
           key: "01",
-          value: "陕西省西安市XX水库",
+          value: "陕西省西安市金丰水库",
         },
         {
           key: "02",
-          value: "陕西省西安市XX水库",
+          value: "陕西省西安市金丰水库",
         },
         {
           key: "03",
-          value: "陕西省西安XX水库",
+          value: "陕西省西安金丰水库",
         },
         {
           key: "04",
-          value: "陕西省西安市XX水库",
+          value: "陕西省西安市金丰水库",
         },
         {
           key: "05",
-          value: "陕西省西安市XX水库",
+          value: "陕西省西安市金丰水库",
         },
         {
           key: "06",
-          value: "陕西省西安市XX水库",
+          value: "陕西省西安市金丰水库",
         },
         {
           key: "07",
-          value: "陕西省西安市XX水库",
+          value: "陕西省西安市金丰水库",
         },
       ],
     };

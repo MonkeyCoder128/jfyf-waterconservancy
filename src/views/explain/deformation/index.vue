@@ -1125,7 +1125,7 @@ export default {
       display: flex;
       flex-flow: wrap;
       .echartsBox {
-        width: 32.1%;
+        width: 31%;
         margin-right: 20px;
         margin-bottom: 20px;
       }
