@@ -4,7 +4,7 @@
       <div class="home_bg">
         <el-row type="flex" class="nav" justify="end">
           <p class="time">{{ nowTime }}</p>
-          <p class="p_nav">XX水库智慧管理平台</p>
+          <p class="p_nav">金丰水库智慧管理平台</p>
           <div class="system" @click="goSystem">
             <img
               src="../../assets/image/xitong.png"
@@ -506,7 +506,7 @@ export default {
   height: 35px;
   color: #2e89e0;
   line-height: 29px;
-  text-shadow: 0 0 4px #2e89e0, 0 0 2px #87e9eb;
+  //text-shadow: 0 0 4px #2e89e0, 0 0 2px #87e9eb;
   border-top: solid 1px #111e38;
   border-bottom: solid 1px #111e38;
   margin: 0 auto;
