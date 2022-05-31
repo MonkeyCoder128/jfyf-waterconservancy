@@ -25,7 +25,7 @@
           ></equipmentChart>
         </div>
         <div class="echartsBox">
-          <span v-if="category === 'water'">设备:投入式水位计二</span>
+          <span v-if="category === 'rainfall'">设备:翻斗式雨量计二</span>
           <span v-else>设备:投入式水位计二</span>
           <waterPolo 
             :parentData="childData.waterPoloB"
@@ -37,7 +37,7 @@
           ></equipmentChart>
         </div>
         <div class="echartsBox">
-          <span v-if="category == 'water'">设备:投入式水位计三</span>
+          <span v-if="category == 'rainfall'">设备:翻斗式雨量计三</span>
           <span v-else>设备:投入式水位计三</span>
           <waterPolo 
             :parentData="childData.waterPoloC"
