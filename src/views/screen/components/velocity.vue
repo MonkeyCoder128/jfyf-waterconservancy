@@ -13,10 +13,10 @@ export default {
       let centerArr = ["50%", "70%"];
       var option = {
         grid: {
-          top: "15%",
-          left: "10%",
-          right: "2%",
-          bottom: "28%",
+          top: "30",
+          left: "48",
+          right: "8",
+          bottom: "45",
         },
         tooltip: {
           show: false,

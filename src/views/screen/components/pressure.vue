@@ -77,7 +77,7 @@ export default {
               padding: [0, 30, -7, 0]
             },
             min: 0,
-            max: 80,
+            max: 4,
             axisLabel: {
               formatter: "{value}",
               textStyle: {
@@ -137,7 +137,7 @@ export default {
                 },
               },
             },
-            data: [70, 50, 20, 60, 80, 40, 60],
+            data: [1.2, 2.2, 1.8, 2.0, 1.2, 1.3, 1.9],
           },
         ],
       };

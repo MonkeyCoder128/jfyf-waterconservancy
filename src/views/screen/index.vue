@@ -116,13 +116,13 @@
                     <el-col :span="12" style="height: 100%"
                       ><div class="bg-purple">
                         库前水位
-                        <div class="num">27.00m</div>
+                        <div class="num">27.56m</div>
                       </div></el-col
                     >
                     <el-col :span="12" style="height: 100%"
                       ><div class="bg-purple">
                         库存
-                        <div class="num">3100000m³</div>
+                        <div class="num">3105406m³</div>
                       </div></el-col
                     >
                   </el-row>
@@ -248,10 +248,6 @@ import broken from "./components/broken.vue";
 import pressure from "./components/pressure.vue";
 import flow from "./components/flow.vue";
 import patrol from "./components/patrol.vue";
-import dam from "./components/dam.vue";
-import dambg from "./components/dambg.vue";
-import dam2 from "./components/dam2.vue";
-import dam2bg from "./components/dam2bg.vue";
 import velocity from "./components/velocity.vue";
 import tabledata from "./components/tabledata.vue";
 import inspection from "./components/inspection.vue";
@@ -265,10 +261,6 @@ export default {
     pressure,
     flow,
     patrol,
-    dam,
-    dambg,
-    dam2,
-    dam2bg,
     velocity,
     tabledata,
     inspection

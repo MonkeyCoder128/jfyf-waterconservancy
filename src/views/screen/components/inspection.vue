@@ -27,7 +27,7 @@ export default {
         grid: {
           top: "10",
           left: "10",
-          right: "10",
+          right: "35",
           bottom: "25",
           containLabel: true,
         },
@@ -60,6 +60,11 @@ export default {
         ],
         yAxis: [
           {
+            name: "(次)",
+            nameTextStyle: {
+              color: "#ffffff",
+              padding: [-20, -720, 8, 0],
+            },
             splitLine: {
               show: false,
             },
@@ -97,7 +102,7 @@ export default {
               color: "#fff",
               fontSize: 10,
               distance: 15, // 距离
-              formatter: "{c}次", // 这里是数据展示的时候显示的数据
+              formatter: "{c}", // 这里是数据展示的时候显示的数据
             }, // 柱子上方的数值
             itemStyle: {
               barBorderRadius: [0, 20, 20, 0], // 圆角（左上、右上、右下、左下）
