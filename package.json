@@ -24,6 +24,7 @@
     "vue-loader": "^13.3.0",
     "vue-pdf": "^4.3.0",
     "vue-router": "^3.2.0",
+    "vue-seamless-scroll": "^1.1.23",
     "vue-video-player": "^5.0.2",
     "vuex": "^3.4.0"
   },

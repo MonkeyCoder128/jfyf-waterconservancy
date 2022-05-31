@@ -299,7 +299,7 @@ export default {
     return {
       speedData: {}, //流速
       fluxData: {}, //流量
-      rainWater: "rainfall", //水雨情类型
+      rainWater: "water", //水雨情类型
       waterLevelData: {}, //水位
       rainfallData: {}, //降雨量
       pressureData: {}, //库压渗压
