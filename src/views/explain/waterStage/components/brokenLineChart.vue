@@ -5,14 +5,21 @@
 </template>
 <script>
 export default {
+  mounted() {
+    this.myCharts();
+  },
   props: {
     parentData: {
       type: Object,
       default: "",
     },
   },
-  mounted() {
-    this.myCharts();
+  // 监听父组件传值，有改变重新渲染echarts
+  watch:{
+    parentData:function(newVal){
+      console.log("监听到变化",newVal);
+      this.myCharts();
+    }
   },
   methods: {
     myCharts() {
@@ -104,7 +111,7 @@ export default {
         ],
         series: [
           {
-            name: "投入式水位计一",
+            name: this.parentData.name[0],
             type: "line",
             smooth: true,
             symbolSize: 8,
@@ -160,7 +167,7 @@ export default {
             data: this.parentData.LineOne,
           },
           {
-            name: "投入式水位计二",
+            name: this.parentData.name[1],
             type: "line",
             smooth: true,
             symbolSize: 8,
@@ -210,7 +217,7 @@ export default {
             data: this.parentData.LineTwo,
           },
           {
-            name: "投入式水位计三",
+            name: this.parentData.name[2],
             type: "line",
             smooth: true,
             symbolSize: 8,
