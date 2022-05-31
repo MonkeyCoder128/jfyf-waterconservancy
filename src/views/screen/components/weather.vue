@@ -176,7 +176,7 @@ export default {
 <style lang="scss" scoped>
 #weather {
   width: 100%;
-  height: 140px;
+  height: 100%;
   overflow: hidden;
   position: relative;
 }
@@ -193,7 +193,7 @@ export default {
 #weater_box {
   color: #fff;
   width: 100%;
-  height: 53%;
+  height: 45%;
   display: flex;
   justify-content: space-between;
   .box {
