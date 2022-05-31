@@ -17,7 +17,6 @@ export default {
   // 监听父组件传值，有改变重新渲染echarts
   watch:{
     parentData:function(newVal){
-      console.log("监听到变化",newVal);
       this.myCharts();
     }
   },
