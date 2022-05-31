@@ -299,7 +299,7 @@ export default {
     return {
       speedData: {}, //流速
       fluxData: {}, //流量
-      rainWater: "rainfall", //水雨情类型
+      rainWater: "water", //水雨情类型
       waterLevelData: {}, //水位
       rainfallData: {}, //降雨量
       pressureData: {}, //库压渗压
@@ -1289,12 +1289,12 @@ export default {
           {
             type: "gauge",
             splitNumber: 4, //刻度数量
-            radius: "86%", //图表尺寸
+            radius: "87%", //图表尺寸
             startAngle: 200,
             endAngle: -20,
             center: ["50%", "51%"],
             axisLine: {
-              show: true,
+              show: false,
               lineStyle: {
                 width: 0,
                 shadowBlur: 0,
