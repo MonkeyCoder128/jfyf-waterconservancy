@@ -107,11 +107,11 @@ export default {
     return {
       // 子组件数据
       childData: {
-        equipmentChartA: "35",
-        equipmentChartB: "58",
-        equipmentChartC: "88",
-        equipmentChartD: "73",
-        equipmentChartE: "69",
+        equipmentChartA: "1.1",
+        equipmentChartB: "1.3",
+        equipmentChartC: "1.5",
+        equipmentChartD: "1.2",
+        equipmentChartE: "1.7",
         brokenLineChart: {
           LineOne: [3, 1, 0, 2, 1, 0, 0, 2],
           LineTwo: [2, 1, 1, 3, 0, 1, 0, 0],
