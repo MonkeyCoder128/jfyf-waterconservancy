@@ -148,19 +148,19 @@ export default {
           sn:'7',
           location: "振弦式渗压计一",
           createTime:'2022-01-23',
-          address: "库压渗压35Mpa",
+          address: "库压渗压1.5MPa",
         },
         {
           sn:'8',
           location: "振弦式渗压计二",
           createTime:'2022-02-14',
-          address: "库压渗压38Mpa",
+          address: "库压渗压1.6MPa",
         },
         {
           sn:'9',
           location: "振弦式渗压计三",
           createTime:'2022-03-21',
-          address: "库压渗压36Mpa",
+          address: "库压渗压1.4MPa",
         },
         {
           sn:'10',
