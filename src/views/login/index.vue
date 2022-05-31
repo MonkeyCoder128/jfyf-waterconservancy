@@ -6,6 +6,16 @@
         <p>实时掌握大坝运行数据，全面赋能智慧水库建设</p>
       </div>
       <div class="loginRight">
+        <iframe
+          frameborder="0"
+          scrolling="no"
+          src="http://112.125.88.230/webgl/index.html"
+          width="300"
+          height="300"
+          class="ifremud"
+          id="iframe"
+          style="position: static;display:none;"
+        ></iframe>
         <el-form ref="loginForm" :model="loginForm" class="loginformBox">
           <span class="title">您好,欢迎登录！</span>
           <el-form-item prop="username" label="账号">

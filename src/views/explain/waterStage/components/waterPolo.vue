@@ -134,7 +134,7 @@ export default {
             endAngle: -20,
             center: ["50%", "51%"],
             axisLine: {
-              show: true,
+              show: false,
               lineStyle: {
                 width: 0,
                 shadowBlur: 0,
