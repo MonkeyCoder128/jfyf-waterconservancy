@@ -2,37 +2,46 @@
   <div class="waterStagePage">
     <div class="cardMenu">
       <span class="cardTitle">当前数据</span>
+      <i>数据类别</i>
+      <el-select 
+        size="mini"
+        @change="changeType"
+        placeholder="水位"
+        v-model="category">
+        <el-option label="水位" value="water"></el-option>
+        <el-option label="降雨量" value="rainfall"></el-option>
+      </el-select>
       <div class="echartsBoxContent">
         <div class="echartsBox">
           <span>设备:投入式水位计一</span>
           <waterPolo 
-            :parentData="this.childData.waterPoloA"
-            v-if="this.category == 'rainfall'">
+            :parentData="childData.waterPoloA"
+            v-if="category == 'rainfall'">
           </waterPolo>
           <equipmentChart
-            :parentData="this.childData.equipmentChartA"
+            :parentData="childData.equipmentChartA"
             v-else
           ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:投入式水位计二</span>
           <waterPolo 
-            :parentData="this.childData.waterPoloB"
-            v-if="this.category == 'rainfall'">
+            :parentData="childData.waterPoloB"
+            v-if="category == 'rainfall'">
           </waterPolo>
           <equipmentChart
-            :parentData="this.childData.equipmentChartB"
+            :parentData="childData.equipmentChartB"
             v-else
           ></equipmentChart>
         </div>
         <div class="echartsBox">
           <span>设备:投入式水位计三</span>
           <waterPolo 
-            :parentData="this.childData.waterPoloC"
-            v-if="this.category == 'rainfall'">
+            :parentData="childData.waterPoloC"
+            v-if="category == 'rainfall'">
           </waterPolo>
           <equipmentChart
-            :parentData="this.childData.equipmentChartC"
+            :parentData="childData.equipmentChartC"
             v-else
           ></equipmentChart>
         </div>
@@ -141,8 +150,8 @@ export default {
           type: "1",
         },
       ],
-      // 存储当前类别
-      category: "default",
+      // 存储当前水雨情类别
+      category: "water",
     };
   },
   created(){
@@ -159,6 +168,10 @@ export default {
         },
       });
     },
+    // 水雨情类型改变
+    changeType(option){
+      this.category = option;
+    }
   },
 };
 </script>
@@ -298,6 +311,21 @@ export default {
         height: 550px;
       }
     }
+  }
+}
+// 设置水雨情select选择器的样式
+/deep/ .el-input--mini .el-input__inner{
+  width: 90px;
+  height: 20px;
+}
+/deep/ .el-input--mini .el-input__icon{
+  line-height: 12px;
+}
+.cardMenu{
+  i{
+    font-size: 12px !important;
+    font-style: normal;
+    margin:0 10px 0 20px;
   }
 }
 </style>
