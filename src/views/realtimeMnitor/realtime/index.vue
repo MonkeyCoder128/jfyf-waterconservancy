@@ -1206,8 +1206,6 @@ export default {
             type: "liquidFill",
             itemStyle: {
               opacity: 0.8, //波浪的透明度
-              shadowBlur: 10, //波浪的阴影范围
-              shadowColor: "#FFB931", //阴影颜色
             },
             radius: "73%",
             //水波
@@ -1223,6 +1221,7 @@ export default {
                 },
               ]),
             ],
+            data: [0.3, 0.35],
             backgroundStyle: {
               color: {
                 type: "radial",
@@ -1271,11 +1270,11 @@ export default {
                 shadowColor: "red",
               },
             },
-            data: [
-              {
-                value: scroePer,
-              },
-            ],
+            // data: [
+            //   {
+            //     value: scroePer,
+            //   },
+            // ],
             label: {
               normal: {
                 formatter: "",

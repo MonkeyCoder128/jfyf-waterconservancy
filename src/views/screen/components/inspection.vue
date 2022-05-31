@@ -33,6 +33,11 @@ export default {
         },
         xAxis: [
           {
+            name: "(次)",
+            nameTextStyle: {
+              color: "#ffffff",
+              padding: [0, 0, 8, 0],
+            },
             splitLine: {
               show: false,
             },
@@ -60,11 +65,7 @@ export default {
         ],
         yAxis: [
           {
-            name: "(次)",
-            nameTextStyle: {
-              color: "#ffffff",
-              padding: [-20, -720, 8, 0],
-            },
+            
             splitLine: {
               show: false,
             },
