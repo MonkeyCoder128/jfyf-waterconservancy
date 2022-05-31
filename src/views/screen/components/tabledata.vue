@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%">
     <div v-for="(item, index) in getPlayData" :key="index" class="getPlayData">
       <section :class="index==0?'red':''" :style="{'background':item.fixed?'none':'rgba(34, 88, 140, .1)'}">
         <div class="table-cell" style="width: 40%" :title="item.time">
@@ -32,6 +32,7 @@ export default {
 .getPlayData{
   display: flex;
   width: 96%;
+  height: 14.3%;
   color: #fff;
   margin: 0 auto;
   font-size: 12px;
@@ -40,7 +41,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 24px;
+    height: 100%;
   }
 }
 .red{

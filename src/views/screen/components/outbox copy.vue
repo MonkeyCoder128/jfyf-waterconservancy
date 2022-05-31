@@ -5,49 +5,35 @@
       <div class="table-cell" style="width: 25%">设备</div>
       <div class="table-cell" style="width: 12%">原因</div>
     </div>
-    <div style="width: 95%;height: 86%; margin: auto">
-      <marquee
-        id="affiche"
-        align="left"
-        behavior="scroll"
-        direction="up"
-        height="100%"
-        width="100%"
-        hspace="50"
-        vspace="20"
-        loop="-1"
-        scrollamount="4"
-        scrolldelay="10"
-        onMouseOut="this.start()"
-        onMouseOver="this.stop()"
-        class="scrollContent"
-      >
-        <div class="warningStage">
-          <div style="width: 55%">2022-04-20 11:20:09</div>
-          <div style="width: 32%">投入式水位计三</div>
-          <div style="color: red; width: 13%">异常</div>
+    <div class="table-body" style="width: 94%; margin: 0 auto">
+      <div :class="{ 'scroll-wrap': getPlayData.length > 0 }">
+        <div
+          class="table-row"
+          :class="{ hasBgc: index % 2 === 0 }"
+          v-for="(item, index) in getPlayData"
+          :key="index"
+          :ref="'row_' + index"
+        >
+          <div
+            class="table-cell"
+            style="align: center; width: 58%"
+            :title="item.time"
+          >
+            {{ item.time }}
+          </div>
+          <div
+            class="table-cell"
+            style="align: center; width: 30%"
+            :title="item.cont"
+          >
+            {{ item.cont }}
+          </div>
+          <div class="table-cell" :title="item.publish">
+            <!-- <span :class="item.yy.search('异常')>=0?'red':'white'">{{item.yy}}</span> -->
+            <span style="color: red">{{ item.yy }}</span>
+          </div>
         </div>
-        <div class="warningStage">
-          <div style="width: 55%">2022-04-20 11:20:10</div>
-          <div style="width: 32%">GNSS接收机一</div>
-          <div style="color: red; width: 13%">异常</div>
-        </div>
-        <div class="warningStage">
-          <div style="width: 55%">2022-04-20 11:20:11</div>
-          <div style="width: 32%">流速流量仪一</div>
-          <div style="color: red; width: 13%">异常</div>
-        </div>
-        <div class="warningStage">
-          <div style="width: 55%">2022-04-20 11:20:12</div>
-          <div style="width: 32%">振弦式渗压计一</div>
-          <div style="color: red; width: 13%">异常</div>
-        </div>
-        <div class="warningStage">
-          <div style="width: 55%">2022-04-20 11:20:13</div>
-          <div style="width: 32%">水质测定仪一</div>
-          <div style="color: red; width: 13%">异常</div>
-        </div>
-      </marquee>
+      </div>
     </div>
   </div>
 </template>
@@ -93,12 +79,18 @@ export default {
           this.visible = true;
         });
         this.play();
-      }, 2000);
+      }, 500);
     },
   },
   watch: {},
-  computed: {},
-  mounted() {},
+  computed: {
+    // getPlayData() {
+    //   return this.data.concat(this.data.slice(0, 4));
+    // },
+  },
+  mounted() {
+    // this.play();
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -128,9 +120,6 @@ $cellHeight: 35px;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-// .hasBgc {
-//   background: rgb(0, 59, 81);
-// }
 .hidden-row {
   height: 0 !important;
   line-height: 0 !important;
@@ -157,12 +146,5 @@ $cellHeight: 35px;
   to {
     top: -8 * $cellHeight;
   }
-}
-.warningStage {
-  display: flex;
-  flex-direction: row;
-  color: #fff;
-  border-bottom: solid 1px #182d47;
-  height: 30px;
 }
 </style>
