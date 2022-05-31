@@ -8,19 +8,27 @@ export default {
   mounted() {
     this.myecharts();
   },
+  props: {
+    parentData: {
+      type: Array,
+      default: "",
+    },
+  },
+  // 监听父组件传值，有改变重新渲染echarts
+  watch:{
+    parentData:function(newVal){
+      this.myecharts();
+    }
+  },
   methods: {
     myecharts() {
       var warningCharts = this.$echarts.init(this.$refs.warningCharts);
       let colors = ["#148F97", "#1289BA", "#115CB9", "#37ABC1", "#EA951C"];
-      var dataCake = [
-        { name: "投入式水位计一", value: 15 },
-        { name: "投入式水位计二", value: 13 },
-        { name: "投入式水位计三", value: 19 },
-      ];
+      var dataCake = this.parentData;
       var option = {
         legend: {
           selectedMode: false,
-          data: ["投入式水位计一", "投入式水位计二", "投入式水位计三"],
+          data: [this.parentData[0].name, this.parentData[1].name, this.parentData[2].name],
           icon: "rect",
           orient: "vertical",
           left: "52%", //图例距离左的距离
