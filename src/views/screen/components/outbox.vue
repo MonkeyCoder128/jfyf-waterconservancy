@@ -2,10 +2,10 @@
   <div style="height: 88%; overflow: hidden; width: 98%; margin: 0 auto">
     <div class="table-header table-row">
       <div class="table-cell" style="width: 68%">时间</div>
-      <div class="table-cell" style="width: 26%">设备</div>
-      <div class="table-cell" style="width: 13%">原因</div>
+      <div class="table-cell" style="width: 37%">设备</div>
+      <div class="table-cell" style="width: 22%">原因</div>
     </div>
-    <div style="width: 95%; height: 86%; margin: auto">
+    <div style="width: 95%; height: 86%; margin: auto;font-size:12px;">
       <marquee
         id="affiche"
         align="left"

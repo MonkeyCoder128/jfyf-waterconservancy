@@ -36,7 +36,7 @@ export default {
             name: "(次)",
             nameTextStyle: {
               color: "#ffffff",
-              padding: [0, 0, 8, 0],
+              padding: [10, 10, 10, -10],
             },
             splitLine: {
               show: false,
@@ -54,7 +54,7 @@ export default {
               },
             },
             min: 0,
-            max: 80,
+            max: 50,
             axisLabel: {
               formatter: "{value}",
               textStyle: {
@@ -65,7 +65,6 @@ export default {
         ],
         yAxis: [
           {
-            
             splitLine: {
               show: false,
             },
@@ -89,11 +88,16 @@ export default {
                 color: "#2E89E0FF",
               },
             },
-            
           },
         ],
         series: [
           {
+            showBackground: true,
+
+            backgroundStyle:{
+              color: "#0e2637",
+              borderRadius: [0, 5, 5, 0]
+            },
             name: "标准化",
             type: "bar",
             barWidth: 12, // 柱子宽度
