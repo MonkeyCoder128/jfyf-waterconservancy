@@ -725,10 +725,11 @@ export default {
             data: [
               {
                 value: 60,
-                name: "水平位移m/s",
+                name: "流速m/s",
               },
             ],
           },
+
           //内层刻度线渐变
           {
             type: "gauge",
@@ -1183,10 +1184,10 @@ export default {
     },
     /**降雨量图表 */
     getRainfallData() {
-      var max = 100; //满刻度大小
-      var scroe = 20,
+      let max = 100; //满刻度大小
+      let scroe = 20,
         scroePer = scroe / 50;
-      var data = max * scroePer;
+      let data = max * scroePer;
       let dataOption = {
         title: {
           top: "47%",
@@ -1201,77 +1202,90 @@ export default {
         },
         series: [
           //data数值
-            {
-              type: "liquidFill",
-              itemStyle: {
-                opacity: 0.8, //波浪的透明度
-                shadowBlur: 10, //波浪的阴影范围
-                shadowColor: "#FFB931", //阴影颜色
-              },
-              radius: "73%",
-              //水波
-              color: [
-                new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            type: "liquidFill",
+            itemStyle: {
+              opacity: 0.8, //波浪的透明度
+              shadowBlur: 10, //波浪的阴影范围
+              shadowColor: "#FFB931", //阴影颜色
+            },
+            radius: "73%",
+            //水波
+            color: [
+              new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#35EBFB",
+                },
+                {
+                  offset: 1,
+                  color: "#2876F7",
+                },
+              ]),
+            ],
+            backgroundStyle: {
+              color: {
+                type: "radial",
+                x: 0.5,
+                y: 0.5,
+                r: 0.5,
+                colorStops: [
                   {
                     offset: 0,
-                    color: "#35EBFB",
+                    color: "rgba(189, 240, 254, 0)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.5,
+                    color: "rgba(189, 240, 254, 0.01)", // 0% 处的颜色
                   },
                   {
                     offset: 1,
-                    color: "#2876F7",
+                    color: "rgba(189, 240, 254, 1)", // 100% 处的颜色
                   },
-                ]),
-              ],
-              outline: {
-            borderDistance: 0,
-            itemStyle: {
-              borderWidth: 0,
-              borderColor: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                  offset: 0,
-                  color: 'rgba(50,115,256, 1)'
-                }, {
-                  offset: 0.5,
-                  color: 'rgba(50,115,233, .75)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(50,115,233, 1)'
-                }],
-                globalCoord: false
-              },
-            }
-          },
-              data: [
-                {
-                  value: scroePer,
-                },
-              ],
-              center: ["50%", "50%"],
-              backgroundStyle: {
-                color: "#fff",
-              },
-              label: {
-                normal: {
-                  formatter: "",
-                  textStyle: {
-                    fontSize: 12,
-                  },
-                },
-              },
-              outline: {
-                itemStyle: {
-                  borderColor: "transparent",
-                  borderWidth: 5,
-                },
-                borderDistance: 0,
+                ],
+                globalCoord: false, // 缺省为 false
               },
             },
-     
+            outline: {
+              borderDistance: 2,
+              itemStyle: {
+                borderWidth: 0,
+                borderColor: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(69, 73, 240, 0)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(69, 73, 240, 1)",
+                    },
+                  ],
+                },
+                shadowBlur: 30,
+                shadowColor: "red",
+              },
+            },
+            data: [
+              {
+                value: scroePer,
+              },
+            ],
+            label: {
+              normal: {
+                formatter: "",
+                textStyle: {
+                  fontSize: 12,
+                },
+              },
+            },
+          },
+
           //内层刻度线渐变
           {
             type: "gauge",
@@ -1859,7 +1873,7 @@ export default {
         series: [
           //外层光晕渐变
           {
-            type: "dashed",
+            type: "gauge",
             radius: "90%",
             center: ["50%", "60%"],
             startAngle: 180,
