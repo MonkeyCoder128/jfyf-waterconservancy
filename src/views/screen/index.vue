@@ -4,7 +4,7 @@
       <div class="home_bg">
         <el-row type="flex" class="nav" justify="end">
           <p class="time">{{ nowTime }}</p>
-          <p class="p_nav">XX水库智慧管理平台</p>
+          <p class="p_nav">金丰水库智慧管理平台</p>
           <div class="system" @click="goSystem">
             <img
               src="../../assets/image/xitong.png"

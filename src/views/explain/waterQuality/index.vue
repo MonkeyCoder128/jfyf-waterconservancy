@@ -285,7 +285,7 @@ export default {
       align-items: center;
       flex-wrap: wrap;
       div {
-        width: 32.5%;
+        width: 31%;
         margin: 0 6px 5px;
       }
     }

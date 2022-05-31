@@ -175,60 +175,38 @@
           <span>预警状态</span>
         </div>
         <div class="bottomMenu">
-          <div class="chartDataBox" style="width: 60%">
+          <div class="chartDataBox" style="width: 70%; height: 100%">
             <Chart
               :chartData="alarmStateData"
               :width="'100%'"
               :height="'100%'"
             />
           </div>
-          <marquee
-            id="affiche"
-            align="left"
-            behavior="scroll"
-            direction="up"
-            height="300"
-            width="200"
-            hspace="50"
-            vspace="20"
-            loop="-1"
-            scrollamount="4"
-            scrolldelay="10"
-            onMouseOut="this.start()"
-            onMouseOver="this.stop()"
-            class="scrollContent"
+          <vue-seamless-scroll
+            style="width: 300px; height: 200px; overflow-y: hidden"
+            :data="CardPartsStatisticsList"
+            :class-option="classOption"
+            class="scroll"
           >
-            <div class="warningStage">
-              <i class="el-icon-warning-outline"></i><span>A1区水位过高</span>
+            <div
+              v-for="(item, index) in CardPartsStatisticsList"
+              :class="[
+                item.type === 'one'
+                  ? 'warningStage'
+                  : item.type === 'two'
+                  ? 'bodyDam'
+                  : item.type === 'three'
+                  ? 'osmometer'
+                  : item.type === 'four'
+                  ? 'lakeQuality'
+                  : 'earlyWarning',
+              ]"
+              :key="index"
+            >
+              <i class="el-icon-warning-outline"></i
+              ><span>{{ item.itemname }}</span>
             </div>
-            <div class="bodyDam">
-              <i class="el-icon-warning-outline"></i><span>A2区坝体形变</span>
-            </div>
-            <div class="osmometer">
-              <i class="el-icon-warning-outline"></i><span>A1区渗压异常</span>
-            </div>
-            <div class="lakeQuality">
-              <i class="el-icon-warning-outline"></i><span>A1区水位过高</span>
-            </div>
-            <div class="earlyWarning">
-              <i class="el-icon-warning-outline"></i><span>A1区气象预警</span>
-            </div>
-            <div class="warningStage">
-              <i class="el-icon-warning-outline"></i><span>A1区水位过高</span>
-            </div>
-            <div class="bodyDam">
-              <i class="el-icon-warning-outline"></i><span>A2区坝体形变</span>
-            </div>
-            <div class="osmometer">
-              <i class="el-icon-warning-outline"></i><span>A1区渗压异常</span>
-            </div>
-            <div class="lakeQuality">
-              <i class="el-icon-warning-outline"></i><span>A1区水位过高</span>
-            </div>
-            <div class="earlyWarning">
-              <i class="el-icon-warning-outline"></i><span>A1区气象预警</span>
-            </div>
-          </marquee>
+          </vue-seamless-scroll>
         </div>
       </div>
     </div>
@@ -290,16 +268,17 @@
 </template>
 <script>
 import Chart from "@/views/screenChart/chart";
+import vueSeamlessScroll from "vue-seamless-scroll";
 import * as echarts from "echarts";
 import "echarts-liquidfill"; //在这里引入水球图
 export default {
   name: "Realtime",
-  components: { Chart },
+  components: { Chart, vueSeamlessScroll },
   data() {
     return {
       speedData: {}, //流速
       fluxData: {}, //流量
-      rainWater: "water", //水雨情类型
+      rainWater: "rainfall", //水雨情类型
       waterLevelData: {}, //水位
       rainfallData: {}, //降雨量
       pressureData: {}, //库压渗压
@@ -431,97 +410,97 @@ export default {
         {
           name: "投入式水位计一",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "投入式水位计二",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "投入式水位计三",
           type: "0",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "GNSS接收机一",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "GNSS接收机二",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "GNSS接收机三",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "GNSS接收机四",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "GNSS接收机五",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "振弦式渗压计一",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "振弦式渗压计二",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "振弦式渗压计三",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "流速流量仪一",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "流速流量仪二",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "流速流量仪三",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "流速流量仪四",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "流速流量仪四",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "水质测定仪一",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "水质测定仪二",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
         {
           name: "水质测定仪三",
           type: "1",
-          address: "陕西省西安市XX水库",
+          address: "陕西省西安市金丰水库",
         },
       ],
       total: 0,
@@ -531,7 +510,34 @@ export default {
         pageSize: 10,
       },
       laneChart_bar: {},
+
+      CardPartsStatisticsList: [
+        { id: 1, itemname: "A1区坝体形变", type: "one" },
+        { id: 2, itemname: "A2区坝体形变", type: "two" },
+        { id: 3, itemname: "A3区坝体形变", type: "three" },
+        { id: 4, itemname: "A4区坝体形变", type: "four" },
+        { id: 5, itemname: "A5区坝体形变", type: "five" },
+        { id: 6, itemname: "A6区坝体形变", type: "one" },
+        { id: 7, itemname: "A7区坝体形变", type: "two" },
+        { id: 8, itemname: "A8区坝体形变", type: "three" },
+        { id: 9, itemname: "A9区坝体形变", type: "four" },
+        { id: 10, itemname: "A10区坝体形变", type: "five" },
+      ],
     };
+  },
+  computed: {
+    classOption() {
+      return {
+        step: 0.66, // 数值越大速度滚动越快
+        limitMoveNum: 6, // 开始无缝滚动的数据量
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+      };
+    },
   },
   created() {
     this.speedData = this.getSpeedData();
@@ -2108,7 +2114,7 @@ export default {
           clockWise: false,
           hoverAnimation: false,
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["40%", "55%"],
+          center: ["53%", "55%"],
           label: {
             show: false,
           },
@@ -2134,7 +2140,7 @@ export default {
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["40%", "55%"],
+          center: ["53%", "55%"],
           label: {
             show: false,
           },
@@ -2177,7 +2183,7 @@ export default {
         grid: {
           top: "0",
           bottom: "45%",
-          left: "40%",
+          left: "50%",
           containLabel: false,
         },
         yAxis: [
@@ -2270,10 +2276,17 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
+/** 滚动插件断层问题 */
+.scroll {
+  height: 300px;
+  overflow: hidden;
+}
+
 .selectCharts {
   /deep/.el-input__inner {
     width: 133px;
     height: 20px;
+    line-height: 20px;
   }
 }
 
@@ -2307,79 +2320,68 @@ export default {
         align-items: center;
         justify-content: space-between;
 
-        .scrollContent::-webkit-scrollbar {
-          display: none;
+        div {
+          height: 100%;
+          width: 100%;
+          padding: 0 10px;
+          height: 30px;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          margin-bottom: 9px;
+
+          span {
+            font-size: 12px;
+          }
+
+          i {
+            margin-right: 10px;
+          }
         }
 
-        .scrollContent {
-          width: 35%;
-          margin-right: 15px;
-          max-height: 200px;
-          overflow-y: auto;
-          cursor: pointer;
-
-          div {
-            width: 100%;
-            padding: 0 10px;
-            height: 30px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            margin-bottom: 9px;
-
-            span {
-              font-size: 12px;
-            }
-
-            i {
-              margin-right: 10px;
-            }
+        .warningStage {
+          background-color: rgba(55, 171, 193, 0.2);
+          span,
+          i {
+            color: #37abc1;
+            z-index: 99999;
           }
+        }
 
-          .warningStage {
-            background-color: rgba(55, 171, 193, 0.2);
-
-            span,
-            i {
-              color: #37abc1;
-              z-index: 99999;
-            }
+        .bodyDam {
+          width: 200px;
+          color: #3f85ff;
+          background-color: rgba(63, 133, 255, 0.2);
+          span,
+          i {
+            color: #3f85ff;
           }
+        }
 
-          .bodyDam {
-            background-color: rgba(63, 133, 255, 0.2);
+        .osmometer {
+          background-color: rgba(234, 149, 28, 0.2);
 
-            span,
-            i {
-              color: #3f85ff;
-            }
+          span,
+          i {
+            color: #ea951c;
           }
+        }
 
-          .osmometer {
-            background-color: rgba(234, 149, 28, 0.2);
+        .lakeQuality {
+          background-color: rgba(55, 171, 193, 0.2);
 
-            span,
-            i {
-              color: #ea951c;
-            }
+          span,
+          i {
+            color: #27c4c4;
           }
+        }
 
-          .lakeQuality {
-            background-color: rgba(55, 171, 193, 0.2);
+        .earlyWarning {
+          background-color: rgba(243, 182, 62, 0.2);
 
-            span,
-            i {
-              color: #27c4c4;
-            }
-          }
-
-          .earlyWarning {
-            background-color: rgba(243, 182, 62, 0.2);
-
-            span,
-            i {
-              color: #f3b63e;
-            }
+          span,
+          i {
+            color: #f3b63e;
           }
         }
       }

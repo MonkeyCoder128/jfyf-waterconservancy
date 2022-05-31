@@ -2,7 +2,7 @@
   <div class="box">
     <!-- 菜单 -->
     <div class="tac">
-      <span class="mentTitle">XX水库智慧管理平台</span>
+      <span class="mentTitle">金丰水库智慧管理平台</span>
       <el-menu
         unique-opened
         style="width: 221px"
