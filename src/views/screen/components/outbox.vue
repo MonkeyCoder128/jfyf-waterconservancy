@@ -2,10 +2,10 @@
   <div style="height: 88%; overflow: hidden; width: 98%; margin: 0 auto">
     <div class="table-header table-row">
       <div class="table-cell" style="width: 68%">时间</div>
-      <div class="table-cell" style="width: 25%">设备</div>
-      <div class="table-cell" style="width: 12%">原因</div>
+      <div class="table-cell" style="width: 26%">设备</div>
+      <div class="table-cell" style="width: 13%">原因</div>
     </div>
-    <div style="width: 95%;height: 86%; margin: auto">
+    <div style="width: 95%; height: 86%; margin: auto">
       <marquee
         id="affiche"
         align="left"
@@ -25,27 +25,27 @@
         <div class="warningStage">
           <div style="width: 55%">2022-04-20 11:20:09</div>
           <div style="width: 32%">投入式水位计三</div>
-          <div style="color: red; width: 13%">异常</div>
+          <div style="color: red; width: 18%">设备异常</div>
         </div>
         <div class="warningStage">
           <div style="width: 55%">2022-04-20 11:20:10</div>
           <div style="width: 32%">GNSS接收机一</div>
-          <div style="color: red; width: 13%">异常</div>
+          <div style="width: 18%; color: rgb(234, 149, 28)">数据异常</div>
         </div>
         <div class="warningStage">
           <div style="width: 55%">2022-04-20 11:20:11</div>
           <div style="width: 32%">流速流量仪一</div>
-          <div style="color: red; width: 13%">异常</div>
+          <div style="width: 18%; color: rgb(234, 149, 28)">数据异常</div>
         </div>
         <div class="warningStage">
           <div style="width: 55%">2022-04-20 11:20:12</div>
           <div style="width: 32%">振弦式渗压计一</div>
-          <div style="color: red; width: 13%">异常</div>
+          <div style="width: 18%; color: rgb(234, 149, 28)">数据异常</div>
         </div>
         <div class="warningStage">
           <div style="width: 55%">2022-04-20 11:20:13</div>
           <div style="width: 32%">水质测定仪一</div>
-          <div style="color: red; width: 13%">异常</div>
+          <div style="width: 18%; color: rgb(234, 149, 28)">数据异常</div>
         </div>
       </marquee>
     </div>
