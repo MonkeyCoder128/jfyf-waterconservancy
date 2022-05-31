@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+// 引入echarts水球图
+import 'echarts-liquidfill'
 export default {
   data() {
     return {};
@@ -23,31 +25,30 @@ export default {
     getLoadEcharts() {
       var echarts = require("echarts");
       var myChart = this.$echarts.init(this.$refs.waterPolo);
-      var max = 100; //满刻度大小
-      var scroe = this.parentData,
-      scroePer = scroe / 50;
-      var data = max * scroePer;
-      let option = {
+      let max = 100; //满刻度大小
+      let scroe = this.parentData,
+        scroePer = scroe / 50;
+      let data = max * scroePer;
+      let dataOption = {
         title: {
           top: "47%",
           left: "center",
-          text: scroe + "mm/min",
+          text: scroe + " mm/min",
           textStyle: {
             color: "#1C48BF",
             fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: 16,
+            fontWeight: "bold",
+            fontSize: 14,
           },
         },
         series: [
+          //data数值
           {
             type: "liquidFill",
             itemStyle: {
               opacity: 0.8, //波浪的透明度
-              shadowBlur: 10, //波浪的阴影范围
-              shadowColor: "#FFB931", //阴影颜色
             },
-            radius: "80%",
+            radius: "73%",
             //水波
             color: [
               new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -61,15 +62,60 @@ export default {
                 },
               ]),
             ],
-            data: [
-              {
-                value: scroePer,
-              },
-            ],
-            center: ["50%", "50%"],
+            data: [0.3, 0.35],
             backgroundStyle: {
-              color: "#fff",
+              color: {
+                type: "radial",
+                x: 0.5,
+                y: 0.5,
+                r: 0.5,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "rgba(189, 240, 254, 0)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 0.5,
+                    color: "rgba(189, 240, 254, 0.01)", // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(189, 240, 254, 1)", // 100% 处的颜色
+                  },
+                ],
+                globalCoord: false, // 缺省为 false
+              },
             },
+            outline: {
+              borderDistance: 2,
+              itemStyle: {
+                borderWidth: 0,
+                borderColor: {
+                  type: "linear",
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "rgba(69, 73, 240, 0)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(69, 73, 240, 1)",
+                    },
+                  ],
+                },
+                shadowBlur: 30,
+                shadowColor: "red",
+              },
+            },
+            // data: [
+            //   {
+            //     value: scroePer,
+            //   },
+            // ],
             label: {
               normal: {
                 formatter: "",
@@ -78,52 +124,92 @@ export default {
                 },
               },
             },
-            outline: {
-              itemStyle: {
-                borderColor: "transparent",
-                borderWidth: 5,
+          },
+          //内层刻度线渐变
+          {
+            type: "gauge",
+            splitNumber: 3, //刻度数量
+            radius: "94%", //图表尺寸
+            startAngle: 200,
+            endAngle: -20,
+            center: ["50%", "51%"],
+            axisLine: {
+              show: true,
+              lineStyle: {
+                width: 0,
+                shadowBlur: 0,
+                color: [
+                  [0.1, "#71C5FF"],
+
+                  [1, "#71C5FF"],
+                ],
               },
-              borderDistance: 0,
+            },
+            axisTick: {
+              show: true,
+              lineStyle: {
+                color: "auto",
+                width: 10,
+              },
+              length: 2,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            pointer: {
+              show: false,
             },
           },
-          //外环线
+          // 底部半弧
           {
-            color: ["#3192D8", "transparent"],
-            type: "pie",
-            center: ["50%", "50%"],
-            radius: ["80%", "82%"],
-            hoverAnimation: false,
-            data: [
-              {
-                name: "",
-                value: data,
-                label: {
-                  show: false,
-                  position: "center",
-                  color: "#fff",
-                  fontSize: 38,
-                  fontWeight: "bold",
-                  formatter: function (o) {
-                    return data;
-                  },
-                },
+            type: "gauge",
+            radius: "83%",
+            startAngle: -25,
+            endAngle: -154,
+            show: false,
+            center: ["50%", "52%"],
+            progress: {
+              width: 16,
+              roundCap: true,
+            },
+            pointer: {
+              show: false,
+            },
+            axisLine: {
+              roundCap: true,
+              lineStyle: {
+                width: 8,
+                color: [[1, "#3192D8"]], //刻度线背景色
               },
-              {
-                //画剩余的刻度圆环
-                name: "",
-                value: max - data,
-                label: {
-                  show: false,
-                },
-                labelLine: {
-                  show: false,
-                },
-              },
-            ],
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              show: false,
+            },
+            anchor: {
+              show: false,
+            },
+            title: {
+              show: false,
+            },
+            detail: {
+              width: "85%",
+              borderRadius: 8,
+              fontSize: 18,
+            },
+            data: [],
           },
         ],
       };
-      myChart.setOption(option);
+      myChart.setOption(dataOption);
     },
   },
 };
