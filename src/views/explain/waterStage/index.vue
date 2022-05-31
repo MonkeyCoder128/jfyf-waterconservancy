@@ -317,6 +317,11 @@ export default {
 /deep/ .el-input--mini .el-input__inner{
   width: 90px;
   height: 20px;
+  color: #333333;
+}
+/deep/ .el-input--mini .el-input__inner::-webkit-input-placeholder {
+  color: #333333;
+  font-size: 12px;
 }
 /deep/ .el-input--mini .el-input__icon{
   line-height: 12px;
