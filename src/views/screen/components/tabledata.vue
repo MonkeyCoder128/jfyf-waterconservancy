@@ -42,6 +42,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    
+  padding-left: 10px;
   }
 }
 .red{

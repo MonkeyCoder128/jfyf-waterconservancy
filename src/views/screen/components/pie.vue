@@ -112,7 +112,7 @@ export default {
             data: dataCake,
             itemStyle: {
               normal: {
-                shadowBlur: 10,
+                shadowBlur: 5,
                 shadowColor: "#87888a",
                 color: function (params) {
                   //自定义颜色

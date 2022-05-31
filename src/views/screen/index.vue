@@ -122,7 +122,7 @@
                     <el-col :span="12" style="height: 100%"
                       ><div class="bg-purple">
                         库存
-                        <div class="num">3105406m³</div>
+                        <div class="num">3,105,406m³</div>
                       </div></el-col
                     >
                   </el-row>
@@ -157,7 +157,7 @@
                     <el-col :span="1" class="title1"
                       ><img src="../../assets/image/dp_title1.png" alt=""
                     /></el-col>
-                    <el-col :span="19">大坝巡查</el-col>
+                    <el-col :span="19">设备巡查统计</el-col>
                   </el-row>
                 </div>
                 <div class="box_content">
