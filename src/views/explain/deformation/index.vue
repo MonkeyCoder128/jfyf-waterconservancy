@@ -761,10 +761,10 @@ export default {
         yAxis: [
           {
             type: "value",
-            name:'次',
+            name: "次",
             splitNumber: 5, // 配置 Y 轴数值间隔
-            max:10,
-            min:0,
+            max: 10,
+            min: 0,
             axisLabel: {
               textStyle: {
                 color: "#666",
@@ -1090,6 +1090,13 @@ export default {
     height: 560px;
   }
 }
+@media screen and (min-width: 600px) and (max-width: 1780px) {
+  .echartsBoxContent {
+    .echartsBox {
+      width: 31% !important;
+    }
+  }
+}
 .deformationPage {
   height: 100%;
   overflow: auto;
@@ -1125,7 +1132,7 @@ export default {
       display: flex;
       flex-flow: wrap;
       .echartsBox {
-        width: 31%;
+        width: 32%;
         margin-right: 20px;
         margin-bottom: 20px;
       }
