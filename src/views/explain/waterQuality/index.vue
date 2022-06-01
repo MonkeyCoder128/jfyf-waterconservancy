@@ -294,20 +294,18 @@ export default {
 
   .cardMenu {
     width: 100%;
-    height: auto;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 5px 12px;
+    padding: 5px 20px;
     .echartsBoxContent {
       width: 100%;
       height: auto;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
+      flex-flow: wrap;
       .echartsBox {
-        width: 32.3%;
-        margin: 0 6px 5px;
+        width: 32%;
+        margin-right: 20px;
+        margin-bottom: 20px;
       }
     }
   }
