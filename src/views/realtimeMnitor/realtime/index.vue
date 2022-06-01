@@ -2116,7 +2116,7 @@ export default {
           clockWise: false,
           hoverAnimation: false,
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["60%", "55%"],
+          center: ["59%", "55%"],
           label: {
             show: false,
           },
@@ -2142,7 +2142,7 @@ export default {
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["60%", "55%"],
+          center: ["59%", "55%"],
           label: {
             show: false,
           },
@@ -2185,7 +2185,7 @@ export default {
         grid: {
           top: "0",
           bottom: "45%",
-          left: "57%",
+          left: "56%",
           containLabel: false,
         },
         yAxis: [
