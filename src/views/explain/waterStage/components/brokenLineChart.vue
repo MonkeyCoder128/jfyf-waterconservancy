@@ -15,10 +15,10 @@ export default {
     },
   },
   // 监听父组件传值，有改变重新渲染echarts
-  watch:{
-    parentData:function(newVal){
+  watch: {
+    parentData: function (newVal) {
       this.myCharts();
-    }
+    },
   },
   methods: {
     myCharts() {
@@ -28,14 +28,13 @@ export default {
       var option = {
         legend: {
           bottom: 5,
-          itemGap: 36,
           selectedMode: false,
         },
         grid: {
           left: "3%",
           right: "3%",
           top: "8%",
-          bottom: "6%",
+          bottom: "10%",
           containLabel: true,
         },
         tooltip: {
@@ -80,10 +79,10 @@ export default {
         yAxis: [
           {
             type: "value",
-            name:'次',
+            name: "次",
             splitNumber: 5, // 配置 Y 轴数值间隔
-            max:10,
-            min:0,
+            max: 10,
+            min: 0,
             axisLabel: {
               textStyle: {
                 color: "#666",

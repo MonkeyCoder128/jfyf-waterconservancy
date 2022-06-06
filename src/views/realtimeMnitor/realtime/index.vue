@@ -175,7 +175,7 @@
           <span>预警状态</span>
         </div>
         <div class="bottomMenu">
-          <div class="chartDataBox" style="width: 75%; height: 100%">
+          <div class="chartDataBox" style="width: 100%; height: 100%">
             <Chart
               :chartData="alarmStateData"
               :width="'100%'"
@@ -183,7 +183,7 @@
             />
           </div>
           <vue-seamless-scroll
-            style="width: 300px; height: 200px; overflow-y: hidden"
+            style="width: 120px; height: 200px; overflow-y: hidden"
             :data="CardPartsStatisticsList"
             :class-option="classOption"
             class="scroll"

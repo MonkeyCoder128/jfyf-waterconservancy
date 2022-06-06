@@ -693,7 +693,6 @@ export default {
         legend: {
           selectedMode: false,
           bottom: 0,
-          itemGap: 36,
         },
         grid: {
           left: "3%",

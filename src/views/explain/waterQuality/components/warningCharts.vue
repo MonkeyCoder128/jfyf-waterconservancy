@@ -23,7 +23,7 @@ export default {
           data: ["水质测定仪一", "水质测定仪二", "水质测定仪三"],
           icon: "rect",
           orient: "vertical",
-          left: "52%", //图例距离左的距离
+          left: "50%", //图例距离左的距离
           y: "center",
           itemGap: 20,
           itemWidth: 19,
@@ -60,7 +60,7 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["30%", "50%"],
+            center: ["20%", "50%"],
             radius: ["50%", "60%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
@@ -83,8 +83,8 @@ export default {
           },
           {
             type: "pie",
+            center: ["20%", "50%"],
             radius: ["65%", "80%"],
-            center: ["30%", "50%"],
             avoidLabelOverlap: false,
             labelLine: {
               show: false,
