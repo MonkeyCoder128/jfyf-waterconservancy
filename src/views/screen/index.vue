@@ -178,7 +178,6 @@
                 </div>
               </div>
             </div>
-          
           </el-col>
           <el-col class="screen_right">
             <div class="box_right" style="margin-top: 0 !important">
@@ -263,7 +262,7 @@ export default {
     patrol,
     velocity,
     tabledata,
-    inspection
+    inspection,
   },
   data() {
     return {
@@ -577,11 +576,13 @@ export default {
   box-shadow: 0px 0px 20px #3885e5 inset;
   margin: 5% auto;
 }
+
 .num {
   color: #fff;
   font-size: 24px;
   padding-top: 2%;
 }
+
 .threed {
   margin: 4% auto 0;
   width: 594px;
@@ -612,5 +613,10 @@ export default {
   height: 100%;
   padding: 5px;
   position: relative;
+}
+@media screen and (min-device-width: 1360px) and (max-device-width: 1919px) {
+  .num {
+    font-size: 17px !important;
+  }
 }
 </style>

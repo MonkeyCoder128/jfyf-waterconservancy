@@ -214,12 +214,21 @@ export default {
   padding: 0;
   height: 70vh;
 }
-.el-col-6{
-  width: 18%;
+.el-col-6 {
+  width: 21%;
 }
-.el-col-18{
-  width: 82%;
+.el-col-18 {
+  width: 79%;
 }
+@media screen and (min-width: 2000px) {
+  .el-col-6{
+    width: 18%;
+  }
+  .el-col-18{
+    width: 82%;
+  }
+}
+
 /deep/.el-dialog__headerbtn {
   z-index: 2;
   border: 1px solid #fff;

@@ -192,11 +192,20 @@ export default {
   line-height: 30px;
 }
 .el-col-6 {
-  width: 18%;
+  width: 21%;
 }
 .el-col-18 {
-  width: 82%;
+  width: 79%;
 }
+@media screen and (min-width: 2000px) {
+  .el-col-6{
+    width: 18%;
+  }
+  .el-col-18{
+    width: 82%;
+  }
+}
+
 .h100 {
   height: 100%;
 }
