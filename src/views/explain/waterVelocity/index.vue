@@ -571,7 +571,7 @@ export default {
           ],
           icon: "rect",
           orient: "vertical",
-          left: "56%", //图例距离左的距离
+          left: "60%", //图例距离左的距离
           y: "center",
           itemGap: 10,
           itemWidth: 19,
