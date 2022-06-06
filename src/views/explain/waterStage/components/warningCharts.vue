@@ -31,7 +31,7 @@ export default {
           data: [this.parentData[0].name, this.parentData[1].name, this.parentData[2].name],
           icon: "rect",
           orient: "vertical",
-          left: "50%", //图例距离左的距离
+          left: "60%", //图例距离左的距离
           y: "center",
           itemGap: 10,
           itemWidth: 19,

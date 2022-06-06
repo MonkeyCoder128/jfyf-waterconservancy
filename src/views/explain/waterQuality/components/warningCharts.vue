@@ -23,7 +23,7 @@ export default {
           data: ["水质测定仪一", "水质测定仪二", "水质测定仪三"],
           icon: "rect",
           orient: "vertical",
-          left: "50%", //图例距离左的距离
+          left: "60%", //图例距离左的距离
           y: "center",
           itemGap: 10,
           itemWidth: 19,

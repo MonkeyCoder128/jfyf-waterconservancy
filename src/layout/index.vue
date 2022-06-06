@@ -46,26 +46,6 @@
       <!-- 头部 -->
       <div class="navbar">
         <Breadcrumb />
-        <el-row type="flex" justify="end" class="nav_right">
-          <el-tooltip
-            class="item"
-            effect="dark"
-            content="进入系统"
-            placement="bottom"
-          >
-          </el-tooltip>
-          <el-dropdown>
-            <el-button type="text"><i class="el-icon-s-custom"></i> </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native.prevent="screen"
-                >返回大屏</el-dropdown-item
-              >
-              <el-dropdown-item @click.native.prevent="outLogin"
-                >退出登录</el-dropdown-item
-              >
-            </el-dropdown-menu>
-          </el-dropdown>
-        </el-row>
       </div>
       <!-- 首页 -->
       <section class="app-main">
@@ -122,47 +102,6 @@ export default {
       this.leftmenu = true;
       this.rightmenu = false;
     },
-    //全屏
-    screen() {
-      let element = document.documentElement;
-      if (this.fullscreen) {
-        this.$message.success("退出全屏模式");
-        this.fullscreenTitle = "进入全屏模式";
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      } else {
-        this.$message.success("进入全屏模式");
-        this.fullscreenTitle = "退出全屏模式";
-        if (element.requestFullscreen) {
-          element.requestFullscreen();
-        } else if (element.webkitRequestFullScreen) {
-          element.webkitRequestFullScreen();
-        } else if (element.mozRequestFullScreen) {
-          element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
-          // IE11
-          element.msRequestFullscreen();
-        }
-      }
-      this.fullscreen = !this.fullscreen;
-    },
-    screen() {
-      this.$router.push({ path: "/" });
-    },
-    outLogin() {
-      this.$router.push({ path: "/login" });
-      sessionStorage.clear();
-      localStorage.clear();
-      this.$cookies.remove('token')
-      this.$message.success("已退出账号");
-    },
   },
   watch: {
     $route: "onRouteChanged",
@@ -173,12 +112,10 @@ export default {
 <style lang="scss" scoped>
 /*左侧菜单样式更改*/
 /deep/.el-menu {
-  //border-right: solid 1px #e6e6e6;
   list-style: none;
   position: relative;
   margin: 0;
   padding-left: 0;
-  // background-image: url("../assets/image/daohang.png");
   background: #283558;
 }
 .el_menubg {
@@ -346,14 +283,7 @@ export default {
   color: #606266;
   margin-right: 10px;
 }
-.nav_right {
-  float: right;
-  position: absolute;
-  right: 1vw;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
+
 .el-button--text {
   font-size: 19px;
   color: #989b9c;
