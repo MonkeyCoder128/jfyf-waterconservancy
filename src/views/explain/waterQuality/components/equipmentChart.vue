@@ -242,7 +242,6 @@ export default {
                 color: function (params) {
                   //自定义颜色
                   var colorList = colors
-
                   return colorList[params.dataIndex];
                 },
                 // borderRadius: 2,
@@ -261,8 +260,23 @@ export default {
               color: "black",
               fontSize: 12,
               padding: [20, -32],
-              formatter: ["{c}" + "mol/L"].join("\n"),
-              color: "inherit",
+              // formatter: ["{c}" + "mol/L"].join("\n"),
+              formatter: "{a|{c}mol/L}{abg|}\n{hr|}\n ",
+              borderWidth: 1,
+              borderRadius: 4,
+              color: "inherit", //设置外层标识字体颜色与饼图颜色一致
+              rich: {
+                a: {
+                  lineHeight: 22,
+                  align: "center",
+                },
+                hr: {
+                  borderColor: "#EEEEEE",
+                  width: "100%",
+                  borderWidth: 1,
+                  height: 0,
+                },
+              },
             },
             emphasis: {
               label: {
