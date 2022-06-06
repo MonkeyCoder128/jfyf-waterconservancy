@@ -175,7 +175,7 @@
           <span>预警状态</span>
         </div>
         <div class="bottomMenu">
-          <div class="chartDataBox" style="width: 70%; height: 100%">
+          <div class="chartDataBox" style="width: 75%; height: 100%">
             <Chart
               :chartData="alarmStateData"
               :width="'100%'"
@@ -188,23 +188,25 @@
             :class-option="classOption"
             class="scroll"
           >
-            <div
-              v-for="(item, index) in CardPartsStatisticsList"
-              :class="[
-                item.type === 'one'
-                  ? 'warningStage'
-                  : item.type === 'two'
-                  ? 'bodyDam'
-                  : item.type === 'three'
-                  ? 'osmometer'
-                  : item.type === 'four'
-                  ? 'lakeQuality'
-                  : 'earlyWarning',
-              ]"
-              :key="index"
-            >
-              <i class="el-icon-warning-outline"></i
-              ><span>{{ item.itemname }}</span>
+            <div class="scrollContent">
+              <div
+                v-for="(item, index) in CardPartsStatisticsList"
+                :key="index"
+                :class="[
+                  item.type === 'one'
+                    ? 'warningStage'
+                    : item.type === 'two'
+                    ? 'bodyDam'
+                    : item.type === 'three'
+                    ? 'osmometer'
+                    : item.type === 'four'
+                    ? 'lakeQuality'
+                    : 'earlyWarning',
+                ]"
+              >
+                <i class="el-icon-warning-outline"></i
+                ><span>{{ item.itemname }}</span>
+              </div>
             </div>
           </vue-seamless-scroll>
         </div>
@@ -528,7 +530,7 @@ export default {
   computed: {
     classOption() {
       return {
-        step: 0.66, // 数值越大速度滚动越快
+        step: 0.36, // 数值越大速度滚动越快
         limitMoveNum: 6, // 开始无缝滚动的数据量
         hoverStop: true, // 是否开启鼠标悬停stop
         direction: 1, // 0向下 1向上 2向左 3向右
@@ -2114,7 +2116,7 @@ export default {
           clockWise: false,
           hoverAnimation: false,
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["53%", "55%"],
+          center: ["59%", "55%"],
           label: {
             show: false,
           },
@@ -2140,7 +2142,7 @@ export default {
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
           radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["53%", "55%"],
+          center: ["59%", "55%"],
           label: {
             show: false,
           },
@@ -2183,7 +2185,7 @@ export default {
         grid: {
           top: "0",
           bottom: "45%",
-          left: "50%",
+          left: "56%",
           containLabel: false,
         },
         yAxis: [
@@ -2278,8 +2280,15 @@ export default {
 <style  lang="scss" scoped>
 /** 滚动插件断层问题 */
 .scroll {
-  height: 300px;
   overflow: hidden;
+  margin-left: 30px;
+  .scrollContent {
+    height: 410px;
+    margin-top: 3px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .selectCharts {
@@ -2320,68 +2329,67 @@ export default {
         align-items: center;
         justify-content: space-between;
 
-        div {
-          height: 100%;
-          width: 100%;
-          padding: 0 10px;
-          height: 30px;
-          border-radius: 5px;
-          display: flex;
-          align-items: center;
-          margin-bottom: 9px;
+        .scrollContent {
+          div {
+            width: 170px;
+            padding: 8px 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 9px;
 
-          span {
-            font-size: 12px;
+            span {
+              font-size: 12px;
+            }
+
+            i {
+              margin-right: 10px;
+            }
           }
 
-          i {
-            margin-right: 10px;
+          .warningStage {
+            background-color: rgba(55, 171, 193, 0.2);
+            span,
+            i {
+              color: #37abc1;
+              z-index: 99999;
+            }
           }
-        }
 
-        .warningStage {
-          background-color: rgba(55, 171, 193, 0.2);
-          span,
-          i {
-            color: #37abc1;
-            z-index: 99999;
-          }
-        }
-
-        .bodyDam {
-          width: 200px;
-          color: #3f85ff;
-          background-color: rgba(63, 133, 255, 0.2);
-          span,
-          i {
+          .bodyDam {
             color: #3f85ff;
+            background-color: rgba(63, 133, 255, 0.2);
+            span,
+            i {
+              color: #3f85ff;
+            }
           }
-        }
 
-        .osmometer {
-          background-color: rgba(234, 149, 28, 0.2);
+          .osmometer {
+            background-color: rgba(234, 149, 28, 0.2);
 
-          span,
-          i {
-            color: #ea951c;
+            span,
+            i {
+              color: #ea951c;
+            }
           }
-        }
 
-        .lakeQuality {
-          background-color: rgba(55, 171, 193, 0.2);
+          .lakeQuality {
+            background-color: rgba(55, 171, 193, 0.2);
 
-          span,
-          i {
-            color: #27c4c4;
+            span,
+            i {
+              color: #27c4c4;
+            }
           }
-        }
 
-        .earlyWarning {
-          background-color: rgba(243, 182, 62, 0.2);
+          .earlyWarning {
+            background-color: rgba(243, 182, 62, 0.2);
 
-          span,
-          i {
-            color: #f3b63e;
+            span,
+            i {
+              color: #f3b63e;
+            }
           }
         }
       }

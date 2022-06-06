@@ -238,6 +238,28 @@ export default {
     height: 560px;
   }
 }
+
+@media screen and (min-width: 600px) and (max-width: 1780px) {
+  .cardMenu {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 12px;
+    .echartsBoxContent {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      .echartsBox {
+        width: 31% !important;
+        margin: 0 6px 5px;
+      }
+    }
+  }
+}
 .waterQualityPage {
   height: auto;
   overflow: auto;
@@ -272,21 +294,18 @@ export default {
 
   .cardMenu {
     width: 100%;
-    // height: 260px;
-    height: auto;
     background-color: #ffffff;
     border-radius: 5px;
-    padding: 5px 12px;
+    padding: 5px 20px;
     .echartsBoxContent {
       width: 100%;
       height: auto;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
-      div {
-        width: 31%;
-        margin: 0 6px 5px;
+      flex-flow: wrap;
+      .echartsBox {
+        width: 32%;
+        margin-right: 20px;
+        margin-bottom: 20px;
       }
     }
   }

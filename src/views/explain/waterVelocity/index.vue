@@ -1025,6 +1025,13 @@ export default {
     height: 560px;
   }
 }
+@media screen and (min-width: 600px) and (max-width: 1780px) {
+  .echartsBoxContent {
+    .echartsBox {
+      width: 31% !important;
+    }
+  }
+}
 .waterVelocityPage {
   height: 100%;
   overflow: auto;
@@ -1060,7 +1067,7 @@ export default {
       display: flex;
       flex-flow: wrap;
       .echartsBox {
-        width: 31%;
+        width: 32%;
         margin-right: 20px;
         margin-bottom: 20px;
       }
