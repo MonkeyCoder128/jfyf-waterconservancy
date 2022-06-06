@@ -1605,7 +1605,7 @@ export default {
             name: "内置圆",
             type: "pie",
             center: ["32%", "50%"],
-            radius: ["40%", "50%"], // 这个属性修改圆环宽度
+            radius: ["30%", "40%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
@@ -1629,7 +1629,7 @@ export default {
             name: "饼图数据",
             type: "pie",
             center: ["32%", "50%"],
-            radius: ["55%", "70%"],
+            radius: ["50%", "60%"],
             avoidLabelOverlap: false,
             labelLine: {
               show: false,
@@ -2115,8 +2115,8 @@ export default {
           type: "pie",
           clockWise: false,
           hoverAnimation: false,
-          radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["59%", "55%"],
+          radius: [80 - i * 15 + "%", 72 - i * 15 + "%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -2141,8 +2141,8 @@ export default {
           z: 1,
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
-          radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["59%", "55%"],
+          radius: [80 - i * 15 + "%", 72 - i * 15 + "%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -2185,7 +2185,7 @@ export default {
         grid: {
           top: "0",
           bottom: "45%",
-          left: "56%",
+          left: "36%",
           containLabel: false,
         },
         yAxis: [
@@ -2293,7 +2293,7 @@ export default {
 
 .selectCharts {
   /deep/.el-input__inner {
-    width: 133px;
+    width: 130px;
     height: 20px;
     line-height: 20px;
   }
@@ -2412,6 +2412,7 @@ export default {
     span {
       font-size: 16px;
       color: #333333;
+      white-space: nowrap;
     }
 
     em {
