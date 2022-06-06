@@ -189,7 +189,7 @@ export default {
   background-size: 100% 100%;
   height: 220px;
   width: 220px;
-  z-index: 9999;
+  // z-index: 9999;
 }
 .el-menu-vertical-demo el-menu
 /*分页插件样式更改*/

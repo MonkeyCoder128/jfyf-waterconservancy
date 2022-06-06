@@ -191,11 +191,19 @@ export default {
 /deep/.el-input__icon {
   line-height: 30px;
 }
+@media screen and (min-width: 2000px) and (max-width: 3840px) {
+  .el-col-6{
+    width: 18%;
+  }
+  .el-col-18{
+    width: 82%;
+  }
+}
 .el-col-6 {
-  width: 18%;
+  width: 20%;
 }
 .el-col-18 {
-  width: 82%;
+  width: 80%;
 }
 .h100 {
   height: 100%;
