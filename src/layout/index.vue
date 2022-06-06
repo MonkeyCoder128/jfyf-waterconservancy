@@ -93,15 +93,6 @@ export default {
       let that = this;
       that.path = that.$route.path;
     },
-    //菜单
-    showmenu() {
-      this.leftmenu = false;
-      this.rightmenu = true;
-    },
-    hidemenu() {
-      this.leftmenu = true;
-      this.rightmenu = false;
-    },
   },
   watch: {
     $route: "onRouteChanged",
