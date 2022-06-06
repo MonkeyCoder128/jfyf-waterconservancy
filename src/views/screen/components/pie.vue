@@ -8,6 +8,16 @@ export default {
   },
   methods: {
     myecharts() {
+      const transformFontSize = (res = 0.12) => {
+        const docEl = document.documentElement,
+          clientWidth =
+            window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+        if (!clientWidth) return;
+        const fontSize = 100 * (clientWidth / 3840);
+        return res * fontSize;
+      };
       var pie = this.$echarts.init(document.getElementById("pie"));
       let colors = ["#1289ba", "#148f97", "#e7b20a", "#115cb9", "#eb9a26"];
       var dataCake = [
@@ -28,31 +38,36 @@ export default {
         legend: {
           selectedMode: false,
           orient: "vertical",
-          right: "12%",
+          right: "13%",
           top: "center",
-          itemHeight: 10*1.1,
-          itemWidth: 11*1.1,
-          padding: [1,-20],
-          fontSize: 12,
+          itemHeight: 11,
+          itemWidth: 11,
+          padding: [5, -20],
           textStyle: {
             rich: {
               t0: {
                 color: colors[0],
+                fontSize: transformFontSize(0.3),
               },
               t1: {
                 color: colors[1],
+                fontSize: transformFontSize(0.3),
               },
               t2: {
                 color: colors[2],
+                fontSize: transformFontSize(0.3),
               },
               t3: {
                 color: colors[3],
+                fontSize: transformFontSize(0.3),
               },
               t4: {
                 color: colors[4],
+                fontSize: transformFontSize(0.3),
               },
               white: {
                 color: "#fff",
+                fontSize: transformFontSize(0.25),
               },
             },
           },
