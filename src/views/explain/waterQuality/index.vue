@@ -260,6 +260,31 @@ export default {
     }
   }
 }
+@media screen and (min-width: 1366px) and (max-width: 1480px) {
+  .cardMenu {
+    width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 12px;
+    .echartsBoxContent {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      .echartsBox {
+        width: 32% !important;
+        padding:10px 5px !important;
+        margin-right: 10px !important; 
+      }
+      .echartsBox:nth-child(1){
+        margin-left: 0px;
+      }
+    }
+  }
+}
 .waterQualityPage {
   height: auto;
   overflow: auto;
