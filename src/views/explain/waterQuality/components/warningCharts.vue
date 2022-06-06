@@ -25,7 +25,7 @@ export default {
           orient: "vertical",
           left: "50%", //图例距离左的距离
           y: "center",
-          itemGap: 20,
+          itemGap: 10,
           itemWidth: 19,
           itemHeight: 19,
           textStyle: {
@@ -60,7 +60,7 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["20%", "50%"],
+            center: ["30%", "50%"],
             radius: ["50%", "60%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
@@ -83,7 +83,7 @@ export default {
           },
           {
             type: "pie",
-            center: ["20%", "50%"],
+            center: ["30%", "50%"],
             radius: ["65%", "80%"],
             avoidLabelOverlap: false,
             labelLine: {

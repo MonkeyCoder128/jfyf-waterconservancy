@@ -573,7 +573,7 @@ export default {
           orient: "vertical",
           left: "56%", //图例距离左的距离
           y: "center",
-          itemGap: 20,
+          itemGap: 10,
           itemWidth: 19,
           itemHeight: 19,
           textStyle: {

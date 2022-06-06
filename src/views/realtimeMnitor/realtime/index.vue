@@ -4,10 +4,10 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>水雨情</span>
-          <div class="selectCharts">
+          <div style="display: flex; align-items: center">
             <em style="color: #333333">类别</em>
             <el-select
-              style="margin: 0 12px"
+              style="margin: 0 12px; width: 84px"
               @change="changeRainWater"
               v-model="rainWater"
               size="mini"
@@ -1564,7 +1564,6 @@ export default {
         { value: 10, name: "氦含量" },
       ];
       let data = {
-        
         legend: {
           selectedMode: false,
           icon: "rect",
@@ -1605,7 +1604,7 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["32%", "50%"],
+            center: ["35%", "50%"],
             radius: ["30%", "40%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
@@ -1629,7 +1628,7 @@ export default {
           {
             name: "饼图数据",
             type: "pie",
-            center: ["32%", "50%"],
+            center: ["35%", "50%"],
             radius: ["50%", "60%"],
             avoidLabelOverlap: false,
             labelLine: {
@@ -2292,12 +2291,16 @@ export default {
     flex-direction: column;
   }
 }
-
+/deep/.el-input__inner {
+  height: 20px;
+  line-height: 20px;
+}
 .selectCharts {
+  display: flex;
+  align-items: center;
   /deep/.el-input__inner {
-    width: 130px;
-    height: 20px;
-    line-height: 20px;
+    width: 110px;
+    padding: 0 5px;
   }
 }
 
