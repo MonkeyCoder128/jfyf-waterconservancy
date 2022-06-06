@@ -28,14 +28,13 @@ export default {
       var option = {
         legend: {
           bottom: 0,
-          itemGap: 36,
           selectedMode: false,
         },
         grid: {
           left: "3%",
           right: "3%",
           top: "10%",
-          bottom: "6%",
+          bottom: "10%",
           containLabel: true,
         },
         tooltip: {

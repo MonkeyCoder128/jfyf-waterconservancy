@@ -23,9 +23,9 @@ export default {
           data: ["水质测定仪一", "水质测定仪二", "水质测定仪三"],
           icon: "rect",
           orient: "vertical",
-          left: "52%", //图例距离左的距离
+          left: "50%", //图例距离左的距离
           y: "center",
-          itemGap: 20,
+          itemGap: 10,
           itemWidth: 19,
           itemHeight: 19,
           textStyle: {
@@ -83,8 +83,8 @@ export default {
           },
           {
             type: "pie",
-            radius: ["65%", "80%"],
             center: ["30%", "50%"],
+            radius: ["65%", "80%"],
             avoidLabelOverlap: false,
             labelLine: {
               show: false,
@@ -94,6 +94,7 @@ export default {
               fontSize: 1,
               borderWidth: 1,
               borderRadius: 4,
+              padding: [20, -20],
               rich: {
                 a: {
                   color: "inherit", //继承颜色，设置颜色一致对应

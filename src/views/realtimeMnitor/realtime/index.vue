@@ -4,10 +4,10 @@
       <div class="echartBox">
         <div class="topMenu">
           <span>水雨情</span>
-          <div class="selectCharts">
+          <div style="display: flex; align-items: center">
             <em style="color: #333333">类别</em>
             <el-select
-              style="margin: 0 12px"
+              style="margin: 0 12px; width: 84px"
               @change="changeRainWater"
               v-model="rainWater"
               size="mini"
@@ -1604,8 +1604,8 @@ export default {
           {
             name: "内置圆",
             type: "pie",
-            center: ["32%", "50%"],
-            radius: ["40%", "50%"], // 这个属性修改圆环宽度
+            center: ["35%", "50%"],
+            radius: ["30%", "40%"], // 这个属性修改圆环宽度
             silent: true,
             labelLine: {
               show: false,
@@ -1628,8 +1628,8 @@ export default {
           {
             name: "饼图数据",
             type: "pie",
-            center: ["32%", "50%"],
-            radius: ["55%", "70%"],
+            center: ["35%", "50%"],
+            radius: ["50%", "60%"],
             avoidLabelOverlap: false,
             labelLine: {
               show: false,
@@ -1638,6 +1638,7 @@ export default {
               formatter: "{a|{c}mol/L}{abg|}\n{hr|}\n ",
               borderWidth: 1,
               borderRadius: 4,
+              padding: [20, -20],
               rich: {
                 a: {
                   color: "inherit",
@@ -2115,8 +2116,8 @@ export default {
           type: "pie",
           clockWise: false,
           hoverAnimation: false,
-          radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["59%", "55%"],
+          radius: [80 - i * 15 + "%", 72 - i * 15 + "%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -2141,8 +2142,8 @@ export default {
           z: 1,
           clockWise: false, //顺时加载
           hoverAnimation: false, //鼠标移入变大
-          radius: [90 - i * 15 + "%", 82 - i * 15 + "%"],
-          center: ["59%", "55%"],
+          radius: [80 - i * 15 + "%", 72 - i * 15 + "%"],
+          center: ["40%", "55%"],
           label: {
             show: false,
           },
@@ -2185,7 +2186,7 @@ export default {
         grid: {
           top: "0",
           bottom: "45%",
-          left: "56%",
+          left: "36%",
           containLabel: false,
         },
         yAxis: [
@@ -2290,12 +2291,16 @@ export default {
     flex-direction: column;
   }
 }
-
+/deep/.el-input__inner {
+  height: 20px;
+  line-height: 20px;
+}
 .selectCharts {
+  display: flex;
+  align-items: center;
   /deep/.el-input__inner {
-    width: 133px;
-    height: 20px;
-    line-height: 20px;
+    width: 110px;
+    padding: 0 5px;
   }
 }
 
@@ -2412,6 +2417,7 @@ export default {
     span {
       font-size: 16px;
       color: #333333;
+      white-space: nowrap;
     }
 
     em {

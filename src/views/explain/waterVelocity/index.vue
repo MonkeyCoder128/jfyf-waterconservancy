@@ -573,7 +573,7 @@ export default {
           orient: "vertical",
           left: "56%", //图例距离左的距离
           y: "center",
-          itemGap: 20,
+          itemGap: 10,
           itemWidth: 19,
           itemHeight: 19,
           textStyle: {
@@ -642,6 +642,7 @@ export default {
               fontSize: 1,
               borderWidth: 1,
               borderRadius: 4,
+              padding: [20, -20],
               rich: {
                 a: {
                   color: "inherit", //继承颜色，设置颜色一致对应
@@ -693,7 +694,6 @@ export default {
         legend: {
           selectedMode: false,
           bottom: 0,
-          itemGap: 36,
         },
         grid: {
           left: "3%",
