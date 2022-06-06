@@ -141,7 +141,7 @@
                 已解决
               </h5>
               <div class="reportRecordList">
-                <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
+                <el-divider v-if="item.progress>3" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div class="showInfoBox" v-if="item.reportRecordList !== null">
                   <li v-if="item.progress == 0">
@@ -243,7 +243,7 @@
                 已解决
               </h5>
               <div class="reportRecordList">
-                <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
+                <el-divider v-if="item.progress>3" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div class="showInfoBox" v-if="item.reportRecordList !== null">
                   <li v-if="item.progress == 0">

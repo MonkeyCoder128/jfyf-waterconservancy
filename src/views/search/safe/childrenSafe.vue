@@ -190,13 +190,15 @@
                 已解决
               </h5>
               <div class="reportRecordList">
-                <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
+                <el-divider v-if="item.progress>3" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div v-if="item.reportRecordList !== null">
                   <li v-if="item.progress == 0">
                      <span class="spantime">
                       <i class="">预警时间：</i>
                       2022-05-18 22:00
+
+                      
                     </span>
                     <span class="spancontent">
                       <i class="">预警内容：</i>
@@ -294,7 +296,7 @@
                 已解决
               </h5>
               <div class="reportRecordList">
-                <el-divider v-if="item.progress>2" class="isFirstDivider" direction="vertical"></el-divider>
+                <el-divider v-if="item.progress>3" class="isFirstDivider" direction="vertical"></el-divider>
                 <el-divider v-else direction="vertical"></el-divider>
                 <div v-if="item.reportRecordList !== null">
                   <li v-if="item.progress == 0">

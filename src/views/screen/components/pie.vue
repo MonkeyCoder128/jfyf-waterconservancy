@@ -28,7 +28,7 @@ export default {
         legend: {
           selectedMode: false,
           orient: "vertical",
-          right: "50",
+          right: "12%",
           top: "center",
           itemHeight: 10*1.1,
           itemWidth: 11*1.1,
