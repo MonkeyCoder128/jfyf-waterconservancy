@@ -618,8 +618,5 @@ export default {
   .num {
     font-size: 17px !important;
   }
-  .getPlayData {
-    height: 13.3% !important;
-  }
 }
 </style>

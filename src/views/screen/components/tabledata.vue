@@ -49,4 +49,9 @@ export default {
 .red{
   color: #2A78BFFF;
 }
+@media screen and (min-device-width: 1360px) and (max-device-width: 1919px) {
+  .getPlayData {
+    height: 13.3% !important;
+  }
+}
 </style>
