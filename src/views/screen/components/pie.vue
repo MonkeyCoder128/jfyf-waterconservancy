@@ -26,13 +26,13 @@ export default {
           containLabel: true,
         },
         legend: {
-          selectedMode:false,
+          selectedMode: false,
           orient: "vertical",
           right: "50",
           top: "center",
-          itemHeight: 15,
-          itemWidth: 15,
-          padding: [10, 10],
+          itemHeight: 10*1.1,
+          itemWidth: 11*1.1,
+          padding: [1,-20],
           fontSize: 12,
           textStyle: {
             rich: {
