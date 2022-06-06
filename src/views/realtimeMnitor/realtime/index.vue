@@ -5,9 +5,9 @@
         <div class="topMenu">
           <span>水雨情</span>
           <div style="display: flex; align-items: center">
-            <em style="color: #333333">类别</em>
+            <em style="color: #333333; margin-left: 20px">类别</em>
             <el-select
-              style="margin: 0 12px; width: 84px"
+              style="margin: 0 12px 0 0; width: 84px"
               @change="changeRainWater"
               v-model="rainWater"
               size="mini"
@@ -25,7 +25,7 @@
             <em style="color: #333333">设备</em>
             <el-select
               v-if="rainWater === 'water'"
-              style="margin: 0 12px"
+              style="margin: 0 6px"
               @change="changeWaterLevel"
               v-model="waterLevelType"
               size="mini"
@@ -40,7 +40,7 @@
             </el-select>
             <el-select
               v-if="rainWater === 'rainfall'"
-              style="margin: 0 12px"
+              style="margin: 0 6px"
               @change="changeRainfallType"
               v-model="rainfallType"
               size="mini"
@@ -70,7 +70,7 @@
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
-              style="margin: 0 12px"
+              style="margin: 0 6px"
               @change="changeDeformation"
               v-model="deformationType"
               size="mini"
@@ -97,7 +97,7 @@
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
-              style="margin: 0 12px"
+              style="margin: 0 6px"
               @change="changeOsmometer"
               v-model="osmometerType"
               size="mini"
@@ -123,7 +123,7 @@
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
-              style="margin: 0 12px"
+              style="margin: 0 6px"
               @change="changeFlowRate"
               v-model="flowRateType"
               size="mini"
@@ -150,7 +150,7 @@
           <div class="selectCharts">
             <em style="color: #333333">设备</em>
             <el-select
-              style="margin: 0 12px"
+              style="margin: 0 6px"
               @change="changeWaterQuality"
               v-model="waterQualityType"
               size="mini"
@@ -2298,6 +2298,8 @@ export default {
 .selectCharts {
   display: flex;
   align-items: center;
+  width: 56%;
+  justify-content: flex-end;
   /deep/.el-input__inner {
     width: 110px;
     padding: 0 5px;
