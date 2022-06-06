@@ -6,12 +6,7 @@
           <p class="time">{{ nowTime }}</p>
           <p class="p_nav">金丰水库智慧管理平台</p>
           <div class="system" @click="goSystem">
-            <img
-              src="../../assets/image/xitong.png"
-              alt=""
-              width="20"
-              height="20"
-            />
+            <img src="../../assets/image/xitong.png" alt="" width="20" height="20" />
             <p style="padding-left: 10px">进入系统</p>
           </div>
         </el-row>
@@ -21,9 +16,7 @@
             <div class="box" style="margin-top: 0 !important">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">预警信息</el-col>
                 </el-row>
               </div>
@@ -32,9 +25,7 @@
             <div class="box">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">坝基变形监测</el-col>
                 </el-row>
               </div>
@@ -45,9 +36,7 @@
             <div class="box">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">降雨量</el-col>
                 </el-row>
               </div>
@@ -56,17 +45,13 @@
               </div>
             </div>
           </el-col>
-          <el-col class="screen_cont"
-            ><div
-              ref="box"
-              class="box_cont box_cont_top"
-              style="
+          <el-col class="screen_cont">
+            <div ref="box" class="box_cont box_cont_top" style="
                 margin-top: 0 !important;
                 position: relative;
                 overflow: hidden;
                 box-shadow: 0 0 10px #213662 inset;
-              "
-            >
+              ">
               <div class="mengban" @click="tothreed"></div>
               <!-- <div>
                 <iframe"
@@ -82,58 +67,46 @@
               </div> -->
               <!-- <img src="../../assets/image/3d.png" class="threed" alt="" /> -->
               <div style="height: 100%; overflow-y: hidden; display: block">
-                <iframe
-                  frameborder="0"
-                  scrolling="no"
-                  src="http://112.125.88.230/webgl/index.html"
-                  :style="{ width: width, height: height }"
-                  class="ifremud"
-                  id="iframe"
-                  style="position: static"
-                ></iframe>
+                <iframe frameborder="0" scrolling="no" src="http://112.125.88.230/webgl/index.html"
+                  :style="{ width: width, height: height }" class="ifremud" id="iframe"
+                  style="position: static"></iframe>
               </div>
             </div>
-            <div
-              style="
+            <div style="
                 display: flex;
                 flex-direction: row;
                 height: 24%;
                 overflow: hidden;
                 margin-top: 1.3%;
-              "
-            >
+              ">
               <div class="box_cont box_cont_content">
                 <div class="box_nav box_nav1">
                   <el-row :gutter="19">
-                    <el-col :span="1" class="title1"
-                      ><img src="../../assets/image/dp_title1.png" alt=""
-                    /></el-col>
+                    <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                     <el-col :span="19">水库概况</el-col>
                   </el-row>
                 </div>
                 <div class="box_content">
                   <el-row :gutter="20" class="shuiwei">
-                    <el-col :span="12" style="height: 100%"
-                      ><div class="bg-purple">
+                    <el-col :span="12" style="height: 100%">
+                      <div class="bg-purple">
                         库前水位
                         <div class="num">27.56m</div>
-                      </div></el-col
-                    >
-                    <el-col :span="12" style="height: 100%"
-                      ><div class="bg-purple">
+                      </div>
+                    </el-col>
+                    <el-col :span="12" style="height: 100%">
+                      <div class="bg-purple">
                         库存
                         <div class="num">3,105,406m³</div>
-                      </div></el-col
-                    >
+                      </div>
+                    </el-col>
                   </el-row>
                 </div>
               </div>
               <div class="box_cont box_cont_content box_cont_content2">
                 <div class="box_nav box_nav1">
                   <el-row :gutter="19">
-                    <el-col :span="1" class="title1"
-                      ><img src="../../assets/image/dp_title1.png" alt=""
-                    /></el-col>
+                    <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                     <el-col :span="19">水库信息</el-col>
                   </el-row>
                 </div>
@@ -142,21 +115,17 @@
                 </div>
               </div>
             </div>
-            <div
-              style="
+            <div style="
                 display: flex;
                 flex-direction: row;
                 height: 24%;
                 overflow: hidden;
                 margin-top: 1.3%;
-              "
-            >
+              ">
               <div class="box_cont box_cont_content">
                 <div class="box_nav box_nav1">
                   <el-row :gutter="19">
-                    <el-col :span="1" class="title1"
-                      ><img src="../../assets/image/dp_title1.png" alt=""
-                    /></el-col>
+                    <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                     <el-col :span="19">设备巡查统计</el-col>
                   </el-row>
                 </div>
@@ -167,9 +136,7 @@
               <div class="box_cont box_cont_content box_cont_content2">
                 <div class="box_nav box_nav1">
                   <el-row :gutter="19">
-                    <el-col :span="1" class="title1"
-                      ><img src="../../assets/image/dp_title1.png" alt=""
-                    /></el-col>
+                    <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                     <el-col :span="19">天气</el-col>
                   </el-row>
                 </div>
@@ -183,9 +150,7 @@
             <div class="box_right" style="margin-top: 0 !important">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">流量、流速监测</el-col>
                 </el-row>
               </div>
@@ -196,9 +161,7 @@
             <div class="box_right">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">渗透压监测</el-col>
                 </el-row>
               </div>
@@ -209,9 +172,7 @@
             <div class="box_right">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">压力/应力监测</el-col>
                 </el-row>
               </div>
@@ -222,9 +183,7 @@
             <div class="box_right">
               <div class="box_nav">
                 <el-row :gutter="20">
-                  <el-col :span="1" class="title1"
-                    ><img src="../../assets/image/dp_title1.png" alt=""
-                  /></el-col>
+                  <el-col :span="1" class="title1"><img src="../../assets/image/dp_title1.png" alt="" /></el-col>
                   <el-col :span="19">水质</el-col>
                 </el-row>
               </div>
@@ -264,7 +223,7 @@ export default {
     tabledata,
     inspection,
   },
-  data() {
+  data () {
     return {
       nowTime: "",
       //smgHtmlPath: "http://112.125.88.230/webgl/index.html",
@@ -272,16 +231,16 @@ export default {
       width: "100%", //自适应当前窗口宽度
     };
   },
-  created() {
+  created () {
     localStorage.setItem("isshow", 1);
   },
-  mounted() {
+  mounted () {
     this.nowTimes();
     this.iframe = document.getElementById("iframe");
     this.postMsg();
   },
   methods: {
-    postMsg() {
+    postMsg () {
       //将token传递给子页面
       let token = 0;
       let param = {
@@ -289,7 +248,7 @@ export default {
       };
       this.iframe.contentWindow.postMessage(param, "*");
     },
-    timeFormate(timeStamp) {
+    timeFormate (timeStamp) {
       let year = new Date(timeStamp).getFullYear();
       let month =
         new Date(timeStamp).getMonth() + 1 < 10
@@ -348,24 +307,24 @@ export default {
         ss +
         "   ";
     },
-    nowTimes() {
+    nowTimes () {
       this.timeFormate(new Date());
       setInterval(this.nowTimes, 1000);
       this.clear();
     },
-    clear() {
+    clear () {
       clearInterval(this.nowTimes);
       this.nowTimes = null;
     },
-    goSystem() {
+    goSystem () {
       this.$router.push({ path: "/realtimeMnitor/realtime" });
     },
-    tothreed() {
+    tothreed () {
       this.$router.push({
         path: "/threed",
       });
     },
-    outLogin() {
+    outLogin () {
       this.$router.push({ path: "/login" });
       this.$message.success("已退出账号");
     },
@@ -376,14 +335,14 @@ export default {
 .home_bg {
   width: 100vw;
   height: 100vh;
-  background: url("../../assets/image/bg.png");
+  background: url('../../assets/image/bg.png');
   background-size: 100% 100%;
   position: relative;
   z-index: 1;
 }
 .nav {
   width: 100%;
-  background: url("../../assets/image/top.png");
+  background: url('../../assets/image/top.png');
   background-size: 100% 100%;
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
@@ -617,6 +576,14 @@ export default {
 @media screen and (min-device-width: 1360px) and (max-device-width: 1919px) {
   .num {
     font-size: 17px !important;
+  }
+  .box_nav,
+  .box_nav1,
+  .box_nav2 {
+    height: 29px !important;
+  }
+  .title1 {
+    padding-top: 2px;
   }
 }
 </style>
