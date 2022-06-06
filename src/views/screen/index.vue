@@ -614,7 +614,7 @@ export default {
   padding: 5px;
   position: relative;
 }
-@media screen and (max-width: 1400px) {
+@media screen and (min-device-width: 1360px) and (max-device-width: 1919px) {
   .num {
     font-size: 17px !important;
   }
