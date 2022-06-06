@@ -642,6 +642,7 @@ export default {
               fontSize: 1,
               borderWidth: 1,
               borderRadius: 4,
+              padding: [20, -20],
               rich: {
                 a: {
                   color: "inherit", //继承颜色，设置颜色一致对应

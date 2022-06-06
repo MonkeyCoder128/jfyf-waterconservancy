@@ -175,7 +175,7 @@
           <span>预警状态</span>
         </div>
         <div class="bottomMenu">
-          <div class="chartDataBox" style="width: 100%; height: 100%">
+          <div class="chartDataBox" style="width: 75%; height: 100%">
             <Chart
               :chartData="alarmStateData"
               :width="'100%'"
@@ -183,7 +183,7 @@
             />
           </div>
           <vue-seamless-scroll
-            style="width: 120px; height: 200px; overflow-y: hidden"
+            style="width: 300px; height: 200px; overflow-y: hidden"
             :data="CardPartsStatisticsList"
             :class-option="classOption"
             class="scroll"
@@ -1564,6 +1564,7 @@ export default {
         { value: 10, name: "氦含量" },
       ];
       let data = {
+        
         legend: {
           selectedMode: false,
           icon: "rect",
@@ -1638,6 +1639,7 @@ export default {
               formatter: "{a|{c}mol/L}{abg|}\n{hr|}\n ",
               borderWidth: 1,
               borderRadius: 4,
+              padding: [20, -20],
               rich: {
                 a: {
                   color: "inherit",
